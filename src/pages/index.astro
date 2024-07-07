@@ -5,6 +5,7 @@ import Card from '../components/Card.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import Label from '../components/Label.astro'
 import SkillLayout from '../components/SkillLayout.astro'
+import '../styles/app.css'
 //import PostPreview from '@/components/blog/PostPreview.astro'
 
 import { Image } from 'astro:assets'
@@ -33,7 +34,9 @@ const others = ['git', 'vscode']
 			/>
 
 			<div class='flex flex-col items-center gap-y-4'>
-				<h1 class='text-3xl font-bold'>emar27181 home</h1>
+				<h1 class='text-3xl font-bold'>Ema Home</h1>
+				{
+					/*
 				<a
 					href='https://github.com/srleom/astro-theme-resume.git'
 					class='flex flex-row items-center gap-x-3 rounded-3xl border border-input px-4 py-2 text-sm shadow-sm transition-all hover:shadow-md'
@@ -47,8 +50,12 @@ const others = ['git', 'vscode']
 
 					<p class='font-medium'>Get free template</p>
 				</a>
+				 */
+				}
+
+				{/*
 				<div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-					<Label title='Market'>
+					<Label title='Shop' as='a' href='https://suzuri.jp/nodoame27181' target='_blank'>
 						<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='h-5 w-5' slot='icon'
 							><path
 								fill='currentColor'
@@ -78,11 +85,13 @@ const others = ['git', 'vscode']
 					</Label>
 				</div>
 			</div>
+			 */}
 		</section>
 
-		<Section title='About'>
+		<Section title='About this site'>
 			<p class='text-muted-foreground'>
-				情報科学を専攻している大学院生です．デザインに興味があります．ゆっくりしていってください．(現在作成中.)
+				ここは情報系大学院生Emaのポートフォリオサイトです。<br />
+				これまでに手掛けた制作物や身に着けたスキルをまとめています。
 			</p>
 		</Section>
 
@@ -104,10 +113,27 @@ const others = ['git', 'vscode']
 		 */
 		}
 
+		<Section title='About me'>
+			<p class='text-muted-foreground'>
+				現在、明治大学大学院理工学研究科情報科学専攻に在学中の大学院生。研究室では、カラーパレットの推薦によるイラスト制作支援について研究中。
+				<br /><br />
+
+				MyLab: <a class='link' target='_blank' href='https://int.cs.meiji.ac.jp/'>
+					https://int.cs.meiji.ac.jp/</a
+				><br />
+				GitHub: <a class='link' target='_blank' href='https://github.com/emar27181'
+					>https://github.com/emar27181</a
+				><br />
+				Gmail: <a class='link' target='_blank' href='mailto: ryunosukeema.job@gmail.com'
+					>ryunosukeema.job@gmail.com</a
+				><br />
+			</p>
+		</Section>
+
 		<Section title='Experience'>
 			<Card
 				heading='インタラクション2024 デモ発表'
-				subheading='Sit amet consectetur'
+				subheading='「配色の可視化と配色技法の推定によるイラスト制作支援ツールの開発」というタイトルでデモ発表を行いました。'
 				date='2024年3月'
 				*imagePath='/src/assets/about-astro.png'
 				*
@@ -115,24 +141,50 @@ const others = ['git', 'vscode']
 				imageClass='h-12 w-auto md:-left-16'
 			>
 				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>「」というタイトルでデモ発表を行いました．</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://www.interaction-ipsj.org/proceedings/2024/data/bib/3B-27.html'
+							>学会リンク</a
+						>
+					</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://int.cs.meiji.ac.jp/2024/03/%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e3%81%ae%e5%88%b6%e4%bd%9c%e3%82%92%e5%8a%a9%e3%81%91%e3%82%8b%e9%85%8d%e8%89%b2%e6%94%af%e6%8f%b4%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0/'
+							>説明リンク</a
+						>
+					</li>
 				</ul>
 			</Card>
 			<Card
-				heading='エンターテインメントコンピューティング2024 デモ発表'
-				subheading='現在論文執筆中'
+				heading='エンターテインメントコンピューティング2024 レギュラー・デモ発表(予定)'
 				date='2024年9月'
+				subheading='現在論文執筆中'
 				*imagePath='/src/assets/about-astro.png'
 				*
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>「」というタイトルでデモ発表を行いました．</li>
-				</ul>
-			</Card>
+			/>
 		</Section>
 
+		<Section title='Works'>
+			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
+				<ProjectCard
+					href='https://emar27181.github.io/'
+					heading='p5.js演習ブラウザ'
+					subheading='研究で作成した成果物を展示しています．'
+					imagePath='/src/assets/demo-site.png'
+					altText='Example'
+					class='w-full sm:w-1/2'
+				/>
+			</div>
+		</Section>
+
+		{
+			/*
 		<Section title='Hobby'>
 			<Card
 				as='a'
@@ -140,86 +192,56 @@ const others = ['git', 'vscode']
 				target='_blank'
 				heading='イラスト'
 				subheading='幼少期から～'
-				*imagePath='/src/assets/about-astro.png'
-				*
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
 			<Card
 				heading='テニス'
 				subheading='高校から～'
-				*imagePath='/src/assets/about-astro.png'
-				*
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
 			<Card
 				heading='スノボ'
 				subheading='大学から～'
-				*imagePath='/src/assets/about-astro.png'
-				*
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
 		</Section>
+		*/
+		}
 
 		<Section title='Education'>
 			<Card
 				heading='藤沢市立第一中学校 卒業'
-				subheading='Sit amet consectetur'
+				subheading='卓球部副部長'
 				date='2014年4月 - 2017年3月'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>卓球部部副部長（←こういう情報要る？）</li>
-				</ul>
-			</Card>
+			/>
 
 			<Card
 				heading='神奈川県立鎌倉高等学校 卒業'
-				subheading='Sit amet consectetur'
+				subheading='硬式テニス部副部長'
 				date='2017年4月 - 2020年3月'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>硬式テニス部副部長（←こういう情報要る？）</li>
-				</ul>
-			</Card>
+			/>
 
 			<Card
 				heading='明治大学理工学部情報科学科 卒業'
-				subheading='Sit amet consectetur'
+				subheading='テニスサークル練習長'
 				date='2020年4月 - 2024年3月卒業'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>テニスサークル練習長（←こういう情報要る？）</li>
-				</ul>
-			</Card>
+			/>
 
 			<Card
 				heading='明治大学大学院理工学研究科情報科学専攻 在学中'
-				subheading='Sit amet consectetur'
 				date='2023年4月 - '
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
-		</Section>
-
-		<Section title='Projects'>
-			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
-				<ProjectCard
-					href='https://emar27181.github.io/'
-					heading='p5.js演習ブラウザ'
-					subheading='研究で作成した成果物を展示しています．'
-					imagePath='/src/assets/coming-soon.png'
-					altText='Example'
-					class='w-full sm:w-1/2'
-				/>
-			</div>
 		</Section>
 
 		<Section title='Certifications'>
