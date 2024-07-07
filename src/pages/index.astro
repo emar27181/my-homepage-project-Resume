@@ -183,34 +183,6 @@ const others = ['git', 'vscode']
 			</div>
 		</Section>
 
-		{
-			/*
-		<Section title='Hobby'>
-			<Card
-				as='a'
-				href='https://www.instagram.com/amen27181'
-				target='_blank'
-				heading='イラスト'
-				subheading='幼少期から～'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-			<Card
-				heading='テニス'
-				subheading='高校から～'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-			<Card
-				heading='スノボ'
-				subheading='大学から～'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-		</Section>
-		*/
-		}
-
 		<Section title='Education'>
 			<Card
 				heading='藤沢市立第一中学校 卒業'
@@ -244,6 +216,37 @@ const others = ['git', 'vscode']
 			/>
 		</Section>
 
+		<Section title='Skills'>
+			<SkillLayout title='Languages' skills={languages} />
+			<SkillLayout title='Frontend' skills={frontend} />
+			<SkillLayout title='Backend' skills={backend} />
+			<SkillLayout title='Others' skills={others} />
+		</Section>
+
+		<Section title='Hobby'>
+			<Card
+				as='a'
+				href='https://www.instagram.com/amen27181'
+				target='_blank'
+				heading='イラスト'
+				subheading='幼少期から～'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+			<Card
+				heading='テニス'
+				subheading='高校から～'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+			<Card
+				heading='スノボ'
+				subheading='大学から～'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+		</Section>
+
 		<Section title='Certifications'>
 			<Card
 				as='a'
@@ -261,12 +264,7 @@ const others = ['git', 'vscode']
 			/>
 		</Section>
 
-		<Section title='Skills'>
-			<SkillLayout title='Languages' skills={languages} />
-			<SkillLayout title='Frontend' skills={frontend} />
-			<SkillLayout title='Backend' skills={backend} />
-			<SkillLayout title='Others' skills={others} />
-		</Section>
+
 	</div>
 	<a
 		href='https://github.com/srleom/astro-theme-resume.git'
