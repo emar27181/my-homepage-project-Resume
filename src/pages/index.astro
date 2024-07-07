@@ -5,21 +5,21 @@ import Card from '../components/Card.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import Label from '../components/Label.astro'
 import SkillLayout from '../components/SkillLayout.astro'
-import PostPreview from '@/components/blog/PostPreview.astro'
+//import PostPreview from '@/components/blog/PostPreview.astro'
 
 import { Image } from 'astro:assets'
 import astro from '../assets/about-astro.png'
 
-import { getAllPosts, sortMDByDate } from '@/utils'
+//import { getAllPosts, sortMDByDate } from '@/utils'
 
 const languages = ['Japanese']
 const frontend = ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'p5.js']
 const backend = ['python', 'flask', 'c', 'java']
 const others = ['git', 'vscode']
 
-const MAX_POSTS = 10
-const allPosts = await getAllPosts()
-const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+//const MAX_POSTS = 10
+//const allPosts = await getAllPosts()
+//const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 ---
 
 <PageLayout meta={{ title: 'Home' }}>
@@ -134,13 +134,14 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 		</Section>
 
 		<Section title='Hobby'>
-			<Card 
-			as='a' href='https://www.instagram.com/amen27181' target='_blank'
+			<Card
+				as='a'
+				href='https://www.instagram.com/amen27181'
+				target='_blank'
 				heading='イラスト'
 				subheading='幼少期から～'
 				*imagePath='/src/assets/about-astro.png'
 				*
-
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
