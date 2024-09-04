@@ -3,7 +3,7 @@
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "astro check --watch & astro dev",
+		"dev": "astro check --watch & astro dev --host",
 		"start": "astro dev",
 		"build": "astro check && astro build",
 		"preview": "astro preview",
