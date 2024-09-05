@@ -13,10 +13,10 @@ import astro from '../assets/about-astro.png'
 
 //import { getAllPosts, sortMDByDate } from '@/utils'
 
-const languages = ['Japanese']
-const frontend = ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'p5.js']
-const backend = ['python', 'flask', 'c', 'java']
-const others = ['git', 'vscode']
+//const languages = ['Japanese']
+const frontend = ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'p5.js', 'flask', 'Astro']
+const backend = ['python', 'c', 'java']
+const tool = ['git', 'vscode']
 
 //const MAX_POSTS = 10
 //const allPosts = await getAllPosts()
@@ -210,6 +210,13 @@ const others = ['git', 'vscode']
 			</div>
 		</Section>
 
+		<Section title='Skills'>
+			{/*}<SkillLayout title='Languages' skills={languages} />*/}
+			<SkillLayout title='Frontend' skills={frontend} />
+			<SkillLayout title='Backend' skills={backend} />
+			<SkillLayout title='Tool' skills={tool} />
+		</Section>
+
 		<Section title='Education'>
 
 			<Card
@@ -234,13 +241,6 @@ const others = ['git', 'vscode']
 			/>
 		</Section>
 
-		<Section title='Skills'>
-			<SkillLayout title='Languages' skills={languages} />
-			<SkillLayout title='Frontend' skills={frontend} />
-			<SkillLayout title='Backend' skills={backend} />
-			<SkillLayout title='Others' skills={others} />
-		</Section>
-
 		<Section title='Hobby'>
 			<Card
 				heading='イラスト'
@@ -262,9 +262,16 @@ const others = ['git', 'vscode']
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
+
+			<Card
+				heading='ゲーム'
+				subheading='主にFPSゲームをするのが好きです。APEXというFPSゲームの賞金付きカスタム大会を主催したこともあります。'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
 		</Section>
 
-		{/*
+		
 		<Section title='Certifications'>
 			<Card
 				as='a'
@@ -273,6 +280,7 @@ const others = ['git', 'vscode']
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-11 w-auto md:-left-16'
 			/>
+			{/*
 			<Card
 				as='a'
 				heading='普通自動車第1種免許取得'
@@ -280,8 +288,8 @@ const others = ['git', 'vscode']
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-11 w-auto md:-left-16'
 			/>
+			*/}
 		</Section>
-		 */}
 
 
 	</div>
