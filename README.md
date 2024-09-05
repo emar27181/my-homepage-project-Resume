@@ -1,5 +1,17 @@
 # Astro Resume
 
+## 注意事項
+- このプロジェクトは[astro-theme-resume](https://github.com/srleom/astro-theme-resume)を基に作成したものです．
+
+## デプロイ方法
+
+1. `npm run build`でdistを更新
+2. `netlify login` でnetlifyのログインを確認
+3. `netlify deploy`で公開前のデプロイ結果の確認
+    - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は"dist"を選択
+4. `netlify deploy --prod`でデプロイ結果を公開
+
+
 ## Features
 
 - Astro v4
