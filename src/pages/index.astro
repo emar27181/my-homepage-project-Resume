@@ -23,7 +23,7 @@ const tool = ['git', 'vscode']
 //const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 ---
 
-<PageLayout meta={{ title: 'Home' }}>
+<PageLayout meta={{ title: 'ホーム' }}>
 	<div class='flex w-full flex-col gap-y-10'>
 		<section class='flex flex-col items-center gap-y-7'>
 			<Image
@@ -88,10 +88,10 @@ const tool = ['git', 'vscode']
 			 */}
 		</section>
 
-		<Section title='About this site'>
+		<Section title='このサイトについて'>
 			<p class='text-muted-foreground'>
 				ここは情報系大学院生Emaのポートフォリオサイトです。<br />
-				これまでに手掛けた制作物や身に着けたスキルをまとめています。
+				就職活動のための情報(自己PRや制作物、スキルなど)をまとめています。
 			</p>
 		</Section>
 
@@ -113,7 +113,7 @@ const tool = ['git', 'vscode']
 		 */
 		}
 
-		<Section title='About me'>
+		<Section title='私について'>
 			<p class='text-muted-foreground'>
 				現在、明治大学大学院理工学研究科情報科学専攻に在学中の大学院生。研究室では、カラーパレットの推薦によるイラスト制作支援について研究中。
 				過去に書いたコードはGitHubにて公開しています。
@@ -131,7 +131,7 @@ const tool = ['git', 'vscode']
 			</p>
 		</Section>
 
-		<Section title='Experience'>
+		<Section title='発表'>
 			<Card
 				heading='インタラクション2024 デモ発表'
 				subheading='「配色の可視化と配色技法の推定によるイラスト制作支援ツールの開発」というタイトルでデモ発表を行いました。'
@@ -197,7 +197,7 @@ const tool = ['git', 'vscode']
 			</Card>
 		</Section>
 
-		<Section title='Works'>
+		<Section title='制作物'>
 			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
 				<ProjectCard
 					href='https://emar27181.github.io/'
@@ -210,38 +210,52 @@ const tool = ['git', 'vscode']
 			</div>
 		</Section>
 
-		<Section title='Skills'>
+		<Section title='スキル'>
 			{/*}<SkillLayout title='Languages' skills={languages} />*/}
 			<SkillLayout title='Frontend' skills={frontend} />
 			<SkillLayout title='Backend' skills={backend} />
 			<SkillLayout title='Tool' skills={tool} />
 		</Section>
 
-		<Section title='Education'>
+		<Section title='学歴'>
+			<Card
+				heading='神奈川県立鎌倉高等学校 入学'
+				date='2017年4月'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
 
 			<Card
 				heading='神奈川県立鎌倉高等学校 卒業'
-				date='2017年4月 - 2020年3月'
+				date='2020年3月'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading='明治大学理工学部情報科学科 入学'
+				date='2020年4月'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
 
 			<Card
 				heading='明治大学理工学部情報科学科 卒業'
-				date='2020年4月 - 2024年3月'
+				date='2024年3月'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
 
 			<Card
-				heading='明治大学大学院理工学研究科情報科学専攻 在学中'
-				date='2023年4月 - '
+				heading='明治大学大学院理工学研究科情報科学専攻 入学'
+				date='2024年4月'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
+			
 		</Section>
 
-		<Section title='Hobby'>
+		<Section title='趣味'>
 			<Card
 				heading='イラスト'
 				subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
@@ -272,7 +286,7 @@ const tool = ['git', 'vscode']
 		</Section>
 
 		
-		<Section title='Certifications'>
+		<Section title='資格・免許'>
 			<Card
 				as='a'
 				heading='実用英語技能検定2級合格'
@@ -280,7 +294,6 @@ const tool = ['git', 'vscode']
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-11 w-auto md:-left-16'
 			/>
-			{/*
 			<Card
 				as='a'
 				heading='普通自動車第1種免許取得'
@@ -288,7 +301,7 @@ const tool = ['git', 'vscode']
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-11 w-auto md:-left-16'
 			/>
-			*/}
+
 		</Section>
 
 
