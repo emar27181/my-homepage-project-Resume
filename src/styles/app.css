@@ -70,3 +70,8 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+.link {
+	color: blue;
+	text-decoration: none;
+}

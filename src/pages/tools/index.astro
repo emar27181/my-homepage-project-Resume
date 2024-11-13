@@ -3,11 +3,30 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import ToolSection from '@/components/ToolSection.astro'
 import Button from '@/components/Button.astro'
 
+/*
 const DESIGN = [
 	{
 		name: 'Figma',
 		description: 'Design Tool',
 		href: 'https://www.figma.com/',
+		iconPath: 'figma',
+		iconBgColour: '#000001'
+	}
+]
+*/
+
+const FRONTEND = [
+	{
+		name: 'Typescript',
+		description: 'language',
+		href: 'https://www.typescriptlang.org/',
+		iconPath: 'figma',
+		iconBgColour: '#000001'
+	},
+	{
+		name: 'React.js',
+		description: 'library',
+		href: 'https://ja.react.dev/',
 		iconPath: 'figma',
 		iconBgColour: '#000001'
 	}
@@ -44,13 +63,6 @@ const DEVELOPMENT = [
 		href: 'https://code.visualstudio.com/',
 		iconPath: 'vscode',
 		iconBgColour: '#2C2C32'
-	},
-	{
-		name: 'ChatGPT',
-		description: 'AI',
-		href: 'https://chat.openai.com/',
-		iconPath: 'chatgpt',
-		iconBgColour: '#06A67F'
 	}
 ]
 ---
@@ -75,11 +87,10 @@ const DEVELOPMENT = [
 
 		<div class='mt-5 flex w-full flex-col gap-y-10'>
 			<div>
-				<h1 class='mb-1 text-2xl font-bold'>Tools</h1>
-				<p>Tools and software I use daily</p>
+				<h1 class='mb-1 text-2xl font-bold'>Skill</h1>
 			</div>
 
-			<ToolSection title='Design' tools={DESIGN} />
+			<ToolSection title='Frontend' tools={FRONTEND} />
 			<ToolSection title='Productivity' tools={PRODUCTIVITY} />
 			<ToolSection title='Development' tools={DEVELOPMENT} />
 		</div>

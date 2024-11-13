@@ -3,26 +3,27 @@ import PageLayout from '../layouts/BaseLayout.astro'
 import Section from '../components/Section.astro'
 import Card from '../components/Card.astro'
 import ProjectCard from '../components/ProjectCard.astro'
-import Label from '../components/Label.astro'
+//import Label from '../components/Label.astro'
 import SkillLayout from '../components/SkillLayout.astro'
-import PostPreview from '@/components/blog/PostPreview.astro'
+import '../styles/app.css'
+//import PostPreview from '@/components/blog/PostPreview.astro'
 
 import { Image } from 'astro:assets'
 import astro from '../assets/about-astro.png'
 
-import { getAllPosts, sortMDByDate } from '@/utils'
+//import { getAllPosts, sortMDByDate } from '@/utils'
 
-const languages = ['Japanese']
-const frontend = ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'p5.js']
-const backend = ['python', 'flask', 'c', 'java']
-const others = ['git', 'vscode']
+//const languages = ['Japanese']
+const frontend = ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'p5.js', 'flask', 'Astro']
+const backend = ['python', 'c', 'java']
+const tool = ['git', 'vscode']
 
-const MAX_POSTS = 10
-const allPosts = await getAllPosts()
-const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+//const MAX_POSTS = 10
+//const allPosts = await getAllPosts()
+//const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 ---
 
-<PageLayout meta={{ title: 'Home' }}>
+<PageLayout meta={{ title: 'ホーム' }}>
 	<div class='flex w-full flex-col gap-y-10'>
 		<section class='flex flex-col items-center gap-y-7'>
 			<Image
@@ -33,7 +34,9 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			/>
 
 			<div class='flex flex-col items-center gap-y-4'>
-				<h1 class='text-3xl font-bold'>emar27181 home</h1>
+				<h1 class='text-3xl font-bold'>Ema Portfolio</h1>
+				{
+					/*
 				<a
 					href='https://github.com/srleom/astro-theme-resume.git'
 					class='flex flex-row items-center gap-x-3 rounded-3xl border border-input px-4 py-2 text-sm shadow-sm transition-all hover:shadow-md'
@@ -47,8 +50,12 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 
 					<p class='font-medium'>Get free template</p>
 				</a>
+				 */
+				}
+
+				{/*
 				<div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-					<Label title='Market'>
+					<Label title='Shop' as='a' href='https://suzuri.jp/nodoame27181' target='_blank'>
 						<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='h-5 w-5' slot='icon'
 							><path
 								fill='currentColor'
@@ -78,11 +85,18 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 					</Label>
 				</div>
 			</div>
+			 */}
 		</section>
 
-		<Section title='About'>
+		<Section title='このサイトについて'>
 			<p class='text-muted-foreground'>
-				情報科学を専攻している大学院生です．デザインに興味があります．ゆっくりしていってください．(現在作成中.)
+				ここは情報系大学院生Emaのポートフォリオサイトです。<br />
+				就職活動のための情報(自己PRや制作物、スキルなど)をまとめています。<br/>
+				このサイトのGitHubリポジトリは
+				<a class='link' target='_blank' href='https://github.com/emar27181/my-homepage-project-Resume'>
+					こちら
+				</a>
+				からご覧いただけます。
 			</p>
 		</Section>
 
@@ -104,10 +118,52 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 		 */
 		}
 
-		<Section title='Experience'>
+		<Section title='私について'>
+			<p class='text-muted-foreground'>
+				現在、明治大学大学院理工学研究科情報科学専攻に在学中の大学院生。研究室では、カラーパレットの推薦によるイラスト制作支援について研究中。
+				過去に書いたコードはGitHubにて公開しています。
+				<br /><br />
+
+				MyLab: <a class='link' target='_blank' href='https://int.cs.meiji.ac.jp/'>
+					https://int.cs.meiji.ac.jp/</a
+				><br />
+				GitHub: <a class='link' target='_blank' href='https://github.com/emar27181'
+					>https://github.com/emar27181</a
+				><br />
+				Gmail: <a class='link' target='_blank' href='mailto: ryunosukeema.job@gmail.com'
+					>ryunosukeema.job@gmail.com</a
+				><br />
+			</p>
+		</Section>
+
+		<Section title='自己PR'>
+			<Card
+				heading='実行力'
+				subheading='大学時代、賞金付きのゲーム大会を主催することにしました。まず、参加者を集める多めに私の人脈とコミュニケーション能力を活かし、約1ヶ月で33人の参加者を集めました。参加者が公平に競い合えるようにするため、事前にチームメンバーのゲームの上手さなどの情報を収集し、極端に強いチームが生まれないよう調整しました。また、参加費を300円とし、支払いを任意としました。優勝賞金を平等に分配するために、賞金は1位チーム総取りとしつつ、チーム内の参加費の支払い人数に応じて獲得賞金が変動する仕組みを設けました。この経験を通じて、自分が主催する仕事を全うすることの重要性を再認識しました。'
+				*imagePath='/src/assets/about-astro.png'
+				*
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+			</Card>
+		</Section>
+
+		<Section title='研究テーマ'>
+			<Card
+				heading='配色の推薦によるイラスト制作の支援'
+				subheading='一般的にイラストを描く際、イラストレーターは自身の経験に基づいて色を塗りますが、初心者は経験が浅いため、配色のバランスが崩れやすいという問題があります。そのため、使われている色の数や配色を利用者が把握することが重要です。私の研究では、キャンバス上で使用されている配色を推定し、相性の良いとされる配色技法の色相環上にに表示させる手法を提案しました。提案手法を用いることで配色技法について知らない初心者でもバランスの良い色塗りが出来るように支援します。'
+				*imagePath='/src/assets/about-astro.png'
+				*
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+			</Card>
+		</Section>
+
+		<Section title='学会発表'>
 			<Card
 				heading='インタラクション2024 デモ発表'
-				subheading='Sit amet consectetur'
+				subheading='「配色の可視化と配色技法の推定によるイラスト制作支援ツールの開発」というタイトルでデモ発表を行いました。'
 				date='2024年3月'
 				*imagePath='/src/assets/about-astro.png'
 				*
@@ -115,135 +171,169 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 				imageClass='h-12 w-auto md:-left-16'
 			>
 				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>「」というタイトルでデモ発表を行いました．</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://www.interaction-ipsj.org/2024/'
+							>学会リンク</a
+						>
+					</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://www.interaction-ipsj.org/proceedings/2024/data/bib/3B-27.html'
+							>論文リンク</a
+						>
+					</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://int.cs.meiji.ac.jp/2024/03/%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e3%81%ae%e5%88%b6%e4%bd%9c%e3%82%92%e5%8a%a9%e3%81%91%e3%82%8b%e9%85%8d%e8%89%b2%e6%94%af%e6%8f%b4%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0/'
+							>説明リンク</a
+						>
+					</li>
 				</ul>
 			</Card>
 			<Card
-				heading='エンターテインメントコンピューティング2024 デモ発表'
-				subheading='現在論文執筆中'
+				heading='エンターテインメントコンピューティング2024 口頭発表・デモ発表'
 				date='2024年9月'
+				subheading='「利用者のコンセプトに合った配色を推薦するカラーパレットの検討」というタイトルで口頭発表・デモ発表を行いました。'
 				*imagePath='/src/assets/about-astro.png'
 				*
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>「」というタイトルでデモ発表を行いました．</li>
+				<ul >
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://ec2024.entcomp.org/'
+							>学会リンク</a
+						>
+					</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=238714&item_no=1&page_id=13&block_id=8'
+							>論文リンク</a
+						>
+					</li>
 				</ul>
 			</Card>
 		</Section>
 
-		<Section title='Hobby'>
-			<Card 
-			as='a' href='https://www.instagram.com/amen27181' target='_blank'
-				heading='イラスト'
-				subheading='幼少期から～'
-				*imagePath='/src/assets/about-astro.png'
-				*
-
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-			<Card
-				heading='テニス'
-				subheading='高校から～'
-				*imagePath='/src/assets/about-astro.png'
-				*
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-			<Card
-				heading='スノボ'
-				subheading='大学から～'
-				*imagePath='/src/assets/about-astro.png'
-				*
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-		</Section>
-
-		<Section title='Education'>
-			<Card
-				heading='藤沢市立第一中学校 卒業'
-				subheading='Sit amet consectetur'
-				date='2014年4月 - 2017年3月'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>卓球部部副部長（←こういう情報要る？）</li>
-				</ul>
-			</Card>
-
-			<Card
-				heading='神奈川県立鎌倉高等学校 卒業'
-				subheading='Sit amet consectetur'
-				date='2017年4月 - 2020年3月'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>硬式テニス部副部長（←こういう情報要る？）</li>
-				</ul>
-			</Card>
-
-			<Card
-				heading='明治大学理工学部情報科学科 卒業'
-				subheading='Sit amet consectetur'
-				date='2020年4月 - 2024年3月卒業'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>テニスサークル練習長（←こういう情報要る？）</li>
-				</ul>
-			</Card>
-
-			<Card
-				heading='明治大学大学院理工学研究科情報科学専攻 在学中'
-				subheading='Sit amet consectetur'
-				date='2023年4月 - '
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-		</Section>
-
-		<Section title='Projects'>
+		<Section title='制作物'>
 			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
 				<ProjectCard
 					href='https://emar27181.github.io/'
 					heading='p5.js演習ブラウザ'
 					subheading='研究で作成した成果物を展示しています．'
-					imagePath='/src/assets/coming-soon.png'
+					imagePath='/src/assets/demo-site.png'
 					altText='Example'
 					class='w-full sm:w-1/2'
 				/>
 			</div>
 		</Section>
 
-		<Section title='Certifications'>
+		<Section title='スキル'>
+			{/*}<SkillLayout title='Languages' skills={languages} />*/}
+			<SkillLayout title='Frontend' skills={frontend} />
+			<SkillLayout title='Backend' skills={backend} />
+			<SkillLayout title='Tool' skills={tool} />
+		</Section>
+
+		<Section title='学歴'>
+			<Card
+				heading='神奈川県立鎌倉高等学校 入学'
+				date='2017年4月'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading='神奈川県立鎌倉高等学校 卒業'
+				date='2020年3月'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading='明治大学理工学部情報科学科 入学'
+				date='2020年4月'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading='明治大学理工学部情報科学科 卒業'
+				date='2024年3月'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading='明治大学大学院理工学研究科情報科学専攻 入学'
+				date='2024年4月'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+			
+		</Section>
+
+		<Section title='趣味'>
+			<Card
+				heading='イラスト'
+				subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
+				
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+				>
+				<br/>
+				Instagram: <a class='link' target='_blank' href='https://www.instagram.com/amen27181/'
+				>https://www.instagram.com/amen27181/</a
+			>
+			</Card>
+
+				
+			<Card
+				heading='スポーツ'
+				subheading='スノーボード、テニス、卓球などのスポーツをするのが趣味です。中学時代には卓球部の副部長、高校時代にはテニス部の副部長、大学時代にはテニスサークルの練習長(練習をまとめる役)を任されていました。'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading='ゲーム'
+				subheading='主にFPSゲームをするのが好きです。APEXというFPSゲームの賞金付きカスタム大会を主催したこともあります。'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+		</Section>
+
+		
+		<Section title='資格・免許'>
 			<Card
 				as='a'
 				heading='実用英語技能検定2級合格'
-				date='2017年 7月'
+				date='2019年 7月'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-11 w-auto md:-left-16'
 			/>
 			<Card
 				as='a'
 				heading='普通自動車第1種免許取得'
-				date='2023年 5月'
+				date='2020年 8月'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-11 w-auto md:-left-16'
 			/>
+
 		</Section>
 
-		<Section title='Skills'>
-			<SkillLayout title='Languages' skills={languages} />
-			<SkillLayout title='Frontend' skills={frontend} />
-			<SkillLayout title='Backend' skills={backend} />
-			<SkillLayout title='Others' skills={others} />
-		</Section>
+
 	</div>
 	<a
 		href='https://github.com/srleom/astro-theme-resume.git'
@@ -256,6 +346,6 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			<span class='relative inline-flex h-2 w-2 rounded-full bg-green-400'></span>
 		</span>
 
-		<p class='font-medium'>Get free template</p>
+		<p class='font-medium'>Use this template</p>
 	</a>
 </PageLayout>
