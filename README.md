@@ -8,9 +8,14 @@
 1. `npm run build`でdistを更新
 2. `netlify login` でnetlifyのログインを確認
 3. `netlify deploy`で公開前のデプロイ結果の確認
-    - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は"dist"を選択
+    - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は"dist"を入力
 4. `netlify deploy --prod`でデプロイ結果を公開
+    - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は"dist"を入力
 
+
+## よく使うファイル(※下記に詳細あり)
+- `src/pages/index.astro` : ホームの編集
+- `src/components/layout/Header.astro` : ヘッダーの編集
 
 ## Features
 
