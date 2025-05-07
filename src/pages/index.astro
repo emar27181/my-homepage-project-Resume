@@ -238,14 +238,12 @@ const tool = ['git', 'vscode']
 		<Section title='趣味'>
 			<Card
 				heading='イラスト'
-				subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。このページの下部に描いてきた作品の一部を掲示しています。'
+				subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			>
-				<br />
-				Instagram: <a class='link' target='_blank' href='https://www.instagram.com/amen27181/'
-					>https://www.instagram.com/amen27181/</a
-				>
+				<a href='#gallery' class='underline'>作品はこちら</a>
+
 				<div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
 					<iframe
 						src='https://www.youtube.com/embed/1-tDSvjpxn4'
@@ -286,57 +284,59 @@ const tool = ['git', 'vscode']
 			/>
 		</Section>
 
-		<Masonry
-			breakpointCols={{ default: 4, 1024: 3, 768: 2, 480: 2 }}
-			class='-ml-[12px] flex'
-			columnClass='pl-[12px]'
-		>
-			<img
-				src='/images/image_cat_ann1.jpg'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-			<img
-				src='/images/image_cat_ann2.jpg'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-			<img
-				src='/images/image_girl.jpg'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-			<img
-				src='/images/image_icon_astra.jpg'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-			<img
-				src='/images/image_icon_omen.png'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-			<img
-				src='/images/image_logo_shandy.jpg'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-			<img
-				src='/images/image_logo_ylab.jpg'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-			<img
-				src='/images/image_manga_gojo.jpg'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-			<img
-				src='/images/image_manga_itadori.jpg'
-				alt='Image'
-				class='mb-[12px] block h-auto w-full rounded-lg'
-			/>
-		</Masonry>
+		<div id='gallery'>
+			<Masonry
+				breakpointCols={{ default: 4, 1024: 3, 768: 2, 480: 2 }}
+				class='-ml-[12px] flex'
+				columnClass='pl-[12px]'
+			>
+				<img
+					src='/images/image_cat_ann1.jpg'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+				<img
+					src='/images/image_cat_ann2.jpg'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+				<img
+					src='/images/image_girl.jpg'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+				<img
+					src='/images/image_icon_astra.jpg'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+				<img
+					src='/images/image_icon_omen.png'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+				<img
+					src='/images/image_logo_shandy.jpg'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+				<img
+					src='/images/image_logo_ylab.jpg'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+				<img
+					src='/images/image_manga_gojo.jpg'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+				<img
+					src='/images/image_manga_itadori.jpg'
+					alt='Image'
+					class='mb-[12px] block h-auto w-full rounded-lg'
+				/>
+			</Masonry>
+		</div>
 	</div>
 	<a
 		href='https://github.com/srleom/astro-theme-resume.git'
