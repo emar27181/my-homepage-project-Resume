@@ -62,6 +62,7 @@
 	}
 }
 
+
 @layer base {
 	* {
 		@apply border-border;
@@ -71,7 +72,12 @@
 	}
 }
 
-.link {
-	color: blue;
-	text-decoration: none;
+.link{
+	color: #0969DA; /* githubの通常モード */
+	/*color: #2475F8; /* githubのダークモード */
+	/*color: #5FA6DA; /* Edgeのダークモード */
+}
+
+.link:hover {
+	color: #0077ff; 
 }
