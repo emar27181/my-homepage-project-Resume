@@ -1,0 +1,56 @@
+---
+// components/Gallery.astro
+import { Masonry } from 'astro-masonry'
+const breakpointCols = { default: 4, 1024: 3, 768: 2, 480: 2 }
+---
+
+<div id='gallery'>
+	<Masonry breakpointCols={breakpointCols} class='-mx-[2px] flex' columnClass='px-[2px]'>
+		<img
+			src='/images/image_cat_ann1.jpg'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+		<img
+			src='/images/image_cat_ann2.jpg'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+		<img src='/images/image_girl.jpg' alt='Image' class='mb-[4px] block h-auto w-full rounded-lg' />
+		<img
+			src='/images/image_illust_dragon.jpg'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+		<img
+			src='/images/image_icon_astra.jpg'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+		<img
+			src='/images/image_icon_omen.png'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+		<img
+			src='/images/image_logo_shandy.jpg'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+		<img
+			src='/images/image_logo_ylab.jpg'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+		<img
+			src='/images/image_manga_gojo.jpg'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+		<img
+			src='/images/image_manga_itadori.jpg'
+			alt='Image'
+			class='mb-[4px] block h-auto w-full rounded-lg'
+		/>
+	</Masonry>
+</div>
