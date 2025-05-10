@@ -2,7 +2,7 @@
 // components/Gallery.astro
 import { Masonry } from 'astro-masonry'
 
-const images = [
+let images = [
 	{ src: '/images/image_cat_ann1.jpg', alt: 'Cat Illustration 1', title: 'Cat Ann 1' },
 	{ src: '/images/image_cat_ann2.jpg', alt: 'Cat Illustration 2', title: 'Cat Ann 2' },
 	{ src: '/images/image_girl.jpg', alt: 'Girl Portrait', title: 'Girl' },
@@ -14,6 +14,8 @@ const images = [
 	{ src: '/images/image_manga_gojo.jpg', alt: 'Gojo Manga Panel', title: 'Gojo' },
 	{ src: '/images/image_manga_itadori.jpg', alt: 'Itadori Manga Panel', title: 'Itadori' }
 ]
+
+//images.sort((a, b) => a.title.localeCompare(b.title))
 
 const breakpointCols = { default: 4, 1024: 3, 768: 2, 480: 2 }
 ---
