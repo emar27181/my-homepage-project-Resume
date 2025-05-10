@@ -1,56 +1,35 @@
 ---
 // components/Gallery.astro
 import { Masonry } from 'astro-masonry'
+
+const images = [
+	{ src: '/images/image_cat_ann1.jpg', alt: 'Cat Illustration 1', title: 'Cat Ann 1' },
+	{ src: '/images/image_cat_ann2.jpg', alt: 'Cat Illustration 2', title: 'Cat Ann 2' },
+	{ src: '/images/image_girl.jpg', alt: 'Girl Portrait', title: 'Girl' },
+	{ src: '/images/image_illust_dragon.jpg', alt: 'Dragon Illustration', title: 'Dragon' },
+	{ src: '/images/image_icon_astra.jpg', alt: 'Astra Icon', title: 'Astra' },
+	{ src: '/images/image_icon_omen.png', alt: 'Omen Icon', title: 'Omen' },
+	{ src: '/images/image_logo_shandy.jpg', alt: 'Shandy Logo', title: 'Shandy' },
+	{ src: '/images/image_logo_ylab.jpg', alt: 'YLab Logo', title: 'YLab' },
+	{ src: '/images/image_manga_gojo.jpg', alt: 'Gojo Manga Panel', title: 'Gojo' },
+	{ src: '/images/image_manga_itadori.jpg', alt: 'Itadori Manga Panel', title: 'Itadori' }
+]
+
 const breakpointCols = { default: 4, 1024: 3, 768: 2, 480: 2 }
 ---
 
 <div id='gallery'>
 	<Masonry breakpointCols={breakpointCols} class='-mx-[2px] flex' columnClass='px-[2px]'>
-		<img
-			src='/images/image_cat_ann1.jpg'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
-		<img
-			src='/images/image_cat_ann2.jpg'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
-		<img src='/images/image_girl.jpg' alt='Image' class='mb-[4px] block h-auto w-full rounded-lg' />
-		<img
-			src='/images/image_illust_dragon.jpg'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
-		<img
-			src='/images/image_icon_astra.jpg'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
-		<img
-			src='/images/image_icon_omen.png'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
-		<img
-			src='/images/image_logo_shandy.jpg'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
-		<img
-			src='/images/image_logo_ylab.jpg'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
-		<img
-			src='/images/image_manga_gojo.jpg'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
-		<img
-			src='/images/image_manga_itadori.jpg'
-			alt='Image'
-			class='mb-[4px] block h-auto w-full rounded-lg'
-		/>
+		{
+			images.map(({ src, alt, title }) => (
+				<img
+					src={src}
+					alt={alt}
+					title={title}
+					class='mb-[4px] block h-auto w-full rounded-lg'
+					loading='lazy'
+				/>
+			))
+		}
 	</Masonry>
 </div>
