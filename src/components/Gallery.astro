@@ -5,7 +5,7 @@ import { images } from '../data/image'
 const breakpointCols = { default: 4, 1024: 3, 768: 2, 480: 2 }
 ---
 
-<div id='gallery'>
+<div id='gallery' class='xl:-mx-48'>
 	<Masonry breakpointCols={breakpointCols} class='-mx-[2px] flex' columnClass='px-[2px]'>
 		{
 			images.map(({ src, alt, title }) => (
