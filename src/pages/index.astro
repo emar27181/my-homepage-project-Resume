@@ -174,12 +174,30 @@ const tool = ['git', 'vscode']
 		</section>
 
 		<Section title='制作物'>
-			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
+			<div class='gap-y-12 sm:flex-row sm:gap-x-3'>
+				<ProjectCard
+					href='https://emar27181-resume.netlify.app/'
+					heading='ポートフォリオ'
+					subheading='経歴などをまとめたポートフォリオサイトです．'
+					altText='Example'
+					imagePath='/src/assets/portfolio.png'
+					class='w-full sm:w-1/2'
+				/>
+
 				<ProjectCard
 					href='https://emar27181.github.io/'
 					heading='p5.js演習ブラウザ'
 					subheading='研究で作成した成果物を展示しています．'
 					imagePath='/src/assets/demo-site.png'
+					altText='Example'
+					class='w-full sm:w-1/2'
+				/>
+
+				<ProjectCard
+					href='https://juqs-map.netlify.app/'
+					heading='JUQSマップ'
+					subheading='JUQSと呼ばれるラクガキの写真をマップ上にまとめたサイトです．'
+					imagePath='/src/assets/juqs-map.png'
 					altText='Example'
 					class='w-full sm:w-1/2'
 				/>
