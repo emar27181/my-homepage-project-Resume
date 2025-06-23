@@ -1,0 +1,62 @@
+---
+// components/ImageModal.astro
+---
+
+<div id="image-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-75 p-4">
+	<div class="relative max-h-full max-w-full">
+		<button 
+			id="close-modal" 
+			class="absolute -top-10 right-0 text-white hover:text-gray-300 text-2xl font-bold z-10"
+			aria-label="Close modal"
+		>
+			&times;
+		</button>
+		<img 
+			id="modal-image" 
+			class="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl" 
+			alt=""
+		/>
+	</div>
+</div>
+
+<script>
+	const modal = document.getElementById('image-modal') as HTMLElement;
+	const modalImage = document.getElementById('modal-image') as HTMLImageElement;
+	const closeButton = document.getElementById('close-modal') as HTMLElement;
+
+	// Close modal function
+	function closeModal() {
+		modal.classList.add('hidden');
+		modal.classList.remove('flex');
+		document.body.style.overflow = 'auto';
+	}
+
+	// Open modal function
+	function openModal(src: string, alt: string) {
+		modalImage.src = src;
+		modalImage.alt = alt;
+		modal.classList.remove('hidden');
+		modal.classList.add('flex');
+		document.body.style.overflow = 'hidden';
+	}
+
+	// Close button event
+	closeButton.addEventListener('click', closeModal);
+
+	// Close when clicking outside the image
+	modal.addEventListener('click', (e) => {
+		if (e.target === modal) {
+			closeModal();
+		}
+	});
+
+	// Close with Escape key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+			closeModal();
+		}
+	});
+
+	// Expose functions globally for use by Gallery component
+	(window as any).openImageModal = openModal;
+</script>
