@@ -14,6 +14,9 @@ import icon from 'astro-icon'
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://example.me',
+	server: {
+		port: 4000
+	},
 	image: {
 		service: passthroughImageService(),
 	},
