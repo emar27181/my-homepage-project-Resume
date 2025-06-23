@@ -10,7 +10,8 @@ const {
 	heading,
 	subheading,
 	imagePath,
-	altText
+	altText,
+	target
 } = Astro.props
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}')
 if (!images[imagePath])
@@ -24,6 +25,7 @@ if (!images[imagePath])
 		href && 'transition-all hover:border-foreground/25 hover:shadow-sm'
 	)}
 	href={href}
+	target={target}
 >
 	<Image
 		src={images[imagePath]()}
