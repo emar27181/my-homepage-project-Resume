@@ -55,4 +55,9 @@
 - **コード中の定数・共通仕様は統一管理**  
   → `constants/` ディレクトリなどにまとめておく。
 
+- **画像パスの記述について**  
+  → Astroプロジェクトで画像パスを指定する際は、先頭に `/` を付けて `/src/assets/` 形式で記述する
+  → 例: `imagePath='/src/assets/gallery-portfolio.png'`（正しい）
+  → 例: `imagePath='src/assets/gallery-portfolio.png'`（間違い）
+
 ---
