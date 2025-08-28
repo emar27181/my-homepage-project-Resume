@@ -12,6 +12,10 @@ import ImageModal from '../components/ImageModal.astro'
 
 import { Image } from 'astro:assets'
 import astro from '../assets/about-astro.png'
+import { useTranslations, getLanguageFromPath } from '../utils/i18n'
+
+const currentLanguage = getLanguageFromPath(Astro.url.pathname)
+const t = useTranslations(currentLanguage)
 
 //import { getAllPosts, sortMDByDate } from '@/utils'
 
@@ -325,7 +329,7 @@ const tool = ['git', 'vscode']
 					href='https://emar27181-gallery-portfolio.netlify.app/'
 					class='underline'
 					target='_blank'
-					rel='noopener noreferrer'>イラスト作品はこちら</a
+					rel='noopener noreferrer'>{t.illutWorksLink}</a
 				>
 
 				<div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
@@ -378,9 +382,9 @@ const tool = ['git', 'vscode']
 			href='https://emar27181-gallery-portfolio.netlify.app/'
 			class='link'
 			target='_blank'
-			rel='noopener noreferrer'>こちら</a
+			rel='noopener noreferrer'>{t.galleryLinkText}</a
 		>
-		からより多くの作品をご覧いただけます。
+		{t.moreWorksLink}
 	</p>
 
 	<ImageModal />
