@@ -97,7 +97,7 @@ export const translations = {
     siteDescription: 'This is the portfolio site of Ema, a graduate student in information science. It summarizes information for job hunting (self-promotion, projects, skills, etc.).',
     githubLink: 'You can view the GitHub repository of this site',
     githubLinkText: 'here',
-    githubLinkSuffix: '.',
+    githubLinkSuffix: '. The English translation of this site was created by Claude Code.',
     
     // Personal information
     profileDescription: 'Currently a graduate student at Meiji University Graduate School of Science and Technology, Department of Computer Science. In the laboratory, I am researching illustration creation support through color palette recommendations. I have published my past code on GitHub. I enjoy a wide range of hobbies including sports, illustration, and gaming. You can view my illustration works',
