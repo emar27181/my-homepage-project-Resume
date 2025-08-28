@@ -10,20 +10,23 @@ const enPath = getLocalizedPath(basePath, 'en')
 ---
 
 <div class="language-switcher">
-  <button
-    class={`language-btn ${currentLanguage === 'ja' ? 'active' : ''}`}
-    data-lang="ja"
-    data-path={jaPath}
-  >
-    日本語
-  </button>
-  <button
-    class={`language-btn ${currentLanguage === 'en' ? 'active' : ''}`}
-    data-lang="en"
-    data-path={enPath}
-  >
-    English
-  </button>
+  {currentLanguage === 'ja' ? (
+    <button
+      class="language-btn"
+      data-lang="en"
+      data-path={enPath}
+    >
+      English
+    </button>
+  ) : (
+    <button
+      class="language-btn"
+      data-lang="ja"
+      data-path={jaPath}
+    >
+      日本語
+    </button>
+  )}
 </div>
 
 <style>
@@ -49,11 +52,6 @@ const enPath = getLocalizedPath(basePath, 'en')
     border-color: rgba(var(--color-border-hover));
   }
 
-  .language-btn.active {
-    background: rgba(var(--color-accent));
-    border-color: rgba(var(--color-accent));
-    color: rgba(var(--color-accent-text));
-  }
 </style>
 
 <script>
