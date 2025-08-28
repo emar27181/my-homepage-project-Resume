@@ -1,0 +1,72 @@
+---
+import { getLanguageFromPath, getLocalizedPath, removeLanguagePrefix } from '../utils/i18n'
+
+const currentPath = Astro.url.pathname
+const currentLanguage = getLanguageFromPath(currentPath)
+const basePath = removeLanguagePrefix(currentPath)
+
+const jaPath = getLocalizedPath(basePath, 'ja')
+const enPath = getLocalizedPath(basePath, 'en')
+---
+
+<div class="language-switcher">
+  <button
+    class={`language-btn ${currentLanguage === 'ja' ? 'active' : ''}`}
+    data-lang="ja"
+    data-path={jaPath}
+  >
+    日本語
+  </button>
+  <button
+    class={`language-btn ${currentLanguage === 'en' ? 'active' : ''}`}
+    data-lang="en"
+    data-path={enPath}
+  >
+    English
+  </button>
+</div>
+
+<style>
+  .language-switcher {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .language-btn {
+    padding: 6px 12px;
+    border: 1px solid rgba(var(--color-border));
+    border-radius: 6px;
+    background: transparent;
+    color: rgba(var(--color-text-body));
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .language-btn:hover {
+    background: rgba(var(--color-fill));
+    border-color: rgba(var(--color-border-hover));
+  }
+
+  .language-btn.active {
+    background: rgba(var(--color-accent));
+    border-color: rgba(var(--color-accent));
+    color: rgba(var(--color-accent-text));
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const languageButtons = document.querySelectorAll('.language-btn')
+    
+    languageButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const path = button.getAttribute('data-path')
+        if (path) {
+          window.location.href = path
+        }
+      })
+    })
+  })
+</script>
