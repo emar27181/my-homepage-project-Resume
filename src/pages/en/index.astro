@@ -1,0 +1,350 @@
+---
+import PageLayout from '../../layouts/BaseLayout.astro'
+import Section from '../../components/Section.astro'
+import Card from '../../components/Card.astro'
+import ProjectCard from '../../components/ProjectCard.astro'
+import SkillLayout from '../../components/SkillLayout.astro'
+import '../../styles/app.css'
+import Gallery from '../../components/Gallery.astro'
+import ImageModal from '../../components/ImageModal.astro'
+import { useTranslations } from '../../utils/i18n'
+
+import { Image } from 'astro:assets'
+import astro from '../../assets/about-astro.png'
+
+const t = useTranslations('en')
+
+const frontend = ['js', 'ts', 'html', 'css', 'react', 'p5js', 'flask', 'astro']
+const backend = ['python', 'c', 'java']
+const tool = ['git', 'vscode']
+---
+
+<PageLayout meta={{ title: 'emar27181-portfolio' }}>
+	<div class='flex w-full flex-col gap-y-10'>
+		<section class='flex flex-col items-center gap-y-7'>
+			<Image
+				src={astro}
+				alt='profile photo'
+				class='h-28 w-auto rounded-full bg-[#EEEEEE] p-2'
+				loading='eager'
+			/>
+
+			<div class='flex flex-col items-center gap-y-4'>
+				<h1 class='text-center text-3xl font-bold'>
+					<span class='hidden sm:inline'>Ryunosuke Ema | 江馬 龍之介</span>
+					<span class='sm:hidden'>
+						Ryunosuke Ema<br />江馬 龍之介
+					</span>
+				</h1>
+			</div>
+		</section>
+
+		<Section title={t.about}>
+			<p class='text-muted-foreground'>
+				{t.siteDescription}
+				{t.githubLink}
+				<a
+					class='link'
+					target='_blank'
+					href='https://github.com/emar27181/my-homepage-project-Resume'
+				>
+					{t.githubLinkText}
+				</a>
+				{t.githubLinkSuffix}
+			</p>
+		</Section>
+
+		<Section title={t.aboutMe}>
+			<p class='text-muted-foreground'>
+				{t.profileDescription}
+				<a
+					href='https://emar27181-gallery-portfolio.netlify.app/'
+					class='link'
+					target='_blank'
+					rel='noopener noreferrer'>{t.galleryLinkText}</a
+				>
+				{t.galleryLinkSuffix}
+				<br /><br />
+
+				MyLab: <a class='link' target='_blank' href='https://int.cs.meiji.ac.jp/'>
+					https://int.cs.meiji.ac.jp/</a
+				><br />
+				GitHub: <a class='link' target='_blank' href='https://github.com/emar27181'
+					>https://github.com/emar27181</a
+				><br />
+				Gmail: <a class='link' target='_blank' href='mailto: ryunosukeema.job@gmail.com'
+					>ryunosukeema.job@gmail.com</a
+				><br />
+			</p>
+		</Section>
+
+		<Section title={t.projects}>
+			<div class='flex flex-col gap-y-3'>
+				<ProjectCard
+					href='https://emar27181-gallery-portfolio.netlify.app/'
+					heading={t.galleryPortfolio}
+					subheading={t.galleryPortfolioDesc}
+					imagePath='/src/assets/gallery-portfolio.png'
+					altText='Example'
+					class='w-full'
+					target='_blank'
+				/>
+
+				<ProjectCard
+					href='https://color-recommend.netlify.app/'
+					heading={t.colorRecommendApp}
+					subheading={t.colorRecommendAppDesc}
+					imagePath='/src/assets/color-recommend-site.jpg'
+					altText='Example'
+					class='w-full'
+					target='_blank'
+				/>
+
+				<ProjectCard
+					href='https://emar27181-resume.netlify.app/'
+					heading={t.portfolioSite}
+					subheading={t.portfolioSiteDesc}
+					altText='Example'
+					imagePath='/src/assets/portfolio.png'
+					class='w-full'
+					target='_blank'
+				/>
+
+				<ProjectCard
+					href='https://juqs-map.netlify.app/'
+					heading={t.juqsMap}
+					subheading={t.juqsMapDesc}
+					imagePath='/src/assets/juqs-map.png'
+					altText='Example'
+					class='w-full'
+					target='_blank'
+				/>
+
+				<ProjectCard
+					href='https://nodoame27181.netlify.app/'
+					heading={t.gamePortfolio}
+					subheading={t.gamePortfolioDesc}
+					imagePath='/src/assets/nodoame_portfolio.png'
+					altText='Example'
+					class='w-full'
+					target='_blank'
+				/>
+
+				<ProjectCard
+					href='https://valorant-point-viewer.netlify.app/'
+					heading={t.valorantPointViewer}
+					subheading={t.valorantPointViewerDesc}
+					imagePath='/src/assets/valopoint.png'
+					altText='Example'
+					class='w-full'
+					target='_blank'
+				/>
+
+				<ProjectCard
+					href='https://emar27181.github.io/'
+					heading={t.p5jsBrowser}
+					subheading={t.p5jsBrowserDesc}
+					imagePath='/src/assets/demo-site.png'
+					altText='Example'
+					class='w-full'
+					target='_blank'
+				/>
+			</div>
+		</Section>
+
+		<Section title={t.research}>
+			<Card
+				heading={t.researchTitle}
+				subheading={t.researchDescription}
+			/>
+		</Section>
+
+		<Section title={t.publications}>
+			<Card
+				heading='Interaction 2024 Demo Presentation'
+				subheading='Demo presentation titled "Development of illustration creation support tool through color scheme visualization and color scheme technique estimation".'
+				date='March 2024'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						<a class='link' target='_blank' href='https://www.interaction-ipsj.org/2024/'
+							>Conference Link</a
+						>
+					</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://www.interaction-ipsj.org/proceedings/2024/data/bib/3B-27.html'
+							>Paper Link</a
+						>
+					</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://int.cs.meiji.ac.jp/2024/03/%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e3%81%ae%e5%88%b6%e4%bd%9c%e3%82%92%e5%8a%a9%e3%81%91%e3%82%8b%e9%85%8d%e8%89%b2%e6%94%af%e6%8f%b4%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0/'
+							>Description Link</a
+						>
+					</li>
+					<br />
+					<div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
+						<iframe
+							src='https://www.youtube.com/embed/RDHGUdwDi1A'
+							style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
+							allowfullscreen></iframe>
+					</div>
+				</ul>
+			</Card>
+			<Card
+				heading='Entertainment Computing 2024 Oral & Demo Presentation'
+				date='September 2024'
+				subheading='Oral and demo presentation titled "Study of color palettes that recommend color schemes suitable for users concepts".'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						<a class='link' target='_blank' href='https://ec2024.entcomp.org/'>Conference Link</a>
+					</li>
+					<li>
+						<a
+							class='link'
+							target='_blank'
+							href='https://ipsj.ixsq.nii.ac.jp/ej/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=238714&item_no=1&page_id=13&block_id=8'
+							>Paper Link</a
+						>
+					</li>
+					<br />
+					<div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
+						<iframe
+							src='https://www.youtube.com/embed/1PHFpr4gAR4'
+							style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
+							allowfullscreen></iframe>
+					</div>
+				</ul>
+			</Card>
+		</Section>
+
+		<Section title={t.skills}>
+			<SkillLayout title='Frontend' skills={frontend} />
+			<SkillLayout title='Backend' skills={backend} />
+			<SkillLayout title='Tool' skills={tool} />
+			<br />
+
+			<div class='flex flex-col items-start justify-center gap-4'>
+				<img
+					src='https://github-readme-stats.vercel.app/api?username=emar27181&count_private=true&show_icons=true&theme=transparent'
+				/>
+				<img
+					src='https://github-readme-stats.vercel.app/api/top-langs/?username=emar27181&layout=compact&theme=transparent'
+				/>
+			</div>
+		</Section>
+
+		<Section title={t.education}>
+			<Card
+				heading={t.highSchoolEnrollment}
+				date='April 2017'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading={t.highSchoolGraduation}
+				date='March 2020'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading={t.universityEnrollment}
+				date='April 2020'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading={t.universityGraduation}
+				date='March 2024'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading={t.graduateSchoolEnrollment}
+				date='April 2024'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+		</Section>
+
+		<Section title={t.hobbies}>
+			<Card
+				heading={t.illustrationHobby}
+				subheading={t.illustrationDesc}
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+				<a
+					href='https://emar27181-gallery-portfolio.netlify.app/'
+					class='underline'
+					target='_blank'
+					rel='noopener noreferrer'>{t.illutWorksLink}</a
+				>
+
+				<div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
+					<iframe
+						src='https://www.youtube.com/embed/1-tDSvjpxn4'
+						style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
+						allowfullscreen></iframe>
+				</div>
+			</Card>
+
+			<Card
+				heading={t.sportsHobby}
+				subheading={t.sportsDesc}
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+
+			<Card
+				heading={t.gamingHobby}
+				subheading={t.gamingDesc}
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+		</Section>
+
+		<Section title={t.certifications}>
+			<Card
+				as='a'
+				heading={t.englishTest}
+				date='July 2019'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-11 w-auto md:-left-16'
+			/>
+			<Card
+				as='a'
+				heading={t.drivingLicense}
+				date='August 2020'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-11 w-auto md:-left-16'
+			/>
+		</Section>
+
+		<Section title={t.gallery} />
+	</div>
+
+	<div class='mt-[12px]'><Gallery /></div>
+
+	<p>
+		<a
+			href='https://emar27181-gallery-portfolio.netlify.app/'
+			class='link'
+			target='_blank'
+			rel='noopener noreferrer'>{t.galleryLinkText}</a
+		>
+		{t.moreWorksLink}
+	</p>
+
+	<ImageModal />
+</PageLayout>
