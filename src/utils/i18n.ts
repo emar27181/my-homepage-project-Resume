@@ -51,6 +51,8 @@ export const translations = {
     valorantPointViewerDesc: 'VALORANTの各マップの定点動画をマップ上で確認できるWebサイトです。プレイヤーがマップを理解し、戦略を練るためのツールとして制作しました。',
     p5jsBrowser: 'p5.js演習ブラウザ',
     p5jsBrowserDesc: '研究で作成した成果物を展示しています．',
+    mahjongYakuVisualizer: '麻雀役ビジュアライザー',
+    mahjongYakuVisualizerDesc: '麻雀の役を視覚的に確認できるWebサイトです。',
     
     // 研究
     researchTitle: '配色の推薦によるイラスト制作の支援',
@@ -120,6 +122,8 @@ export const translations = {
     valorantPointViewerDesc: 'A website where you can check fixed-point videos of each VALORANT map on the map. Created as a tool for players to understand maps and develop strategies.',
     p5jsBrowser: 'p5.js Exercise Browser',
     p5jsBrowserDesc: 'Exhibiting the results created in my research.',
+    mahjongYakuVisualizer: 'Mahjong Yaku Visualizer',
+    mahjongYakuVisualizerDesc: 'A website for visually checking mahjong winning hands.',
     
     // Research
     researchTitle: 'Supporting Illustration Creation Through Color Palette Recommendations',
