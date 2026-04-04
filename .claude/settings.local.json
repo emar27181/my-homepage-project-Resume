@@ -8,7 +8,10 @@
       "Bash(npm run dev:*)",
       "Bash(netlify:*)",
       "Bash(cat:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(python3 -c \"import sys,json; sites=json.load\\(sys.stdin\\); [print\\(s['id'], s['name']\\) for s in sites if 'unused-emar27181-resume' == s['name']]\")",
+      "Bash(mkdir -p /tmp/redirect-site)",
+      "Read(//tmp/redirect-site/**)"
     ],
     "deny": []
   }
