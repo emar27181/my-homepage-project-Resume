@@ -26,13 +26,13 @@ export const translations = {
     gallery: '作品集',
     
     // サイト情報
-    siteDescription: 'ここは情報系大学院生Emaのポートフォリオサイトです。就職活動のための情報(自己PRや制作物、スキルなど)をまとめています。',
+    siteDescription: 'ここはITエンジニアEmaのポートフォリオサイトです。自己PRや制作物、スキルなどをまとめています。',
     githubLink: 'このサイトのGitHubリポジトリは',
     githubLinkText: 'こちら',
     githubLinkSuffix: 'からご覧いただけます。',
     
     // 個人情報
-    profileDescription: '現在、明治大学大学院理工学研究科情報科学専攻に在学中の大学院生。研究室では、カラーパレットの推薦によるイラスト制作支援について研究中。過去に書いたコードはGitHubにて公開しています。スポーツやイラスト、ゲームなど、趣味として幅広く楽しんでいます。イラスト作品は',
+    profileDescription: '明治大学大学院理工学研究科情報科学専攻を2026年3月に修了し、現在は某通信企業でITエンジニアとして勤務中。過去に書いたコードはGitHubにて公開しています。スポーツやイラスト、ゲームなど、趣味として幅広く楽しんでいます。イラスト作品は',
     galleryLinkText: 'こちら',
     galleryLinkSuffix: 'からご覧いただけます。',
     
@@ -62,6 +62,7 @@ export const translations = {
     universityEnrollment: '明治大学理工学部情報科学科 入学',
     universityGraduation: '明治大学理工学部情報科学科 卒業',
     graduateSchoolEnrollment: '明治大学大学院理工学研究科情報科学専攻 入学',
+    graduateSchoolGraduation: '明治大学大学院理工学研究科情報科学専攻 修了',
     
     // 趣味
     illustrationHobby: 'イラスト',
@@ -94,13 +95,13 @@ export const translations = {
     gallery: 'Gallery',
     
     // Site information
-    siteDescription: 'This is the portfolio site of Ema, a graduate student in information science. It summarizes information for job hunting (self-promotion, projects, skills, etc.).',
+    siteDescription: 'This is the portfolio site of Ema, an IT engineer. It summarizes self-promotion, projects, skills, and more. This site was originally created for job hunting and has since been repurposed as a personal portfolio.',
     githubLink: 'You can view the GitHub repository of this site',
     githubLinkText: 'here',
     githubLinkSuffix: '. The English translation of this site was created by Claude Code.',
     
     // Personal information
-    profileDescription: 'Currently a graduate student at Meiji University Graduate School of Science and Technology, Department of Computer Science. In the laboratory, I am researching illustration creation support through color palette recommendations. I have published my past code on GitHub. I enjoy a wide range of hobbies including sports, illustration, and gaming. You can view my illustration works',
+    profileDescription: 'Completed the Master\'s program at Meiji University Graduate School of Science and Technology, Department of Computer Science in March 2026, and currently working as an IT engineer at a telecommunications company. I have published my past code on GitHub. I enjoy a wide range of hobbies including sports, illustration, and gaming. You can view my illustration works',
     galleryLinkText: 'here',
     galleryLinkSuffix: '.',
     
@@ -130,6 +131,7 @@ export const translations = {
     universityEnrollment: 'Enrolled in Meiji University School of Science and Technology, Department of Computer Science',
     universityGraduation: 'Graduated from Meiji University School of Science and Technology, Department of Computer Science',
     graduateSchoolEnrollment: 'Enrolled in Meiji University Graduate School of Science and Technology, Department of Computer Science',
+    graduateSchoolGraduation: 'Completed Meiji University Graduate School of Science and Technology, Department of Computer Science',
     
     // Hobbies
     illustrationHobby: 'Illustration',

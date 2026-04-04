@@ -49,20 +49,20 @@ export let images = [
         tags: [''],
         date: '2000-01-01'
     },
-    {
-        src: '/images/image_icon_astra.jpg',
-        alt: 'Astra Icon',
-        title: 'Astra',
-        tags: [''],
-        date: '2000-01-01'
-    },
-    {
-        src: '/images/image_icon_omen.png',
-        alt: 'Omen Icon',
-        title: 'Omen',
-        tags: [''],
-        date: '2000-01-01'
-    },
+    // {
+    //     src: '/images/image_icon_astra.jpg',
+    //     alt: 'Astra Icon',
+    //     title: 'Astra',
+    //     tags: [''],
+    //     date: '2000-01-01'
+    // },
+    // {
+    //     src: '/images/image_icon_omen.png',
+    //     alt: 'Omen Icon',
+    //     title: 'Omen',
+    //     tags: [''],
+    //     date: '2000-01-01'
+    // },
     {
         src: '/images/image_logo_shandy.jpg',
         alt: 'Shandy Logo',
