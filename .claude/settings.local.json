@@ -6,7 +6,8 @@
       "Bash(npm run build:*)",
       "Bash(netlify deploy:*)",
       "Bash(npm run dev:*)",
-      "Bash(netlify:*)"
+      "Bash(netlify:*)",
+      "Bash(cat:*)"
     ],
     "deny": []
   }
