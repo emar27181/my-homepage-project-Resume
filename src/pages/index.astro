@@ -30,19 +30,18 @@ const tool = ['git', 'vscode']
 ---
 
 <PageLayout meta={{ title: 'emar27181-portfolio' }}>
+	<nav slot='toc' class='flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-foreground/80'>
+		<span class='font-semibold text-foreground/60 shrink-0'>目次:</span>
+		<a class='hover:text-foreground transition-colors' href='#projects'>制作物</a>
+		<a class='hover:text-foreground transition-colors' href='#research'>研究テーマ</a>
+		<a class='hover:text-foreground transition-colors' href='#publications'>学会発表</a>
+		<a class='hover:text-foreground transition-colors' href='#skills'>スキル</a>
+		<a class='hover:text-foreground transition-colors' href='#education'>学歴</a>
+		<a class='hover:text-foreground transition-colors' href='#hobbies'>趣味</a>
+		<a class='hover:text-foreground transition-colors' href='#qualifications'>資格・免許</a>
+		<a class='hover:text-foreground transition-colors' href='#gallery'>作品集</a>
+	</nav>
 	<div class='flex w-full flex-col gap-y-10'>
-		<nav class='text-sm text-muted-foreground'>
-			<ul class='flex flex-wrap gap-x-4 gap-y-1'>
-				<li><a class='link' href='#projects'>制作物</a></li>
-				<li><a class='link' href='#research'>研究テーマ</a></li>
-				<li><a class='link' href='#publications'>学会発表</a></li>
-				<li><a class='link' href='#skills'>スキル</a></li>
-				<li><a class='link' href='#education'>学歴</a></li>
-				<li><a class='link' href='#hobbies'>趣味</a></li>
-				<li><a class='link' href='#qualifications'>資格・免許</a></li>
-				<li><a class='link' href='#gallery'>作品集</a></li>
-			</ul>
-		</nav>
 		<section class='flex flex-col items-center gap-y-7'>
 			<Image
 				src={astro}
