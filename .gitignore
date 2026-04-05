@@ -24,5 +24,8 @@ pnpm-debug.log*
 # Local Netlify folder
 .netlify
 
+# Claude Code local settings
+.claude/settings.local.json
+
 # Temporary files
 tmp/
