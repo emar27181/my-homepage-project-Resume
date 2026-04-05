@@ -1,0 +1,1626 @@
+{
+  "fetchedAt": "2026-04-05T06:28:56.628402Z",
+  "profile": {
+    "name": "emar27181",
+    "login": "emar27181",
+    "bio": "",
+    "company": null,
+    "location": null,
+    "email": "",
+    "websiteUrl": "https://emar27181-resume.netlify.app/",
+    "createdAt": "2023-01-11T06:01:05Z",
+    "followers": {
+      "totalCount": 10
+    },
+    "following": {
+      "totalCount": 17
+    },
+    "repositories": {
+      "totalCount": 25
+    },
+    "starredRepositories": {
+      "totalCount": 16
+    }
+  },
+  "repositories": [
+    {
+      "name": "software-practice-ta",
+      "description": null,
+      "url": "https://github.com/emar27181/software-practice-ta",
+      "homepageUrl": null,
+      "stars": 1,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "Python",
+      "languages": [
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "bytes": 266201
+        },
+        {
+          "name": "C",
+          "color": "#555555",
+          "bytes": 134271
+        },
+        {
+          "name": "Shell",
+          "color": "#89e051",
+          "bytes": 1217
+        }
+      ],
+      "topics": [],
+      "createdAt": "2026-02-09T11:54:00Z",
+      "updatedAt": "2026-02-10T12:09:56Z",
+      "pushedAt": "2026-02-10T08:09:00Z"
+    },
+    {
+      "name": "my-color-recommend-ui-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-color-recommend-ui-project",
+      "homepageUrl": null,
+      "stars": 1,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "TypeScript",
+      "languages": [
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "bytes": 530421
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "bytes": 5866
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "bytes": 2778
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "bytes": 1511
+        }
+      ],
+      "topics": [],
+      "createdAt": "2025-06-16T08:58:47Z",
+      "updatedAt": "2026-02-07T07:23:47Z",
+      "pushedAt": "2026-02-07T07:35:06Z"
+    },
+    {
+      "name": "my-net-homepage-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-net-homepage-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "Astro",
+      "languages": [
+        {
+          "name": "Astro",
+          "color": "#ff5a03",
+          "bytes": 235444
+        },
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "bytes": 65360
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "bytes": 14779
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "bytes": 317
+        }
+      ],
+      "topics": [],
+      "createdAt": "2025-06-21T08:54:36Z",
+      "updatedAt": "2026-01-20T04:58:02Z",
+      "pushedAt": "2026-01-20T04:58:04Z"
+    },
+    {
+      "name": "valorant-AA-project",
+      "description": null,
+      "url": "https://github.com/emar27181/valorant-AA-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-12-07T09:33:31Z",
+      "updatedAt": "2025-12-07T09:33:35Z",
+      "pushedAt": "2025-12-07T09:33:32Z"
+    },
+    {
+      "name": "my-color-recommendation-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-color-recommendation-project",
+      "homepageUrl": null,
+      "stars": 1,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "Python",
+      "languages": [
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "bytes": 181335
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "bytes": 1729
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "bytes": 654
+        },
+        {
+          "name": "Makefile",
+          "color": "#427819",
+          "bytes": 362
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "bytes": 300
+        }
+      ],
+      "topics": [],
+      "createdAt": "2024-09-25T05:19:43Z",
+      "updatedAt": "2025-09-01T08:07:36Z",
+      "pushedAt": "2026-02-07T11:25:07Z"
+    },
+    {
+      "name": "flex-rail-map-project",
+      "description": null,
+      "url": "https://github.com/emar27181/flex-rail-map-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-09-01T06:53:31Z",
+      "updatedAt": "2025-09-01T06:53:35Z",
+      "pushedAt": "2025-09-01T06:53:31Z"
+    },
+    {
+      "name": "emar27181",
+      "description": null,
+      "url": "https://github.com/emar27181/emar27181",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2023-10-19T06:05:48Z",
+      "updatedAt": "2025-08-15T06:04:41Z",
+      "pushedAt": "2025-08-15T06:04:37Z"
+    },
+    {
+      "name": "emar27181.github.io",
+      "description": null,
+      "url": "https://github.com/emar27181/emar27181.github.io",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "TypeScript",
+      "languages": [
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "bytes": 461950
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "bytes": 14486
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "bytes": 2324
+        },
+        {
+          "name": "Shell",
+          "color": "#89e051",
+          "bytes": 206
+        }
+      ],
+      "topics": [],
+      "createdAt": "2023-03-16T13:05:49Z",
+      "updatedAt": "2025-07-15T03:22:55Z",
+      "pushedAt": "2024-11-13T05:52:53Z"
+    },
+    {
+      "name": "my-gallery-portfolio-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-gallery-portfolio-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "Astro",
+      "languages": [
+        {
+          "name": "Astro",
+          "color": "#ff5a03",
+          "bytes": 39342
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "bytes": 17340
+        },
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "bytes": 14061
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "bytes": 121
+        }
+      ],
+      "topics": [],
+      "createdAt": "2025-07-02T11:37:30Z",
+      "updatedAt": "2025-07-12T10:00:05Z",
+      "pushedAt": "2025-07-12T10:00:06Z"
+    },
+    {
+      "name": "my-p5js-gallery-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-p5js-gallery-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-07-11T15:24:03Z",
+      "updatedAt": "2025-07-11T15:24:08Z",
+      "pushedAt": "2025-07-11T15:24:04Z"
+    },
+    {
+      "name": "minecraft-building-support-ui-project",
+      "description": null,
+      "url": "https://github.com/emar27181/minecraft-building-support-ui-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-06-23T05:42:14Z",
+      "updatedAt": "2025-06-23T05:42:17Z",
+      "pushedAt": "2025-06-23T05:42:14Z"
+    },
+    {
+      "name": "my-gyro-app-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-gyro-app-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-06-22T04:03:29Z",
+      "updatedAt": "2025-06-22T04:03:33Z",
+      "pushedAt": "2025-06-22T04:03:30Z"
+    },
+    {
+      "name": "practice-project",
+      "description": null,
+      "url": "https://github.com/emar27181/practice-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-05-30T11:24:36Z",
+      "updatedAt": "2025-05-30T11:24:39Z",
+      "pushedAt": "2025-05-30T11:24:36Z"
+    },
+    {
+      "name": "my-line-bot-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-line-bot-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-05-11T06:35:00Z",
+      "updatedAt": "2025-05-11T06:35:04Z",
+      "pushedAt": "2025-05-11T06:35:01Z"
+    },
+    {
+      "name": "my-homepage-project-Resume",
+      "description": null,
+      "url": "https://github.com/emar27181/my-homepage-project-Resume",
+      "homepageUrl": null,
+      "stars": 1,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "Astro",
+      "languages": [
+        {
+          "name": "Astro",
+          "color": "#ff5a03",
+          "bytes": 47160
+        },
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "bytes": 7891
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "bytes": 4698
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "bytes": 1835
+        }
+      ],
+      "topics": [],
+      "createdAt": "2024-07-05T05:24:40Z",
+      "updatedAt": "2025-05-07T04:59:41Z",
+      "pushedAt": "2025-05-07T04:59:37Z"
+    },
+    {
+      "name": "sound-to-generative-art-project",
+      "description": null,
+      "url": "https://github.com/emar27181/sound-to-generative-art-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-04-08T09:26:09Z",
+      "updatedAt": "2025-04-08T09:26:12Z",
+      "pushedAt": "2025-04-08T09:26:09Z"
+    },
+    {
+      "name": "my-valorant-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-valorant-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-03-12T06:53:36Z",
+      "updatedAt": "2025-03-12T06:53:40Z",
+      "pushedAt": "2025-03-12T06:53:36Z"
+    },
+    {
+      "name": "minecraft-FTP-project",
+      "description": null,
+      "url": "https://github.com/emar27181/minecraft-FTP-project",
+      "homepageUrl": null,
+      "stars": 1,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "Python",
+      "languages": [
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "bytes": 17302
+        }
+      ],
+      "topics": [],
+      "createdAt": "2025-01-29T08:06:44Z",
+      "updatedAt": "2025-02-27T05:27:06Z",
+      "pushedAt": "2025-02-27T05:27:08Z"
+    },
+    {
+      "name": "pokepoke-analyze-match-project",
+      "description": null,
+      "url": "https://github.com/emar27181/pokepoke-analyze-match-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-02-07T14:49:12Z",
+      "updatedAt": "2025-02-07T14:49:15Z",
+      "pushedAt": "2025-02-07T14:49:12Z"
+    },
+    {
+      "name": "pokepoke-x-trend-project",
+      "description": null,
+      "url": "https://github.com/emar27181/pokepoke-x-trend-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-02-03T15:48:56Z",
+      "updatedAt": "2025-02-03T15:49:00Z",
+      "pushedAt": "2025-02-03T15:48:56Z"
+    },
+    {
+      "name": "dynamodb-load-tester",
+      "description": null,
+      "url": "https://github.com/emar27181/dynamodb-load-tester",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": null,
+      "languages": [],
+      "topics": [],
+      "createdAt": "2025-01-18T05:02:16Z",
+      "updatedAt": "2025-01-18T05:02:18Z",
+      "pushedAt": "2025-01-18T05:02:17Z"
+    },
+    {
+      "name": "srusa-pokepoke-project",
+      "description": null,
+      "url": "https://github.com/emar27181/srusa-pokepoke-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "TypeScript",
+      "languages": [
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "bytes": 5196
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "bytes": 345
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "bytes": 135
+        }
+      ],
+      "topics": [],
+      "createdAt": "2024-11-21T14:28:26Z",
+      "updatedAt": "2024-11-26T15:41:48Z",
+      "pushedAt": "2024-11-26T15:41:57Z"
+    },
+    {
+      "name": "my-python-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-python-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "Python",
+      "languages": [
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "bytes": 87320
+        },
+        {
+          "name": "Shell",
+          "color": "#89e051",
+          "bytes": 24
+        }
+      ],
+      "topics": [],
+      "createdAt": "2023-05-07T09:08:54Z",
+      "updatedAt": "2024-11-08T11:31:14Z",
+      "pushedAt": "2024-11-08T11:31:10Z"
+    },
+    {
+      "name": "my-p5-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-p5-project",
+      "homepageUrl": null,
+      "stars": 0,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "TypeScript",
+      "languages": [
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "bytes": 32687
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "bytes": 2526
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "bytes": 2283
+        }
+      ],
+      "topics": [],
+      "createdAt": "2023-02-28T17:34:32Z",
+      "updatedAt": "2024-04-23T03:39:31Z",
+      "pushedAt": "2023-02-28T17:37:05Z"
+    },
+    {
+      "name": "ShandyTennis.github.io",
+      "description": null,
+      "url": "https://github.com/ShandyTennis/ShandyTennis.github.io",
+      "homepageUrl": null,
+      "stars": 1,
+      "forks": 0,
+      "isFork": false,
+      "primaryLanguage": "HTML",
+      "languages": [
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "bytes": 224
+        }
+      ],
+      "topics": [],
+      "createdAt": "2023-06-27T08:31:47Z",
+      "updatedAt": "2023-06-27T09:11:39Z",
+      "pushedAt": "2023-06-27T09:15:23Z"
+    }
+  ],
+  "languageStats": {
+    "TypeScript": {
+      "bytes": 1117566,
+      "percent": 50.75,
+      "color": "#3178c6"
+    },
+    "Python": {
+      "bytes": 552158,
+      "percent": 25.08,
+      "color": "#3572A5"
+    },
+    "Astro": {
+      "bytes": 321946,
+      "percent": 14.62,
+      "color": "#ff5a03"
+    },
+    "C": {
+      "bytes": 134271,
+      "percent": 6.1,
+      "color": "#555555"
+    },
+    "CSS": {
+      "bytes": 54951,
+      "percent": 2.5,
+      "color": "#663399"
+    },
+    "JavaScript": {
+      "bytes": 11229,
+      "percent": 0.51,
+      "color": "#f1e05a"
+    },
+    "HTML": {
+      "bytes": 8071,
+      "percent": 0.37,
+      "color": "#e34c26"
+    },
+    "Shell": {
+      "bytes": 1447,
+      "percent": 0.07,
+      "color": "#89e051"
+    },
+    "Makefile": {
+      "bytes": 362,
+      "percent": 0.02,
+      "color": "#427819"
+    }
+  },
+  "contributions": {
+    "2020": {
+      "total": 0,
+      "commits": 0,
+      "pullRequests": 0,
+      "issues": 0,
+      "reviews": 0,
+      "newRepositories": 0,
+      "monthly": {
+        "2020-01": 0,
+        "2020-02": 0,
+        "2020-03": 0,
+        "2020-04": 0,
+        "2020-05": 0,
+        "2020-06": 0,
+        "2020-07": 0,
+        "2020-08": 0,
+        "2020-09": 0,
+        "2020-10": 0,
+        "2020-11": 0,
+        "2020-12": 0
+      },
+      "daily": []
+    },
+    "2021": {
+      "total": 0,
+      "commits": 0,
+      "pullRequests": 0,
+      "issues": 0,
+      "reviews": 0,
+      "newRepositories": 0,
+      "monthly": {
+        "2021-01": 0,
+        "2021-02": 0,
+        "2021-03": 0,
+        "2021-04": 0,
+        "2021-05": 0,
+        "2021-06": 0,
+        "2021-07": 0,
+        "2021-08": 0,
+        "2021-09": 0,
+        "2021-10": 0,
+        "2021-11": 0,
+        "2021-12": 0
+      },
+      "daily": []
+    },
+    "2022": {
+      "total": 0,
+      "commits": 0,
+      "pullRequests": 0,
+      "issues": 0,
+      "reviews": 0,
+      "newRepositories": 0,
+      "monthly": {
+        "2022-01": 0,
+        "2022-02": 0,
+        "2022-03": 0,
+        "2022-04": 0,
+        "2022-05": 0,
+        "2022-06": 0,
+        "2022-07": 0,
+        "2022-08": 0,
+        "2022-09": 0,
+        "2022-10": 0,
+        "2022-11": 0,
+        "2022-12": 0
+      },
+      "daily": []
+    },
+    "2023": {
+      "total": 295,
+      "commits": 138,
+      "pullRequests": 127,
+      "issues": 18,
+      "reviews": 1,
+      "newRepositories": 10,
+      "monthly": {
+        "2023-01": 1,
+        "2023-02": 5,
+        "2023-03": 22,
+        "2023-04": 24,
+        "2023-05": 64,
+        "2023-06": 9,
+        "2023-07": 8,
+        "2023-08": 0,
+        "2023-09": 22,
+        "2023-10": 48,
+        "2023-11": 47,
+        "2023-12": 45
+      },
+      "daily": [
+        {
+          "date": "2023-01-11",
+          "count": 1
+        },
+        {
+          "date": "2023-02-15",
+          "count": 5
+        },
+        {
+          "date": "2023-03-01",
+          "count": 2
+        },
+        {
+          "date": "2023-03-03",
+          "count": 2
+        },
+        {
+          "date": "2023-03-12",
+          "count": 8
+        },
+        {
+          "date": "2023-03-13",
+          "count": 3
+        },
+        {
+          "date": "2023-03-16",
+          "count": 1
+        },
+        {
+          "date": "2023-03-19",
+          "count": 6
+        },
+        {
+          "date": "2023-04-10",
+          "count": 2
+        },
+        {
+          "date": "2023-04-14",
+          "count": 2
+        },
+        {
+          "date": "2023-04-16",
+          "count": 3
+        },
+        {
+          "date": "2023-04-24",
+          "count": 2
+        },
+        {
+          "date": "2023-04-25",
+          "count": 3
+        },
+        {
+          "date": "2023-04-27",
+          "count": 1
+        },
+        {
+          "date": "2023-04-28",
+          "count": 5
+        },
+        {
+          "date": "2023-04-29",
+          "count": 6
+        },
+        {
+          "date": "2023-05-01",
+          "count": 11
+        },
+        {
+          "date": "2023-05-02",
+          "count": 13
+        },
+        {
+          "date": "2023-05-03",
+          "count": 6
+        },
+        {
+          "date": "2023-05-04",
+          "count": 1
+        },
+        {
+          "date": "2023-05-07",
+          "count": 6
+        },
+        {
+          "date": "2023-05-09",
+          "count": 2
+        },
+        {
+          "date": "2023-05-10",
+          "count": 2
+        },
+        {
+          "date": "2023-05-11",
+          "count": 3
+        },
+        {
+          "date": "2023-05-18",
+          "count": 2
+        },
+        {
+          "date": "2023-05-20",
+          "count": 6
+        },
+        {
+          "date": "2023-05-21",
+          "count": 5
+        },
+        {
+          "date": "2023-05-23",
+          "count": 7
+        },
+        {
+          "date": "2023-06-17",
+          "count": 1
+        },
+        {
+          "date": "2023-06-18",
+          "count": 2
+        },
+        {
+          "date": "2023-06-19",
+          "count": 2
+        },
+        {
+          "date": "2023-06-25",
+          "count": 1
+        },
+        {
+          "date": "2023-06-27",
+          "count": 3
+        },
+        {
+          "date": "2023-07-09",
+          "count": 2
+        },
+        {
+          "date": "2023-07-17",
+          "count": 2
+        },
+        {
+          "date": "2023-07-26",
+          "count": 2
+        },
+        {
+          "date": "2023-07-27",
+          "count": 2
+        },
+        {
+          "date": "2023-09-13",
+          "count": 2
+        },
+        {
+          "date": "2023-09-19",
+          "count": 4
+        },
+        {
+          "date": "2023-09-21",
+          "count": 8
+        },
+        {
+          "date": "2023-09-25",
+          "count": 4
+        },
+        {
+          "date": "2023-09-26",
+          "count": 4
+        },
+        {
+          "date": "2023-10-02",
+          "count": 4
+        },
+        {
+          "date": "2023-10-05",
+          "count": 2
+        },
+        {
+          "date": "2023-10-09",
+          "count": 2
+        },
+        {
+          "date": "2023-10-11",
+          "count": 2
+        },
+        {
+          "date": "2023-10-13",
+          "count": 2
+        },
+        {
+          "date": "2023-10-18",
+          "count": 14
+        },
+        {
+          "date": "2023-10-19",
+          "count": 10
+        },
+        {
+          "date": "2023-10-22",
+          "count": 2
+        },
+        {
+          "date": "2023-10-26",
+          "count": 6
+        },
+        {
+          "date": "2023-10-28",
+          "count": 2
+        },
+        {
+          "date": "2023-10-30",
+          "count": 2
+        },
+        {
+          "date": "2023-11-09",
+          "count": 2
+        },
+        {
+          "date": "2023-11-10",
+          "count": 2
+        },
+        {
+          "date": "2023-11-12",
+          "count": 5
+        },
+        {
+          "date": "2023-11-13",
+          "count": 2
+        },
+        {
+          "date": "2023-11-14",
+          "count": 2
+        },
+        {
+          "date": "2023-11-15",
+          "count": 8
+        },
+        {
+          "date": "2023-11-16",
+          "count": 4
+        },
+        {
+          "date": "2023-11-18",
+          "count": 2
+        },
+        {
+          "date": "2023-11-22",
+          "count": 2
+        },
+        {
+          "date": "2023-11-25",
+          "count": 2
+        },
+        {
+          "date": "2023-11-26",
+          "count": 2
+        },
+        {
+          "date": "2023-11-29",
+          "count": 6
+        },
+        {
+          "date": "2023-11-30",
+          "count": 8
+        },
+        {
+          "date": "2023-12-03",
+          "count": 2
+        },
+        {
+          "date": "2023-12-04",
+          "count": 2
+        },
+        {
+          "date": "2023-12-05",
+          "count": 4
+        },
+        {
+          "date": "2023-12-06",
+          "count": 2
+        },
+        {
+          "date": "2023-12-07",
+          "count": 2
+        },
+        {
+          "date": "2023-12-09",
+          "count": 2
+        },
+        {
+          "date": "2023-12-10",
+          "count": 2
+        },
+        {
+          "date": "2023-12-11",
+          "count": 2
+        },
+        {
+          "date": "2023-12-13",
+          "count": 6
+        },
+        {
+          "date": "2023-12-14",
+          "count": 3
+        },
+        {
+          "date": "2023-12-15",
+          "count": 4
+        },
+        {
+          "date": "2023-12-16",
+          "count": 4
+        },
+        {
+          "date": "2023-12-17",
+          "count": 2
+        },
+        {
+          "date": "2023-12-19",
+          "count": 2
+        },
+        {
+          "date": "2023-12-21",
+          "count": 2
+        },
+        {
+          "date": "2023-12-28",
+          "count": 4
+        }
+      ]
+    },
+    "2024": {
+      "total": 138,
+      "commits": 70,
+      "pullRequests": 59,
+      "issues": 0,
+      "reviews": 0,
+      "newRepositories": 8,
+      "monthly": {
+        "2024-01": 13,
+        "2024-02": 0,
+        "2024-03": 8,
+        "2024-04": 14,
+        "2024-05": 15,
+        "2024-06": 29,
+        "2024-07": 31,
+        "2024-08": 4,
+        "2024-09": 6,
+        "2024-10": 2,
+        "2024-11": 16,
+        "2024-12": 0
+      },
+      "daily": [
+        {
+          "date": "2024-01-12",
+          "count": 2
+        },
+        {
+          "date": "2024-01-17",
+          "count": 2
+        },
+        {
+          "date": "2024-01-18",
+          "count": 2
+        },
+        {
+          "date": "2024-01-19",
+          "count": 2
+        },
+        {
+          "date": "2024-01-23",
+          "count": 1
+        },
+        {
+          "date": "2024-01-29",
+          "count": 4
+        },
+        {
+          "date": "2024-03-05",
+          "count": 2
+        },
+        {
+          "date": "2024-03-07",
+          "count": 2
+        },
+        {
+          "date": "2024-03-17",
+          "count": 2
+        },
+        {
+          "date": "2024-03-24",
+          "count": 2
+        },
+        {
+          "date": "2024-04-12",
+          "count": 2
+        },
+        {
+          "date": "2024-04-16",
+          "count": 2
+        },
+        {
+          "date": "2024-04-17",
+          "count": 2
+        },
+        {
+          "date": "2024-04-20",
+          "count": 2
+        },
+        {
+          "date": "2024-04-22",
+          "count": 2
+        },
+        {
+          "date": "2024-04-26",
+          "count": 2
+        },
+        {
+          "date": "2024-04-30",
+          "count": 2
+        },
+        {
+          "date": "2024-05-10",
+          "count": 4
+        },
+        {
+          "date": "2024-05-14",
+          "count": 4
+        },
+        {
+          "date": "2024-05-19",
+          "count": 3
+        },
+        {
+          "date": "2024-05-20",
+          "count": 2
+        },
+        {
+          "date": "2024-05-28",
+          "count": 2
+        },
+        {
+          "date": "2024-06-04",
+          "count": 2
+        },
+        {
+          "date": "2024-06-06",
+          "count": 2
+        },
+        {
+          "date": "2024-06-10",
+          "count": 2
+        },
+        {
+          "date": "2024-06-12",
+          "count": 2
+        },
+        {
+          "date": "2024-06-15",
+          "count": 3
+        },
+        {
+          "date": "2024-06-16",
+          "count": 2
+        },
+        {
+          "date": "2024-06-19",
+          "count": 8
+        },
+        {
+          "date": "2024-06-21",
+          "count": 2
+        },
+        {
+          "date": "2024-06-28",
+          "count": 4
+        },
+        {
+          "date": "2024-06-29",
+          "count": 2
+        },
+        {
+          "date": "2024-07-03",
+          "count": 2
+        },
+        {
+          "date": "2024-07-05",
+          "count": 11
+        },
+        {
+          "date": "2024-07-06",
+          "count": 4
+        },
+        {
+          "date": "2024-07-12",
+          "count": 2
+        },
+        {
+          "date": "2024-07-17",
+          "count": 2
+        },
+        {
+          "date": "2024-07-18",
+          "count": 2
+        },
+        {
+          "date": "2024-07-22",
+          "count": 2
+        },
+        {
+          "date": "2024-07-25",
+          "count": 4
+        },
+        {
+          "date": "2024-07-27",
+          "count": 2
+        },
+        {
+          "date": "2024-08-26",
+          "count": 4
+        },
+        {
+          "date": "2024-09-03",
+          "count": 2
+        },
+        {
+          "date": "2024-09-25",
+          "count": 2
+        },
+        {
+          "date": "2024-09-30",
+          "count": 2
+        },
+        {
+          "date": "2024-10-29",
+          "count": 2
+        },
+        {
+          "date": "2024-11-08",
+          "count": 2
+        },
+        {
+          "date": "2024-11-13",
+          "count": 4
+        },
+        {
+          "date": "2024-11-15",
+          "count": 2
+        },
+        {
+          "date": "2024-11-20",
+          "count": 2
+        },
+        {
+          "date": "2024-11-21",
+          "count": 4
+        },
+        {
+          "date": "2024-11-27",
+          "count": 2
+        }
+      ]
+    },
+    "2025": {
+      "total": 140,
+      "commits": 71,
+      "pullRequests": 42,
+      "issues": 0,
+      "reviews": 0,
+      "newRepositories": 27,
+      "monthly": {
+        "2025-01": 12,
+        "2025-02": 16,
+        "2025-03": 2,
+        "2025-04": 8,
+        "2025-05": 21,
+        "2025-06": 28,
+        "2025-07": 18,
+        "2025-08": 7,
+        "2025-09": 12,
+        "2025-10": 2,
+        "2025-11": 6,
+        "2025-12": 8
+      },
+      "daily": [
+        {
+          "date": "2025-01-05",
+          "count": 2
+        },
+        {
+          "date": "2025-01-18",
+          "count": 2
+        },
+        {
+          "date": "2025-01-25",
+          "count": 2
+        },
+        {
+          "date": "2025-01-29",
+          "count": 4
+        },
+        {
+          "date": "2025-01-31",
+          "count": 2
+        },
+        {
+          "date": "2025-02-03",
+          "count": 2
+        },
+        {
+          "date": "2025-02-04",
+          "count": 2
+        },
+        {
+          "date": "2025-02-07",
+          "count": 2
+        },
+        {
+          "date": "2025-02-16",
+          "count": 2
+        },
+        {
+          "date": "2025-02-17",
+          "count": 4
+        },
+        {
+          "date": "2025-02-19",
+          "count": 2
+        },
+        {
+          "date": "2025-02-27",
+          "count": 2
+        },
+        {
+          "date": "2025-03-12",
+          "count": 2
+        },
+        {
+          "date": "2025-04-01",
+          "count": 2
+        },
+        {
+          "date": "2025-04-08",
+          "count": 2
+        },
+        {
+          "date": "2025-04-11",
+          "count": 2
+        },
+        {
+          "date": "2025-04-18",
+          "count": 2
+        },
+        {
+          "date": "2025-05-03",
+          "count": 2
+        },
+        {
+          "date": "2025-05-06",
+          "count": 3
+        },
+        {
+          "date": "2025-05-07",
+          "count": 2
+        },
+        {
+          "date": "2025-05-11",
+          "count": 2
+        },
+        {
+          "date": "2025-05-16",
+          "count": 2
+        },
+        {
+          "date": "2025-05-26",
+          "count": 2
+        },
+        {
+          "date": "2025-05-27",
+          "count": 6
+        },
+        {
+          "date": "2025-05-30",
+          "count": 2
+        },
+        {
+          "date": "2025-06-03",
+          "count": 2
+        },
+        {
+          "date": "2025-06-08",
+          "count": 2
+        },
+        {
+          "date": "2025-06-12",
+          "count": 4
+        },
+        {
+          "date": "2025-06-16",
+          "count": 4
+        },
+        {
+          "date": "2025-06-17",
+          "count": 2
+        },
+        {
+          "date": "2025-06-21",
+          "count": 4
+        },
+        {
+          "date": "2025-06-22",
+          "count": 2
+        },
+        {
+          "date": "2025-06-23",
+          "count": 4
+        },
+        {
+          "date": "2025-06-30",
+          "count": 4
+        },
+        {
+          "date": "2025-07-01",
+          "count": 2
+        },
+        {
+          "date": "2025-07-02",
+          "count": 2
+        },
+        {
+          "date": "2025-07-04",
+          "count": 2
+        },
+        {
+          "date": "2025-07-07",
+          "count": 2
+        },
+        {
+          "date": "2025-07-12",
+          "count": 4
+        },
+        {
+          "date": "2025-07-21",
+          "count": 2
+        },
+        {
+          "date": "2025-07-30",
+          "count": 4
+        },
+        {
+          "date": "2025-08-06",
+          "count": 2
+        },
+        {
+          "date": "2025-08-15",
+          "count": 5
+        },
+        {
+          "date": "2025-09-01",
+          "count": 6
+        },
+        {
+          "date": "2025-09-05",
+          "count": 2
+        },
+        {
+          "date": "2025-09-17",
+          "count": 2
+        },
+        {
+          "date": "2025-09-29",
+          "count": 2
+        },
+        {
+          "date": "2025-10-27",
+          "count": 2
+        },
+        {
+          "date": "2025-11-09",
+          "count": 4
+        },
+        {
+          "date": "2025-11-10",
+          "count": 2
+        },
+        {
+          "date": "2025-12-07",
+          "count": 2
+        },
+        {
+          "date": "2025-12-10",
+          "count": 2
+        },
+        {
+          "date": "2025-12-16",
+          "count": 2
+        },
+        {
+          "date": "2025-12-20",
+          "count": 2
+        }
+      ]
+    },
+    "2026": {
+      "total": 41,
+      "commits": 20,
+      "pullRequests": 12,
+      "issues": 1,
+      "reviews": 0,
+      "newRepositories": 8,
+      "monthly": {
+        "2026-01": 22,
+        "2026-02": 15,
+        "2026-03": 4,
+        "2026-04": 0,
+        "2026-05": 0,
+        "2026-06": 0,
+        "2026-07": 0,
+        "2026-08": 0,
+        "2026-09": 0,
+        "2026-10": 0,
+        "2026-11": 0,
+        "2026-12": 0
+      },
+      "daily": [
+        {
+          "date": "2026-01-05",
+          "count": 4
+        },
+        {
+          "date": "2026-01-08",
+          "count": 2
+        },
+        {
+          "date": "2026-01-09",
+          "count": 2
+        },
+        {
+          "date": "2026-01-12",
+          "count": 6
+        },
+        {
+          "date": "2026-01-16",
+          "count": 2
+        },
+        {
+          "date": "2026-01-20",
+          "count": 6
+        },
+        {
+          "date": "2026-02-07",
+          "count": 2
+        },
+        {
+          "date": "2026-02-08",
+          "count": 3
+        },
+        {
+          "date": "2026-02-09",
+          "count": 4
+        },
+        {
+          "date": "2026-02-10",
+          "count": 2
+        },
+        {
+          "date": "2026-02-11",
+          "count": 2
+        },
+        {
+          "date": "2026-02-17",
+          "count": 2
+        },
+        {
+          "date": "2026-03-12",
+          "count": 2
+        },
+        {
+          "date": "2026-03-19",
+          "count": 2
+        }
+      ]
+    }
+  }
+}
