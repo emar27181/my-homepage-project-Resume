@@ -31,6 +31,18 @@ const tool = ['git', 'vscode']
 
 <PageLayout meta={{ title: 'emar27181-portfolio' }}>
 	<div class='flex w-full flex-col gap-y-10'>
+		<nav class='text-sm text-muted-foreground'>
+			<ul class='flex flex-wrap gap-x-4 gap-y-1'>
+				<li><a class='link' href='#projects'>制作物</a></li>
+				<li><a class='link' href='#research'>研究テーマ</a></li>
+				<li><a class='link' href='#publications'>学会発表</a></li>
+				<li><a class='link' href='#skills'>スキル</a></li>
+				<li><a class='link' href='#education'>学歴</a></li>
+				<li><a class='link' href='#hobbies'>趣味</a></li>
+				<li><a class='link' href='#qualifications'>資格・免許</a></li>
+				<li><a class='link' href='#gallery'>作品集</a></li>
+			</ul>
+		</nav>
 		<section class='flex flex-col items-center gap-y-7'>
 			<Image
 				src={astro}
@@ -111,7 +123,7 @@ const tool = ['git', 'vscode']
 				*/
 		}
 
-		<Section title='制作物'>
+		<Section title='制作物' id='projects'>
 			<div class='grid grid-cols-1 sm:grid-cols-2 gap-3'>
 				<ProjectCard
 					href='https://emar27181-gallery-portfolio.netlify.app/'
@@ -205,7 +217,7 @@ const tool = ['git', 'vscode']
 			</div>
 		</Section>
 
-		<Section title='研究テーマ'>
+		<Section title='研究テーマ' id='research'>
 			<Card
 				heading='配色の推薦によるイラスト制作の支援'
 				subheading='一般的にイラストを描く際、イラストレーターは自身の経験に基づいて色を塗りますが、初心者は経験が浅いため、配色のバランスが崩れやすいという問題があります。そのため、使われている色の数や配色を利用者が把握することが重要です。私の研究では、キャンバス上で使用されている配色を推定し、相性の良いとされる配色技法の色相環上にに表示させる手法を提案しました。提案手法を用いることで配色技法について知らない初心者でもバランスの良い色塗りが出来るように支援します。'
@@ -228,7 +240,7 @@ const tool = ['git', 'vscode']
 			</Card>
 		</Section>
 
-		<Section title='学会発表'>
+		<Section title='学会発表' id='publications'>
 			<div class='grid grid-cols-1 sm:grid-cols-2 gap-3'>
 			<Card
 				heading='インタラクション2024 デモ発表'
@@ -357,7 +369,7 @@ const tool = ['git', 'vscode']
 			</div>
 		</Section>
 
-		<Section title='スキル'>
+		<Section title='スキル' id='skills'>
 			{/*}<SkillLayout title='Languages' skills={languages} />*/}
 			<SkillLayout title='Frontend' skills={frontend} />
 			<SkillLayout title='Backend' skills={backend} />
@@ -376,7 +388,7 @@ const tool = ['git', 'vscode']
 			</div>
 		</Section>
 
-		<Section title='学歴'>
+		<Section title='学歴' id='education'>
 			<Card
 				heading='神奈川県立鎌倉高等学校 入学'
 				date='2017年4月'
@@ -420,7 +432,7 @@ const tool = ['git', 'vscode']
 			/>
 		</Section>
 
-		<Section title='趣味'>
+		<Section title='趣味' id='hobbies'>
 			<Card
 				heading='イラスト'
 				subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
@@ -457,7 +469,7 @@ const tool = ['git', 'vscode']
 			/>
 		</Section>
 
-		<Section title='資格・免許'>
+		<Section title='資格・免許' id='qualifications'>
 			<Card
 				as='a'
 				heading='実用英語技能検定2級合格'
@@ -481,7 +493,7 @@ const tool = ['git', 'vscode']
 			/>
 		</Section>
 
-		<Section title='作品集' />
+		<Section title='作品集' id='gallery' />
 	</div>
 
 	<div class='mt-[12px]'><Gallery /></div>
