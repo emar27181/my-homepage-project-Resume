@@ -37,6 +37,16 @@ const {
 				)}
 			</div>
 		</div>
+		<div
+			id='skill-popup'
+			class='hidden fixed z-50 rounded-lg border border-border bg-background shadow-lg p-3 text-sm min-w-[160px] max-w-[220px] font-satoshi'
+		>
+			<p id='skill-popup-name' class='font-semibold text-foreground mb-2'></p>
+			<div class='space-y-1 text-muted-foreground'>
+				<p class='flex gap-2'><span class='text-foreground/50 shrink-0'>経験:</span><span id='skill-popup-exp'></span></p>
+				<p class='flex gap-2'><span class='text-foreground/50 shrink-0'>コメント:</span><span id='skill-popup-comment'></span></p>
+			</div>
+		</div>
 		<main
 			class='mx-auto flex min-h-screen w-full max-w-[60rem] flex-col items-center px-6 pb-10 pt-7 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
 		>
@@ -45,6 +55,62 @@ const {
 		</main>
 	</body>
 <script>
+	// Skill popup
+	const skillData: Record<string, { name: string; experience: string; comment: string }> = {
+		js:           { name: 'JavaScript',  experience: '作成中', comment: '作成中' },
+		ts:           { name: 'TypeScript',  experience: '作成中', comment: '作成中' },
+		html:         { name: 'HTML',        experience: '作成中', comment: '作成中' },
+		css:          { name: 'CSS',         experience: '作成中', comment: '作成中' },
+		react:        { name: 'React',       experience: '作成中', comment: '作成中' },
+		nextjs:       { name: 'Next.js',     experience: '作成中', comment: '作成中' },
+		p5js:         { name: 'p5.js',       experience: '作成中', comment: '作成中' },
+		flask:        { name: 'Flask',       experience: '作成中', comment: '作成中' },
+		astro:        { name: 'Astro',       experience: '作成中', comment: '作成中' },
+		python:       { name: 'Python',      experience: '作成中', comment: '作成中' },
+		c:            { name: 'C',           experience: '作成中', comment: '作成中' },
+		java:         { name: 'Java',        experience: '作成中', comment: '作成中' },
+		git:          { name: 'Git',         experience: '作成中', comment: '作成中' },
+		vscode:       { name: 'VS Code',     experience: '作成中', comment: '作成中' },
+		'claude-code':{ name: 'Claude Code', experience: '作成中', comment: '作成中' },
+		gemini:       { name: 'Gemini',      experience: '作成中', comment: '作成中' },
+		chatgpt:      { name: 'ChatGPT',     experience: '作成中', comment: '作成中' },
+		genspark:     { name: 'Genspark',    experience: '作成中', comment: '作成中' },
+	}
+
+	const popup = document.getElementById('skill-popup') as HTMLElement | null
+	const popupName = document.getElementById('skill-popup-name')
+	const popupExp = document.getElementById('skill-popup-exp')
+	const popupComment = document.getElementById('skill-popup-comment')
+
+	function showPopup(target: HTMLElement, skillKey: string) {
+		const data = skillData[skillKey]
+		if (!data || !popup || !popupName || !popupExp || !popupComment) return
+		popupName.textContent = data.name
+		popupExp.textContent = data.experience
+		popupComment.textContent = data.comment
+		const rect = target.getBoundingClientRect()
+		let left = rect.left
+		let top = rect.bottom + 8
+		popup.classList.remove('hidden')
+		const pw = popup.offsetWidth
+		if (left + pw > window.innerWidth - 8) left = window.innerWidth - pw - 8
+		if (left < 8) left = 8
+		popup.style.left = `${left}px`
+		popup.style.top = `${top}px`
+	}
+
+	document.addEventListener('click', (e) => {
+		const target = e.target as HTMLElement
+		const skillKey = target.dataset.skill
+		if (skillKey && (target.classList.contains('skill-icon') || target.classList.contains('skill-badge'))) {
+			showPopup(target, skillKey)
+			e.stopPropagation()
+		} else {
+			popup?.classList.add('hidden')
+		}
+	})
+
+	// TOC scroll
 	const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#toc-nav a.toc-link'))
 	const sectionIds = tocLinks.map(a => a.getAttribute('href')?.slice(1)).filter(Boolean) as string[]
 	const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[]
