@@ -381,26 +381,31 @@ const tool = ['git', 'vscode']
 			<SkillLayout title='Frontend' skills={frontend} />
 			<SkillLayout title='Backend' skills={backend} />
 			<SkillLayout title='Tool' skills={tool} />
+			{/*
 			<div class='flex flex-col gap-y-2 md:flex-row md:gap-x-5 md:gap-y-0'>
 				<h3 class='w-1/5 font-medium'>AI</h3>
 				<div class='flex flex-wrap gap-2'>
 					{
 						[
-							{ key: 'claude-code', label: 'Claude Code' },
-							{ key: 'gemini', label: 'Gemini' },
-							{ key: 'chatgpt', label: 'ChatGPT' },
-							{ key: 'genspark', label: 'Genspark' }
-						].map(({ key, label }) => (
-							<span
-								class='skill-badge inline-flex cursor-pointer items-center rounded-md border border-border bg-muted px-3 py-1 text-sm font-medium text-foreground/80'
+							{ key: 'claude-code', label: 'Claude Code', icon: '/icons/ai/anthropic.svg' },
+							{ key: 'gemini', label: 'Gemini', icon: '/icons/ai/gemini.svg' },
+							{ key: 'chatgpt', label: 'ChatGPT', icon: '/icons/ai/openai.svg' },
+							{ key: 'genspark', label: 'Genspark', icon: '/icons/ai/genspark.svg' }
+						].map(({ key, label, icon }) => (
+							<img
+								src={icon}
+								alt={label}
+								width={45}
+								height={45}
+								title={label}
+								class='skill-icon skill-badge cursor-pointer'
 								data-skill={key}
-							>
-								{label}
-							</span>
+							/>
 						))
 					}
 				</div>
 			</div>
+		*/}
 			<br />
 
 			<div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>
@@ -460,60 +465,40 @@ const tool = ['git', 'vscode']
 		</Section>
 
 		<Section title='趣味' id='hobbies'>
-			<Card
-				heading='イラスト'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			>
-				<div class='flex flex-row items-start gap-4'>
-					<div class='flex-1 text-sm text-muted-foreground'>
-						幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。
-						<br />
-						<a
-							href='https://emar27181-gallery-portfolio.netlify.app/'
-							class='text-sm underline'
-							target='_blank'
-							rel='noopener noreferrer'>{t.illutWorksLink}</a>
-					</div>
-					<div style='width: 150px; height: 150px; overflow: hidden; border-radius: 8px; flex-shrink: 0;'>
-						<iframe
-							src='https://emar27181-gallery-portfolio.netlify.app/'
-							style='width: 100%; height: 100%; border: none;'
-							loading='lazy'></iframe>
-					</div>
-				</div>
-			</Card>
+			<div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+				<Card
+					heading='イラスト'
+					subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
+					altText='Lorem, ipsum dolor sit'
+					imageClass='h-12 w-auto md:-left-16'
+				>
+					<a
+						href='https://emar27181-gallery-portfolio.netlify.app/'
+						class='text-sm underline'
+						target='_blank'
+						rel='noopener noreferrer'>{t.illutWorksLink}</a>
+				</Card>
 
-			<Card
-				heading='スポーツ'
-				subheading='スノーボード、テニス、卓球などのスポーツをするのが趣味です。中学時代には卓球部の副部長、高校時代にはテニス部の副部長、大学時代にはテニスサークルの練習長(練習をまとめる役)を任されていました。'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
+				<Card
+					heading='スポーツ'
+					subheading='スノーボード、テニス、卓球などのスポーツをするのが趣味です。中学時代には卓球部の副部長、高校時代にはテニス部の副部長、大学時代にはテニスサークルの練習長(練習をまとめる役)を任されていました。'
+					altText='Lorem, ipsum dolor sit'
+					imageClass='h-12 w-auto md:-left-16'
+				/>
 
-			<Card
-				heading='ゲーム'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			>
-				<div class='flex flex-row items-start gap-4'>
-					<div class='flex-1 text-sm text-muted-foreground'>
-						主にFPSゲームをするのが好きです。APEXというFPSゲームの賞金付きカスタム大会を主催したこともあります。
-						<br />
-						<a
-							href='https://nodoame27181.netlify.app/'
-							class='text-sm underline'
-							target='_blank'
-							rel='noopener noreferrer'>ゲームポートフォリオを見る</a>
-					</div>
-					<div style='width: 150px; height: 150px; overflow: hidden; border-radius: 8px; flex-shrink: 0;'>
-						<iframe
-							src='https://nodoame27181.netlify.app/'
-							style='width: 100%; height: 100%; border: none;'
-							loading='lazy'></iframe>
-					</div>
-				</div>
-			</Card>
+				<Card
+					heading='ゲーム'
+					subheading='主にFPSゲームをするのが好きです。APEXというFPSゲームの賞金付きカスタム大会を主催したこともあります。'
+					altText='Lorem, ipsum dolor sit'
+					imageClass='h-12 w-auto md:-left-16'
+				>
+					<a
+						href='https://nodoame27181.netlify.app/'
+						class='text-sm underline'
+						target='_blank'
+						rel='noopener noreferrer'>ゲームポートフォリオを見る</a>
+				</Card>
+			</div>
 		</Section>
 
 		<Section title='資格・免許' id='qualifications'>
