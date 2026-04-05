@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-05T06:28:56.628402Z",
+  "fetchedAt": "2026-04-05T06:36:59.931672Z",
   "profile": {
     "name": "emar27181",
     "login": "emar27181",
@@ -8,6 +8,7 @@
     "location": null,
     "email": "",
     "websiteUrl": "https://emar27181-resume.netlify.app/",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/122428459?u=08d623e38001db8e66e4afc25479d91657eae477&v=4",
     "createdAt": "2023-01-11T06:01:05Z",
     "followers": {
       "totalCount": 10
@@ -20,8 +21,63 @@
     },
     "starredRepositories": {
       "totalCount": 16
+    },
+    "gists": {
+      "totalCount": 0
     }
   },
+  "pinnedRepositories": [
+    {
+      "name": "emar27181.github.io",
+      "description": null,
+      "url": "https://github.com/emar27181/emar27181.github.io",
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "TypeScript",
+      "primaryLanguageColor": "#3178c6",
+      "topics": []
+    },
+    {
+      "name": "my-homepage-project-Resume",
+      "description": null,
+      "url": "https://github.com/emar27181/my-homepage-project-Resume",
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "Astro",
+      "primaryLanguageColor": "#ff5a03",
+      "topics": []
+    },
+    {
+      "name": "my-python-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-python-project",
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "Python",
+      "primaryLanguageColor": "#3572A5",
+      "topics": []
+    },
+    {
+      "name": "my-color-recommendation-project",
+      "description": null,
+      "url": "https://github.com/emar27181/my-color-recommendation-project",
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "Python",
+      "primaryLanguageColor": "#3572A5",
+      "topics": []
+    },
+    {
+      "name": "minecraft-FTP-project",
+      "description": null,
+      "url": "https://github.com/emar27181/minecraft-FTP-project",
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "Python",
+      "primaryLanguageColor": "#3572A5",
+      "topics": []
+    }
+  ],
   "repositories": [
     {
       "name": "software-practice-ta",
@@ -30,8 +86,12 @@
       "homepageUrl": null,
       "stars": 1,
       "forks": 0,
+      "watchers": 0,
+      "commits": 3,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "Python",
+      "primaryLanguageColor": "#3572A5",
       "languages": [
         {
           "name": "Python",
@@ -50,6 +110,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2026-02-09T11:54:00Z",
       "updatedAt": "2026-02-10T12:09:56Z",
       "pushedAt": "2026-02-10T08:09:00Z"
@@ -61,8 +124,12 @@
       "homepageUrl": null,
       "stars": 1,
       "forks": 0,
+      "watchers": 0,
+      "commits": 710,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "TypeScript",
+      "primaryLanguageColor": "#3178c6",
       "languages": [
         {
           "name": "TypeScript",
@@ -86,6 +153,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-06-16T08:58:47Z",
       "updatedAt": "2026-02-07T07:23:47Z",
       "pushedAt": "2026-02-07T07:35:06Z"
@@ -97,8 +167,12 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 0,
+      "commits": 136,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "Astro",
+      "primaryLanguageColor": "#ff5a03",
       "languages": [
         {
           "name": "Astro",
@@ -122,6 +196,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 1,
+      "openPRs": 0,
       "createdAt": "2025-06-21T08:54:36Z",
       "updatedAt": "2026-01-20T04:58:02Z",
       "pushedAt": "2026-01-20T04:58:04Z"
@@ -133,10 +210,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 0,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-12-07T09:33:31Z",
       "updatedAt": "2025-12-07T09:33:35Z",
       "pushedAt": "2025-12-07T09:33:32Z"
@@ -148,8 +232,12 @@
       "homepageUrl": null,
       "stars": 1,
       "forks": 0,
+      "watchers": 1,
+      "commits": 354,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "Python",
+      "primaryLanguageColor": "#3572A5",
       "languages": [
         {
           "name": "Python",
@@ -178,6 +266,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2024-09-25T05:19:43Z",
       "updatedAt": "2025-09-01T08:07:36Z",
       "pushedAt": "2026-02-07T11:25:07Z"
@@ -189,10 +280,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 0,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-09-01T06:53:31Z",
       "updatedAt": "2025-09-01T06:53:35Z",
       "pushedAt": "2025-09-01T06:53:31Z"
@@ -204,10 +302,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 19,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2023-10-19T06:05:48Z",
       "updatedAt": "2025-08-15T06:04:41Z",
       "pushedAt": "2025-08-15T06:04:37Z"
@@ -219,8 +324,12 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 1877,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "TypeScript",
+      "primaryLanguageColor": "#3178c6",
       "languages": [
         {
           "name": "TypeScript",
@@ -244,6 +353,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 7,
+      "openPRs": 0,
       "createdAt": "2023-03-16T13:05:49Z",
       "updatedAt": "2025-07-15T03:22:55Z",
       "pushedAt": "2024-11-13T05:52:53Z"
@@ -255,8 +367,12 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 0,
+      "commits": 66,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "Astro",
+      "primaryLanguageColor": "#ff5a03",
       "languages": [
         {
           "name": "Astro",
@@ -280,6 +396,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-07-02T11:37:30Z",
       "updatedAt": "2025-07-12T10:00:05Z",
       "pushedAt": "2025-07-12T10:00:06Z"
@@ -291,10 +410,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 0,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-07-11T15:24:03Z",
       "updatedAt": "2025-07-11T15:24:08Z",
       "pushedAt": "2025-07-11T15:24:04Z"
@@ -306,10 +432,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 0,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-06-23T05:42:14Z",
       "updatedAt": "2025-06-23T05:42:17Z",
       "pushedAt": "2025-06-23T05:42:14Z"
@@ -321,10 +454,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 0,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-06-22T04:03:29Z",
       "updatedAt": "2025-06-22T04:03:33Z",
       "pushedAt": "2025-06-22T04:03:30Z"
@@ -336,10 +476,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 0,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-05-30T11:24:36Z",
       "updatedAt": "2025-05-30T11:24:39Z",
       "pushedAt": "2025-05-30T11:24:36Z"
@@ -351,10 +498,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-05-11T06:35:00Z",
       "updatedAt": "2025-05-11T06:35:04Z",
       "pushedAt": "2025-05-11T06:35:01Z"
@@ -366,8 +520,12 @@
       "homepageUrl": null,
       "stars": 1,
       "forks": 0,
+      "watchers": 1,
+      "commits": 48,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "Astro",
+      "primaryLanguageColor": "#ff5a03",
       "languages": [
         {
           "name": "Astro",
@@ -391,6 +549,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2024-07-05T05:24:40Z",
       "updatedAt": "2025-05-07T04:59:41Z",
       "pushedAt": "2025-05-07T04:59:37Z"
@@ -402,10 +563,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-04-08T09:26:09Z",
       "updatedAt": "2025-04-08T09:26:12Z",
       "pushedAt": "2025-04-08T09:26:09Z"
@@ -417,10 +585,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-03-12T06:53:36Z",
       "updatedAt": "2025-03-12T06:53:40Z",
       "pushedAt": "2025-03-12T06:53:36Z"
@@ -432,8 +607,12 @@
       "homepageUrl": null,
       "stars": 1,
       "forks": 0,
+      "watchers": 1,
+      "commits": 60,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "Python",
+      "primaryLanguageColor": "#3572A5",
       "languages": [
         {
           "name": "Python",
@@ -442,6 +621,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-01-29T08:06:44Z",
       "updatedAt": "2025-02-27T05:27:06Z",
       "pushedAt": "2025-02-27T05:27:08Z"
@@ -453,10 +635,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-02-07T14:49:12Z",
       "updatedAt": "2025-02-07T14:49:15Z",
       "pushedAt": "2025-02-07T14:49:12Z"
@@ -468,10 +657,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-02-03T15:48:56Z",
       "updatedAt": "2025-02-03T15:49:00Z",
       "pushedAt": "2025-02-03T15:48:56Z"
@@ -483,10 +679,17 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 1,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": null,
+      "primaryLanguageColor": null,
       "languages": [],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2025-01-18T05:02:16Z",
       "updatedAt": "2025-01-18T05:02:18Z",
       "pushedAt": "2025-01-18T05:02:17Z"
@@ -498,8 +701,12 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 10,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "TypeScript",
+      "primaryLanguageColor": "#3178c6",
       "languages": [
         {
           "name": "TypeScript",
@@ -518,6 +725,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2024-11-21T14:28:26Z",
       "updatedAt": "2024-11-26T15:41:48Z",
       "pushedAt": "2024-11-26T15:41:57Z"
@@ -529,8 +739,12 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 385,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "Python",
+      "primaryLanguageColor": "#3572A5",
       "languages": [
         {
           "name": "Python",
@@ -544,6 +758,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2023-05-07T09:08:54Z",
       "updatedAt": "2024-11-08T11:31:14Z",
       "pushedAt": "2024-11-08T11:31:10Z"
@@ -555,8 +772,12 @@
       "homepageUrl": null,
       "stars": 0,
       "forks": 0,
+      "watchers": 1,
+      "commits": 195,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "TypeScript",
+      "primaryLanguageColor": "#3178c6",
       "languages": [
         {
           "name": "TypeScript",
@@ -575,6 +796,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2023-02-28T17:34:32Z",
       "updatedAt": "2024-04-23T03:39:31Z",
       "pushedAt": "2023-02-28T17:37:05Z"
@@ -586,8 +810,12 @@
       "homepageUrl": null,
       "stars": 1,
       "forks": 0,
+      "watchers": 1,
+      "commits": 7,
       "isFork": false,
+      "isArchived": false,
       "primaryLanguage": "HTML",
+      "primaryLanguageColor": "#e34c26",
       "languages": [
         {
           "name": "HTML",
@@ -596,6 +824,9 @@
         }
       ],
       "topics": [],
+      "releases": 0,
+      "openIssues": 0,
+      "openPRs": 0,
       "createdAt": "2023-06-27T08:31:47Z",
       "updatedAt": "2023-06-27T09:11:39Z",
       "pushedAt": "2023-06-27T09:15:23Z"

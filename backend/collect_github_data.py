@@ -27,11 +27,28 @@ query($login: String!) {
     location
     email
     websiteUrl
+    avatarUrl
     createdAt
     followers { totalCount }
     following { totalCount }
     repositories(privacy: PUBLIC) { totalCount }
     starredRepositories { totalCount }
+    gists(privacy: PUBLIC) { totalCount }
+    pinnedItems(first: 6, types: REPOSITORY) {
+      nodes {
+        ... on Repository {
+          name
+          description
+          url
+          stargazerCount
+          forkCount
+          primaryLanguage { name color }
+          topics: repositoryTopics(first: 5) {
+            nodes { topic { name } }
+          }
+        }
+      }
+    }
   }
 }
 """
@@ -76,17 +93,29 @@ query($login: String!, $cursor: String) {
         homepageUrl
         stargazerCount
         forkCount
+        watcherCount: watchers { totalCount }
         isForked: isFork
+        isArchived
         createdAt
         updatedAt
         pushedAt
-        primaryLanguage { name }
-        languages(first: 5, orderBy: { field: SIZE, direction: DESC }) {
+        defaultBranchRef {
+          target {
+            ... on Commit {
+              history { totalCount }
+            }
+          }
+        }
+        primaryLanguage { name color }
+        languages(first: 8, orderBy: { field: SIZE, direction: DESC }) {
           edges { size node { name color } }
         }
         repositoryTopics(first: 10) {
           nodes { topic { name } }
         }
+        releases { totalCount }
+        issues(states: OPEN) { totalCount }
+        pullRequests(states: OPEN) { totalCount }
       }
     }
   }
@@ -217,6 +246,11 @@ if __name__ == "__main__":
     repos_raw = fetch_all_repos(token, username)
     repos = []
     for r in repos_raw:
+        commit_count = None
+        try:
+            commit_count = r["defaultBranchRef"]["target"]["history"]["totalCount"]
+        except (TypeError, KeyError):
+            pass
         repos.append({
             "name": r["name"],
             "description": r["description"],
@@ -224,13 +258,20 @@ if __name__ == "__main__":
             "homepageUrl": r["homepageUrl"],
             "stars": r["stargazerCount"],
             "forks": r["forkCount"],
+            "watchers": r["watcherCount"]["totalCount"],
+            "commits": commit_count,
             "isFork": r["isForked"],
+            "isArchived": r["isArchived"],
             "primaryLanguage": r["primaryLanguage"]["name"] if r["primaryLanguage"] else None,
+            "primaryLanguageColor": r["primaryLanguage"]["color"] if r["primaryLanguage"] else None,
             "languages": [
                 {"name": e["node"]["name"], "color": e["node"]["color"], "bytes": e["size"]}
                 for e in r["languages"]["edges"]
             ],
             "topics": [n["topic"]["name"] for n in r["repositoryTopics"]["nodes"]],
+            "releases": r["releases"]["totalCount"],
+            "openIssues": r["issues"]["totalCount"],
+            "openPRs": r["pullRequests"]["totalCount"],
             "createdAt": r["createdAt"],
             "updatedAt": r["updatedAt"],
             "pushedAt": r["pushedAt"],
@@ -244,9 +285,24 @@ if __name__ == "__main__":
     print(f"[4/4] 年別コントリビューション取得 (2020-{datetime.now().year})...")
     contributions = fetch_yearly_contributions(token, username, 2020, datetime.now().year)
 
+    # ピン留めリポジトリ整形
+    pinned = []
+    for p in profile.pop("pinnedItems", {}).get("nodes", []):
+        pinned.append({
+            "name": p["name"],
+            "description": p["description"],
+            "url": p["url"],
+            "stars": p["stargazerCount"],
+            "forks": p["forkCount"],
+            "primaryLanguage": p["primaryLanguage"]["name"] if p["primaryLanguage"] else None,
+            "primaryLanguageColor": p["primaryLanguage"]["color"] if p["primaryLanguage"] else None,
+            "topics": [n["topic"]["name"] for n in p["topics"]["nodes"]],
+        })
+
     output = {
         "fetchedAt": datetime.utcnow().isoformat() + "Z",
         "profile": profile,
+        "pinnedRepositories": pinned,
         "repositories": repos,
         "languageStats": languages,
         "contributions": contributions,
