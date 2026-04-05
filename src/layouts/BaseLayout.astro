@@ -44,4 +44,27 @@ const {
 			<Footer />
 		</main>
 	</body>
+<script>
+	const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#toc-nav a.toc-link'))
+	const sectionIds = tocLinks.map(a => a.getAttribute('href')?.slice(1)).filter(Boolean) as string[]
+	const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[]
+
+	function updateToc() {
+		const scrollY = window.scrollY + 120
+		let activeIndex = 0
+		for (let i = 0; i < sections.length; i++) {
+			if (sections[i].offsetTop <= scrollY) {
+				activeIndex = i
+			}
+		}
+		tocLinks.forEach((link, i) => {
+			link.classList.toggle('toc-active', i === activeIndex)
+		})
+	}
+
+	if (tocLinks.length > 0) {
+		window.addEventListener('scroll', updateToc, { passive: true })
+		updateToc()
+	}
+</script>
 </html>
