@@ -116,7 +116,7 @@ const tool = ['git', 'vscode']
 					subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
 					altText='イラスト'
 				>
-					<img src='/images/image_cat_ann1.jpg' class='mt-2 w-full rounded-lg object-cover' style='max-height: 200px;' alt='猫のイラスト' />
+					<img src='/images/image_cat_ann1.jpg' class='mt-2 w-full rounded-lg object-cover cursor-pointer' style='max-height: 200px;' alt='猫のイラスト' onclick="window.openImageModal(this.src, this.alt)" />
 					<a
 						href='https://emar27181-gallery-portfolio.netlify.app/'
 						class='text-sm underline'
@@ -130,9 +130,9 @@ const tool = ['git', 'vscode']
 					altText='スポーツ'
 				>
 					<div class='mt-2 grid grid-cols-3 gap-1'>
-						<img src='/images/imge_photo_sport_snowboard.jpg' class='w-full rounded-lg object-cover aspect-square' alt='スノーボード' />
-						<img src='/images/image_photo_sport_tennis.png' class='w-full rounded-lg object-cover aspect-square' alt='テニス' />
-						<img src='/images/image_photo_sport_golf.png' class='w-full rounded-lg object-cover aspect-square' alt='ゴルフ' />
+						<img src='/images/imge_photo_sport_snowboard.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='スノーボード' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_photo_sport_tennis.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='テニス' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_photo_sport_golf.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ゴルフ' onclick="window.openImageModal(this.src, this.alt)" />
 					</div>
 				</Card>
 
@@ -154,17 +154,38 @@ const tool = ['git', 'vscode']
 					altText='アニメ・漫画'
 				>
 					<div class='mt-2 grid grid-cols-3 gap-1'>
-						<img src='/images/image_manga_gojo.jpg' class='w-full rounded-lg object-cover aspect-square' alt='五条悟' />
-						<img src='/images/image_manga_itadori.jpg' class='w-full rounded-lg object-cover aspect-square' alt='虎杖悠仁' />
-						<img src='/images/image_manga_horks.jpg' class='w-full rounded-lg object-cover aspect-square' alt='ホークス' />
+						<img src='/images/image_manga_gojo.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='五条悟' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_manga_itadori.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='虎杖悠仁' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_manga_horks.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ホークス' onclick="window.openImageModal(this.src, this.alt)" />
 					</div>
 				</Card>
 
 				<Card
-					heading='ラーメン'
-					subheading='ラーメンを食べ歩くのが好きです。一番好きなお店は藤沢市の「こぐま」。二郎系は「豚山」、博多系は「がっとん」や「ヌードルワークス」もよく行きます。'
-					altText='ラーメン'
+					heading='音楽'
+					subheading='King Gnu・米津玄師・Mrs. GREEN APPLE・Vaundyなどが好きです。King Gnuの「Prayer X」はBANANA FISHを見てからより深く刺さるようになりました。Mrs. GREEN APPLEは「Soranji」「僕のこと」あたりをよく聴いています。'
+					altText='音楽'
 				/>
+
+				<Card
+					heading='ラーメン'
+					subheading='ラーメンを食べ歩くのが好きです。一番好きなお店は藤沢市の「こぐま」。二郎系は「豚山」、博多系は「ヌードルワークス」もよく行きます。'
+					altText='ラーメン'
+				>
+					<div class='mt-2 grid grid-cols-3 gap-1'>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/image_ramen_koguma.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='こぐま' onclick="window.openImageModal(this.src, this.alt)" />
+							<a class='text-xs text-center link' href='https://tabelog.com/kanagawa/A1404/A140404/14000852/' target='_blank' rel='noopener noreferrer'>こぐま</a>
+						</div>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/image_ramen_butayama.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='豚山' onclick="window.openImageModal(this.src, this.alt)" />
+							<a class='text-xs text-center link' href='https://butayama.com/' target='_blank' rel='noopener noreferrer'>豚山</a>
+						</div>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/imge_ramen_noodleworks.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ヌードルワークス' onclick="window.openImageModal(this.src, this.alt)" />
+							<a class='text-xs text-center link' href='https://noodle-works.x0.com/' target='_blank' rel='noopener noreferrer'>ヌードルワークス</a>
+						</div>
+					</div>
+				</Card>
 
 				<Card
 					heading='猫'
