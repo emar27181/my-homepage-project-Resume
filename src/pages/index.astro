@@ -117,6 +117,11 @@ const tool = ['git', 'vscode']
 					altText='イラスト'
 				>
 					<img src='/images/image_cat_ann1.jpg' class='mt-2 w-full rounded-lg object-cover cursor-pointer' style='max-height: 200px;' alt='猫のイラスト' onclick="window.openImageModal(this.src, this.alt)" />
+					<p class='mt-1 text-xs text-muted-foreground/70'>ロゴデザイン</p>
+					<div class='grid grid-cols-2 gap-1'>
+						<img src='/images/image_logo_shandy.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='SHANDYロゴ' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_logo_ylab.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='研究室ロゴ' onclick="window.openImageModal(this.src, this.alt)" />
+					</div>
 					<a
 						href='https://emar27181-gallery-portfolio.netlify.app/'
 						class='text-sm underline'
@@ -150,13 +155,14 @@ const tool = ['git', 'vscode']
 
 				<Card
 					heading='アニメ・漫画'
-					subheading='バトルもの作品が好きで、『HUNTER×HUNTER』『呪術廻戦』『葬送のフリーレン』などをよく見ています。最近『BANANA FISH』を視聴し、元々好きだったKing Gnuの「Prayer X」がより好きになりました。『よふかしのうた』も好きな作品です。'
+					subheading='バトルもの作品が好きで、『HUNTER×HUNTER』『呪術廻戦』『葬送のフリーレン』などをよく見ています。『BANANA FISH』『よふかしのうた』も好きな作品です。'
 					altText='アニメ・漫画'
 				>
-					<div class='mt-2 grid grid-cols-3 gap-1'>
-						<img src='/images/image_manga_gojo.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='五条悟' onclick="window.openImageModal(this.src, this.alt)" />
-						<img src='/images/image_manga_itadori.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='虎杖悠仁' onclick="window.openImageModal(this.src, this.alt)" />
-						<img src='/images/image_manga_horks.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ホークス' onclick="window.openImageModal(this.src, this.alt)" />
+					<p class='mt-1 text-xs text-muted-foreground/70'>好きな漫画の模写</p>
+					<div class='grid grid-cols-3 gap-1'>
+						<img src='/images/image_manga_gojo.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='五条悟（呪術廻戦）' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_manga_itadori.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='虎杖悠仁（呪術廻戦）' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_manga_horks.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ホークス（僕のヒーローアカデミア）' onclick="window.openImageModal(this.src, this.alt)" />
 					</div>
 				</Card>
 
@@ -173,16 +179,16 @@ const tool = ['git', 'vscode']
 				>
 					<div class='mt-2 grid grid-cols-3 gap-1'>
 						<div class='flex flex-col gap-1'>
-							<img src='/images/image_ramen_koguma.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='こぐま' onclick="window.openImageModal(this.src, this.alt)" />
-							<a class='text-xs text-center link' href='https://tabelog.com/kanagawa/A1404/A140404/14000852/' target='_blank' rel='noopener noreferrer'>こぐま</a>
+							<img src='/images/image_photo_ramen_koguma.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='こぐま' onclick="window.openImageModal(this.src, this.alt, {caption: 'こぐま（食べログ）', href: 'https://tabelog.com/kanagawa/A1404/A140404/14000852/'})" />
+							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://tabelog.com/kanagawa/A1404/A140404/14000852/' target='_blank' rel='noopener noreferrer'>こぐま</a>
 						</div>
 						<div class='flex flex-col gap-1'>
-							<img src='/images/image_ramen_butayama.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='豚山' onclick="window.openImageModal(this.src, this.alt)" />
-							<a class='text-xs text-center link' href='https://butayama.com/' target='_blank' rel='noopener noreferrer'>豚山</a>
+							<img src='/images/image_photo_ramen_butayama.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='豚山' onclick="window.openImageModal(this.src, this.alt, {caption: '豚山（公式サイト）', href: 'https://butayama.com/'})" />
+							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://butayama.com/' target='_blank' rel='noopener noreferrer'>豚山</a>
 						</div>
 						<div class='flex flex-col gap-1'>
-							<img src='/images/imge_ramen_noodleworks.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ヌードルワークス' onclick="window.openImageModal(this.src, this.alt)" />
-							<a class='text-xs text-center link' href='https://noodle-works.x0.com/' target='_blank' rel='noopener noreferrer'>ヌードルワークス</a>
+							<img src='/images/image_photo_ramen_noodleworks.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ヌードルワークス' onclick="window.openImageModal(this.src, this.alt, {caption: 'ヌードルワークス（公式サイト）', href: 'https://noodle-works.x0.com/'})" />
+							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://noodle-works.x0.com/' target='_blank' rel='noopener noreferrer'>ヌードルワークス</a>
 						</div>
 					</div>
 				</Card>
@@ -191,7 +197,22 @@ const tool = ['git', 'vscode']
 					heading='猫'
 					subheading='モナ（7歳）、リサ（2歳）、ピット（2歳）の3匹を飼っています。いずれも保護猫です。猫をモチーフにしたイラストを描くことも多く、趣味のイラストとも密接に関わっています。'
 					altText='猫'
-				/>
+				>
+					<div class='mt-2 grid grid-cols-3 gap-1'>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/imge_photo_cat_mona.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='モナ' onclick="window.openImageModal(this.src, this.alt)" />
+							<p class='text-xs text-center text-muted-foreground/70'>モナ</p>
+						</div>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/imge_photo_cat_lisa.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='リサ' onclick="window.openImageModal(this.src, this.alt)" />
+							<p class='text-xs text-center text-muted-foreground/70'>リサ</p>
+						</div>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/imge_photo_cat_pitt.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ピット' onclick="window.openImageModal(this.src, this.alt)" />
+							<p class='text-xs text-center text-muted-foreground/70'>ピット</p>
+						</div>
+					</div>
+				</Card>
 			</div>
 		</Section>
 
