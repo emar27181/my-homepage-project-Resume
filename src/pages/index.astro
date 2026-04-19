@@ -77,7 +77,7 @@ const tool = ['git', 'vscode']
 				</a>
 				からご覧いただけます。
 				<br />
-				<span class='text-xs text-muted-foreground/60'>最終更新: 2026年4月19日</span>
+				<span class='text-xs text-muted-foreground/60'>最終更新: 2026年4月19日　／　このサイトは <a class='underline hover:text-muted-foreground transition-colors' href='https://claude.ai/code' target='_blank' rel='noopener noreferrer'>Claude Code</a> を用いて作られました。</span>
 			</p>
 		</Section>
 
@@ -116,23 +116,11 @@ const tool = ['git', 'vscode']
 					subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
 					altText='イラスト'
 				>
-					<div class='mt-2 grid grid-cols-2 gap-x-1 gap-y-2'>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_cat_ann1.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='猫のイラスト' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>猫</p>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_illust_girl2.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='人物のイラスト' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>人物</p>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_logo_shandy.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='SHANDYロゴ' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>ロゴ（SHANDY）</p>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_logo_ylab.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='研究室ロゴ' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>ロゴ（研究室）</p>
-						</div>
+					<div class='mt-2 grid grid-cols-2 gap-1'>
+						<img src='/images/image_cat_ann1.jpg' class='w-full rounded-lg cursor-pointer' alt='猫のイラスト' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_girl_kisapiyo.jpg' class='w-full rounded-lg cursor-pointer' alt='人物のイラスト' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_logo_shandy.jpg' class='w-full rounded-lg cursor-pointer' alt='SHANDYロゴ' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_gen1.jpg' class='w-full rounded-lg cursor-pointer' alt='ジェネラティブアート' onclick="window.openImageModal(this.src, this.alt)" />
 					</div>
 					<a
 						href='https://emar27181-gallery-portfolio.netlify.app/'
@@ -146,19 +134,83 @@ const tool = ['git', 'vscode']
 					subheading='スノーボード、テニス、卓球などのスポーツをするのが趣味です。中学時代には卓球部の副部長、高校時代にはテニス部の副部長、大学時代にはテニスサークルの練習長(練習をまとめる役)を任されていました。'
 					altText='スポーツ'
 				>
-					<div class='mt-2 grid grid-cols-2 gap-x-1 gap-y-2'>
+					<div class='mt-2 grid grid-cols-2 gap-1'>
+						<img src='/images/imge_photo_sport_snowboard.jpg' class='w-full rounded-lg cursor-pointer' alt='スノーボード' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_photo_sport_tennis.png' class='w-full rounded-lg cursor-pointer' alt='テニス' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_photo_sport_golf.png' class='w-full rounded-lg cursor-pointer' alt='ゴルフ' onclick="window.openImageModal(this.src, this.alt)" />
+					</div>
+				</Card>
+
+				<Card
+					heading='アニメ・漫画'
+					subheading='バトルもの作品が好きで、『HUNTER×HUNTER』『呪術廻戦』『葬送のフリーレン』などをよく見ています。『BANANA FISH』『よふかしのうた』も好きな作品です。'
+					altText='アニメ・漫画'
+				>
+					<p class='mt-1 text-xs text-muted-foreground/70'>好きな漫画の模写</p>
+					<div class='grid grid-cols-2 gap-1 items-start'>
+						<img src='/images/image_manga_gojo.jpg' class='w-full rounded-lg cursor-pointer' alt='五条悟（呪術廻戦）' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_manga_itadori.jpg' class='w-full rounded-lg cursor-pointer' alt='虎杖悠仁（呪術廻戦）' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_manga_horks.jpg' class='w-full rounded-lg cursor-pointer' alt='ホークス（僕のヒーローアカデミア）' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_manga_nagi.jpg' class='w-full rounded-lg cursor-pointer' alt='凪誠士郎（ブルーロック）' onclick="window.openImageModal(this.src, this.alt)" />
+					</div>
+				</Card>
+
+				<Card
+					heading='ラーメン'
+					subheading='ラーメンを食べ歩くのが好きです。一番好きなお店は藤沢市の「こぐま」。二郎系は「豚山」、博多系は「ヌードルワークス」もよく行きます。'
+					altText='ラーメン'
+				>
+					<div class='mt-2 grid grid-cols-2 gap-1'>
 						<div class='flex flex-col gap-1'>
-							<img src='/images/imge_photo_sport_snowboard.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='スノーボード' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>スノーボード</p>
+							<img src='/images/image_photo_ramen_koguma.png' class='w-full rounded-lg cursor-pointer' alt='こぐま' onclick="window.openImageModal(this.src, this.alt, {caption: 'こぐま（食べログ）', href: 'https://tabelog.com/kanagawa/A1404/A140404/14000852/'})" />
+							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://tabelog.com/kanagawa/A1404/A140404/14000852/' target='_blank' rel='noopener noreferrer'>こぐま</a>
 						</div>
 						<div class='flex flex-col gap-1'>
-							<img src='/images/image_photo_sport_tennis.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='テニス' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>テニス</p>
+							<img src='/images/image_photo_ramen_butayama.png' class='w-full rounded-lg cursor-pointer' alt='豚山' onclick="window.openImageModal(this.src, this.alt, {caption: '豚山（公式サイト）', href: 'https://butayama.com/'})" />
+							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://butayama.com/' target='_blank' rel='noopener noreferrer'>豚山</a>
 						</div>
 						<div class='flex flex-col gap-1'>
-							<img src='/images/image_photo_sport_golf.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ゴルフ' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>ゴルフ</p>
+							<img src='/images/image_photo_ramen_noodleworks.jpg' class='w-full rounded-lg cursor-pointer' alt='ヌードルワークス' onclick="window.openImageModal(this.src, this.alt, {caption: 'ヌードルワークス（公式サイト）', href: 'https://noodle-works.x0.com/'})" />
+							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://noodle-works.x0.com/' target='_blank' rel='noopener noreferrer'>ヌードルワークス</a>
 						</div>
+					</div>
+				</Card>
+
+				<Card
+					heading='猫'
+					subheading='モナ（7歳）・リサ（2歳）・ピット（2歳）の3匹を飼っています。いずれも保護猫です。アン（永遠の7歳）もずっと大切な家族です。猫をモチーフにしたイラストを描くことも多く、趣味のイラストとも密接に関わっています。'
+					altText='猫'
+				>
+					<div class='mt-2 grid grid-cols-2 gap-1'>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/imge_photo_cat_mona.jpg' class='w-full rounded-lg cursor-pointer' alt='モナ' onclick="window.openImageModal(this.src, this.alt)" />
+							<p class='text-xs text-center text-muted-foreground/70'>モナ</p>
+						</div>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/imge_photo_cat_lisa.jpg' class='w-full rounded-lg cursor-pointer' alt='リサ' onclick="window.openImageModal(this.src, this.alt)" />
+							<p class='text-xs text-center text-muted-foreground/70'>リサ</p>
+						</div>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/imge_photo_cat_pitt.jpg' class='w-full rounded-lg cursor-pointer' alt='ピット' onclick="window.openImageModal(this.src, this.alt)" />
+							<p class='text-xs text-center text-muted-foreground/70'>ピット</p>
+						</div>
+						<div class='flex flex-col gap-1'>
+							<img src='/images/imge_photo_cat_ann.jpg' class='w-full rounded-lg cursor-pointer' alt='アン（永遠の子）' onclick="window.openImageModal(this.src, this.alt)" />
+							<p class='text-xs text-center text-muted-foreground/70'>アン</p>
+						</div>
+					</div>
+				</Card>
+
+				<Card
+					heading='写真'
+					subheading='日常のなかでふと目に留まった空や景色を一枚だけ撮るのが好きです。夕焼け・電信柱・花など、何気ないけれどきれいだと感じた瞬間を残しています。'
+					altText='写真'
+				>
+					<div class='mt-2 grid grid-cols-2 gap-1'>
+						<img src='/images/image_photo_sky1.jpg' class='w-full rounded-lg cursor-pointer' alt='空の写真' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_photo_sky2.jpg' class='w-full rounded-lg cursor-pointer' alt='空の写真' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_photo_sky3.jpg' class='w-full rounded-lg cursor-pointer' alt='空の写真' onclick="window.openImageModal(this.src, this.alt)" />
+						<img src='/images/image_photo_sky4.jpg' class='w-full rounded-lg cursor-pointer' alt='空の写真' onclick="window.openImageModal(this.src, this.alt)" />
 					</div>
 				</Card>
 
@@ -175,91 +227,10 @@ const tool = ['git', 'vscode']
 				</Card>
 
 				<Card
-					heading='アニメ・漫画'
-					subheading='バトルもの作品が好きで、『HUNTER×HUNTER』『呪術廻戦』『葬送のフリーレン』などをよく見ています。『BANANA FISH』『よふかしのうた』も好きな作品です。'
-					altText='アニメ・漫画'
-				>
-					<p class='mt-1 text-xs text-muted-foreground/70'>好きな漫画の模写</p>
-					<div class='grid grid-cols-2 gap-x-1 gap-y-2'>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_manga_gojo.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='五条悟（呪術廻戦）' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>五条悟（呪術廻戦）</p>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_manga_itadori.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='虎杖悠仁（呪術廻戦）' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>虎杖悠仁（呪術廻戦）</p>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_manga_horks.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ホークス（僕のヒーローアカデミア）' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>ホークス（ヒロアカ）</p>
-						</div>
-					</div>
-				</Card>
-
-				<Card
 					heading='音楽'
 					subheading='King Gnu・米津玄師・Mrs. GREEN APPLE・Vaundyなどが好きです。King Gnuの「Prayer X」はBANANA FISHを見てからより深く刺さるようになりました。Mrs. GREEN APPLEは「Soranji」「僕のこと」あたりをよく聴いています。'
 					altText='音楽'
 				/>
-
-				<Card
-					heading='ラーメン'
-					subheading='ラーメンを食べ歩くのが好きです。一番好きなお店は藤沢市の「こぐま」。二郎系は「豚山」、博多系は「ヌードルワークス」もよく行きます。'
-					altText='ラーメン'
-				>
-					<div class='mt-2 grid grid-cols-2 gap-1'>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_photo_ramen_koguma.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='こぐま' onclick="window.openImageModal(this.src, this.alt, {caption: 'こぐま（食べログ）', href: 'https://tabelog.com/kanagawa/A1404/A140404/14000852/'})" />
-							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://tabelog.com/kanagawa/A1404/A140404/14000852/' target='_blank' rel='noopener noreferrer'>こぐま</a>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_photo_ramen_butayama.png' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='豚山' onclick="window.openImageModal(this.src, this.alt, {caption: '豚山（公式サイト）', href: 'https://butayama.com/'})" />
-							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://butayama.com/' target='_blank' rel='noopener noreferrer'>豚山</a>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/image_photo_ramen_noodleworks.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ヌードルワークス' onclick="window.openImageModal(this.src, this.alt, {caption: 'ヌードルワークス（公式サイト）', href: 'https://noodle-works.x0.com/'})" />
-							<a class='text-xs text-center text-muted-foreground/70 hover:text-muted-foreground transition-colors' href='https://noodle-works.x0.com/' target='_blank' rel='noopener noreferrer'>ヌードルワークス</a>
-						</div>
-					</div>
-				</Card>
-
-				<Card
-					heading='猫'
-					subheading='モナ（7歳）・リサ（2歳）・ピット（2歳）の3匹を飼っています。いずれも保護猫です。猫をモチーフにしたイラストを描くことも多く、趣味のイラストとも密接に関わっています。'
-					altText='猫'
-				>
-					<div class='mt-2 grid grid-cols-2 gap-1'>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/imge_photo_cat_mona.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='モナ' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>モナ</p>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/imge_photo_cat_lisa.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='リサ' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>リサ</p>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/imge_photo_cat_pitt.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='ピット' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>ピット</p>
-						</div>
-						<div class='flex flex-col gap-1'>
-							<img src='/images/imge_photo_cat_ann.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='アン' onclick="window.openImageModal(this.src, this.alt)" />
-							<p class='text-xs text-center text-muted-foreground/70'>アン（永遠の子）</p>
-						</div>
-					</div>
-				</Card>
-
-				<Card
-					heading='写真'
-					subheading='日常のなかでふと目に留まった空や景色を一枚だけ撮るのが好きです。夕焼け・電信柱・花など、何気ないけれどきれいだと感じた瞬間を残しています。'
-					altText='写真'
-				>
-					<div class='mt-2 grid grid-cols-2 gap-x-1 gap-y-2'>
-						<img src='/images/image_photo_sky1.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='空の写真' onclick="window.openImageModal(this.src, this.alt)" />
-						<img src='/images/image_photo_sky2.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='空の写真' onclick="window.openImageModal(this.src, this.alt)" />
-						<img src='/images/image_photo_sky3.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='空の写真' onclick="window.openImageModal(this.src, this.alt)" />
-						<img src='/images/image_photo_sky4.jpg' class='w-full rounded-lg object-cover aspect-square cursor-pointer' alt='空の写真' onclick="window.openImageModal(this.src, this.alt)" />
-					</div>
-				</Card>
 			</div>
 		</Section>
 
