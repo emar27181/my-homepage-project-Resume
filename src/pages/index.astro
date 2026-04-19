@@ -34,12 +34,12 @@ const tool = ['git', 'vscode']
 		slot='toc'
 		class='flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-satoshi text-[0.92rem]'
 	>
+		<a class='toc-link' href='#hobbies'>趣味</a>
 		<a class='toc-link' href='#projects'>制作物</a>
 		<a class='toc-link' href='#research'>研究テーマ</a>
 		<a class='toc-link' href='#publications'>学会発表</a>
 		<a class='toc-link' href='#skills'>スキル</a>
 		<a class='toc-link' href='#education'>学歴</a>
-		<a class='toc-link' href='#hobbies'>趣味</a>
 		<a class='toc-link' href='#qualifications'>資格・免許</a>
 		<a class='toc-link' href='#gallery'>作品集</a>
 	</nav>
@@ -107,6 +107,71 @@ const tool = ['git', 'vscode']
 					>ryunosukeema.job@gmail.com</a
 				><br />
 			</p>
+		</Section>
+
+		<Section title='趣味' id='hobbies'>
+			<div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+				<Card
+					heading='イラスト'
+					subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
+					altText='イラスト'
+				>
+					<img src='/images/image_cat_ann1.jpg' class='mt-2 w-full rounded-lg object-cover' style='max-height: 200px;' alt='猫のイラスト' />
+					<a
+						href='https://emar27181-gallery-portfolio.netlify.app/'
+						class='text-sm underline'
+						target='_blank'
+						rel='noopener noreferrer'>{t.illutWorksLink}</a>
+				</Card>
+
+				<Card
+					heading='スポーツ'
+					subheading='スノーボード、テニス、卓球などのスポーツをするのが趣味です。中学時代には卓球部の副部長、高校時代にはテニス部の副部長、大学時代にはテニスサークルの練習長(練習をまとめる役)を任されていました。'
+					altText='スポーツ'
+				>
+					<div class='mt-2 grid grid-cols-3 gap-1'>
+						<img src='/images/imge_photo_sport_snowboard.jpg' class='w-full rounded-lg object-cover aspect-square' alt='スノーボード' />
+						<img src='/images/image_photo_sport_tennis.png' class='w-full rounded-lg object-cover aspect-square' alt='テニス' />
+						<img src='/images/image_photo_sport_golf.png' class='w-full rounded-lg object-cover aspect-square' alt='ゴルフ' />
+					</div>
+				</Card>
+
+				<Card
+					heading='ゲーム'
+					subheading='主にFPSゲームをするのが好きです。APEXというFPSゲームの賞金付きカスタム大会を主催したこともあります。'
+					altText='ゲーム'
+				>
+					<a
+						href='https://nodoame27181.netlify.app/'
+						class='text-sm underline'
+						target='_blank'
+						rel='noopener noreferrer'>ゲームポートフォリオを見る</a>
+				</Card>
+
+				<Card
+					heading='アニメ・漫画'
+					subheading='バトルもの作品が好きで、『HUNTER×HUNTER』『呪術廻戦』『葬送のフリーレン』などをよく見ています。最近『BANANA FISH』を視聴し、元々好きだったKing Gnuの「Prayer X」がより好きになりました。『よふかしのうた』も好きな作品です。'
+					altText='アニメ・漫画'
+				>
+					<div class='mt-2 grid grid-cols-3 gap-1'>
+						<img src='/images/image_manga_gojo.jpg' class='w-full rounded-lg object-cover aspect-square' alt='五条悟' />
+						<img src='/images/image_manga_itadori.jpg' class='w-full rounded-lg object-cover aspect-square' alt='虎杖悠仁' />
+						<img src='/images/image_manga_horks.jpg' class='w-full rounded-lg object-cover aspect-square' alt='ホークス' />
+					</div>
+				</Card>
+
+				<Card
+					heading='ラーメン'
+					subheading='ラーメンを食べ歩くのが好きです。一番好きなお店は藤沢市の「こぐま」。二郎系は「豚山」、博多系は「がっとん」や「ヌードルワークス」もよく行きます。'
+					altText='ラーメン'
+				/>
+
+				<Card
+					heading='猫'
+					subheading='モナ（7歳）、リサ（2歳）、ピット（2歳）の3匹を飼っています。いずれも保護猫です。猫をモチーフにしたイラストを描くことも多く、趣味のイラストとも密接に関わっています。'
+					altText='猫'
+				/>
+			</div>
 		</Section>
 
 		{
@@ -462,43 +527,6 @@ const tool = ['git', 'vscode']
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
 			/>
-		</Section>
-
-		<Section title='趣味' id='hobbies'>
-			<div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
-				<Card
-					heading='イラスト'
-					subheading='幼少期から絵を描くことが好きで日常的に絵を描き続けてきました。動物やキャラクターの模写、サークルや研究室のロゴデザインを手掛けるなど幅広い創作活動を行ってきました。'
-					altText='Lorem, ipsum dolor sit'
-					imageClass='h-12 w-auto md:-left-16'
-				>
-					<a
-						href='https://emar27181-gallery-portfolio.netlify.app/'
-						class='text-sm underline'
-						target='_blank'
-						rel='noopener noreferrer'>{t.illutWorksLink}</a>
-				</Card>
-
-				<Card
-					heading='スポーツ'
-					subheading='スノーボード、テニス、卓球などのスポーツをするのが趣味です。中学時代には卓球部の副部長、高校時代にはテニス部の副部長、大学時代にはテニスサークルの練習長(練習をまとめる役)を任されていました。'
-					altText='Lorem, ipsum dolor sit'
-					imageClass='h-12 w-auto md:-left-16'
-				/>
-
-				<Card
-					heading='ゲーム'
-					subheading='主にFPSゲームをするのが好きです。APEXというFPSゲームの賞金付きカスタム大会を主催したこともあります。'
-					altText='Lorem, ipsum dolor sit'
-					imageClass='h-12 w-auto md:-left-16'
-				>
-					<a
-						href='https://nodoame27181.netlify.app/'
-						class='text-sm underline'
-						target='_blank'
-						rel='noopener noreferrer'>ゲームポートフォリオを見る</a>
-				</Card>
-			</div>
 		</Section>
 
 		<Section title='資格・免許' id='qualifications'>
