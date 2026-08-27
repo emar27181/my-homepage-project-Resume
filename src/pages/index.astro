@@ -34,8 +34,8 @@ const tool = ['git', 'vscode']
 		slot='toc'
 		class='flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-satoshi text-[0.92rem]'
 	>
-		<a class='toc-link' href='#hobbies'>趣味</a>
 		<a class='toc-link' href='#projects'>制作物</a>
+		<a class='toc-link' href='#hobbies'>趣味</a>
 		<a class='toc-link' href='#research'>研究テーマ</a>
 		<a class='toc-link' href='#publications'>学会発表</a>
 		<a class='toc-link' href='#skills'>スキル</a>
@@ -115,6 +115,175 @@ const tool = ['git', 'vscode']
 				><br />
 			</p>
 		</Section>
+
+		<Section title='制作物' id='projects'>
+			<div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+				<ProjectCard
+				href='https://emar27181-gallery-portfolio.netlify.app/'
+				heading='ギャラリーポートフォリオ'
+				subheading='自身が描いたイラストや動画などをグリッド上に展示しています．'
+				imagePath='/src/assets/gallery-portfolio.png'
+				altText='Example'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://emar27181-portfolio.netlify.app/'
+				heading='ポートフォリオ(このサイト)'
+				subheading='経歴などをまとめたポートフォリオサイトです．'
+				altText='Example'
+				imagePath='/src/assets/portfolio.png'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://flex-railway-map.netlify.app/'
+				heading='Flex Railway Map'
+				subheading='Flex Railway Map は、情報が多すぎる路線図を必要な路線だけに絞って見やすく表示できるサービスです。'
+				imagePath='/src/assets/flex-rail-map.png'
+				altText='Flex Railway Map'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://music-atlas.netlify.app/'
+				heading='Music Atlas'
+				subheading='自身が聴いている音楽の統計をまとめたサイトです．どの曲がカラオケに向いているかの分析や、聴いている曲の分布をプロットで統計的に確認できます．'
+				imagePath='/src/assets/music-atlas.jpg'
+				altText='Music Atlas'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://throw-frow-darts.netlify.app/'
+				heading='ThrowFlowDarts'
+				subheading='無機質になりがちな自宅でのダーツの記録を、音とデザインでゲームのように楽しく記録できるアプリです．'
+				imagePath='/src/assets/throw-frow-darts.jpg'
+				altText='ThrowFlowDarts'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://waste-tax.netlify.app/onboarding'
+				heading='TAKUS'
+				subheading='研修で作成したサイトを普段から利用できるように模倣・再構成したサイトです．'
+				imagePath='/src/assets/waste-tax.jpg'
+				altText='TAKUS'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://window-brain.netlify.app/'
+				heading='Window Brain'
+				subheading='作業中に使わないモニターを活用するためのサイトです．時計・BGM・天気などをウィジェットとして自由に配置し、おしゃれにカスタマイズできます．'
+				imagePath='/src/assets/window-brain.jpg'
+				altText='Window Brain'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://way-point-map.netlify.app/'
+				heading='Way Point Map'
+				subheading='ゴルフ場をマップベースで閲覧し、1球あたりの値段や単価で比較できるサイトです．フィルタリングやヒートマップでのプロットにも対応しています．'
+				imagePath='/src/assets/way-point-map.jpg'
+				altText='Way Point Map'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://color-recommend.netlify.app/'
+				heading='色相・トーン推薦アプリ'
+				subheading='研究内容のデモを公開しています．'
+				imagePath='/src/assets/color-recommend-site.png'
+				altText='Example'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://nodoame27181.netlify.app/'
+				heading='ゲーム用ポートフォリオ'
+				subheading='自身のゲームアカウントに関する情報やプレイ実績をまとめたポートフォリオサイトです。'
+				imagePath='/src/assets/nodoame_portfolio.png'
+				altText='Example'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://valorant-point-viewer.netlify.app/'
+				heading='VALORANT Point Viewer'
+				subheading='VALORANTの各マップの定点動画をマップ上で確認できるWebサイトです。忘れがちな定点の動画をマップの座標に基づいて確認するツールとして制作しました。'
+				imagePath='/src/assets/valopoint.png'
+				altText='Example'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://mahjong-yaku-visualizer.netlify.app/'
+				heading='麻雀役ビジュアライザー'
+				subheading='麻雀の役を視覚的に確認できるWebサイトです。'
+				imagePath='/src/assets/mahjong-vis.png'
+				altText='Mahjong Yaku Visualizer'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://juqs-map.netlify.app/'
+				heading='JUQSマップ'
+				subheading='JUQSと呼ばれるラクガキの写真をマップ上にまとめたサイトです．'
+				imagePath='/src/assets/juqs-map.png'
+				altText='Example'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://emar27181.github.io/'
+				heading='p5.js演習ブラウザ'
+				subheading='研究で作成した成果物を展示している試験的なサイトです．'
+				imagePath='/src/assets/demo-site.png'
+				altText='Example'
+				class='w-full'
+				target='_blank'
+				/>
+
+				<ProjectCard
+				href='https://card-pocket.netlify.app/'
+				heading='Card Pocket（デモ）'
+				subheading='持ち運びの面倒な会員証をデジタルで管理するサービスです．現在製作途中のデモサイトです．'
+				imagePath='/src/assets/card-pocket.png'
+				altText='Card Pocket'
+				class='w-full'
+				target='_blank'
+				/>
+			</div>
+		</Section>
+
+		{
+			/*
+			<Section title='自己PR'>
+				<Card
+					heading='実行力'
+					subheading='大学時代、賞金付きのゲーム大会を主催することにしました。まず、参加者を集める多めに私の人脈とコミュニケーション能力を活かし、約1ヶ月で33人の参加者を集めました。参加者が公平に競い合えるようにするため、事前にチームメンバーのゲームの上手さなどの情報を収集し、極端に強いチームが生まれないよう調整しました。また、参加費を300円とし、支払いを任意としました。優勝賞金を平等に分配するために、賞金は1位チーム総取りとしつつ、チーム内の参加費の支払い人数に応じて獲得賞金が変動する仕組みを設けました。この経験を通じて、自分が主催する仕事を全うすることの重要性を再認識しました。'
+					*imagePath='/src/assets/about-astro.png'
+					*
+					altText='Lorem, ipsum dolor sit'
+					imageClass='h-12 w-auto md:-left-16'
+				/>
+			</Section>
+				*/
+		}
 
 		<Section title='趣味' id='hobbies'>
 			<div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
@@ -364,175 +533,6 @@ const tool = ['git', 'vscode']
 					heading='音楽'
 					subheading='アニメのOP・EDがきっかけで好きになった曲が多い、最近話題のJ-POPをよく聴いています。King Gnu（Prayer X・AIZO）、米津玄師（IRIS OUT）、Mrs. GREEN APPLE（Soranji・僕のこと・lulu）、Vaundyなどがお気に入りです。'
 					altText='音楽'
-				/>
-			</div>
-		</Section>
-
-		{
-			/*
-			<Section title='自己PR'>
-				<Card
-					heading='実行力'
-					subheading='大学時代、賞金付きのゲーム大会を主催することにしました。まず、参加者を集める多めに私の人脈とコミュニケーション能力を活かし、約1ヶ月で33人の参加者を集めました。参加者が公平に競い合えるようにするため、事前にチームメンバーのゲームの上手さなどの情報を収集し、極端に強いチームが生まれないよう調整しました。また、参加費を300円とし、支払いを任意としました。優勝賞金を平等に分配するために、賞金は1位チーム総取りとしつつ、チーム内の参加費の支払い人数に応じて獲得賞金が変動する仕組みを設けました。この経験を通じて、自分が主催する仕事を全うすることの重要性を再認識しました。'
-					*imagePath='/src/assets/about-astro.png'
-					*
-					altText='Lorem, ipsum dolor sit'
-					imageClass='h-12 w-auto md:-left-16'
-				/>
-			</Section>
-				*/
-		}
-
-		<Section title='制作物' id='projects'>
-			<div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
-				<ProjectCard
-					href='https://emar27181-gallery-portfolio.netlify.app/'
-					heading='ギャラリーポートフォリオ'
-					subheading='自身が描いたイラストや動画などをグリッド上に展示しています．'
-					imagePath='/src/assets/gallery-portfolio.png'
-					altText='Example'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://color-recommend.netlify.app/'
-					heading='色相・トーン推薦アプリ'
-					subheading='研究内容のデモを公開しています．'
-					imagePath='/src/assets/color-recommend-site.png'
-					altText='Example'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://emar27181-portfolio.netlify.app/'
-					heading='ポートフォリオ(このサイト)'
-					subheading='経歴などをまとめたポートフォリオサイトです．'
-					altText='Example'
-					imagePath='/src/assets/portfolio.png'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://flex-railway-map.netlify.app/'
-					heading='Flex Railway Map'
-					subheading='Flex Railway Map は、情報が多すぎる路線図を必要な路線だけに絞って見やすく表示できるサービスです。'
-					imagePath='/src/assets/flex-rail-map.png'
-					altText='Flex Railway Map'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://nodoame27181.netlify.app/'
-					heading='ゲーム用ポートフォリオ'
-					subheading='自身のゲームアカウントに関する情報やプレイ実績をまとめたポートフォリオサイトです。'
-					imagePath='/src/assets/nodoame_portfolio.png'
-					altText='Example'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://valorant-point-viewer.netlify.app/'
-					heading='VALORANT Point Viewer'
-					subheading='VALORANTの各マップの定点動画をマップ上で確認できるWebサイトです。忘れがちな定点の動画をマップの座標に基づいて確認するツールとして制作しました。'
-					imagePath='/src/assets/valopoint.png'
-					altText='Example'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://mahjong-yaku-visualizer.netlify.app/'
-					heading='麻雀役ビジュアライザー'
-					subheading='麻雀の役を視覚的に確認できるWebサイトです。'
-					imagePath='/src/assets/mahjong-vis.png'
-					altText='Mahjong Yaku Visualizer'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://juqs-map.netlify.app/'
-					heading='JUQSマップ'
-					subheading='JUQSと呼ばれるラクガキの写真をマップ上にまとめたサイトです．'
-					imagePath='/src/assets/juqs-map.png'
-					altText='Example'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://emar27181.github.io/'
-					heading='p5.js演習ブラウザ'
-					subheading='研究で作成した成果物を展示している試験的なサイトです．'
-					imagePath='/src/assets/demo-site.png'
-					altText='Example'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://card-pocket.netlify.app/'
-					heading='Card Pocket（デモ）'
-					subheading='持ち運びの面倒な会員証をデジタルで管理するサービスです．現在製作途中のデモサイトです．'
-					imagePath='/src/assets/card-pocket.png'
-					altText='Card Pocket'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://music-atlas.netlify.app/'
-					heading='Music Atlas'
-					subheading='自身が聴いている音楽の統計をまとめたサイトです．どの曲がカラオケに向いているかの分析や、聴いている曲の分布をプロットで統計的に確認できます．'
-					imagePath='/src/assets/music-atlas.jpg'
-					altText='Music Atlas'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://throw-frow-darts.netlify.app/'
-					heading='ThrowFlowDarts'
-					subheading='無機質になりがちな自宅でのダーツの記録を、音とデザインでゲームのように楽しく記録できるアプリです．'
-					imagePath='/src/assets/throw-frow-darts.jpg'
-					altText='ThrowFlowDarts'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://waste-tax.netlify.app/onboarding'
-					heading='Waste Tax（ウェイストタクス）'
-					subheading='研修で作成したサイトを普段から利用できるように模倣・再構成したサイトです．'
-					imagePath='/src/assets/waste-tax.jpg'
-					altText='Waste Tax'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://way-point-map.netlify.app/'
-					heading='Way Point Map'
-					subheading='ゴルフ場をマップベースで閲覧し、1球あたりの値段や単価で比較できるサイトです．フィルタリングやヒートマップでのプロットにも対応しています．'
-					imagePath='/src/assets/way-point-map.jpg'
-					altText='Way Point Map'
-					class='w-full'
-					target='_blank'
-				/>
-
-				<ProjectCard
-					href='https://window-brain.netlify.app/'
-					heading='Window Brain'
-					subheading='作業中に使わないモニターを活用するためのサイトです．時計・BGM・天気などをウィジェットとして自由に配置し、おしゃれにカスタマイズできます．'
-					imagePath='/src/assets/window-brain.jpg'
-					altText='Window Brain'
-					class='w-full'
-					target='_blank'
 				/>
 			</div>
 		</Section>
