@@ -1,19 +1,27 @@
 # Astro Resume
 
 ## 注意事項
+
 - このプロジェクトは[astro-theme-resume](https://github.com/srleom/astro-theme-resume)を基に作成したものです．
+
+## v1 / v2
+
+- `/` (v1): 従来のレジュメ形式のホームページ。デフォルトはこちら。
+- `/v2` (v2): 「ポートフォリオ = 1台のコンピュータ」をコンセプトにした、ターミナルで自分自身を探索できる実験的な再実装。Terminal / Collage の2モードを切り替え可能。
+- 双方向にヘッダーのボタン(`v1` / `v2`)から行き来できる。
+- v2の設計・構成は [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) と [docs/DESIGN.md](docs/DESIGN.md) を参照。
 
 ## デプロイ方法
 
 1. `npm run build`でdistを更新
 2. `netlify login` でnetlifyのログインを確認
 3. `netlify deploy`で公開前のデプロイ結果の確認
-    - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は`"dist"`を入力
+   - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は`"dist"`を入力
 4. `netlify deploy --prod`でデプロイ結果を公開
-    - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は`"dist"`を入力
-
+   - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は`"dist"`を入力
 
 ## よく使うファイル(※下記に詳細あり)
+
 - `src/pages/index.astro` : ホームの編集
 - `src/components/layout/Header.astro` : ヘッダーの編集
 
