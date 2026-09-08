@@ -25,6 +25,16 @@ src/v2/
 
 **依存の向き**: `app.ts`(DOM) → `engine.ts`(状態) → `commands.ts`(コマンド) → `filesystem.ts` / `data/portfolio.ts`(データ)。逆方向の依存はない。Collageモードは `src/pages/v2/index.astro` から直接 `data/portfolio.ts` を読んでサーバーサイドでカード表示を組み立てており、Terminalモードと表示方法が違うだけで参照するデータソースは同じ1つ。
 
+## テストによる品質担保
+
+`filesystem.ts` / `commands.ts` / `engine.ts` はDOMに依存しない純粋なTypeScriptなので、Vitest(`*.test.ts`、`npm run test`)でブラウザなしに検証できる。app.tsとastroのマークアップはユニットテスト対象にしていない(DOM組み立てとイベント配線のみで、分岐が少ない)ため、見た目や実機での挙動はこれまで通りPlaywrightでの目視確認を都度行う。
+
+- `filesystem.test.ts`: パス解決(`cd`/`..`/`~`/`/`)とファイルツリーの構造。
+- `commands.test.ts`: 各コマンドの出力と、`cd`/`open`/`clear`/`reboot`/`rm -rf /`が返す制御シグナルの型。
+- `engine.test.ts`: プロンプトの更新、コマンド履歴の↑↓、Tab補完。
+
+v2のロジックに変更を加えるときは、まずここに落ちるテストを書く(または既存のテストを直す)。`npm run build`(型チェック)と`npm run test`の両方が通ってからコミットする。
+
 ## テーマ切り替えとの関係
 
 v1はTailwindの`dark:`クラス切り替え(`ThemeProvider`がlocalStorageと`<html class="dark">`を同期)で1つの色関数相当を実現している。v2はそもそも常時ダーク基調の別世界という設定のため、v1のライト/ダーク切り替えとは独立している(v2ページはv1のテーマ状態を読み書きしない)。
