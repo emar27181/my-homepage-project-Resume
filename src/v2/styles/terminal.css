@@ -336,10 +336,28 @@ button.pf-chip:hover {
 	gap: 8px;
 }
 
+.pf-preview__header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 8px;
+}
+
 .pf-preview h3 {
 	color: var(--pf-green);
 	font-size: 16px;
 	margin: 0;
+}
+
+.pf-preview__close {
+	/* Square icon button reusing the sm touch step as its side length,
+	   instead of the pill's horizontal padding — a "×" needs a square hit
+	   area, not a wide pill. */
+	flex-shrink: 0;
+	width: var(--pf-touch-sm);
+	padding: 0;
+	font-size: 14px;
+	line-height: 1;
 }
 
 .pf-preview p {
