@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-08 (4)
+
+- improve: v1ヘッダーのv2切替リンクを、テキスト「v2」からLucideの`square-terminal`アイコンに変更。`src/icons/square-terminal.svg`をastro-iconのローカルアイコンとして追加し、`currentColor`でダーク/ライト両テーマに追従する。アクセシブルな名前は`sr-only`テキストとtitle属性で維持。
+
 ## 2026-09-08 (3)
 
 - improve: start.shのブート完了メッセージを、単なるローディング演出から「ポートフォリオ=探索できるファイルシステム」というコンセプトが伝わる内容に変更。`whoami · ls · cd projects · open <slug> · help`という具体的な例コマンドを最初から提示するようにした。
