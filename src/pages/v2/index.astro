@@ -22,13 +22,14 @@ import { hobbies, profile, projects, research, skills } from '@/v2/data/portfoli
 			<span class='pf-header__prompt'>{profile.handle}@portfolio: ~</span>
 			<div class='pf-header__actions'>
 				<Chip as='a' href='/' size='sm' title='戻る: 従来のレジュメページ'>v1</Chip>
+				{
+					/* collageモードは一時的に非表示(コード・データはそのまま)。
+					 再表示するにはoptionsに { value: 'collage', label: 'collage' } を戻すだけでよい。 */
+				}
 				<SegmentedControl
 					name='display mode'
 					value='terminal'
-					options={[
-						{ value: 'collage', label: 'collage' },
-						{ value: 'terminal', label: 'terminal' }
-					]}
+					options={[{ value: 'terminal', label: 'terminal' }]}
 				/>
 			</div>
 		</header>
