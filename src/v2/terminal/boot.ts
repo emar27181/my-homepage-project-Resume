@@ -20,9 +20,12 @@ export const bootLines: BootLine[] = [
 	{ text: '', delayMs: 80 },
 	{ text: '────────────────────────────────────────────', delayMs: 40 },
 	{ text: '', delayMs: 40 },
-	{ text: `Welcome to ${profile.name}'s portfolio.`, delayMs: 120 },
+	{
+		text: `Welcome to ${profile.name}'s portfolio — mounted as a filesystem you can explore.`,
+		delayMs: 120
+	},
 	{ text: '', delayMs: 40 },
-	{ text: 'Type `help` to see available commands.', delayMs: 120 },
+	{ text: 'Try: whoami · ls · cd projects · open <slug> · help', delayMs: 120 },
 	{ text: '', delayMs: 40 },
 	{ text: '────────────────────────────────────────────', delayMs: 0 }
 ]
