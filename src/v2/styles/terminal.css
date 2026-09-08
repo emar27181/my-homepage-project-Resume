@@ -19,6 +19,7 @@
 	--pf-touch-md: 44px;
 
 	min-height: 100vh;
+	min-height: 100dvh;
 	background: var(--pf-bg);
 	color: var(--pf-text);
 	font-family: var(--pf-mono);
@@ -138,10 +139,21 @@ button.pf-chip:hover {
 .pf-window {
 	flex: 1 1 60%;
 	min-width: 0;
+	/* Flex items default to min-height:auto, which lets them grow past an
+	   explicit height to fit their content — exactly what breaks this once
+	   .pf-terminal-layout switches to a column on mobile (the window would
+	   stretch to fit every printed line instead of respecting 70/80dvh and
+	   scrolling internally). min-height:0 makes the declared height win. */
+	min-height: 0;
 	max-width: 100%;
 	display: flex;
 	flex-direction: column;
+	/* vh is measured against the browser's largest possible viewport, so on
+	   mobile Safari with the address bar expanded the window reads as too
+	   short for what's actually visible. dvh tracks the real visible area;
+	   the vh line is the fallback for browsers that don't support dvh. */
 	height: min(70vh, 640px);
+	height: min(70dvh, 640px);
 	background: var(--pf-panel);
 	border: 1px solid var(--pf-border);
 	border-radius: 8px;
@@ -184,6 +196,7 @@ button.pf-chip:hover {
 
 .pf-window__body {
 	flex: 1;
+	min-height: 0;
 	overflow-y: auto;
 	padding: 16px;
 	line-height: 1.6;
@@ -197,6 +210,32 @@ button.pf-chip:hover {
 .pf-window__body::-webkit-scrollbar-thumb {
 	background: var(--pf-border);
 	border-radius: 9999px;
+}
+
+/* Single-column on mobile (.pf-terminal-layout above): the window doesn't
+   have to share width with the preview panel, so let it use most of the
+   visible viewport instead of the desktop 70%. Placed after the base
+   .pf-window rule (not inside the earlier @media block) so it actually
+   wins — equal-specificity rules apply in source order regardless of which
+   one is in a @media block. */
+@media (max-width: 860px) {
+	.pf-window {
+		/* flex-basis:60% (desktop's width share) means nothing once the main
+		   axis flips to vertical here, and a % basis against this column's
+		   indefinite height falls back to content size — silently ignoring
+		   `height` below. flex-basis:auto makes `height` the basis again. */
+		flex: 1 1 auto;
+		height: min(80vh, 640px);
+		height: min(80dvh, 640px);
+	}
+
+	.pf-main {
+		padding: 8px;
+	}
+
+	.pf-header {
+		padding: 8px 12px;
+	}
 }
 
 .pf-line-prompt {
