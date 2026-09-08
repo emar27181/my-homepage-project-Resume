@@ -5,6 +5,8 @@
 import BaseHead from '@/components/BaseHead.astro'
 import '@/v2/styles/terminal.css'
 
+import Chip from '@/v2/components/atoms/Chip.astro'
+import SegmentedControl from '@/v2/components/molecules/SegmentedControl.astro'
 import { hobbies, profile, projects, research, skills } from '@/v2/data/portfolio'
 ---
 
@@ -19,17 +21,15 @@ import { hobbies, profile, projects, research, skills } from '@/v2/data/portfoli
 		<header class='pf-header'>
 			<span class='pf-header__prompt'>{profile.handle}@portfolio: ~</span>
 			<div class='pf-header__actions'>
-				<a class='pf-chip' href='/' title='戻る: 従来のレジュメページ'>v1</a>
-				<div class='pf-mode-toggle' role='tablist' aria-label='display mode'>
-					<button type='button' class='pf-chip' data-mode='collage' role='tab'>collage</button>
-					<button
-						type='button'
-						class='pf-chip is-active'
-						data-mode='terminal'
-						role='tab'
-						aria-selected='true'>terminal</button
-					>
-				</div>
+				<Chip as='a' href='/' size='sm' title='戻る: 従来のレジュメページ'>v1</Chip>
+				<SegmentedControl
+					name='display mode'
+					value='terminal'
+					options={[
+						{ value: 'collage', label: 'collage' },
+						{ value: 'terminal', label: 'terminal' }
+					]}
+				/>
 			</div>
 		</header>
 
@@ -71,9 +71,9 @@ import { hobbies, profile, projects, research, skills } from '@/v2/data/portfoli
 						<div class='pf-tech'>
 							{
 								profile.links.map((l) => (
-									<a class='pf-chip' href={l.href} target='_blank' rel='noopener noreferrer'>
+									<Chip as='a' href={l.href} size='sm' target='_blank' rel='noopener noreferrer'>
 										{l.label}
-									</a>
+									</Chip>
 								))
 							}
 						</div>
@@ -84,15 +84,15 @@ import { hobbies, profile, projects, research, skills } from '@/v2/data/portfoli
 							<div class='pf-card' data-tag={`projects/${p.slug}`}>
 								<h3>{p.heading}</h3>
 								<p>{p.summary}</p>
-								<ul>
+								<div class='pf-tech'>
 									{p.tech.map((t) => (
-										<li>{t}</li>
+										<Chip size='sm'>{t}</Chip>
 									))}
-								</ul>
+								</div>
 								{p.href && (
-									<a class='pf-chip' href={p.href} target='_blank' rel='noopener noreferrer'>
+									<Chip as='a' href={p.href} size='sm' target='_blank' rel='noopener noreferrer'>
 										open →
-									</a>
+									</Chip>
 								)}
 							</div>
 						))

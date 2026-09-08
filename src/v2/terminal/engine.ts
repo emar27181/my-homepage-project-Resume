@@ -61,7 +61,7 @@ export class TerminalEngine {
 		}
 
 		const [cmd, ...rest] = tokens
-		const partial = hasTrailingSpace ? '' : (rest.pop() ?? '')
+		const partial = hasTrailingSpace ? '' : rest.pop() ?? ''
 		const base = rest.join(' ')
 
 		let candidates: string[] = []

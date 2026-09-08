@@ -124,6 +124,7 @@ function renderPreview(slug: string) {
 	tech.className = 'pf-tech'
 	project.tech.forEach((t) => {
 		const span = document.createElement('span')
+		span.className = 'pf-chip pf-chip--sm'
 		span.textContent = t
 		tech.appendChild(span)
 	})

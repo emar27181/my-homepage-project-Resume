@@ -1,0 +1,38 @@
+---
+// Mutually-exclusive selector row, built from Chip atoms only. Knows the
+// composition rule (one active, rest inactive, same size), not the domain
+// meaning of each option — app.ts owns the click behaviour.
+import Chip from '@/v2/components/atoms/Chip.astro'
+
+interface Option {
+	value: string
+	label: string
+}
+
+interface Props {
+	name: string
+	options: Option[]
+	value: string
+	class?: string
+}
+
+const { name, options, value, class: className }: Props = Astro.props
+---
+
+<div class:list={['pf-mode-toggle', className]} role='tablist' aria-label={name}>
+	{
+		options.map((option) => (
+			<Chip
+				as='button'
+				type='button'
+				size='sm'
+				active={option.value === value}
+				data-mode={option.value}
+				role='tab'
+				aria-selected={option.value === value}
+			>
+				{option.label}
+			</Chip>
+		))
+	}
+</div>
