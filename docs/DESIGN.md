@@ -19,7 +19,7 @@ v1のデザイン規約(Tailwindのデフォルトスケール、shadcn由来の
 
 - フォントは全面的にmonospace(`ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`)。
 - 本文14px、入力欄は16px固定(iOS Safariの自動拡大を防ぐため。§05参照)。
-- ASCII artは幅560px未満で3文字の"RYU"、560px以上で"NODOAME"を表示(`boot.ts#asciiArtFor`)。2つとも `asciiFont.ts` の同じ5行ブロックフォントから生成しており、手描きのASCII artを2つ持って食い違わせない設計。
+- ASCII artは幅560px未満で"EMAR"、560px以上で"EMAR27181"(ハンドル名)を表示(`boot.ts#asciiArtFor`)。2つとも `asciiFont.ts` の同じ5行ブロックフォントから生成しており、手描きのASCII artを2つ持って食い違わせない設計。
 
 ## 操作部品の高さ
 

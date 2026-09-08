@@ -20,7 +20,7 @@ export interface Profile {
 export const profile: Profile = {
 	name: 'Ryunosuke Ema',
 	nameJa: '江馬 龍之介',
-	handle: 'nodoame27181',
+	handle: 'emar27181',
 	role: 'IT Engineer',
 	location: 'Kanagawa, Japan',
 	education: '明治大学大学院 理工学研究科 情報科学専攻 修了 (2026.03)',

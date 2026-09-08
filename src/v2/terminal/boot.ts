@@ -31,5 +31,5 @@ export const HINT_DELAY_MS = 6000
 export const HINT_TEXT = 'Hint: try ./start.sh'
 
 export function asciiArtFor(width: number): string[] {
-	return width < 560 ? renderAsciiWord('RYU') : renderAsciiWord('NODOAME')
+	return width < 560 ? renderAsciiWord('EMAR') : renderAsciiWord('EMAR27181')
 }
