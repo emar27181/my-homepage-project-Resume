@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components'
 import IconButton from '@/components/IconButton.astro'
 ---
 
@@ -31,7 +32,10 @@ import IconButton from '@/components/IconButton.astro'
 		*/
 			}
 
-			<IconButton as='a' href='/v2' title='ターミナル版ポートフォリオを試す'>v2</IconButton>
+			<IconButton as='a' href='/v2' title='ターミナル版ポートフォリオを試す'>
+				<span class='sr-only'>ターミナル版ポートフォリオ</span>
+				<Icon name='square-terminal' class='h-[1.2rem] w-[1.2rem]' />
+			</IconButton>
 
 			<IconButton id='toggleDarkMode'>
 				<span class='sr-only'>Dark Theme</span>
