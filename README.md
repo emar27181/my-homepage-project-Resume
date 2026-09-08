@@ -11,6 +11,11 @@
 - 双方向にヘッダーのボタン(`v1` / `v2`)から行き来できる。
 - v2の設計・構成は [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) と [docs/DESIGN.md](docs/DESIGN.md) を参照。
 
+## テスト
+
+- `npm run test`(= `vitest run`)で、v2のターミナルロジック(仮想ファイルシステム・コマンド・エンジン)のユニットテストを実行する。
+- v2に変更を加えたら、`npm run build`(型チェック含む)・`npm run test`の両方が通ることを確認してからコミットする。
+
 ## デプロイ方法
 
 1. `npm run build`でdistを更新
