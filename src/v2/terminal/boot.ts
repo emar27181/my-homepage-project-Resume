@@ -28,7 +28,10 @@ export const bootLines: BootLine[] = [
 ]
 
 export const HINT_DELAY_MS = 6000
-export const HINT_TEXT = 'Hint: try ./start.sh'
+// The input already has ./start.sh typed in for the visitor (see app.ts) —
+// all that is left to do is run it, so the hint says exactly that.
+export const HINT_TEXT = 'Hint: press Enter to boot'
+export const START_COMMAND = './start.sh'
 
 export function asciiArtFor(width: number): string[] {
 	return width < 560 ? renderAsciiWord('EMAR') : renderAsciiWord('EMAR27181')
