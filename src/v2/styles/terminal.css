@@ -297,6 +297,27 @@ button.pf-chip:hover {
 	caret-color: var(--pf-green);
 }
 
+/* Mobile has no physical Tab key and virtual keyboards don't reliably send
+   a keydown Enter, so give touch visitors on-screen equivalents. Hidden on
+   desktop (a physical keyboard already has both) — same 560px cutoff used
+   elsewhere in this file for "narrow viewport". */
+.pf-mobile-keys {
+	display: none;
+	gap: 8px;
+	padding: 8px 16px 12px;
+	border-top: 1px solid var(--pf-border);
+}
+
+.pf-mobile-keys .pf-chip {
+	flex: 1;
+}
+
+@media (max-width: 560px) {
+	.pf-mobile-keys {
+		display: flex;
+	}
+}
+
 .pf-window--glitch {
 	animation: pf-glitch 0.35s infinite;
 }

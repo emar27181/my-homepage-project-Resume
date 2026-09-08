@@ -1,5 +1,5 @@
 import { projects } from '@/v2/data/portfolio'
-import { asciiArtFor, bootLines, HINT_DELAY_MS, HINT_TEXT } from './boot'
+import { asciiArtFor, bootLines, HINT_DELAY_MS, HINT_TEXT, START_COMMAND } from './boot'
 import { TerminalEngine } from './engine'
 import type { CommandResult } from './commands'
 
@@ -10,6 +10,7 @@ const input = document.getElementById('pf-input') as HTMLInputElement
 const promptEl = document.getElementById('pf-prompt') as HTMLSpanElement
 const windowEl = document.getElementById('pf-window') as HTMLDivElement
 const preview = document.getElementById('pf-preview') as HTMLDivElement
+const mobileKeys = document.getElementById('pf-mobile-keys')
 
 let booted = false
 let busy = false
@@ -185,7 +186,7 @@ async function handleSubmit(raw: string) {
 	input.value = ''
 	const trimmed = raw.trim()
 
-	if (trimmed === './start.sh' || trimmed === 'start.sh') {
+	if (trimmed === START_COMMAND || trimmed === 'start.sh') {
 		printRaw(`${engine.getPrompt()} ${raw}`, 'pf-line-command')
 		engine.cmdHistory.push(trimmed)
 		await playBoot()
@@ -197,6 +198,15 @@ async function handleSubmit(raw: string) {
 	await applyResult(result)
 	updatePrompt()
 	resetHintTimer()
+}
+
+function triggerTabComplete() {
+	const { value, suggestions } = engine.complete(input.value)
+	input.value = value
+	if (suggestions.length > 1) {
+		printRaw(`${engine.getPrompt()} ${input.value}`, 'pf-line-command')
+		printLines(suggestions)
+	}
 }
 
 input.addEventListener('keydown', (e) => {
@@ -218,12 +228,7 @@ input.addEventListener('keydown', (e) => {
 	}
 	if (e.key === 'Tab') {
 		e.preventDefault()
-		const { value, suggestions } = engine.complete(input.value)
-		input.value = value
-		if (suggestions.length > 1) {
-			printRaw(`${engine.getPrompt()} ${input.value}`, 'pf-line-command')
-			printLines(suggestions)
-		}
+		triggerTabComplete()
 		return
 	}
 	if (e.ctrlKey && e.key.toLowerCase() === 'l') {
@@ -241,6 +246,19 @@ input.addEventListener('keydown', (e) => {
 })
 
 windowEl.addEventListener('click', () => input.focus())
+
+// --- on-screen Enter/Tab keys (mobile has no physical Tab key, and virtual
+// keyboards don't reliably fire a keydown 'Enter' the same way) ---
+mobileKeys?.querySelectorAll<HTMLButtonElement>('[data-key]').forEach((button) => {
+	// Prevent the button from stealing focus (and dismissing the on-screen
+	// keyboard) before the click handler runs.
+	button.addEventListener('pointerdown', (e) => e.preventDefault())
+	button.addEventListener('click', () => {
+		if (button.dataset.key === 'tab') triggerTabComplete()
+		else if (button.dataset.key === 'enter') void handleSubmit(input.value)
+		input.focus()
+	})
+})
 
 // --- mode toggle (terminal / collage) ---
 const modeButtons = document.querySelectorAll<HTMLButtonElement>('[data-mode]')
@@ -261,7 +279,10 @@ modeButtons.forEach((button) => {
 })
 
 updatePrompt()
-// Show the ./start.sh hint right away instead of waiting for the first
-// idle timeout — a first-time visitor shouldn't have to guess or wait.
+// The boot command is already typed in for the visitor — pressing Enter is
+// the only thing left to do — and the hint right away says exactly that,
+// instead of waiting for the first idle timeout.
+input.value = START_COMMAND
 printRaw(HINT_TEXT, 'pf-line-hint')
 input.focus()
+input.select()
