@@ -1,5 +1,5 @@
 ---
-
+import IconButton from '@/components/IconButton.astro'
 ---
 
 <header class='mb-12 flex w-full flex-wrap pb-3 text-sm sm:flex-nowrap sm:justify-start'>
@@ -10,27 +10,30 @@
 		<a class='flex-none text-xl font-semibold' href='/' aria-label='Brand'>Home</a>
 
 		<div class='flex flex-row items-center justify-center gap-x-5 sm:gap-x-7'>
-			{/*
+			{
+				/*
 			<a
 				href='/blog'
 				class='flex-none text-[1.05rem] font-medium hover:text-foreground/75'
 				aria-label='Nav Menu Item'
 				>Blog
 			</a>
-		*/}
-			{/* 
+		*/
+			}
+			{
+				/* 
 			<a
 				href='/tools'
 				class='flex-none text-[1.05rem] font-medium hover:text-foreground/75'
 				aria-label='Nav Menu Item'
 				>Skill
 			</a>
-		*/}
+		*/
+			}
 
-			<button
-				id='toggleDarkMode'
-				class='relative rounded-md border border-border p-1.5 transition-all hover:bg-border'
-			>
+			<IconButton as='a' href='/v2' title='ターミナル版ポートフォリオを試す'>v2</IconButton>
+
+			<IconButton id='toggleDarkMode'>
 				<span class='sr-only'>Dark Theme</span>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
@@ -54,7 +57,7 @@
 						d='M12.058 20q-3.334 0-5.667-2.333Q4.058 15.333 4.058 12q0-3.038 1.98-5.27Q8.02 4.5 10.942 4.097q.081 0 .159.006t.153.017q-.506.706-.801 1.57q-.295.865-.295 1.811q0 2.667 1.866 4.533q1.867 1.867 4.534 1.867q.952 0 1.813-.295q.862-.295 1.548-.801q.012.075.018.153q.005.078.005.158q-.384 2.923-2.615 4.904T12.057 20'
 					></path></svg
 				>
-			</button>
+			</IconButton>
 		</div>
 	</nav>
 </header>

@@ -1,0 +1,143 @@
+---
+// v2 — "My Portfolio is a Computer". A standalone experience: its own
+// dark/green shell, not the site's normal Header/Footer/theme (v1 stays
+// untouched at "/"). See docs/ARCHITECTURE.md and docs/DESIGN.md.
+import BaseHead from '@/components/BaseHead.astro'
+import '@/v2/styles/terminal.css'
+
+import Chip from '@/v2/components/atoms/Chip.astro'
+import SegmentedControl from '@/v2/components/molecules/SegmentedControl.astro'
+import { hobbies, profile, projects, research, skills } from '@/v2/data/portfolio'
+---
+
+<html lang='ja'>
+	<head>
+		<BaseHead
+			title='Portfolio Terminal'
+			description={`${profile.name} のポートフォリオ — ターミナルとして探索できます。`}
+		/>
+	</head>
+	<body class='pf-computer'>
+		<header class='pf-header'>
+			<span class='pf-header__prompt'>{profile.handle}@portfolio: ~</span>
+			<div class='pf-header__actions'>
+				<Chip as='a' href='/' size='sm' title='戻る: 従来のレジュメページ'>v1</Chip>
+				{
+					/* collageモードは一時的に非表示(コード・データはそのまま)。
+					 再表示するにはoptionsに { value: 'collage', label: 'collage' } を戻すだけでよい。 */
+				}
+				<SegmentedControl
+					name='display mode'
+					value='terminal'
+					options={[{ value: 'terminal', label: 'terminal' }]}
+				/>
+			</div>
+		</header>
+
+		<main class='pf-main'>
+			<section id='pf-terminal-view' class='pf-view'>
+				<div class='pf-terminal-layout'>
+					<div class='pf-window' id='pf-window'>
+						<div class='pf-window__titlebar'>
+							<span class='pf-dot pf-dot--red'></span>
+							<span class='pf-dot pf-dot--yellow'></span>
+							<span class='pf-dot pf-dot--green'></span>
+							<span class='pf-window__title'>{profile.handle}@portfolio</span>
+						</div>
+						<div class='pf-window__body' id='pf-output' role='log' aria-live='polite'></div>
+						<div class='pf-window__input-row'>
+							<span class='pf-prompt' id='pf-prompt'></span>
+							<input
+								id='pf-input'
+								class='pf-input'
+								type='text'
+								autocomplete='off'
+								autocapitalize='off'
+								spellcheck='false'
+								aria-label='terminal input'
+							/>
+						</div>
+					</div>
+					<aside id='pf-preview' class='pf-preview' hidden></aside>
+				</div>
+			</section>
+
+			<section id='pf-collage-view' class='pf-view' hidden>
+				<div class='pf-collage'>
+					<div class='pf-card pf-card--wide' data-tag='about/profile.md'>
+						<h3>{profile.name} / {profile.nameJa}</h3>
+						<p>{profile.role} — {profile.location}</p>
+						<p>{profile.education}</p>
+						{profile.bio.map((line) => <p>{line}</p>)}
+						<div class='pf-tech'>
+							{
+								profile.links.map((l) => (
+									<Chip as='a' href={l.href} size='sm' target='_blank' rel='noopener noreferrer'>
+										{l.label}
+									</Chip>
+								))
+							}
+						</div>
+					</div>
+
+					{
+						projects.map((p) => (
+							<div class='pf-card' data-tag={`projects/${p.slug}`}>
+								<h3>{p.heading}</h3>
+								<p>{p.summary}</p>
+								<div class='pf-tech'>
+									{p.tech.map((t) => (
+										<Chip size='sm'>{t}</Chip>
+									))}
+								</div>
+								{p.href && (
+									<Chip as='a' href={p.href} size='sm' target='_blank' rel='noopener noreferrer'>
+										open →
+									</Chip>
+								)}
+							</div>
+						))
+					}
+
+					<div class='pf-card pf-card--wide pf-card--tilt' data-tag='research/'>
+						<h3>Research</h3>
+						{
+							research.map((r) => (
+								<p>
+									{r.heading}
+									{r.date ? ` — ${r.date}` : ''}: {r.summary}
+								</p>
+							))
+						}
+					</div>
+
+					<div class='pf-card' data-tag='skills.json'>
+						<h3>Skills</h3>
+						{
+							skills.map((group) => (
+								<p>
+									{group.label}: {group.items.join(', ')}
+								</p>
+							))
+						}
+					</div>
+
+					<div class='pf-card' data-tag='hobbies.md'>
+						<h3>Hobbies</h3>
+						{
+							hobbies.map((h) => (
+								<p>
+									{h.heading} — {h.summary}
+								</p>
+							))
+						}
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<script>
+			import '@/v2/terminal/app'
+		</script>
+	</body>
+</html>

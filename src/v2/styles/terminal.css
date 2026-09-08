@@ -1,0 +1,422 @@
+/* v2 "portfolio is a computer" — self-contained dark/green theme.
+   Namespaced under .pf-* so it never leaks into v1's styles. */
+
+.pf-computer {
+	--pf-bg: #0a0d0b;
+	--pf-panel: #0f1310;
+	--pf-border: #1f2b23;
+	--pf-green: #3ddc84;
+	--pf-green-dim: #2a9d5c;
+	--pf-text: #d7ded9;
+	--pf-muted: #7c8a80;
+	--pf-red: #ff5f57;
+	--pf-yellow: #febc2e;
+	--pf-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+	/* Operable-part height, 2 steps only (docs/DESIGN.md): sm for dense/desktop
+	   rows, md for touch (Apple HIG 44pt). Single source for both .pf-chip
+	   and the mobile touch-target override below. */
+	--pf-touch-sm: 24px;
+	--pf-touch-md: 44px;
+
+	min-height: 100vh;
+	min-height: 100dvh;
+	background: var(--pf-bg);
+	color: var(--pf-text);
+	font-family: var(--pf-mono);
+	font-size: 14px;
+	overflow-x: hidden;
+}
+
+.pf-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px 16px;
+	border-bottom: 1px solid var(--pf-border);
+	flex-wrap: wrap;
+}
+
+.pf-header__prompt {
+	color: var(--pf-green);
+	font-size: 13px;
+	white-space: nowrap;
+}
+
+.pf-header__actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+/* One pill atom for the whole page (docs/DESIGN.md): nav links, the mode
+   toggle, profile links, and tech tags all share this base + one size
+   modifier. Only `a`/`button` get pointer/hover — a plain `span` (tag use)
+   stays static, same size, no separate "tag" style to drift out of sync. */
+.pf-chip {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 9999px;
+	border: 1px solid var(--pf-border);
+	background: transparent;
+	color: var(--pf-muted);
+	font-family: inherit;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: all 0.15s ease;
+}
+
+.pf-chip--sm {
+	height: var(--pf-touch-sm);
+	padding: 0 12px;
+	font-size: 12px;
+}
+
+.pf-chip--md {
+	height: var(--pf-touch-md);
+	padding: 0 20px;
+	font-size: 14px;
+}
+
+a.pf-chip,
+button.pf-chip {
+	cursor: pointer;
+}
+
+a.pf-chip:hover,
+button.pf-chip:hover {
+	border-color: var(--pf-green-dim);
+	color: var(--pf-text);
+}
+
+/* On a touch-sized viewport, operable chips (nav, mode toggle, links) grow
+   to the 44px touch step; decorative tags (plain <span>, e.g. tech
+   labels) stay at 24px — they aren't tapped, so they shouldn't eat space. */
+@media (max-width: 560px) {
+	a.pf-chip.pf-chip--sm,
+	button.pf-chip.pf-chip--sm {
+		height: var(--pf-touch-md);
+		padding: 0 16px;
+		font-size: 13px;
+	}
+}
+
+.pf-chip.is-active {
+	background: var(--pf-green);
+	border-color: var(--pf-green);
+	color: #06120a;
+	font-weight: 600;
+}
+
+.pf-mode-toggle {
+	display: flex;
+	gap: 6px;
+}
+
+.pf-main {
+	padding: 16px;
+}
+
+.pf-view[hidden] {
+	display: none;
+}
+
+.pf-terminal-layout {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+@media (max-width: 860px) {
+	.pf-terminal-layout {
+		flex-direction: column;
+	}
+}
+
+.pf-window {
+	flex: 1 1 60%;
+	min-width: 0;
+	/* Flex items default to min-height:auto, which lets them grow past an
+	   explicit height to fit their content — exactly what breaks this once
+	   .pf-terminal-layout switches to a column on mobile (the window would
+	   stretch to fit every printed line instead of respecting 70/80dvh and
+	   scrolling internally). min-height:0 makes the declared height win. */
+	min-height: 0;
+	max-width: 100%;
+	display: flex;
+	flex-direction: column;
+	/* vh is measured against the browser's largest possible viewport, so on
+	   mobile Safari with the address bar expanded the window reads as too
+	   short for what's actually visible. dvh tracks the real visible area;
+	   the vh line is the fallback for browsers that don't support dvh. */
+	height: min(70vh, 640px);
+	height: min(70dvh, 640px);
+	background: var(--pf-panel);
+	border: 1px solid var(--pf-border);
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+	transition: transform 0.15s ease;
+}
+
+.pf-window__titlebar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 12px;
+	border-bottom: 1px solid var(--pf-border);
+	background: #0c100d;
+}
+
+.pf-dot {
+	width: 11px;
+	height: 11px;
+	border-radius: 9999px;
+	display: inline-block;
+}
+.pf-dot--red {
+	background: var(--pf-red);
+}
+.pf-dot--yellow {
+	background: var(--pf-yellow);
+}
+.pf-dot--green {
+	background: var(--pf-green);
+}
+
+.pf-window__title {
+	margin-inline: auto;
+	color: var(--pf-muted);
+	font-size: 12px;
+	transform: translateX(-16px);
+}
+
+.pf-window__body {
+	flex: 1;
+	min-height: 0;
+	overflow-y: auto;
+	padding: 16px;
+	line-height: 1.6;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.pf-window__body::-webkit-scrollbar {
+	width: 8px;
+}
+.pf-window__body::-webkit-scrollbar-thumb {
+	background: var(--pf-border);
+	border-radius: 9999px;
+}
+
+/* Single-column on mobile (.pf-terminal-layout above): the window doesn't
+   have to share width with the preview panel, so let it use most of the
+   visible viewport instead of the desktop 70%. Placed after the base
+   .pf-window rule (not inside the earlier @media block) so it actually
+   wins — equal-specificity rules apply in source order regardless of which
+   one is in a @media block. */
+@media (max-width: 860px) {
+	.pf-window {
+		/* flex-basis:60% (desktop's width share) means nothing once the main
+		   axis flips to vertical here, and a % basis against this column's
+		   indefinite height falls back to content size — silently ignoring
+		   `height` below. flex-basis:auto makes `height` the basis again. */
+		flex: 1 1 auto;
+		height: min(80vh, 640px);
+		height: min(80dvh, 640px);
+	}
+
+	.pf-main {
+		padding: 8px;
+	}
+
+	.pf-header {
+		padding: 8px 12px;
+	}
+}
+
+.pf-line-prompt {
+	color: var(--pf-green);
+}
+.pf-line-command {
+	color: var(--pf-text);
+}
+.pf-line-output {
+	color: var(--pf-text);
+}
+.pf-line-hint {
+	color: var(--pf-muted);
+	font-style: italic;
+}
+.pf-line-error {
+	color: #ff8a80;
+}
+.pf-ascii {
+	color: var(--pf-green);
+	font-size: 12px;
+	line-height: 1.2;
+	white-space: pre;
+	overflow-x: auto;
+	display: block;
+}
+@media (min-width: 560px) {
+	.pf-ascii {
+		font-size: 16px;
+	}
+}
+
+.pf-window__input-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 16px;
+	border-top: 1px solid var(--pf-border);
+	min-width: 0;
+}
+
+.pf-prompt {
+	color: var(--pf-green);
+	white-space: nowrap;
+	font-size: 14px;
+	flex-shrink: 0;
+}
+
+.pf-input {
+	flex: 1;
+	min-width: 0;
+	width: 100%;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: var(--pf-text);
+	font-family: inherit;
+	font-size: 16px; /* fixed per DESIGN.md iOS zoom guard */
+	caret-color: var(--pf-green);
+}
+
+.pf-window--glitch {
+	animation: pf-glitch 0.35s infinite;
+}
+@keyframes pf-glitch {
+	0% {
+		transform: translate(0, 0) rotate(0deg);
+	}
+	25% {
+		transform: translate(-2px, 1px) rotate(-0.3deg);
+	}
+	50% {
+		transform: translate(2px, -1px) rotate(0.3deg);
+	}
+	75% {
+		transform: translate(-1px, -1px) rotate(0deg);
+	}
+	100% {
+		transform: translate(0, 0) rotate(0deg);
+	}
+}
+.pf-window--blackout .pf-window__body,
+.pf-window--blackout .pf-window__input-row {
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+
+.pf-preview {
+	flex: 1 1 40%;
+	min-width: 0;
+	max-width: 100%;
+	background: var(--pf-panel);
+	border: 1px solid var(--pf-border);
+	border-radius: 8px;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.pf-preview h3 {
+	color: var(--pf-green);
+	font-size: 16px;
+	margin: 0;
+}
+
+.pf-preview p {
+	color: var(--pf-text);
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.pf-tech {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.pf-preview a.pf-link {
+	color: var(--pf-green);
+	font-size: 13px;
+	text-decoration: none;
+}
+.pf-preview a.pf-link:hover {
+	text-decoration: underline;
+}
+
+/* Collage mode */
+.pf-collage {
+	max-width: 1100px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 16px;
+}
+
+.pf-card {
+	background: var(--pf-panel);
+	border: 1px solid var(--pf-border);
+	border-radius: 8px;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	position: relative;
+}
+
+.pf-card::before {
+	content: attr(data-tag);
+	position: absolute;
+	top: -9px;
+	left: 12px;
+	background: var(--pf-bg);
+	padding: 0 6px;
+	font-size: 10px;
+	color: var(--pf-green-dim);
+	letter-spacing: 0.08em;
+}
+
+.pf-card--wide {
+	grid-column: 1 / -1;
+}
+
+.pf-card--tilt {
+	transform: rotate(-0.6deg);
+}
+
+.pf-card h3 {
+	margin: 0;
+	color: var(--pf-text);
+	font-size: 15px;
+}
+
+.pf-card p {
+	margin: 0;
+	color: var(--pf-muted);
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.pf-card .pf-chip {
+	align-self: flex-start;
+}
