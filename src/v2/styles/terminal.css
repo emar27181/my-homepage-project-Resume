@@ -12,6 +12,11 @@
 	--pf-red: #ff5f57;
 	--pf-yellow: #febc2e;
 	--pf-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+	/* Operable-part height, 2 steps only (docs/DESIGN.md): sm for dense/desktop
+	   rows, md for touch (Apple HIG 44pt). Single source for both .pf-chip
+	   and the mobile touch-target override below. */
+	--pf-touch-sm: 24px;
+	--pf-touch-md: 44px;
 
 	min-height: 100vh;
 	background: var(--pf-bg);
@@ -62,13 +67,13 @@
 }
 
 .pf-chip--sm {
-	height: 24px;
+	height: var(--pf-touch-sm);
 	padding: 0 12px;
 	font-size: 12px;
 }
 
 .pf-chip--md {
-	height: 44px;
+	height: var(--pf-touch-md);
 	padding: 0 20px;
 	font-size: 14px;
 }
@@ -82,6 +87,18 @@ a.pf-chip:hover,
 button.pf-chip:hover {
 	border-color: var(--pf-green-dim);
 	color: var(--pf-text);
+}
+
+/* On a touch-sized viewport, operable chips (nav, mode toggle, links) grow
+   to the 44px touch step; decorative tags (plain <span>, e.g. tech
+   labels) stay at 24px — they aren't tapped, so they shouldn't eat space. */
+@media (max-width: 560px) {
+	a.pf-chip.pf-chip--sm,
+	button.pf-chip.pf-chip--sm {
+		height: var(--pf-touch-md);
+		padding: 0 16px;
+		font-size: 13px;
+	}
 }
 
 .pf-chip.is-active {
