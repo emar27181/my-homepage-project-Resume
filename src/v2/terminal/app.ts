@@ -116,8 +116,20 @@ function renderPreview(slug: string) {
 	preview.hidden = false
 	preview.innerHTML = ''
 
+	const header = document.createElement('div')
+	header.className = 'pf-preview__header'
 	const h3 = document.createElement('h3')
 	h3.textContent = project.heading
+	const closeButton = document.createElement('button')
+	closeButton.type = 'button'
+	closeButton.className = 'pf-chip pf-chip--sm pf-preview__close'
+	closeButton.setAttribute('aria-label', 'Close preview')
+	closeButton.textContent = '×'
+	closeButton.addEventListener('click', () => {
+		preview.hidden = true
+	})
+	header.append(h3, closeButton)
+
 	const p = document.createElement('p')
 	p.textContent = project.concept
 	const tech = document.createElement('div')
@@ -128,7 +140,7 @@ function renderPreview(slug: string) {
 		span.textContent = t
 		tech.appendChild(span)
 	})
-	preview.append(h3, p, tech)
+	preview.append(header, p, tech)
 
 	if (project.href) {
 		const a = document.createElement('a')
