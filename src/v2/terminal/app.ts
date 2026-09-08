@@ -249,5 +249,7 @@ modeButtons.forEach((button) => {
 })
 
 updatePrompt()
-resetHintTimer()
+// Show the ./start.sh hint right away instead of waiting for the first
+// idle timeout — a first-time visitor shouldn't have to guess or wait.
+printRaw(HINT_TEXT, 'pf-line-hint')
 input.focus()
