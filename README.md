@@ -1,19 +1,60 @@
 # Astro Resume
 
 ## 注意事項
+
 - このプロジェクトは[astro-theme-resume](https://github.com/srleom/astro-theme-resume)を基に作成したものです．
+
+## v1 / v2
+
+- `/` (v1): 従来のレジュメ形式のホームページ。デフォルトはこちら。
+- `/v2` (v2): 「ポートフォリオ = 1台のコンピュータ」をコンセプトにした、ターミナルで自分自身を探索できる実験的な再実装。Terminal / Collage の2モードを切り替え可能。
+- 双方向にヘッダーのボタン(`v1` / `v2`)から行き来できる。
+- v2の設計・構成は [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) と [docs/DESIGN.md](docs/DESIGN.md) を参照。
+
+### v2の使い方
+
+`/v2`を開くと、入力欄にすでに`./start.sh`が入力された状態で待ち受けている。そのままEnterを押すと起動ログが流れ、ASCII artの後にシェルが使えるようになる(何もしなくても6秒後には同じ内容のヒントが再度出る)。
+
+主なコマンド(`help`でも一覧を表示):
+
+| コマンド                          | 内容                                           |
+| --------------------------------- | ---------------------------------------------- |
+| `whoami`                          | プロフィールを表示                             |
+| `ls [-l] [path]`                  | ファイル一覧(`ls -l projects`で詳細表示)       |
+| `cd <dir>` / `cd ..`              | ディレクトリ移動(`~`はホーム、`/`もホーム扱い) |
+| `cat <file>`                      | ファイルの中身を表示                           |
+| `tree`                            | ファイルツリー全体を表示                       |
+| `projects` / `open <slug>`        | 制作物一覧 / 個別プロジェクトをプレビュー表示  |
+| `skills` / `research` / `hobbies` | 各セクションの内容を表示                       |
+| `history`                         | このセッションで打ったコマンドの履歴           |
+| `clear` / `reboot`                | 画面クリア / 起動シーケンスを最初からやり直す  |
+| `sudo rm -rf /`                   | 遊び心のある削除演出(実データは消えない)       |
+
+操作:
+
+- `Tab`: コマンド/パスの補完(候補が複数あれば一覧表示)
+- `↑` / `↓`: コマンド履歴を辿る
+- `Ctrl + L`: 画面クリア、`Ctrl + C`: 入力中の行を中断
+- スマホ幅(560px以下)では、物理キーボードにない`Tab`と、確実に効く`Enter`をオンスクリーンのボタンとして入力欄の下に表示する。
+
+現在Collageモード(カードベースのGUI表示)はヘッダーの切替から一時的に非表示にしている。コードはそのまま残っているので、`src/pages/v2/index.astro`のSegmentedControlのoptionsに戻せば再表示できる。
+
+## テスト
+
+- `npm run test`(= `vitest run`)で、v2のターミナルロジック(仮想ファイルシステム・コマンド・エンジン)のユニットテストを実行する。
+- v2に変更を加えたら、`npm run build`(型チェック含む)・`npm run test`の両方が通ることを確認してからコミットする。
 
 ## デプロイ方法
 
 1. `npm run build`でdistを更新
 2. `netlify login` でnetlifyのログインを確認
 3. `netlify deploy`で公開前のデプロイ結果の確認
-    - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は`"dist"`を入力
+   - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は`"dist"`を入力
 4. `netlify deploy --prod`でデプロイ結果を公開
-    - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は`"dist"`を入力
-
+   - `Please provide a publish directory (e.g. "public" or "dist" or "."): `は`"dist"`を入力
 
 ## よく使うファイル(※下記に詳細あり)
+
 - `src/pages/index.astro` : ホームの編集
 - `src/components/layout/Header.astro` : ヘッダーの編集
 

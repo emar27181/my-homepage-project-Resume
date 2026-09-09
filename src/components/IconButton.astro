@@ -1,0 +1,19 @@
+---
+// Fixed-size square button for the header's icon-only controls (theme
+// toggle, v2 link). One definition so "the button next to it" always
+// matches exactly, instead of each caller guessing padding/font size.
+import { cn } from '@/utils'
+
+const { as: Tag = 'button', href, class: className, ...rest } = Astro.props
+---
+
+<Tag
+	class={cn(
+		'relative flex h-8 w-8 flex-none items-center justify-center rounded-md border border-border text-xs font-medium transition-all hover:bg-border',
+		className
+	)}
+	href={Tag === 'a' ? href : undefined}
+	{...rest}
+>
+	<slot />
+</Tag>

@@ -1,0 +1,32 @@
+---
+// The one pill-shaped atom for v2: nav links, the mode toggle, profile
+// links, and tech tags all render through this — never a one-off pill
+// style. Two height steps only (sm=24px / md=44px, docs/DESIGN.md).
+// Interactive (`as="a"|"button"`) vs decorative (`as="span"`, default)
+// is the only thing that changes hover/cursor — never the size.
+interface Props {
+	as?: 'a' | 'button' | 'span'
+	href?: string
+	size?: 'sm' | 'md'
+	active?: boolean
+	class?: string
+	[key: string]: unknown
+}
+
+const {
+	as: Tag = 'span',
+	href,
+	size = 'sm',
+	active = false,
+	class: className,
+	...rest
+}: Props = Astro.props
+---
+
+<Tag
+	class:list={['pf-chip', `pf-chip--${size}`, { 'is-active': active }, className]}
+	href={Tag === 'a' ? href : undefined}
+	{...rest}
+>
+	<slot />
+</Tag>
