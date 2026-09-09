@@ -1,0 +1,43 @@
+---
+// components/Gallery.astro
+import { Masonry } from 'astro-masonry'
+import { images } from '../data/image'
+const breakpointCols = { default: 4, 1024: 3, 768: 2, 640: 2 }
+---
+
+<div id='gallery' class='xl:-mx-48'>
+	<Masonry breakpointCols={breakpointCols} class='-mx-[2px] flex' columnClass='px-[2px]'>
+		{
+			images.map(({ src, alt, title }) => (
+				<img
+					src={src}
+					alt={alt}
+					title={title}
+					class='mb-[4px] block h-auto w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity duration-200'
+					loading='lazy'
+					data-src={src}
+					data-alt={alt}
+					data-title={title}
+				/>
+			))
+		}
+	</Masonry>
+</div>
+
+<script>
+	// Add click event listeners to all gallery images
+	document.addEventListener('DOMContentLoaded', () => {
+		const galleryImages = document.querySelectorAll('#gallery img');
+		
+		galleryImages.forEach((img) => {
+			img.addEventListener('click', () => {
+				const src = img.getAttribute('data-src') || img.getAttribute('src');
+				const alt = img.getAttribute('data-alt') || img.getAttribute('alt');
+				
+				if (src && (window as any).openImageModal) {
+					(window as any).openImageModal(src, alt);
+				}
+			});
+		});
+	});
+</script>

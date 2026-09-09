@@ -3,16 +3,15 @@
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "astro check --watch & astro dev --host",
+		"dev": "astro dev --host",
 		"start": "astro dev",
-		"build": "astro check && astro build",
+		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
 		"test": "vitest run",
 		"lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,svelte,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,svelte,astro}\""
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.5.6",
 		"@astrojs/mdx": "^2.1.1",
 		"@astrojs/rss": "^4.0.5",
 		"@astrojs/sitemap": "^3.1.1",

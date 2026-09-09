@@ -1,14 +1,19 @@
 ---
+import LanguageSwitcher from '../LanguageSwitcher.astro'
+import { getLanguageFromPath, getLocalizedPath } from '../../utils/i18n'
 import { Icon } from 'astro-icon/components'
 import IconButton from '@/components/IconButton.astro'
+
+const currentLanguage = getLanguageFromPath(Astro.url.pathname)
+const homeLink = getLocalizedPath('/', currentLanguage)
 ---
 
-<header class='mb-12 flex w-full flex-wrap pb-3 text-sm sm:flex-nowrap sm:justify-start'>
+<header class='flex w-full flex-wrap py-3 text-sm sm:flex-nowrap sm:justify-start'>
 	<nav
 		class='relative mx-auto flex w-full items-center justify-between sm:flex sm:items-center'
 		aria-label='global'
 	>
-		<a class='flex-none text-xl font-semibold' href='/' aria-label='Brand'>Home</a>
+		<a class='flex-none text-xl font-semibold' href={homeLink} aria-label='Brand'>Home</a>
 
 		<div class='flex flex-row items-center justify-center gap-x-5 sm:gap-x-7'>
 			{
@@ -31,6 +36,20 @@ import IconButton from '@/components/IconButton.astro'
 			</a>
 		*/
 			}
+
+			<LanguageSwitcher />
+
+			<button
+				id='toggleToc'
+				class='relative rounded-md p-1.5 transition-all hover:bg-border sm:hidden'
+				aria-label='Toggle navigation'
+			>
+				<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+					<line x1='3' y1='6' x2='21' y2='6'/>
+					<line x1='3' y1='12' x2='21' y2='12'/>
+					<line x1='3' y1='18' x2='21' y2='18'/>
+				</svg>
+			</button>
 
 			<IconButton as='a' href='/v2' title='ターミナル版ポートフォリオを試す'>
 				<span class='sr-only'>ターミナル版ポートフォリオ</span>
@@ -77,5 +96,12 @@ import IconButton from '@/components/IconButton.astro'
 			detail: { theme: getCurrentTheme() === 'light' ? 'dark' : 'light' }
 		})
 		document.dispatchEvent(toggleDarkModeEvent)
+	})
+
+	const toggleTocButton = document.getElementById('toggleToc')
+	const tocNav = document.getElementById('toc-nav')
+
+	toggleTocButton?.addEventListener('click', () => {
+		tocNav?.classList.toggle('hidden')
 	})
 </script>
