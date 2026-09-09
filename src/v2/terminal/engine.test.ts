@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { profile, projects } from '@/v2/data/portfolio'
+import { getPortfolio, profile, projects } from '@/v2/data/portfolio'
 import { TerminalEngine } from './engine'
 
 describe('TerminalEngine', () => {
@@ -63,6 +63,27 @@ describe('TerminalEngine', () => {
 			const result = engine.complete('zzz')
 			expect(result.value).toBe('zzz')
 			expect(result.suggestions).toEqual([])
+		})
+	})
+
+	describe('lang: en', () => {
+		it('the prompt uses the same handle (language-neutral)', () => {
+			const enEngine = new TerminalEngine('en')
+			expect(enEngine.getPrompt()).toBe(`${getPortfolio('en').profile.handle}@portfolio:~$`)
+		})
+
+		it('open completion offers the English project slugs (same set as ja)', () => {
+			const enEngine = new TerminalEngine('en')
+			const { suggestions } = enEngine.complete('open ')
+			for (const p of getPortfolio('en').projects) expect(suggestions).toContain(p.slug)
+		})
+
+		it('whoami returns English content, not ja', () => {
+			const enEngine = new TerminalEngine('en')
+			const { result } = enEngine.submit('whoami')
+			if (result.type === 'text') {
+				expect(result.lines.join('\n')).toContain(getPortfolio('en').profile.education)
+			}
 		})
 	})
 })

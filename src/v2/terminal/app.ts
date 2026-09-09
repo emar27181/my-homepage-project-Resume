@@ -1,9 +1,13 @@
-import { projects } from '@/v2/data/portfolio'
+import { getPortfolio, type Language } from '@/v2/data/portfolio'
 import { asciiArtFor, bootLines, HINT_DELAY_MS, HINT_TEXT, START_COMMAND } from './boot'
 import { TerminalEngine } from './engine'
 import type { CommandResult } from './commands'
 
-const engine = new TerminalEngine()
+const lang: Language = document.documentElement.lang === 'en' ? 'en' : 'ja'
+const { projects } = getPortfolio(lang)
+const engine = new TerminalEngine(lang)
+const CLOSE_PREVIEW_LABEL = lang === 'en' ? 'Close preview' : 'プレビューを閉じる'
+const VIEW_PROJECT_LABEL = lang === 'en' ? 'View Project →' : 'プロジェクトを見る →'
 
 const output = document.getElementById('pf-output') as HTMLDivElement
 const input = document.getElementById('pf-input') as HTMLInputElement
@@ -124,7 +128,7 @@ function renderPreview(slug: string) {
 	const closeButton = document.createElement('button')
 	closeButton.type = 'button'
 	closeButton.className = 'pf-chip pf-chip--sm pf-preview__close'
-	closeButton.setAttribute('aria-label', 'Close preview')
+	closeButton.setAttribute('aria-label', CLOSE_PREVIEW_LABEL)
 	closeButton.textContent = '×'
 	closeButton.addEventListener('click', () => {
 		preview.hidden = true
@@ -149,7 +153,7 @@ function renderPreview(slug: string) {
 		a.href = project.href
 		a.target = '_blank'
 		a.rel = 'noopener noreferrer'
-		a.textContent = 'View Project →'
+		a.textContent = VIEW_PROJECT_LABEL
 		preview.appendChild(a)
 	}
 }

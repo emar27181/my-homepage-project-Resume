@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { profile, projects } from '@/v2/data/portfolio'
+import { getPortfolio, profile, projects, type Language } from '@/v2/data/portfolio'
 import { runCommand } from './commands'
 
-const ctx = (overrides: Partial<{ cwd: string[]; history: string[] }> = {}) => ({
+const ctx = (overrides: Partial<{ cwd: string[]; history: string[]; lang: Language }> = {}) => ({
 	args: [],
 	cwd: overrides.cwd ?? [],
-	history: overrides.history ?? []
+	history: overrides.history ?? [],
+	lang: overrides.lang
 })
 
 describe('runCommand', () => {
@@ -104,5 +105,33 @@ describe('runCommand', () => {
 	it('an unknown command says so instead of crashing', () => {
 		const result = runCommand('frobnicate', ctx())
 		if (result.type === 'text') expect(result.lines[0]).toContain('command not found: frobnicate')
+	})
+
+	describe('lang: en', () => {
+		const enProfile = getPortfolio('en').profile
+		const enProjects = getPortfolio('en').projects
+
+		it('whoami shows the English profile content', () => {
+			const result = runCommand('whoami', ctx({ lang: 'en' }))
+			if (result.type === 'text') expect(result.lines.join('\n')).toContain(enProfile.education)
+		})
+
+		it('projects lists the same slugs as ja (slugs are language-neutral)', () => {
+			const result = runCommand('projects', ctx({ lang: 'en' }))
+			if (result.type === 'text') {
+				const text = result.lines.join('\n')
+				for (const p of enProjects) expect(text).toContain(p.slug)
+			}
+		})
+
+		it('cat prints the English project README', () => {
+			const result = runCommand('cat projects/way-point-map/README.md', ctx({ lang: 'en' }))
+			if (result.type === 'text') expect(result.lines.join('\n')).toContain('golf courses')
+		})
+
+		it('falls back to ja when lang is omitted', () => {
+			const result = runCommand('whoami', ctx())
+			if (result.type === 'text') expect(result.lines.join('\n')).toContain(profile.education)
+		})
 	})
 })

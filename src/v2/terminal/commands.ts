@@ -1,10 +1,11 @@
-import { hobbies, profile, projects, research, skills } from '@/v2/data/portfolio'
-import { getNode, promptPath, resolveSegments, root, type FSDir } from './filesystem'
+import { getPortfolio, type Language } from '@/v2/data/portfolio'
+import { getNode, getRoot, promptPath, resolveSegments, type FSDir } from './filesystem'
 
 export interface CommandContext {
 	args: string[]
 	cwd: string[]
 	history: string[]
+	lang?: Language
 }
 
 export type CommandResult =
@@ -17,7 +18,7 @@ export type CommandResult =
 
 const text = (lines: string[]): CommandResult => ({ type: 'text', lines })
 
-function renderTree(node: FSDir = root, prefix = ''): string[] {
+function renderTree(node: FSDir, prefix = ''): string[] {
 	const lines: string[] = []
 	node.children.forEach((child, i) => {
 		const isLast = i === node.children.length - 1
@@ -30,8 +31,13 @@ function renderTree(node: FSDir = root, prefix = ''): string[] {
 	return lines
 }
 
-function renderLs(segments: string[], flags: string[]): CommandResult {
-	const node = getNode(segments)
+function renderLs(
+	segments: string[],
+	flags: string[],
+	root: FSDir,
+	projects: { slug: string; heading: string; summary: string; year: string }[]
+): CommandResult {
+	const node = getNode(segments, root)
 	if (!node) return text([`ls: ${promptPath(segments)}: No such file or directory`])
 	if (node.type === 'file') return text([node.name])
 
@@ -48,6 +54,19 @@ function renderLs(segments: string[], flags: string[]): CommandResult {
 
 function fmtLinks(links?: { label: string; href: string }[]) {
 	return links ? links.map((l) => `  ${l.label}: ${l.href}`) : []
+}
+
+const FORTUNES: Record<Language, string[]> = {
+	ja: [
+		'配色に迷ったら、まず彩度を1段階落としてみる。',
+		'動くコードは正義。ただし読めるコードはもっと正義。',
+		'締め切りは発表の一週間前だと思え。'
+	],
+	en: [
+		'When unsure about a color, try dropping the saturation one notch.',
+		'Working code is righteous. Readable code is more righteous.',
+		'Assume the real deadline is a week before the announced one.'
+	]
 }
 
 export const COMMANDS = [
@@ -68,6 +87,10 @@ export const COMMANDS = [
 ] as const
 
 export function runCommand(input: string, ctx: CommandContext): CommandResult {
+	const lang: Language = ctx.lang ?? 'ja'
+	const { profile, projects, research, skills, hobbies } = getPortfolio(lang)
+	const root = getRoot(lang)
+
 	const [cmd, ...args] = input.trim().split(/\s+/)
 	const flags = args.filter((a) => a.startsWith('-'))
 	const positional = args.filter((a) => !a.startsWith('-'))
@@ -111,12 +134,17 @@ export function runCommand(input: string, ctx: CommandContext): CommandResult {
 			])
 
 		case 'ls':
-			return renderLs(positional.length ? resolveSegments(ctx.cwd, positional[0]) : ctx.cwd, flags)
+			return renderLs(
+				positional.length ? resolveSegments(ctx.cwd, positional[0]) : ctx.cwd,
+				flags,
+				root,
+				projects
+			)
 
 		case 'cd': {
 			const target = positional[0] ?? '~'
 			const segments = resolveSegments(ctx.cwd, target)
-			const node = getNode(segments)
+			const node = getNode(segments, root)
 			if (!node) return text([`cd: no such file or directory: ${target}`])
 			if (node.type !== 'dir') return text([`cd: not a directory: ${target}`])
 			return { type: 'cd', segments }
@@ -125,14 +153,14 @@ export function runCommand(input: string, ctx: CommandContext): CommandResult {
 		case 'cat': {
 			if (!positional[0]) return text(['usage: cat <file>'])
 			const segments = resolveSegments(ctx.cwd, positional[0])
-			const node = getNode(segments)
+			const node = getNode(segments, root)
 			if (!node) return text([`cat: ${positional[0]}: No such file or directory`])
 			if (node.type === 'dir') return text([`cat: ${positional[0]}: Is a directory`])
 			return text(node.content.split('\n'))
 		}
 
 		case 'tree':
-			return text(['~', ...renderTree()])
+			return text(['~', ...renderTree(root)])
 
 		case 'projects': {
 			const lines: string[] = []
@@ -207,11 +235,7 @@ export function runCommand(input: string, ctx: CommandContext): CommandResult {
 			])
 
 		case 'fortune': {
-			const fortunes = [
-				'配色に迷ったら、まず彩度を1段階落としてみる。',
-				'動くコードは正義。ただし読めるコードはもっと正義。',
-				'締め切りは発表の一週間前だと思え。'
-			]
+			const fortunes = FORTUNES[lang]
 			return text([fortunes[Math.floor(Math.random() * fortunes.length)]])
 		}
 
