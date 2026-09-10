@@ -102,6 +102,29 @@ describe('runCommand', () => {
 		}
 	})
 
+	it('pwd prints the current directory', () => {
+		expect(runCommand('pwd', ctx())).toEqual({ type: 'text', lines: ['~'] })
+		expect(runCommand('pwd', ctx({ cwd: ['projects'] }))).toEqual({
+			type: 'text',
+			lines: ['~/projects']
+		})
+	})
+
+	it('echo prints its arguments back', () => {
+		const result = runCommand('echo hello world', ctx())
+		expect(result).toEqual({ type: 'text', lines: ['hello world'] })
+	})
+
+	it('echo with no arguments prints an empty line', () => {
+		expect(runCommand('echo', ctx())).toEqual({ type: 'text', lines: [''] })
+	})
+
+	it('date prints something date-shaped', () => {
+		const result = runCommand('date', ctx())
+		expect(result.type).toBe('text')
+		if (result.type === 'text') expect(result.lines[0].length).toBeGreaterThan(0)
+	})
+
 	it('an unknown command says so instead of crashing', () => {
 		const result = runCommand('frobnicate', ctx())
 		if (result.type === 'text') expect(result.lines[0]).toContain('command not found: frobnicate')

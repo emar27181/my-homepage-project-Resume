@@ -72,6 +72,9 @@ const FORTUNES: Record<Language, string[]> = {
 export const COMMANDS = [
 	'help',
 	'whoami',
+	'pwd',
+	'echo',
+	'date',
 	'ls',
 	'cd',
 	'cat',
@@ -104,6 +107,9 @@ export function runCommand(input: string, ctx: CommandContext): CommandResult {
 				'Available commands:',
 				'',
 				'  whoami              About me',
+				'  pwd                 Print working directory',
+				'  echo <text>         Print text',
+				'  date                Show the current date and time',
 				'  ls [-l] [path]      List files',
 				'  cd <directory>      Change directory',
 				'  cat <file>          Read file',
@@ -132,6 +138,15 @@ export function runCommand(input: string, ctx: CommandContext): CommandResult {
 				'Research:',
 				profile.researchLine
 			])
+
+		case 'pwd':
+			return text([promptPath(ctx.cwd)])
+
+		case 'echo':
+			return text([args.join(' ')])
+
+		case 'date':
+			return text([new Date().toString()])
 
 		case 'ls':
 			return renderLs(
