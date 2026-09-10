@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-10
+
+- fix: v2ヘッダーの`v1`/`EN`/`terminal`チップ群が、狭い画面で`.pf-header`が折り返した際に左寄せになり「右上」から外れていた。`.pf-header__actions`に`margin-left: auto`を追加し、折り返し後の自分の行でも右端に固定されるようにした。
+
 ## 2026-09-09 (3)
 
 - feat: v2ターミナルに基本コマンド`pwd`/`echo <text>`/`date`を追加。`help`とTab補完の一覧にも反映し、READMEのコマンド表も更新した(テスト4件追加、計51件)。
