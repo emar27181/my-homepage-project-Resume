@@ -47,6 +47,11 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
+	/* Stays pinned to the top-right even once `.pf-header` wraps it onto its
+	   own line on narrow screens — without this it falls back to flex-start
+	   (left) because a lone item on a wrapped line has nothing to space
+	   against. */
+	margin-left: auto;
 }
 
 /* One pill atom for the whole page (docs/DESIGN.md): nav links, the mode
