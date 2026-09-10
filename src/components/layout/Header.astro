@@ -6,6 +6,11 @@ import IconButton from '@/components/IconButton.astro'
 
 const currentLanguage = getLanguageFromPath(Astro.url.pathname)
 const homeLink = getLocalizedPath('/', currentLanguage)
+const v2Link = getLocalizedPath('/v2', currentLanguage)
+const v2Title =
+	currentLanguage === 'en' ? 'Try the terminal-style portfolio' : 'ターミナル版ポートフォリオを試す'
+const v2SrLabel =
+	currentLanguage === 'en' ? 'Terminal-style portfolio' : 'ターミナル版ポートフォリオ'
 ---
 
 <header class='flex w-full flex-wrap py-3 text-sm sm:flex-nowrap sm:justify-start'>
@@ -44,15 +49,25 @@ const homeLink = getLocalizedPath('/', currentLanguage)
 				class='relative rounded-md p-1.5 transition-all hover:bg-border sm:hidden'
 				aria-label='Toggle navigation'
 			>
-				<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-					<line x1='3' y1='6' x2='21' y2='6'/>
-					<line x1='3' y1='12' x2='21' y2='12'/>
-					<line x1='3' y1='18' x2='21' y2='18'/>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					width='20'
+					height='20'
+					viewBox='0 0 24 24'
+					fill='none'
+					stroke='currentColor'
+					stroke-width='2'
+					stroke-linecap='round'
+					stroke-linejoin='round'
+				>
+					<line x1='3' y1='6' x2='21' y2='6'></line>
+					<line x1='3' y1='12' x2='21' y2='12'></line>
+					<line x1='3' y1='18' x2='21' y2='18'></line>
 				</svg>
 			</button>
 
-			<IconButton as='a' href='/v2' title='ターミナル版ポートフォリオを試す'>
-				<span class='sr-only'>ターミナル版ポートフォリオ</span>
+			<IconButton as='a' href={v2Link} title={v2Title}>
+				<span class='sr-only'>{v2SrLabel}</span>
 				<Icon name='square-terminal' class='h-[1.2rem] w-[1.2rem]' />
 			</IconButton>
 

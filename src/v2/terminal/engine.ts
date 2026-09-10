@@ -1,6 +1,6 @@
-import { profile, projects } from '@/v2/data/portfolio'
+import { getPortfolio, type Language } from '@/v2/data/portfolio'
 import { COMMANDS, runCommand, type CommandResult } from './commands'
-import { getNode, promptPath, resolveSegments, splitPath } from './filesystem'
+import { getNode, getRoot, promptPath, resolveSegments, splitPath } from './filesystem'
 
 export interface TerminalEntry {
 	prompt: string
@@ -12,9 +12,14 @@ export class TerminalEngine {
 	cwd: string[] = []
 	cmdHistory: string[] = []
 	private historyIndex = 0
+	private lang: Language
+
+	constructor(lang: Language = 'ja') {
+		this.lang = lang
+	}
 
 	getPrompt(): string {
-		return `${profile.handle}@portfolio:${promptPath(this.cwd)}$`
+		return `${getPortfolio(this.lang).profile.handle}@portfolio:${promptPath(this.cwd)}$`
 	}
 
 	/** Run one line of input. Returns the entry to render plus any side effect the UI must act on. */
@@ -26,7 +31,12 @@ export class TerminalEngine {
 		}
 		this.historyIndex = this.cmdHistory.length
 
-		const result = runCommand(trimmed, { args: [], cwd: this.cwd, history: this.cmdHistory })
+		const result = runCommand(trimmed, {
+			args: [],
+			cwd: this.cwd,
+			history: this.cmdHistory,
+			lang: this.lang
+		})
 		if (result.type === 'cd') {
 			this.cwd = result.segments
 		}
@@ -66,13 +76,13 @@ export class TerminalEngine {
 
 		let candidates: string[] = []
 		if (cmd === 'open') {
-			candidates = projects.map((p) => p.slug)
+			candidates = getPortfolio(this.lang).projects.map((p) => p.slug)
 		} else if (cmd === 'cd' || cmd === 'ls' || cmd === 'cat') {
 			const dirSegments = resolveSegments(
 				this.cwd,
 				partial.includes('/') ? partial.slice(0, partial.lastIndexOf('/')) : '.'
 			)
-			const node = getNode(dirSegments)
+			const node = getNode(dirSegments, getRoot(this.lang))
 			const leaf = partial.includes('/') ? partial.slice(partial.lastIndexOf('/') + 1) : partial
 			if (node && node.type === 'dir') {
 				const prefix = partial.includes('/') ? partial.slice(0, partial.lastIndexOf('/') + 1) : ''

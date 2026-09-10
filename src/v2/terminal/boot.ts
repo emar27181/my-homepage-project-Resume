@@ -25,7 +25,21 @@ export const bootLines: BootLine[] = [
 		delayMs: 120
 	},
 	{ text: '', delayMs: 40 },
-	{ text: 'Try: whoami · ls · cd projects · open <slug> · help', delayMs: 120 },
+	{
+		text: 'This is not a page you scroll — it is a computer you operate. Everything about',
+		delayMs: 90
+	},
+	{
+		text: 'me — profile, projects, research, hobbies — lives here as real files and',
+		delayMs: 90
+	},
+	{
+		text: 'directories, the same way a Unix shell works: `cd` into a folder, `cat` a file,',
+		delayMs: 90
+	},
+	{ text: '`open` a project to preview it. Nothing to click, just commands to run.', delayMs: 90 },
+	{ text: '', delayMs: 40 },
+	{ text: 'Try: whoami · ls · tree · cd projects · open <slug> · help', delayMs: 120 },
 	{ text: '', delayMs: 40 },
 	{ text: '────────────────────────────────────────────', delayMs: 0 }
 ]

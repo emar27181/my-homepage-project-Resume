@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getNode, listAllPaths, promptPath, resolveSegments, root } from './filesystem'
+import { getNode, getRoot, listAllPaths, promptPath, resolveSegments, root } from './filesystem'
 
 describe('resolveSegments', () => {
 	it('resolves ~ and / to the root', () => {
@@ -70,5 +70,23 @@ describe('listAllPaths', () => {
 		expect(paths).toContain('projects/flex-railway-map')
 		expect(paths).toContain('projects/flex-railway-map/README.md')
 		expect(paths).toContain('about/profile.md')
+	})
+})
+
+describe('getRoot with lang', () => {
+	it('ja and en trees share the same shape (same project slugs)', () => {
+		const jaPaths = listAllPaths(getRoot('ja'))
+		const enPaths = listAllPaths(getRoot('en'))
+		expect(enPaths).toEqual(jaPaths)
+	})
+
+	it('en tree content is in English, not ja', () => {
+		const node = getNode(['projects', 'way-point-map', 'README.md'], getRoot('en'))
+		expect(node?.type).toBe('file')
+		if (node?.type === 'file') expect(node.content).toContain('golf courses')
+	})
+
+	it('getRoot() defaults to ja, same as the default `root` export', () => {
+		expect(getRoot()).toBe(root)
 	})
 })
