@@ -18,7 +18,7 @@ src/v2/
 │   ├── commands.ts        # コマンド実装(help/whoami/ls/cd/cat/tree/...)。portfolio.ts と filesystem.ts のみを知る。
 │   ├── engine.ts           # TerminalEngine: cwd/履歴/Tab補完などの状態を持つvanilla TSクラス。DOMを知らない。
 │   ├── asciiFont.ts        # 5行ブロックフォント。ASCII artを1つのグリフ表から生成する(手描きの重複を避ける)。
-│   ├── boot.ts              # 起動ログの行と表示間隔、ASCII artの選択(幅で切り替え)。
+│   ├── boot.ts              # 起動ログの行と表示間隔、`whoami`風identityカード、ASCII artの選択(幅で切り替え)。`getBootLines(lang)`で表示言語に応じた文言を返す。
 │   └── app.ts               # DOM側。TerminalEngineとページのDOM要素を繋ぐ、唯一のブラウザ依存コード。
 └── styles/
     └── terminal.css        # `.pf-*` 名前空間の独自スタイル(黒背景+緑アクセント)。v1のCSSと衝突しない。
