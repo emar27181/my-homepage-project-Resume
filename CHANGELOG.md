@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-09-15 (3)
+
+- feat: スマホ幅(560px以下)の入力欄下に、`ls`/`cd`/`cat`/`tree`/`open`/`whoami`/`help`のクイック起動ボタンを追加。既存の`Tab`/`Enter`ボタンの下に配置し、`ls`/`tree`/`whoami`/`help`はタップで即実行、引数が要る`cd`/`cat`/`open`はタップで入力欄に`"cmd "`まで入れてカーソルを残す(続けて`Tab`ボタンで補完候補を出せる)。実ブラウザ(390px幅)で両方の挙動とデスクトップでの非表示を確認済み。
+
+## 2026-09-15 (2)
+
+- fix: モバイル幅(560px未満)の起動ログで、ASCII artが`EMAR`のみ表示され`27181`が欠けていた。`asciiArtFor(width)`の幅判定を撤廃し、常に`EMAR27181`をフルで描画するようにした(identityカードと同じく`.pf-ascii`はもともと折り返さず横スクロールする設計だったため、真に幅が足りない場合もスクロールで見える。実際は狭い幅ではフォントサイズ自体が12pxに縮むため、390px幅でもスクロール無しでフル表示できることを実機で確認)。
+
 ## 2026-09-15
 
 - improve: start.shの起動ログを拡充し、ja/enの表示言語に追従するようにした。`boot.ts`の`bootLines`を`getBootLines(lang)`関数化し、`whoami`風のidentityカード(handle・GitHub/Mail/Labリンク。`profile.links`が唯一の情報源で、値自体は言語非依存なのでbox本体は1つだけ構築)、ポートフォリオの概要説明、基本操作の一覧を表示言語で出し分ける。装飾として`portfolio-shell v1.0.0`等の見出し行を緑強調(`pf-line-banner`)、`[ OK ]`のロード行を控えめな緑(`pf-line-ok`)、identityカードをbox-drawing文字の罫線(`pf-line-box`、ASCII artと同様に折り返さず横スクロール)で表示するようにterminal.cssにクラスを追加した。実ブラウザ(ja/en × desktop/mobile)でbox罫線のずれが無いこと・コンソールエラーが無いことを確認済み。

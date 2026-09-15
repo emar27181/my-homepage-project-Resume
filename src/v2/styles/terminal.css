@@ -340,6 +340,25 @@ button.pf-chip:hover {
 	}
 }
 
+/* Quick-launch buttons for common commands (below Tab/Enter) — typing full
+   commands on a phone keyboard is slow, so mobile gets one-tap access to
+   the ones visitors reach for first. Buttons keep content width and wrap
+   (unlike .pf-mobile-keys' 2 equal-width keys) since there are more of
+   them; .pf-chip--sm already grows to the 44px touch step under this same
+   breakpoint (see the .pf-chip--sm rule above), so no extra sizing here. */
+.pf-mobile-commands {
+	display: none;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 0 16px 12px;
+}
+
+@media (max-width: 560px) {
+	.pf-mobile-commands {
+		display: flex;
+	}
+}
+
 .pf-window--glitch {
 	animation: pf-glitch 0.35s infinite;
 }

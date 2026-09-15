@@ -86,6 +86,21 @@ const description =
 							<button type='button' class='pf-chip pf-chip--md' data-key='tab'>Tab</button>
 							<button type='button' class='pf-chip pf-chip--md' data-key='enter'>Enter ⏎</button>
 						</div>
+						{
+							/* Quick-launch buttons for common commands — typing on a phone's
+							 virtual keyboard is slow, so tapping is the primary way in on
+							 mobile. Commands that take an argument (cd/cat/open) insert
+							 "cmd " and leave the cursor there instead of running immediately. */
+						}
+						<div class='pf-mobile-commands' id='pf-mobile-commands'>
+							<button type='button' class='pf-chip pf-chip--sm' data-cmd='ls'>ls</button>
+							<button type='button' class='pf-chip pf-chip--sm' data-cmd='cd '>cd</button>
+							<button type='button' class='pf-chip pf-chip--sm' data-cmd='cat '>cat</button>
+							<button type='button' class='pf-chip pf-chip--sm' data-cmd='tree'>tree</button>
+							<button type='button' class='pf-chip pf-chip--sm' data-cmd='open '>open</button>
+							<button type='button' class='pf-chip pf-chip--sm' data-cmd='whoami'>whoami</button>
+							<button type='button' class='pf-chip pf-chip--sm' data-cmd='help'>help</button>
+						</div>
 					</div>
 					<aside id='pf-preview' class='pf-preview' hidden></aside>
 				</div>
