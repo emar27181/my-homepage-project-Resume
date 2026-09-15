@@ -114,6 +114,14 @@
 .rp-portfolio ol {
 	margin: 0;
 }
+.rp-portfolio :focus-visible {
+	outline: 3px solid var(--rp-accent);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+.rp-portfolio ::selection {
+	background: var(--rp-accent-soft);
+}
 
 .rp-skip-link {
 	position: fixed;
@@ -178,6 +186,10 @@
 }
 .rp-header-nav a:hover {
 	color: var(--rp-accent);
+}
+.rp-icon-link {
+	justify-content: center;
+	width: 44px;
 }
 .rp-theme-toggle {
 	display: inline-grid;
@@ -332,6 +344,12 @@
 .rp-single-section {
 	padding-block: var(--rp-space-16);
 	border-top: 1px solid var(--rp-rule);
+	/* Keeps a jump-to-#section link (the header tabs, or any other anchor)
+	   from landing the heading underneath the sticky header. --rp-scroll-
+	   offset is measured from the header's real (possibly wrapped) height
+	   by ResearchPortfolio.astro's script — same idea as the source
+	   theme's --page-scroll-offset, ported over since it was missing here. */
+	scroll-margin-top: var(--rp-scroll-offset, 6.5rem);
 }
 .rp-single-overview {
 	padding-block: 0;

@@ -153,3 +153,11 @@ v1のヘッダーには既にすべてのカテゴリ(制作物・趣味・研�
 - 文字サイズ・余白・操作部品の寸法は移植元の値(`design.ts`/`typography.ts`相当)をCSS変数に直接書き写している(`--rp-space-*`/`--rp-type-*`/`--rp-control-*`)。移植元のようにTypeScript側の正本から生成する仕組みは、v3単体では正本が1箇所のCSSファイルで足りる規模のため導入していない。
 
 顔写真アセットはこのプロジェクトのどこにも存在しない(`src/assets`・v1のindex.astroいずれにも無い)。移植元のSidebarは`profile.avatar`の顔写真を表示する設計だったが、Sidebar自体を採用していない(前述)ため、顔写真をどう扱うかという論点自体が無くなっている。
+
+## ヘッダーのv1/v2リンクはアイコン
+
+v1のヘッダー(`src/components/layout/Header.astro`)はv2/v3への切り替えを`IconButton` + Lucide風アイコンで表現しており、テキストラベルを使っていない。v3のヘッダーが最初`v1`/`v2`という素のテキストリンクだったのは、この site 全体の慣習に合っていなかったため、house(v1)・square-terminal(v2、v1側で実際に使っているアイコンと同じ絵柄)のインラインSVGアイコンに差し替えた。`aria-label`/`title`でアクセシブルな名前を保っている。v1は`astro-icon`パッケージ経由で`src/icons/`のローカルSVGを読み込む仕組みだが、v3は他の要素(テーマ切り替えアイコンなど)と同じくコンポーネント内に直接SVGを書く方式を踏襲し、新しい依存は増やしていない。
+
+## スクロール時に見出しがヘッダーに隠れる不具合(移植元にあった仕組みの移植漏れ)
+
+ヘッダー2段目のタブや`#section`アンカーへジャンプすると、対象セクションの見出しがsticky headerの下に隠れる不具合があった。移植元テーマはヘッダーの実測高さを`ResizeObserver`で追跡し、`--page-scroll-offset`というCSS変数を通じて`scroll-padding-top`に反映する仕組みを持っていたが、v3を組み立てた際にこの仕組みを移植し忘れていた。同じ考え方で`ResearchPortfolio.astro`のscriptに`--rp-scroll-offset`を追加し(`.rp-header`の高さ+16pxをResizeObserverで追跡)、`.rp-single-section`の`scroll-margin-top`に使うようにした。ヘッダーは`flex-wrap`で狭い画面では2行になることがあるため、固定値ではなく実測値を使っている。

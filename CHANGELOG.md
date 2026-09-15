@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-15 (16)
+
+- improve: v3ヘッダーのv1/v2リンクをテキストからアイコンに変更。v1のヘッダー(`Header.astro`)がIconButton+アイコンでv2/v3を切り替えている慣習に合わせ、house(v1)・square-terminal(v2、v1側が実際に使っているのと同じ絵柄)のインラインSVGアイコンに差し替えた。`aria-label`/`title`でアクセシブルな名前は維持。
+- fix: ヘッダー2段目のタブや`#section`アンカーへジャンプすると、対象セクションの見出しがsticky headerの下に隠れる不具合を修正。移植元テーマが持つ「ヘッダー実測高さをResizeObserverで追跡し`scroll-padding-top`へ反映する」仕組み(`--page-scroll-offset`)の移植が漏れていたため、同じ考え方で`--rp-scroll-offset`を追加し、`.rp-single-section`の`scroll-margin-top`に使うようにした。
+- style: `:focus-visible`のアウトラインと`::selection`の配色をv3に追加(移植元にあったが未移植だった)。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright)でアイコン表示・タブジャンプ後に見出しが隠れないこと・ライト/ダーク両方でのアイコン視認性を確認済み。
+
 ## 2026-09-15 (15)
 
 - improve: v3のヘッダー2段目のセクションタブに番号(`01`/`02`/`03`)バッジを追加し、幅700px未満(移植元テーマ[aihara-yasuto-portfolio.netlify.app](https://aihara-yasuto-portfolio.netlify.app/)の実際のブレークポイントに合わせた)では見出し文字列を隠して番号だけを丸いバッジで表示するようにした。移植元のCSSが持つ`.header-tabs strong { display: none }`と同じ挙動をv1由来のタブ実装に取り入れた形。ラベル文字列はDOMからは消さず、リンクの`aria-label`で常に読み上げられるようにしている。アクティブなタブはデスクトップでは下線、モバイルではアクセントカラーの塗りつぶしバッジで示す。`npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、390px/1280px)で番号のみ表示への切り替わりを確認済み。

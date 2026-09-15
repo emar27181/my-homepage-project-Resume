@@ -136,6 +136,26 @@ const description =
 				} catch {}
 			})
 
+			// Keeps --rp-scroll-offset (research.css's scroll-margin-top on each
+			// section) matched to the sticky header's real height, so jumping to
+			// a #section anchor never lands the heading underneath it. The
+			// header can wrap to two rows at narrow widths, so this is measured
+			// rather than hardcoded — the same idea as the source theme's
+			// --page-scroll-offset (ResizeObserver over the header), ported
+			// over since v3 was missing it.
+			const header = document.querySelector<HTMLElement>('.rp-header')
+			const updateScrollOffset = () => {
+				if (!header) return
+				document.documentElement.style.setProperty(
+					'--rp-scroll-offset',
+					`${header.getBoundingClientRect().height + 16}px`
+				)
+			}
+			updateScrollOffset()
+			if (header && 'ResizeObserver' in window) {
+				new ResizeObserver(updateScrollOffset).observe(header)
+			}
+
 			// Scroll-spy for the header's section tabs — same idea as v1's
 			// updateToc() in src/layouts/BaseLayout.astro, kept as an
 			// IntersectionObserver here since it was already in place.

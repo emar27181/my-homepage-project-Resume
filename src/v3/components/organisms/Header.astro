@@ -40,8 +40,39 @@ const {
 			{brand}
 		</a>
 		<nav class='rp-header-nav' aria-label={v1Label}>
-			<a href={v1Href} title={v1Label}>v1</a>
-			<a href={v2Href} title={v2Label}>v2</a>
+			<a class='rp-icon-link' href={v1Href} title={v1Label} aria-label={v1Label}>
+				<svg
+					viewBox='0 0 24 24'
+					width='18'
+					height='18'
+					fill='none'
+					stroke='currentColor'
+					stroke-width='2'
+					stroke-linecap='round'
+					stroke-linejoin='round'
+					aria-hidden='true'
+				>
+					<path d='M3 11 12 3l9 8'></path>
+					<path d='M5 10v10a1 1 0 0 0 1 1h5v-6h2v6h5a1 1 0 0 0 1-1V10'></path>
+				</svg>
+			</a>
+			<a class='rp-icon-link' href={v2Href} title={v2Label} aria-label={v2Label}>
+				<svg
+					viewBox='0 0 24 24'
+					width='18'
+					height='18'
+					fill='none'
+					stroke='currentColor'
+					stroke-width='2'
+					stroke-linecap='round'
+					stroke-linejoin='round'
+					aria-hidden='true'
+				>
+					<path d='m7 11 2-2-2-2'></path>
+					<path d='M11 13h4'></path>
+					<rect width='18' height='18' x='3' y='3' rx='2' ry='2'></rect>
+				</svg>
+			</a>
 			<a href={otherLangHref}>{otherLangLabel}</a>
 			<button type='button' class='rp-theme-toggle' data-rp-set-theme aria-label={themeLabel}>
 				<svg

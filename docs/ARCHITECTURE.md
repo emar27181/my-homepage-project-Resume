@@ -100,4 +100,4 @@ v2と同じくURLベースの方式(`/v3` = ja、`/en/v3` = en)。`adapter.ts`�
 
 ## v1・v2・v3間の相互リンク
 
-`src/components/layout/Header.astro`(v1)には`v2`・`v3`へのIconButtonリンクがあり、`getLocalizedPath('/v2'|'/v3', currentLanguage)`で表示言語に追従する。v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`はそれぞれのヘッダーに残り2モードへのリンクを持つ(v2はChip、v3は`.rp-header-nav`のリンク)。
+`src/components/layout/Header.astro`(v1)には`v2`・`v3`へのIconButtonリンクがあり、`getLocalizedPath('/v2'|'/v3', currentLanguage)`で表示言語に追従する。v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`はそれぞれのヘッダーに残り2モードへのリンクを持つ(v2はChip、v3は`.rp-header-nav`のリンク)。v3のv1/v2リンクはテキストではなくアイコン(house/square-terminal、v3独自にインラインSVGで用意。v1が使う`astro-icon`のローカルアイコン一式(`src/icons/`)には依存していない)で、`aria-label`でアクセシブルな名前を持つ。
