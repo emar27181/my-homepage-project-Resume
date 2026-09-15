@@ -1,6 +1,8 @@
 import { getPortfolio, type Language } from '@/v2/data/portfolio'
 import { asciiArtFor, getBootLines, getHintText, HINT_DELAY_MS, START_COMMAND } from './boot'
 import { TerminalEngine } from './engine'
+import { getRoot } from './filesystem'
+import { buildSlFrames } from './sl'
 import type { CommandResult } from './commands'
 
 const lang: Language = document.documentElement.lang === 'en' ? 'en' : 'ja'
@@ -9,6 +11,25 @@ const engine = new TerminalEngine(lang)
 const HINT_TEXT = getHintText(lang)
 const CLOSE_PREVIEW_LABEL = lang === 'en' ? 'Close preview' : 'プレビューを閉じる'
 const VIEW_PROJECT_LABEL = lang === 'en' ? 'View Project →' : 'プロジェクトを見る →'
+const RELOAD_HINT =
+	lang === 'en' ? 'Reload this page to restart.' : 'このページを再読み込みすると復帰します。'
+const SL_HINT =
+	lang === 'en' ? '(hint: you probably meant `ls`)' : '(ヒント: `ls` の打ち間違いかも)'
+
+// A real Linux kernel panic dump — kept in English regardless of display
+// language, like every other piece of "shell" text in this app (help text,
+// error messages): a panic is system-level output, not portfolio content.
+const KERNEL_PANIC = [
+	'Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000100',
+	'',
+	'CPU: 0 PID: 1 Comm: portfolio-shell Not tainted',
+	'Call Trace:',
+	' rm_rf_root+0x1a/0x40',
+	' do_wipe_filesystem+0x88/0xb0',
+	' sys_execve+0x2e/0x30',
+	' entry_SYSCALL_64+0x7c/0x7c',
+	'---[ end Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000100 ]---'
+].join('\n')
 
 const output = document.getElementById('pf-output') as HTMLDivElement
 const inputRow = document.getElementById('pf-input-row') as HTMLDivElement
@@ -87,41 +108,77 @@ async function playBoot() {
 	updatePrompt()
 }
 
+/** `sl`: a steam locomotive crosses the window instead of listing files. */
+async function playSl() {
+	busy = true
+	skipRequested = false
+	const el = document.createElement('div')
+	el.className = 'pf-ascii'
+	output.insertBefore(el, inputRow)
+	for (const frame of buildSlFrames()) {
+		if (skipRequested) break
+		el.textContent = frame.join('\n')
+		scrollToBottom()
+		await sleep(55)
+	}
+	printRaw(SL_HINT, 'pf-line-hint')
+	busy = false
+	skipRequested = false
+	updatePrompt()
+}
+
+/**
+ * Takes the window over completely with a fake kernel-panic dump and
+ * disables input — there is no scripted way back from here, same as a
+ * real crash. Reloading the page (fresh JS state) is the only fix.
+ */
+function showCrashScreen() {
+	input.disabled = true
+	input.blur()
+	mobileKeys?.setAttribute('hidden', '')
+	mobileCommands?.setAttribute('hidden', '')
+
+	const overlay = document.createElement('div')
+	overlay.className = 'pf-crash-screen'
+	overlay.textContent = `${KERNEL_PANIC}\n\n`
+
+	const hint = document.createElement('span')
+	hint.className = 'pf-crash-hint'
+	hint.textContent = RELOAD_HINT
+
+	const cursor = document.createElement('span')
+	cursor.className = 'pf-crash-cursor'
+
+	overlay.append(hint, cursor)
+	windowEl.appendChild(overlay)
+}
+
 async function playWipe() {
 	busy = true
 	skipRequested = false
-	const steps = [
-		'Deleting profile...',
-		'Deleting projects...',
-		'Deleting research...',
-		'Deleting memories...'
-	]
-	for (const step of steps) {
-		printRaw(step)
-		await sleep(220)
+	// Real paths from the actual filesystem, not a hardcoded fake list —
+	// what's "deleted" here is what `tree`/`ls` would really show you.
+	for (const entry of getRoot(lang).children) {
+		const path = `~/${entry.name}`
+		if (entry.type === 'dir') {
+			printRaw(`rm: descending into directory '${path}'`)
+			await sleep(90)
+			printRaw(`removed directory '${path}'`)
+		} else {
+			printRaw(`removed '${path}'`)
+		}
+		await sleep(150)
 	}
 	printRaw('████████████████████ 100%')
 	await sleep(300)
-	printRaw('FATAL: portfolio not found.', 'pf-line-error')
+	printRaw(`rm: cannot remove '/': Device or resource busy`, 'pf-line-error')
 	await sleep(500)
+	printRaw('Segmentation fault (core dumped)', 'pf-line-error')
+	await sleep(700)
 	windowEl.classList.add('pf-window--glitch')
 	await sleep(900)
-	windowEl.classList.add('pf-window--blackout')
-	await sleep(900)
 	windowEl.classList.remove('pf-window--glitch')
-	clearOutput()
-	printRaw('...')
-	await sleep(500)
-	printRaw('just kidding.')
-	await sleep(300)
-	printRaw('restoring from git...')
-	await sleep(400)
-	printRaw('$ git restore .')
-	await sleep(400)
-	windowEl.classList.remove('pf-window--blackout')
-	printRaw('')
-	printRaw('portfolio restored.')
-	busy = false
+	showCrashScreen()
 }
 
 function renderPreview(slug: string) {
@@ -188,6 +245,9 @@ async function applyResult(result: CommandResult) {
 		case 'wipe':
 			await playWipe()
 			break
+		case 'sl':
+			await playSl()
+			break
 	}
 }
 
@@ -222,6 +282,23 @@ function triggerTabComplete() {
 	}
 }
 
+function historyUp() {
+	const value = engine.historyUp()
+	if (value !== undefined) input.value = value
+}
+
+function historyDown() {
+	input.value = engine.historyDown()
+}
+
+/** Moves the input's text cursor by `delta` characters — for the on-screen
+ * ←/→ buttons, which stand in for arrow keys a mobile keyboard lacks. */
+function moveCursor(delta: number) {
+	const pos = input.selectionStart ?? input.value.length
+	const next = Math.max(0, Math.min(input.value.length, pos + delta))
+	input.setSelectionRange(next, next)
+}
+
 input.addEventListener('keydown', (e) => {
 	if (e.key === 'Enter') {
 		e.preventDefault()
@@ -230,13 +307,12 @@ input.addEventListener('keydown', (e) => {
 	}
 	if (e.key === 'ArrowUp') {
 		e.preventDefault()
-		const value = engine.historyUp()
-		if (value !== undefined) input.value = value
+		historyUp()
 		return
 	}
 	if (e.key === 'ArrowDown') {
 		e.preventDefault()
-		input.value = engine.historyDown()
+		historyDown()
 		return
 	}
 	if (e.key === 'Tab') {
@@ -260,15 +336,37 @@ input.addEventListener('keydown', (e) => {
 
 windowEl.addEventListener('click', () => input.focus())
 
-// --- on-screen Enter/Tab keys (mobile has no physical Tab key, and virtual
-// keyboards don't reliably fire a keydown 'Enter' the same way) ---
+// --- on-screen keys mobile lacks: Tab, arrows, Enter, Ctrl+L (Clear) ---
+// Each one runs immediately, the same as pressing the real key — there is
+// nothing to review first, unlike the quick commands below.
 mobileKeys?.querySelectorAll<HTMLButtonElement>('[data-key]').forEach((button) => {
 	// Prevent the button from stealing focus (and dismissing the on-screen
 	// keyboard) before the click handler runs.
 	button.addEventListener('pointerdown', (e) => e.preventDefault())
 	button.addEventListener('click', () => {
-		if (button.dataset.key === 'tab') triggerTabComplete()
-		else if (button.dataset.key === 'enter') void handleSubmit(input.value)
+		switch (button.dataset.key) {
+			case 'tab':
+				triggerTabComplete()
+				break
+			case 'enter':
+				void handleSubmit(input.value)
+				break
+			case 'up':
+				historyUp()
+				break
+			case 'down':
+				historyDown()
+				break
+			case 'left':
+				moveCursor(-1)
+				break
+			case 'right':
+				moveCursor(1)
+				break
+			case 'clear':
+				clearOutput()
+				break
+		}
 		input.focus()
 	})
 })

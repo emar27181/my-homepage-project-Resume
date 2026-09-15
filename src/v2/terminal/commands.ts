@@ -15,6 +15,7 @@ export type CommandResult =
 	| { type: 'reboot' }
 	| { type: 'open'; slug: string; lines: string[] }
 	| { type: 'wipe' }
+	| { type: 'sl' }
 
 const text = (lines: string[]): CommandResult => ({ type: 'text', lines })
 
@@ -54,6 +55,23 @@ function renderLs(
 
 function fmtLinks(links?: { label: string; href: string }[]) {
 	return links ? links.map((l) => `  ${l.label}: ${l.href}`) : []
+}
+
+// `cowsay`'s message is fixed English regardless of `lang` — same reasoning
+// as the boot identity card: a speech-bubble border built from the
+// message's character count would misalign against CJK glyph width.
+function cowsayBubble(message: string): string[] {
+	const border = '-'.repeat(message.length + 2)
+	return [
+		` ${border.replace(/-/g, '_')} `,
+		`< ${message} >`,
+		` ${border} `,
+		'        \\   ^__^',
+		'         \\  (oo)\\_______',
+		'            (__)\\       )\\/\\',
+		'                ||----w |',
+		'                ||     ||'
+	]
 }
 
 const FORTUNES: Record<Language, string[]> = {
@@ -228,7 +246,18 @@ export function runCommand(input: string, ctx: CommandContext): CommandResult {
 
 		case 'sudo':
 			if (positional[0] === 'rm' && positional.includes('/')) return { type: 'wipe' }
+			if (positional.join(' ') === 'make me a sandwich') return text(['okay.'])
 			return text(['nice try. you already have full access — it is your own portfolio.'])
+
+		case 'make':
+			if (positional.join(' ') === 'me a sandwich') return text(['What? Make it yourself.'])
+			return text([`command not found: ${cmd}`, '', 'Try `help`.'])
+
+		case 'sl':
+			return { type: 'sl' }
+
+		case 'cowsay':
+			return text(cowsayBubble('welcome to my portfolio'))
 
 		case 'coffee':
 			return text(['☕ here you go. (no real caffeine included)'])

@@ -142,6 +142,9 @@ button.pf-chip:hover {
 }
 
 .pf-window {
+	/* Anchors .pf-crash-screen (rm -rf / easter egg), which covers the whole
+	   window — titlebar included — with position: absolute; inset: 0. */
+	position: relative;
 	flex: 1 1 60%;
 	min-width: 0;
 	/* Flex items default to min-height:auto, which lets them grow past an
@@ -321,19 +324,20 @@ button.pf-chip:hover {
 	caret-color: var(--pf-green);
 }
 
-/* Mobile has no physical Tab key and virtual keyboards don't reliably send
-   a keydown Enter, so give touch visitors on-screen equivalents. Hidden on
-   desktop (a physical keyboard already has both) — same 560px cutoff used
-   elsewhere in this file for "narrow viewport". */
+/* Mobile has no physical Tab/arrow keys and no easy Ctrl+L, and virtual
+   keyboards don't reliably send a keydown Enter — give touch visitors
+   on-screen equivalents. Hidden on desktop (a physical keyboard already has
+   all of these) — same 560px cutoff used elsewhere in this file for
+   "narrow viewport". Buttons keep content width and wrap, same as
+   .pf-mobile-commands below; .pf-chip--sm already grows to the 44px touch
+   step under this same breakpoint (see the .pf-chip--sm rule above), so no
+   extra sizing here. */
 .pf-mobile-keys {
 	display: none;
+	flex-wrap: wrap;
 	gap: 8px;
 	padding: 8px 16px 12px;
 	border-top: 1px solid var(--pf-border);
-}
-
-.pf-mobile-keys .pf-chip {
-	flex: 1;
 }
 
 @media (max-width: 560px) {
@@ -342,12 +346,9 @@ button.pf-chip:hover {
 	}
 }
 
-/* Quick-launch buttons for common commands (below Tab/Enter) — typing full
-   commands on a phone keyboard is slow, so mobile gets one-tap access to
-   the ones visitors reach for first. Buttons keep content width and wrap
-   (unlike .pf-mobile-keys' 2 equal-width keys) since there are more of
-   them; .pf-chip--sm already grows to the 44px touch step under this same
-   breakpoint (see the .pf-chip--sm rule above), so no extra sizing here. */
+/* Quick-launch buttons for common commands (below the keys row above) —
+   typing full commands on a phone keyboard is slow, so mobile gets one-tap
+   access to the ones visitors reach for first. */
 .pf-mobile-commands {
 	display: none;
 	flex-wrap: wrap;
@@ -381,10 +382,41 @@ button.pf-chip:hover {
 		transform: translate(0, 0) rotate(0deg);
 	}
 }
-.pf-window--blackout .pf-window__body,
-.pf-window--blackout .pf-window__input-row {
-	opacity: 0;
-	transition: opacity 0.4s ease;
+/* rm -rf / easter egg: the terminal genuinely stops responding after this —
+   no scripted "just kidding" restore — same as a real crash. Reloading the
+   page is the only way back, which is the whole point of it looking real. */
+.pf-crash-screen {
+	position: absolute;
+	inset: 0;
+	z-index: 5;
+	background: #000;
+	color: #ff5f57;
+	font-family: var(--pf-mono);
+	font-size: 13px;
+	line-height: 1.6;
+	padding: 16px;
+	white-space: pre-wrap;
+	overflow: auto;
+}
+
+.pf-crash-hint {
+	color: var(--pf-muted);
+}
+
+.pf-crash-cursor {
+	display: inline-block;
+	width: 8px;
+	height: 14px;
+	margin-left: 2px;
+	background: #ff5f57;
+	vertical-align: text-bottom;
+	animation: pf-blink 1s steps(1, end) infinite;
+}
+
+@keyframes pf-blink {
+	50% {
+		opacity: 0;
+	}
 }
 
 .pf-preview {
