@@ -119,7 +119,7 @@ async function playSl() {
 		if (skipRequested) break
 		el.textContent = frame.join('\n')
 		scrollToBottom()
-		await sleep(55)
+		await sleep(90)
 	}
 	printRaw(SL_HINT, 'pf-line-hint')
 	busy = false

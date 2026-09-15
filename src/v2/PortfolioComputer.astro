@@ -123,8 +123,17 @@ const description =
 								data-key='right'
 								aria-label='Cursor right'>→</button
 							>
-							<button type='button' class='pf-chip pf-chip--sm' data-key='enter'>Enter ⏎</button>
 							<button type='button' class='pf-chip pf-chip--sm' data-key='clear'>Clear</button>
+							{
+								/* Enter is the key visitors reach for most, so — like a real
+								 keyboard's layout — it sits apart at the right edge of its
+								 row instead of in the middle of the cluster above. */
+							}
+							<button
+								type='button'
+								class='pf-chip pf-chip--sm pf-mobile-keys__enter'
+								data-key='enter'>Enter ⏎</button
+							>
 						</div>
 						{
 							/* Quick-launch buttons for common commands — typing on a phone's

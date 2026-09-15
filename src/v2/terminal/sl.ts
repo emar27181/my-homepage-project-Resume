@@ -24,7 +24,7 @@ const TRAIN_WIDTH = Math.max(...TRAIN.map((line) => line.length))
  * direction as the original `sl`): starts fully off-screen right, ends
  * fully off-screen left.
  */
-export function buildSlFrames(width = 60, step = 4): string[][] {
+export function buildSlFrames(width = 60, step = 2): string[][] {
 	const frames: string[][] = []
 	for (let pad = width; pad > -TRAIN_WIDTH; pad -= step) {
 		frames.push(
