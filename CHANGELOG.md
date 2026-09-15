@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-15
+
+- improve: start.shの起動ログを拡充し、ja/enの表示言語に追従するようにした。`boot.ts`の`bootLines`を`getBootLines(lang)`関数化し、`whoami`風のidentityカード(handle・GitHub/Mail/Labリンク。`profile.links`が唯一の情報源で、値自体は言語非依存なのでbox本体は1つだけ構築)、ポートフォリオの概要説明、基本操作の一覧を表示言語で出し分ける。装飾として`portfolio-shell v1.0.0`等の見出し行を緑強調(`pf-line-banner`)、`[ OK ]`のロード行を控えめな緑(`pf-line-ok`)、identityカードをbox-drawing文字の罫線(`pf-line-box`、ASCII artと同様に折り返さず横スクロール)で表示するようにterminal.cssにクラスを追加した。実ブラウザ(ja/en × desktop/mobile)でbox罫線のずれが無いこと・コンソールエラーが無いことを確認済み。
+
 ## 2026-09-10
 
 - fix: v2ヘッダーの`v1`/`EN`/`terminal`チップ群が、狭い画面で`.pf-header`が折り返した際に左寄せになり「右上」から外れていた。`.pf-header__actions`に`margin-left: auto`を追加し、折り返し後の自分の行でも右端に固定されるようにした。

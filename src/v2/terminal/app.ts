@@ -1,11 +1,12 @@
 import { getPortfolio, type Language } from '@/v2/data/portfolio'
-import { asciiArtFor, bootLines, HINT_DELAY_MS, HINT_TEXT, START_COMMAND } from './boot'
+import { asciiArtFor, getBootLines, getHintText, HINT_DELAY_MS, START_COMMAND } from './boot'
 import { TerminalEngine } from './engine'
 import type { CommandResult } from './commands'
 
 const lang: Language = document.documentElement.lang === 'en' ? 'en' : 'ja'
 const { projects } = getPortfolio(lang)
 const engine = new TerminalEngine(lang)
+const HINT_TEXT = getHintText(lang)
 const CLOSE_PREVIEW_LABEL = lang === 'en' ? 'Close preview' : 'プレビューを閉じる'
 const VIEW_PROJECT_LABEL = lang === 'en' ? 'View Project →' : 'プロジェクトを見る →'
 
@@ -60,13 +61,9 @@ async function playBoot() {
 	busy = true
 	skipRequested = false
 	output.innerHTML = ''
-	for (const line of bootLines) {
-		if (skipRequested) {
-			printRaw(line.text)
-			continue
-		}
-		printRaw(line.text)
-		if (line.delayMs) await sleep(line.delayMs)
+	for (const line of getBootLines(lang)) {
+		printRaw(line.text, line.className)
+		if (!skipRequested && line.delayMs) await sleep(line.delayMs)
 	}
 	const art = asciiArtFor(windowEl.clientWidth)
 	printRaw('')

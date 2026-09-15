@@ -259,6 +259,23 @@ button.pf-chip:hover {
 .pf-line-error {
 	color: #ff8a80;
 }
+.pf-line-banner {
+	color: var(--pf-green);
+	font-weight: 600;
+}
+.pf-line-ok {
+	color: var(--pf-green-dim);
+}
+/* The identity card printed on boot (docs: `whoami`-style box). Like
+   .pf-ascii, box-drawing characters need a fixed cell width to stay
+   aligned, so this scrolls horizontally instead of wrapping (which would
+   break every corner) on viewports narrower than the card. */
+.pf-line-box {
+	color: var(--pf-green);
+	white-space: pre;
+	overflow-x: auto;
+	display: block;
+}
 .pf-ascii {
 	color: var(--pf-green);
 	font-size: 12px;
