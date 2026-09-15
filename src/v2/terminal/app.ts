@@ -1,6 +1,7 @@
 import { getPortfolio, type Language } from '@/v2/data/portfolio'
 import { asciiArtFor, getBootLines, getHintText, HINT_DELAY_MS, START_COMMAND } from './boot'
 import { TerminalEngine } from './engine'
+import { getRoot } from './filesystem'
 import type { CommandResult } from './commands'
 
 const lang: Language = document.documentElement.lang === 'en' ? 'en' : 'ja'
@@ -9,6 +10,23 @@ const engine = new TerminalEngine(lang)
 const HINT_TEXT = getHintText(lang)
 const CLOSE_PREVIEW_LABEL = lang === 'en' ? 'Close preview' : 'プレビューを閉じる'
 const VIEW_PROJECT_LABEL = lang === 'en' ? 'View Project →' : 'プロジェクトを見る →'
+const RELOAD_HINT =
+	lang === 'en' ? 'Reload this page to restart.' : 'このページを再読み込みすると復帰します。'
+
+// A real Linux kernel panic dump — kept in English regardless of display
+// language, like every other piece of "shell" text in this app (help text,
+// error messages): a panic is system-level output, not portfolio content.
+const KERNEL_PANIC = [
+	'Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000100',
+	'',
+	'CPU: 0 PID: 1 Comm: portfolio-shell Not tainted',
+	'Call Trace:',
+	' rm_rf_root+0x1a/0x40',
+	' do_wipe_filesystem+0x88/0xb0',
+	' sys_execve+0x2e/0x30',
+	' entry_SYSCALL_64+0x7c/0x7c',
+	'---[ end Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000100 ]---'
+].join('\n')
 
 const output = document.getElementById('pf-output') as HTMLDivElement
 const inputRow = document.getElementById('pf-input-row') as HTMLDivElement
@@ -87,41 +105,58 @@ async function playBoot() {
 	updatePrompt()
 }
 
+/**
+ * Takes the window over completely with a fake kernel-panic dump and
+ * disables input — there is no scripted way back from here, same as a
+ * real crash. Reloading the page (fresh JS state) is the only fix.
+ */
+function showCrashScreen() {
+	input.disabled = true
+	input.blur()
+	mobileKeys?.setAttribute('hidden', '')
+	mobileCommands?.setAttribute('hidden', '')
+
+	const overlay = document.createElement('div')
+	overlay.className = 'pf-crash-screen'
+	overlay.textContent = `${KERNEL_PANIC}\n\n`
+
+	const hint = document.createElement('span')
+	hint.className = 'pf-crash-hint'
+	hint.textContent = RELOAD_HINT
+
+	const cursor = document.createElement('span')
+	cursor.className = 'pf-crash-cursor'
+
+	overlay.append(hint, cursor)
+	windowEl.appendChild(overlay)
+}
+
 async function playWipe() {
 	busy = true
 	skipRequested = false
-	const steps = [
-		'Deleting profile...',
-		'Deleting projects...',
-		'Deleting research...',
-		'Deleting memories...'
-	]
-	for (const step of steps) {
-		printRaw(step)
-		await sleep(220)
+	// Real paths from the actual filesystem, not a hardcoded fake list —
+	// what's "deleted" here is what `tree`/`ls` would really show you.
+	for (const entry of getRoot(lang).children) {
+		const path = `~/${entry.name}`
+		if (entry.type === 'dir') {
+			printRaw(`rm: descending into directory '${path}'`)
+			await sleep(90)
+			printRaw(`removed directory '${path}'`)
+		} else {
+			printRaw(`removed '${path}'`)
+		}
+		await sleep(150)
 	}
 	printRaw('████████████████████ 100%')
 	await sleep(300)
-	printRaw('FATAL: portfolio not found.', 'pf-line-error')
+	printRaw(`rm: cannot remove '/': Device or resource busy`, 'pf-line-error')
 	await sleep(500)
+	printRaw('Segmentation fault (core dumped)', 'pf-line-error')
+	await sleep(700)
 	windowEl.classList.add('pf-window--glitch')
 	await sleep(900)
-	windowEl.classList.add('pf-window--blackout')
-	await sleep(900)
 	windowEl.classList.remove('pf-window--glitch')
-	clearOutput()
-	printRaw('...')
-	await sleep(500)
-	printRaw('just kidding.')
-	await sleep(300)
-	printRaw('restoring from git...')
-	await sleep(400)
-	printRaw('$ git restore .')
-	await sleep(400)
-	windowEl.classList.remove('pf-window--blackout')
-	printRaw('')
-	printRaw('portfolio restored.')
-	busy = false
+	showCrashScreen()
 }
 
 function renderPreview(slug: string) {
