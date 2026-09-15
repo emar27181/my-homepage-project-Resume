@@ -1,19 +1,17 @@
 ---
 import PublicationItem from '../molecules/PublicationItem.astro'
-import type { Language } from '@/v2/data/portfolio'
 import type { ResearchOutput } from '../../data/types'
 interface Props {
 	outputs: ResearchOutput[]
-	lang: Language
 }
-const { outputs, lang } = Astro.props
+const { outputs } = Astro.props
 ---
 
 <ul class='rp-plain-list'>
 	{
 		outputs.map((output) => (
 			<li>
-				<PublicationItem output={output} lang={lang} />
+				<PublicationItem output={output} />
 			</li>
 		))
 	}

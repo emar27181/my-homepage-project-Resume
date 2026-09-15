@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-15 (14)
+
+- feat: エンターテインメントコンピューティング2026特集号(情報処理学会論文誌、申請中)をresearchデータに追加。v1(`src/pages/index.astro`)には既にプレースホルダとして掲載されていた内容(タイトル・日付「2026年2月（申請中）」・学会リンク・動画)をそのままv2/data/portfolio.tsに転記した(en版も新規に対応する形で追加)。
+- fix: `ResearchEntry`に`kind?: 'presentation' | 'journal'`を追加し、v3(研究者ポートフォリオ)のPublications/Presentations振り分けを修正。論文誌投稿(発表を伴わない)がPresentationsセクションに紛れ込んでいた挙動を直し、`kind: 'journal'`のものはPublicationsのみに表示されるようにした。
+- improve: v3から引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)を削除。不要と判断したため、関連コンポーネント・スクリプト・CSS・UI文言をまとめて削除した。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright)でPublications 4件(学会発表3件+論文誌1件)・Presentations 3件(学会発表のみ)・引用コピーボタンが表示されないことを確認済み。
+
 ## 2026-09-15 (13)
 
 - improve: v3(研究者ポートフォリオ)を研究関連セクションだけに絞り、ナビゲーションをv1と同じパターンに揃えた。v1のヘッダーには既に全カテゴリ(制作物/趣味/研究テーマ/学会発表/スキル/学歴/資格・免許/作品集)のタブがあるため、v3で移植元の全セクション構成をそのまま再現すると内容が重複してしまう。`SectionId`を`interests`/`publications`/`presentations`の3つに絞り、Featured Projects・Skills・Education/History・Contactの各セクションとそれ専用のコンポーネント(`ProjectList`/`SkillGroup`/`Timeline`)を削除した。プロフィール本文・連絡先リンクはHero(常時表示の導入部)だけに一本化し、独立したAbout/Contactセクションとの重複表示を解消した。ナビゲーションは移植元の左サイドバーをやめ、v1自身が既に持つパターン(`src/layouts/BaseLayout.astro`の`sticky`ヘッダー+`toc-nav`、`.toc-link`/`.toc-active`のスクロール連動ハイライト)を`Header.astro`の2段構成(ブランド行+セクションタブ行)として移植した。これに伴い`Sidebar.astro`・`Avatar.astro`(顔写真の代わりのイニシャル表示)は不要になったため削除。`npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright)でセクション数・タブのスクロール連動ハイライト・スティッキーヘッダーの固定・デスクトップ/モバイル双方の表示を確認済み。

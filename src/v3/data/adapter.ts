@@ -38,12 +38,15 @@ export function getResearchPortfolio(lang: Language): ResearchPortfolioData {
 	const interestEntries = research.filter((entry) => !entry.date)
 	const interests = interestEntries.map((entry) => `${entry.heading} — ${entry.summary}`)
 
-	// Dated research entries are conference presentations; each one also
-	// counts as a publication, matching how portfolio-taraba's own
-	// getPortfolio() lets a conference/workshop item populate both sections.
-	const presentationEntries = research.filter((entry) => entry.date)
-	const outputs: ResearchOutput[] = presentationEntries.map((entry, index) => ({
-		id: `presentation-${index + 1}`,
+	// Dated research entries are publications. Conference entries (the
+	// default `kind`) were also actually presented, so they count as
+	// presentations too, matching how portfolio-taraba's own getPortfolio()
+	// lets a conference/workshop item populate both sections — a `kind:
+	// 'journal'` entry (a paper submission, no talk given) is a publication
+	// only.
+	const outputEntries = research.filter((entry) => entry.date)
+	const outputs: ResearchOutput[] = outputEntries.map((entry, index) => ({
+		id: `output-${index + 1}`,
 		title: quotedTitle(entry.summary, entry.heading),
 		authors: profile.name,
 		venue: entry.heading,
@@ -53,7 +56,7 @@ export function getResearchPortfolio(lang: Language): ResearchPortfolioData {
 			...(entry.links ?? []).map((link) => ({ label: link.label, url: link.href })),
 			...(entry.videoUrl ? [{ label: lang === 'en' ? 'Video' : '動画', url: entry.videoUrl }] : [])
 		],
-		isPresentation: true
+		isPresentation: entry.kind !== 'journal'
 	}))
 
 	const populated: Record<SectionId, boolean> = {

@@ -360,29 +360,6 @@
 	text-decoration: underline;
 }
 
-.rp-citation-copy {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.4rem;
-	min-height: 40px;
-	padding: 0.3rem 0.7rem;
-	border: 1px solid var(--rp-rule);
-	border-radius: 4px;
-	color: var(--rp-ink);
-	background: var(--rp-surface);
-	font: 600 var(--rp-type-sm) inherit;
-	cursor: pointer;
-}
-.rp-citation-copy:hover {
-	color: var(--rp-accent);
-	border-color: var(--rp-accent);
-}
-.rp-citation-copy svg {
-	fill: none;
-	stroke: currentColor;
-	stroke-width: 1.5;
-}
-
 .rp-footer {
 	display: flex;
 	align-items: center;

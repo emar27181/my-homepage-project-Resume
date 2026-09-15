@@ -110,7 +110,7 @@ v3 (`/v3`) は[emar27181/portfolio-taraba](https://github.com/emar27181/portfoli
 - **左サイドバー**: 移植元の主要なレイアウト要素だが、v3では採用していない。代わりにv1自身が既に持っているパターン(ヘッダー+スクロール連動タブ行)を踏襲した。理由・詳細は次節。
 - **Featured Projects・Skills・Education/History・Contact・Awardsのセクション**: v3はResearch Interests・Publications・Presentationsの3セクションだけを表示する。理由は次々節。
 
-保持した機能: セクションタブのスクロール連動ハイライト(IntersectionObserver、`ResearchPortfolio.astro`のscript)、ライト/ダーク切り替え、引用情報コピーボタン。いずれもこのポートの主眼である「研究者ポートフォリオらしい見た目と操作感」に直結するため残した。
+保持した機能: セクションタブのスクロール連動ハイライト(IntersectionObserver、`ResearchPortfolio.astro`のscript)、ライト/ダーク切り替え。いずれもこのポートの主眼である「研究者ポートフォリオらしい見た目と操作感」に直結するため残した。引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)は一度移植したが、不要という判断で削除した。
 
 ## ナビゲーションはv1のパターンを踏襲(サイドバーではない)
 

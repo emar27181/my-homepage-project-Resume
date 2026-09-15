@@ -221,6 +221,8 @@ export interface ResearchEntry {
 	summary: string
 	links?: { label: string; href: string }[]
 	videoUrl?: string
+	/** 'journal' entries are publications but not presentations (no talk was given). Defaults to 'presentation'. */
+	kind?: 'presentation' | 'journal'
 }
 
 const researchByLang: Record<Language, ResearchEntry[]> = {
@@ -272,6 +274,14 @@ const researchByLang: Record<Language, ResearchEntry[]> = {
 				}
 			],
 			videoUrl: 'https://www.youtube.com/embed/Sr1CyI3407c'
+		},
+		{
+			heading: '情報処理学会論文誌 エンターテインメントコンピューティング特集号 (申請中)',
+			date: '2026年2月（申請中）',
+			summary: 'エンターテインメントコンピューティング特集号への論文を申請中です。',
+			links: [{ label: '学会リンク', href: 'https://www.ipsj.or.jp/journal/cfp/26-T.html' }],
+			videoUrl: 'https://www.youtube.com/embed/h5IxvhB8jNE',
+			kind: 'journal'
 		}
 	],
 	en: [
@@ -322,6 +332,15 @@ const researchByLang: Record<Language, ResearchEntry[]> = {
 				}
 			],
 			videoUrl: 'https://www.youtube.com/embed/Sr1CyI3407c'
+		},
+		{
+			heading: 'IPSJ Journal: Entertainment Computing Special Issue (Under Review)',
+			date: 'February 2026 (Under Review)',
+			summary:
+				'Currently under review for submission to the IPSJ Journal Entertainment Computing special issue.',
+			links: [{ label: 'Conference Link', href: 'https://www.ipsj.or.jp/journal/cfp/26-T.html' }],
+			videoUrl: 'https://www.youtube.com/embed/h5IxvhB8jNE',
+			kind: 'journal'
 		}
 	]
 }

@@ -23,8 +23,8 @@
 //   toggle), one fixed accent color (no palette picker), no rainbow mode, no
 //   client-side language switching (this project already resolves language
 //   at build time via separate /v3 and /en/v3 routes).
-// - What's kept: scroll-spy tab highlighting, the light/dark theme toggle,
-//   and the citation-copy button.
+// - What's kept: scroll-spy tab highlighting and the light/dark theme
+//   toggle. The citation-copy button was dropped too (not needed).
 import BaseHead from '@/components/BaseHead.astro'
 import '../styles/research.css'
 
@@ -102,10 +102,10 @@ const description =
 								</ul>
 							)}
 							{section.id === 'publications' && (
-								<PublicationList outputs={portfolio.publications} lang={lang} />
+								<PublicationList outputs={portfolio.publications} />
 							)}
 							{section.id === 'presentations' && (
-								<PublicationList outputs={portfolio.presentations} lang={lang} />
+								<PublicationList outputs={portfolio.presentations} />
 							)}
 						</div>
 					</section>
@@ -134,24 +134,6 @@ const description =
 				try {
 					localStorage.setItem(THEME_KEY, next)
 				} catch {}
-			})
-
-			document.addEventListener('click', async (event) => {
-				const button = (event.target as HTMLElement)?.closest<HTMLButtonElement>(
-					'[data-copy-citation]'
-				)
-				if (!button) return
-				const label = button.querySelector('[data-copy-label]')
-				const reset = () => {
-					if (label) label.textContent = button.dataset.label ?? ''
-				}
-				try {
-					await navigator.clipboard.writeText(button.dataset.citation ?? '')
-					if (label) label.textContent = button.dataset.success ?? ''
-				} catch {
-					if (label) label.textContent = button.dataset.error ?? ''
-				}
-				setTimeout(reset, 1800)
 			})
 
 			// Scroll-spy for the header's section tabs — same idea as v1's

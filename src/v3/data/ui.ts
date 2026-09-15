@@ -11,9 +11,6 @@ export function getUi(lang: Language) {
 				theme: 'Switch theme',
 				light: 'Light',
 				dark: 'Dark',
-				copyCitation: 'Copy citation',
-				citationCopied: 'Copied',
-				citationCopyFailed: 'Copy failed',
 				footer: 'Research portfolio',
 				backToV1: 'Classic resume page',
 				backToV2: 'Terminal-style portfolio'
@@ -25,9 +22,6 @@ export function getUi(lang: Language) {
 				theme: '表示テーマを切り替え',
 				light: 'ライト',
 				dark: 'ダーク',
-				copyCitation: '引用情報をコピー',
-				citationCopied: 'コピーしました',
-				citationCopyFailed: 'コピーできませんでした',
 				footer: 'Research portfolio',
 				backToV1: '従来のレジュメページ',
 				backToV2: 'ターミナル版ポートフォリオ'

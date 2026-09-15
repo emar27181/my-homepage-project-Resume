@@ -59,7 +59,7 @@ v1はTailwindの`dark:`クラス切り替え(`ThemeProvider`がlocalStorageと`<
 ```
 src/v3/
 ├── components/
-│   ├── atoms/       # ExternalLink・CitationCopyButton
+│   ├── atoms/       # ExternalLink
 │   ├── molecules/   # LinkList・PublicationItem
 │   ├── organisms/   # Header(ブランド行+セクションタブ行)・Hero・Footer・PublicationList
 │   └── ResearchPortfolio.astro # v3ページの実体。langをpropで受け取る唯一のマークアップ(v2のPortfolioComputer.astroと同じ役割)。
@@ -67,8 +67,6 @@ src/v3/
 │   ├── types.ts     # 移植先コンポーネントが要求する型(ResearchProfile/ResearchOutput等)。
 │   ├── ui.ts         # UI文言とセクション定義(getUi(lang)/getSectionDefinitions(lang))。
 │   └── adapter.ts    # 唯一のロジック本体。getPortfolio(lang)(v2)の出力をResearchPortfolioDataへ組み替える。
-├── lib/
-│   └── citation.ts   # 引用情報コピー用の文字列整形。
 └── styles/
     └── research.css  # `.rp-*` 名前空間の独自スタイル(紫アクセント、ライト基調)。v1・v2のCSSと衝突しない。
 ```
@@ -81,7 +79,7 @@ src/v3/
 - アクセントカラーは紫1色固定。パレット選択・虹色モードは移植していない。
 - 表示言語はこのサイトの既存の方式(`/v3` = ja、`/en/v3` = en のURLベース切り替え)に統一し、移植元が持っていたクライアントサイドでのDOM文字列置換による言語切り替えは採用していない。
 - **ナビゲーションは移植元の左サイドバーではなくv1自身のパターンを踏襲**(後述)。
-- 保持した機能: セクションタブのスクロール連動ハイライト、ライト/ダーク切り替え、引用コピーボタン。
+- 保持した機能: セクションタブのスクロール連動ハイライト、ライト/ダーク切り替え。引用コピーボタンは一度移植したが不要と判断し削除した。
 
 ## v3のヘッダー/ナビゲーションはv1のパターンを踏襲
 
@@ -97,7 +95,7 @@ v2と同じくURLベースの方式(`/v3` = ja、`/en/v3` = en)。`adapter.ts`�
 
 対応関係:
 
-- `research`配列(v2)のうち日付が無いもの → Research Interestsの1件(研究テーマの説明そのものが関心事だと解釈)。日付があるもの(学会発表2件)→ Publications・Presentationsの両方(移植元の「学会・研究会の成果はPresentationsにも自動掲載」という仕様をそのまま踏襲)。
+- `research`配列(v2)のうち日付が無いもの → Research Interestsの1件(研究テーマの説明そのものが関心事だと解釈)。日付があるものはすべてPublicationsに入る。そのうち`kind`が`'journal'`(投稿中の論文誌など、発表を伴わないもの)以外 ― つまり既定値の学会発表 ― はPresentationsにも入る(移植元の「学会・研究会の成果はPresentationsにも自動掲載」という仕様をそのまま踏襲。`kind: 'journal'`は論文誌投稿がPresentationsに紛れ込まないためのv3独自の追加区分)。
 - `profile.bio`/`profile.links`(v2) → Heroのみで表示(前述のとおりセクションとしては重複させない)。
 
 ## v1・v2・v3間の相互リンク

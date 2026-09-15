@@ -1,17 +1,10 @@
 ---
 import ExternalLink from '../atoms/ExternalLink.astro'
-import CitationCopyButton from '../atoms/CitationCopyButton.astro'
-import { formatCitation } from '../../lib/citation'
-import { getUi } from '../../data/ui'
-import type { Language } from '@/v2/data/portfolio'
 import type { ResearchOutput } from '../../data/types'
 interface Props {
 	output: ResearchOutput
-	lang: Language
 }
-const { output, lang } = Astro.props
-const ui = getUi(lang)
-const citation = formatCitation(output)
+const { output } = Astro.props
 ---
 
 <article class='rp-record' id={output.id}>
@@ -20,12 +13,6 @@ const citation = formatCitation(output)
 	<p>{output.authors}</p>
 	{output.date && <p class='rp-small-label'>{output.date}</p>}
 	<div class='rp-link-list'>
-		<CitationCopyButton
-			citation={citation}
-			label={ui.copyCitation}
-			copiedLabel={ui.citationCopied}
-			failedLabel={ui.citationCopyFailed}
-		/>
 		{output.links.map((link) => <ExternalLink href={link.url}>{link.label}</ExternalLink>)}
 	</div>
 </article>
