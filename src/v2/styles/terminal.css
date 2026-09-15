@@ -340,6 +340,13 @@ button.pf-chip:hover {
 	border-top: 1px solid var(--pf-border);
 }
 
+/* Pushes Enter to the right edge of whichever line it wraps onto — an
+   auto margin on a wrapped flex item is scoped to its own line, so this
+   still works no matter how the other keys wrap above it. */
+.pf-mobile-keys__enter {
+	margin-left: auto;
+}
+
 @media (max-width: 560px) {
 	.pf-mobile-keys {
 		display: flex;

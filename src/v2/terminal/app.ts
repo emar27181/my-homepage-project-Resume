@@ -119,7 +119,7 @@ async function playSl() {
 		if (skipRequested) break
 		el.textContent = frame.join('\n')
 		scrollToBottom()
-		await sleep(55)
+		await sleep(90)
 	}
 	printRaw(SL_HINT, 'pf-line-hint')
 	busy = false
@@ -299,6 +299,17 @@ function moveCursor(delta: number) {
 	input.setSelectionRange(next, next)
 }
 
+/** Inserts `text` at the cursor (replacing any selection) — for the
+ * on-screen `/ . - ~` buttons, standing in for a phone keyboard's symbols
+ * layout switch. */
+function insertAtCursor(text: string) {
+	const start = input.selectionStart ?? input.value.length
+	const end = input.selectionEnd ?? input.value.length
+	input.value = input.value.slice(0, start) + text + input.value.slice(end)
+	const pos = start + text.length
+	input.setSelectionRange(pos, pos)
+}
+
 input.addEventListener('keydown', (e) => {
 	if (e.key === 'Enter') {
 		e.preventDefault()
@@ -336,7 +347,8 @@ input.addEventListener('keydown', (e) => {
 
 windowEl.addEventListener('click', () => input.focus())
 
-// --- on-screen keys mobile lacks: Tab, arrows, Enter, Ctrl+L (Clear) ---
+// --- on-screen keys mobile lacks: Tab, arrows, Enter, Ctrl+L (Clear), and
+// symbols usually behind a keyboard layout switch (/ . - ~) ---
 // Each one runs immediately, the same as pressing the real key — there is
 // nothing to review first, unlike the quick commands below.
 mobileKeys?.querySelectorAll<HTMLButtonElement>('[data-key]').forEach((button) => {
@@ -366,6 +378,10 @@ mobileKeys?.querySelectorAll<HTMLButtonElement>('[data-key]').forEach((button) =
 			case 'clear':
 				clearOutput()
 				break
+			default:
+				// Not a named action — e.g. `/ . - ~` — so the key itself is the
+				// literal text to insert at the cursor.
+				if (button.dataset.key) insertAtCursor(button.dataset.key)
 		}
 		input.focus()
 	})
