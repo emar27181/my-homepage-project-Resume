@@ -69,18 +69,26 @@ const description =
 							<span class='pf-dot pf-dot--green'></span>
 							<span class='pf-window__title'>{profile.handle}@portfolio</span>
 						</div>
-						<div class='pf-window__body' id='pf-output' role='log' aria-live='polite'></div>
-						<div class='pf-window__input-row'>
-							<span class='pf-prompt' id='pf-prompt'></span>
-							<input
-								id='pf-input'
-								class='pf-input'
-								type='text'
-								autocomplete='off'
-								autocapitalize='off'
-								spellcheck='false'
-								aria-label='terminal input'
-							/>
+						<div class='pf-window__body' id='pf-output' role='log' aria-live='polite'>
+							{
+								/* The input line lives inside the scrolling output, as its
+								 last child, so it behaves like a real terminal — you type
+								 right after the last printed line, not in a separate fixed
+								 bar. app.ts keeps it pinned there by inserting every new
+								 printed line before it rather than appending after it. */
+							}
+							<div class='pf-window__input-row' id='pf-input-row'>
+								<span class='pf-prompt' id='pf-prompt'></span>
+								<input
+									id='pf-input'
+									class='pf-input'
+									type='text'
+									autocomplete='off'
+									autocapitalize='off'
+									spellcheck='false'
+									aria-label='terminal input'
+								/>
+							</div>
 						</div>
 						<div class='pf-mobile-keys' id='pf-mobile-keys'>
 							<button type='button' class='pf-chip pf-chip--md' data-key='tab'>Tab</button>

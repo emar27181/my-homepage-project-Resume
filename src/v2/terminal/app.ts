@@ -11,6 +11,7 @@ const CLOSE_PREVIEW_LABEL = lang === 'en' ? 'Close preview' : 'プレビュー�
 const VIEW_PROJECT_LABEL = lang === 'en' ? 'View Project →' : 'プロジェクトを見る →'
 
 const output = document.getElementById('pf-output') as HTMLDivElement
+const inputRow = document.getElementById('pf-input-row') as HTMLDivElement
 const input = document.getElementById('pf-input') as HTMLInputElement
 const promptEl = document.getElementById('pf-prompt') as HTMLSpanElement
 const windowEl = document.getElementById('pf-window') as HTMLDivElement
@@ -40,8 +41,18 @@ function printRaw(text: string, className = 'pf-line-output') {
 	const el = document.createElement('div')
 	el.className = className
 	el.textContent = text
-	output.appendChild(el)
+	// inputRow lives inside #pf-output as its last child (a real terminal's
+	// input sits right after the last printed line, not in a separate fixed
+	// bar) — inserting before it instead of appending keeps it pinned there.
+	output.insertBefore(el, inputRow)
 	scrollToBottom()
+}
+
+/** Clears printed output while keeping the (single, persistent) input row. */
+function clearOutput() {
+	Array.from(output.children).forEach((child) => {
+		if (child !== inputRow) child.remove()
+	})
 }
 
 function printLines(lines: string[], className?: string) {
@@ -61,7 +72,7 @@ function resetHintTimer() {
 async function playBoot() {
 	busy = true
 	skipRequested = false
-	output.innerHTML = ''
+	clearOutput()
 	for (const line of getBootLines(lang)) {
 		printRaw(line.text, line.className)
 		if (!skipRequested && line.delayMs) await sleep(line.delayMs)
@@ -98,7 +109,7 @@ async function playWipe() {
 	windowEl.classList.add('pf-window--blackout')
 	await sleep(900)
 	windowEl.classList.remove('pf-window--glitch')
-	output.innerHTML = ''
+	clearOutput()
 	printRaw('...')
 	await sleep(500)
 	printRaw('just kidding.')
@@ -166,7 +177,7 @@ async function applyResult(result: CommandResult) {
 			renderPreview(result.slug)
 			break
 		case 'clear':
-			output.innerHTML = ''
+			clearOutput()
 			break
 		case 'cd':
 			if (result.lines) printLines(result.lines)
@@ -235,7 +246,7 @@ input.addEventListener('keydown', (e) => {
 	}
 	if (e.ctrlKey && e.key.toLowerCase() === 'l') {
 		e.preventDefault()
-		output.innerHTML = ''
+		clearOutput()
 		return
 	}
 	if (e.ctrlKey && e.key.toLowerCase() === 'c') {
