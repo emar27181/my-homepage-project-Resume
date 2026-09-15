@@ -88,6 +88,30 @@ describe('runCommand', () => {
 		expect(runCommand('sudo rm -rf /', ctx())).toEqual({ type: 'wipe' })
 	})
 
+	it('sl triggers the locomotive easter egg', () => {
+		expect(runCommand('sl', ctx())).toEqual({ type: 'sl' })
+	})
+
+	it('cowsay prints a speech bubble', () => {
+		const result = runCommand('cowsay', ctx())
+		expect(result.type).toBe('text')
+		if (result.type === 'text') {
+			expect(result.lines.join('\n')).toContain('welcome to my portfolio')
+			expect(result.lines.join('\n')).toContain('^__^')
+		}
+	})
+
+	it('sudo make me a sandwich complies; plain make does not', () => {
+		expect(runCommand('sudo make me a sandwich', ctx())).toEqual({
+			type: 'text',
+			lines: ['okay.']
+		})
+		expect(runCommand('make me a sandwich', ctx())).toEqual({
+			type: 'text',
+			lines: ['What? Make it yourself.']
+		})
+	})
+
 	it('rm without -rf / is refused, not executed', () => {
 		const result = runCommand('rm README.md', ctx())
 		expect(result.type).toBe('text')

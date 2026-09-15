@@ -2,6 +2,7 @@ import { getPortfolio, type Language } from '@/v2/data/portfolio'
 import { asciiArtFor, getBootLines, getHintText, HINT_DELAY_MS, START_COMMAND } from './boot'
 import { TerminalEngine } from './engine'
 import { getRoot } from './filesystem'
+import { buildSlFrames } from './sl'
 import type { CommandResult } from './commands'
 
 const lang: Language = document.documentElement.lang === 'en' ? 'en' : 'ja'
@@ -12,6 +13,8 @@ const CLOSE_PREVIEW_LABEL = lang === 'en' ? 'Close preview' : 'プレビュー�
 const VIEW_PROJECT_LABEL = lang === 'en' ? 'View Project →' : 'プロジェクトを見る →'
 const RELOAD_HINT =
 	lang === 'en' ? 'Reload this page to restart.' : 'このページを再読み込みすると復帰します。'
+const SL_HINT =
+	lang === 'en' ? '(hint: you probably meant `ls`)' : '(ヒント: `ls` の打ち間違いかも)'
 
 // A real Linux kernel panic dump — kept in English regardless of display
 // language, like every other piece of "shell" text in this app (help text,
@@ -100,6 +103,25 @@ async function playBoot() {
 	art.forEach((row) => printRaw(row, 'pf-ascii'))
 	printRaw('')
 	booted = true
+	busy = false
+	skipRequested = false
+	updatePrompt()
+}
+
+/** `sl`: a steam locomotive crosses the window instead of listing files. */
+async function playSl() {
+	busy = true
+	skipRequested = false
+	const el = document.createElement('div')
+	el.className = 'pf-ascii'
+	output.insertBefore(el, inputRow)
+	for (const frame of buildSlFrames()) {
+		if (skipRequested) break
+		el.textContent = frame.join('\n')
+		scrollToBottom()
+		await sleep(55)
+	}
+	printRaw(SL_HINT, 'pf-line-hint')
 	busy = false
 	skipRequested = false
 	updatePrompt()
@@ -222,6 +244,9 @@ async function applyResult(result: CommandResult) {
 			break
 		case 'wipe':
 			await playWipe()
+			break
+		case 'sl':
+			await playSl()
 			break
 	}
 }
