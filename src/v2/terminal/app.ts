@@ -282,6 +282,23 @@ function triggerTabComplete() {
 	}
 }
 
+function historyUp() {
+	const value = engine.historyUp()
+	if (value !== undefined) input.value = value
+}
+
+function historyDown() {
+	input.value = engine.historyDown()
+}
+
+/** Moves the input's text cursor by `delta` characters — for the on-screen
+ * ←/→ buttons, which stand in for arrow keys a mobile keyboard lacks. */
+function moveCursor(delta: number) {
+	const pos = input.selectionStart ?? input.value.length
+	const next = Math.max(0, Math.min(input.value.length, pos + delta))
+	input.setSelectionRange(next, next)
+}
+
 input.addEventListener('keydown', (e) => {
 	if (e.key === 'Enter') {
 		e.preventDefault()
@@ -290,13 +307,12 @@ input.addEventListener('keydown', (e) => {
 	}
 	if (e.key === 'ArrowUp') {
 		e.preventDefault()
-		const value = engine.historyUp()
-		if (value !== undefined) input.value = value
+		historyUp()
 		return
 	}
 	if (e.key === 'ArrowDown') {
 		e.preventDefault()
-		input.value = engine.historyDown()
+		historyDown()
 		return
 	}
 	if (e.key === 'Tab') {
@@ -320,15 +336,37 @@ input.addEventListener('keydown', (e) => {
 
 windowEl.addEventListener('click', () => input.focus())
 
-// --- on-screen Enter/Tab keys (mobile has no physical Tab key, and virtual
-// keyboards don't reliably fire a keydown 'Enter' the same way) ---
+// --- on-screen keys mobile lacks: Tab, arrows, Enter, Ctrl+L (Clear) ---
+// Each one runs immediately, the same as pressing the real key — there is
+// nothing to review first, unlike the quick commands below.
 mobileKeys?.querySelectorAll<HTMLButtonElement>('[data-key]').forEach((button) => {
 	// Prevent the button from stealing focus (and dismissing the on-screen
 	// keyboard) before the click handler runs.
 	button.addEventListener('pointerdown', (e) => e.preventDefault())
 	button.addEventListener('click', () => {
-		if (button.dataset.key === 'tab') triggerTabComplete()
-		else if (button.dataset.key === 'enter') void handleSubmit(input.value)
+		switch (button.dataset.key) {
+			case 'tab':
+				triggerTabComplete()
+				break
+			case 'enter':
+				void handleSubmit(input.value)
+				break
+			case 'up':
+				historyUp()
+				break
+			case 'down':
+				historyDown()
+				break
+			case 'left':
+				moveCursor(-1)
+				break
+			case 'right':
+				moveCursor(1)
+				break
+			case 'clear':
+				clearOutput()
+				break
+		}
 		input.focus()
 	})
 })

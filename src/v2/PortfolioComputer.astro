@@ -90,9 +90,41 @@ const description =
 								/>
 							</div>
 						</div>
+						{
+							/* Keys a mobile visitor can't easily press otherwise: no
+							 physical Tab, no arrow keys, and Ctrl+L (clear) needs a
+							 modifier. Unlike the quick commands below, these mirror a
+							 keyboard shortcut and run immediately on tap — there is
+							 nothing to review first, same as pressing the real key. */
+						}
 						<div class='pf-mobile-keys' id='pf-mobile-keys'>
-							<button type='button' class='pf-chip pf-chip--md' data-key='tab'>Tab</button>
-							<button type='button' class='pf-chip pf-chip--md' data-key='enter'>Enter ⏎</button>
+							<button type='button' class='pf-chip pf-chip--sm' data-key='tab'>Tab</button>
+							<button
+								type='button'
+								class='pf-chip pf-chip--sm'
+								data-key='left'
+								aria-label='Cursor left'>←</button
+							>
+							<button
+								type='button'
+								class='pf-chip pf-chip--sm'
+								data-key='up'
+								aria-label='Previous command'>↑</button
+							>
+							<button
+								type='button'
+								class='pf-chip pf-chip--sm'
+								data-key='down'
+								aria-label='Next command'>↓</button
+							>
+							<button
+								type='button'
+								class='pf-chip pf-chip--sm'
+								data-key='right'
+								aria-label='Cursor right'>→</button
+							>
+							<button type='button' class='pf-chip pf-chip--sm' data-key='enter'>Enter ⏎</button>
+							<button type='button' class='pf-chip pf-chip--sm' data-key='clear'>Clear</button>
 						</div>
 						{
 							/* Quick-launch buttons for common commands — typing on a phone's
