@@ -219,6 +219,9 @@
 	padding-block: 0.5rem;
 }
 .rp-toc-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
 	padding: 2px 8px;
 	border-radius: 4px;
 	color: var(--rp-muted);
@@ -228,6 +231,11 @@
 	transition:
 		color 0.2s,
 		background 0.2s;
+}
+.rp-toc-num {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: var(--rp-type-xs);
+	opacity: 0.7;
 }
 .rp-toc-link:hover {
 	color: var(--rp-ink);
@@ -245,6 +253,34 @@
 	height: 2px;
 	border-radius: 1px;
 	background: var(--rp-accent);
+}
+
+/* Below 700px (matches the source theme's own breakpoint), the tab row
+   shows just the section number — like the reference deploy
+   (aihara-yasuto-portfolio.netlify.app) does on mobile — instead of full
+   labels that would wrap awkwardly in a narrow sticky bar. The label text
+   stays in the DOM for screen readers (see Header.astro's aria-label). */
+@media (max-width: 700px) {
+	.rp-toc-text {
+		display: none;
+	}
+	.rp-toc-link {
+		min-width: 32px;
+		min-height: 32px;
+		justify-content: center;
+		border-radius: 999px;
+	}
+	.rp-toc-num {
+		font-size: var(--rp-type-sm);
+		opacity: 1;
+	}
+	.rp-toc-link.rp-toc-active {
+		background: var(--rp-accent);
+		color: white;
+	}
+	.rp-toc-link.rp-toc-active::after {
+		content: none;
+	}
 }
 
 /* Layout */

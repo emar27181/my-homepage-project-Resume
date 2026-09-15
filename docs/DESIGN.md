@@ -112,6 +112,12 @@ v3 (`/v3`) は[emar27181/portfolio-taraba](https://github.com/emar27181/portfoli
 
 保持した機能: セクションタブのスクロール連動ハイライト(IntersectionObserver、`ResearchPortfolio.astro`のscript)、ライト/ダーク切り替え。いずれもこのポートの主眼である「研究者ポートフォリオらしい見た目と操作感」に直結するため残した。引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)は一度移植したが、不要という判断で削除した。
 
+### モバイルではセクションタブを番号のみにする
+
+移植元テーマの実際のデプロイ([aihara-yasuto-portfolio.netlify.app](https://aihara-yasuto-portfolio.netlify.app/))を確認すると、ヘッダーのセクションタブは幅700px未満で見出し文字列を隠し、`01`/`02`のような番号だけを丸いバッジとして表示していた(移植元のCSSにも同じ`@media (max-width: 700px) { .header-tabs strong { display: none; } }`という規則がある)。v1由来のタブ実装(`.rp-toc-link`)ではこの縮小表示を持っていなかったため、狭い画面でラベル文字列が折り返して読みにくくなっていた。
+
+同じ700pxのブレークポイントで`.rp-toc-text`を`display: none`にし、`.rp-toc-num`(`01`/`02`/`03`)だけを残す形で移植元の挙動に合わせた。ラベル文字列はDOMからは消さず、リンク自体の`aria-label`にセクション名を渡しているため、スクリーンリーダーでの読み上げは幅に関係なく変わらない(`.rp-toc-num`/`.rp-toc-text`は両方`aria-hidden`)。アクティブなタブの示し方も、幅が十分あるデスクトップでは下線、番号だけになるモバイルでは(下線だと視認性が落ちるため)アクセントカラーの塗りつぶしバッジに変えている。
+
 ## ナビゲーションはv1のパターンを踏襲(サイドバーではない)
 
 移植元のSidebar(幅260pxの固定左カラム、プロフィール写真+目次)は、v3では実装していない。代わりに、このサイトのv1(`/`)が既に持っている「スクロール位置に応じてハイライトするタブ行」パターン(`src/layouts/BaseLayout.astro`の`sticky`ラッパー + `toc-nav`、`src/styles/app.css`の`.toc-link`/`.toc-active`)をv3にも適用した。

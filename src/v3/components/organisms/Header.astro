@@ -81,9 +81,20 @@ const {
 		sections.length > 0 && (
 			<div class='rp-toc-row'>
 				<nav class='rp-toc-nav' aria-label={contentsLabel}>
-					{sections.map((section) => (
-						<a class='rp-toc-link' href={`#${section.id}`} data-rp-toc-link={section.id}>
-							{section.title}
+					{sections.map((section, index) => (
+						<a
+							class='rp-toc-link'
+							href={`#${section.id}`}
+							data-rp-toc-link={section.id}
+							aria-label={section.title}
+							title={section.title}
+						>
+							<span class='rp-toc-num' aria-hidden='true'>
+								{String(index + 1).padStart(2, '0')}
+							</span>
+							<span class='rp-toc-text' aria-hidden='true'>
+								{section.title}
+							</span>
 						</a>
 					))}
 				</nav>

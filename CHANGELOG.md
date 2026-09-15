@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-15 (15)
+
+- improve: v3のヘッダー2段目のセクションタブに番号(`01`/`02`/`03`)バッジを追加し、幅700px未満(移植元テーマ[aihara-yasuto-portfolio.netlify.app](https://aihara-yasuto-portfolio.netlify.app/)の実際のブレークポイントに合わせた)では見出し文字列を隠して番号だけを丸いバッジで表示するようにした。移植元のCSSが持つ`.header-tabs strong { display: none }`と同じ挙動をv1由来のタブ実装に取り入れた形。ラベル文字列はDOMからは消さず、リンクの`aria-label`で常に読み上げられるようにしている。アクティブなタブはデスクトップでは下線、モバイルではアクセントカラーの塗りつぶしバッジで示す。`npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、390px/1280px)で番号のみ表示への切り替わりを確認済み。
+
 ## 2026-09-15 (14)
 
 - feat: エンターテインメントコンピューティング2026特集号(情報処理学会論文誌、申請中)をresearchデータに追加。v1(`src/pages/index.astro`)には既にプレースホルダとして掲載されていた内容(タイトル・日付「2026年2月（申請中）」・学会リンク・動画)をそのままv2/data/portfolio.tsに転記した(en版も新規に対応する形で追加)。
