@@ -123,6 +123,26 @@ const description =
 								data-key='right'
 								aria-label='Cursor right'>→</button
 							>
+							{
+								/* Characters this shell's paths and commands lean on
+								 heavily (absolute paths, `..`, project slugs, `~`) but
+								 that usually sit behind a symbols-layout switch on a
+								 phone keyboard. Any data-key value app.ts doesn't
+								 recognize as a named action is inserted as literal text
+								 at the cursor — no separate list to keep in sync. */
+							}
+							<button type='button' class='pf-chip pf-chip--sm' data-key='/' aria-label='Slash'
+								>/</button
+							>
+							<button type='button' class='pf-chip pf-chip--sm' data-key='.' aria-label='Dot'
+								>.</button
+							>
+							<button type='button' class='pf-chip pf-chip--sm' data-key='-' aria-label='Dash'
+								>-</button
+							>
+							<button type='button' class='pf-chip pf-chip--sm' data-key='~' aria-label='Tilde'
+								>~</button
+							>
 							<button type='button' class='pf-chip pf-chip--sm' data-key='clear'>Clear</button>
 							{
 								/* Enter is the key visitors reach for most, so — like a real
