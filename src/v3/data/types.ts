@@ -5,6 +5,11 @@
  * this was ported from, which switches language client-side). That mirrors
  * how v2/data/portfolio.ts works: `getResearchPortfolio(lang)` is the one
  * place a `Language` resolves to content.
+ *
+ * v3 only shows the research-related sections (Research Interests /
+ * Publications / Presentations) — v1's own header already has tabs for
+ * everything else (制作物/趣味/スキル/学歴/資格・免許/作品集), so v3
+ * doesn't need to repeat that breadth. See docs/DESIGN.md.
  */
 
 export interface ResearchLink {
@@ -21,18 +26,6 @@ export interface ResearchProfile {
 	statement: string
 	location: string
 	about: string[]
-	initials: string
-}
-
-export interface ResearchSkill {
-	name: string
-	category: string
-}
-
-export interface ResearchExperienceEntry {
-	period: string
-	title: string
-	kind: string
 }
 
 export interface ResearchOutput {
@@ -46,25 +39,7 @@ export interface ResearchOutput {
 	isPresentation: boolean
 }
 
-export interface ResearchProject {
-	id: string
-	title: string
-	summary: string
-	role: string
-	technologies: string[]
-	year: string
-	href?: string
-}
-
-export type SectionId =
-	| 'about'
-	| 'interests'
-	| 'projects'
-	| 'publications'
-	| 'presentations'
-	| 'skills'
-	| 'experience'
-	| 'contact'
+export type SectionId = 'interests' | 'publications' | 'presentations'
 
 export interface SectionDef {
 	id: SectionId
@@ -72,19 +47,11 @@ export interface SectionDef {
 	subtitle: string
 }
 
-// portfolio-taraba (the theme this was ported from) also has an "awards"
-// section, dropped here: v2/data/portfolio.ts has no awards/grants data at
-// all (not just an empty array), so there is no way to ever populate it —
-// keeping the id around would just be an AwardList component with no caller.
-
 export interface ResearchPortfolioData {
 	profile: ResearchProfile
 	links: ResearchLink[]
 	interests: string[]
-	projects: ResearchProject[]
 	publications: ResearchOutput[]
 	presentations: ResearchOutput[]
-	skills: ResearchSkill[]
-	experience: ResearchExperienceEntry[]
 	sections: SectionDef[]
 }

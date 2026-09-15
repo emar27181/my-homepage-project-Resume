@@ -1,28 +1,20 @@
 /**
  * Reshapes v2/data/portfolio.ts (the site's one source of content) into the
  * shape the ported "research portfolio" components expect. There is no
- * separate content file here on purpose — duplicating profile/skills/
- * project text into a second data file is exactly the "same rule written
- * twice" the project's coding conventions rule out. Add or edit content in
+ * separate content file here on purpose — duplicating profile/research text
+ * into a second data file is exactly the "same rule written twice" the
+ * project's coding conventions rule out. Add or edit content in
  * v2/data/portfolio.ts; this file only reshapes it.
+ *
+ * v3 only surfaces the research entries (Research Interests / Publications /
+ * Presentations) — v1's own sticky header already has tabs for the rest
+ * (制作物/趣味/スキル/学歴/資格・免許/作品集), so nothing here computes
+ * projects/skills/experience for v3 to avoid showing the same content twice
+ * under two different designs.
  */
 import { getPortfolio, type Language } from '@/v2/data/portfolio'
 import { getSectionDefinitions } from './ui'
-import type {
-	ResearchExperienceEntry,
-	ResearchOutput,
-	ResearchPortfolioData,
-	ResearchProject,
-	SectionId
-} from './types'
-
-function initialsOf(name: string): string {
-	const letters = name
-		.split(/\s+/)
-		.map((word) => word[0])
-		.filter(Boolean)
-	return letters.slice(0, 2).join('').toUpperCase() || '?'
-}
+import type { ResearchOutput, ResearchPortfolioData, SectionId } from './types'
 
 /** Pulls a `「…」`/`"…"`-quoted title out of a summary sentence, if present. */
 function quotedTitle(summary: string, fallback: string): string {
@@ -35,13 +27,8 @@ function yearOf(date: string | undefined): number | undefined {
 	return match ? Number(match[0]) : undefined
 }
 
-const historyKind: Record<Language, { education: string; certification: string }> = {
-	ja: { education: '学歴', certification: '資格・免許' },
-	en: { education: 'Education', certification: 'Certification' }
-}
-
 export function getResearchPortfolio(lang: Language): ResearchPortfolioData {
-	const { profile, projects, research, skills, history } = getPortfolio(lang)
+	const { profile, research } = getPortfolio(lang)
 
 	const links = profile.links.map((link) => ({ label: link.label, url: link.href }))
 
@@ -69,38 +56,10 @@ export function getResearchPortfolio(lang: Language): ResearchPortfolioData {
 		isPresentation: true
 	}))
 
-	const projectItems: ResearchProject[] = projects.map((project) => ({
-		id: project.slug,
-		title: project.heading,
-		summary: project.summary,
-		role: project.concept,
-		technologies: project.tech,
-		year: project.year,
-		href: project.href
-	}))
-
-	const skillItems = skills.flatMap((group) =>
-		group.items.map((name) => ({ name, category: group.label }))
-	)
-
-	const kind = historyKind[lang]
-	const experience: ResearchExperienceEntry[] = history.map((entry) => ({
-		period: entry.date,
-		title: entry.heading,
-		kind: /入学|卒業|修了|Enroll|Graduat|Complet/i.test(entry.heading)
-			? kind.education
-			: kind.certification
-	}))
-
 	const populated: Record<SectionId, boolean> = {
-		about: profile.bio.length > 0,
 		interests: interests.length > 0,
-		projects: projectItems.length > 0,
 		publications: outputs.length > 0,
-		presentations: outputs.some((item) => item.isPresentation),
-		skills: skillItems.length > 0,
-		experience: experience.length > 0,
-		contact: links.length > 0
+		presentations: outputs.some((item) => item.isPresentation)
 	}
 
 	return {
@@ -111,16 +70,12 @@ export function getResearchPortfolio(lang: Language): ResearchPortfolioData {
 			affiliation: profile.education,
 			statement: profile.researchLine,
 			location: profile.location,
-			about: profile.bio,
-			initials: initialsOf(profile.name)
+			about: profile.bio
 		},
 		links,
 		interests,
-		projects: projectItems,
 		publications: outputs,
 		presentations: outputs.filter((item) => item.isPresentation),
-		skills: skillItems,
-		experience,
 		sections: getSectionDefinitions(lang).filter((section) => populated[section.id])
 	}
 }

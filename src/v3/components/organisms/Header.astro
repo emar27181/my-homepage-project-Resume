@@ -1,4 +1,12 @@
 ---
+// Mirrors src/components/layout/Header.astro (v1) + the sticky `toc-nav`
+// bar rendered around it in src/layouts/BaseLayout.astro: a sticky bar with
+// the brand/mode-switch row on top, and a second row of section tabs whose
+// current item is highlighted by scroll position (wired up in
+// ResearchPortfolio.astro's script, the same `toc-active`-on-scroll idea as
+// v1's `updateToc()`).
+import type { SectionDef } from '../../data/types'
+
 interface Props {
 	brand: string
 	v1Href: string
@@ -8,9 +16,21 @@ interface Props {
 	otherLangHref: string
 	otherLangLabel: string
 	themeLabel: string
+	sections: SectionDef[]
+	contentsLabel: string
 }
-const { brand, v1Href, v1Label, v2Href, v2Label, otherLangHref, otherLangLabel, themeLabel } =
-	Astro.props
+const {
+	brand,
+	v1Href,
+	v1Label,
+	v2Href,
+	v2Label,
+	otherLangHref,
+	otherLangLabel,
+	themeLabel,
+	sections,
+	contentsLabel
+} = Astro.props
 ---
 
 <header class='rp-header'>
@@ -57,5 +77,17 @@ const { brand, v1Href, v1Label, v2Href, v2Label, otherLangHref, otherLangLabel, 
 			</button>
 		</nav>
 	</div>
-	<div class='rp-page-progress' data-rp-progress><span></span></div>
+	{
+		sections.length > 0 && (
+			<div class='rp-toc-row'>
+				<nav class='rp-toc-nav' aria-label={contentsLabel}>
+					{sections.map((section) => (
+						<a class='rp-toc-link' href={`#${section.id}`} data-rp-toc-link={section.id}>
+							{section.title}
+						</a>
+					))}
+				</nav>
+			</div>
+		)
+	}
 </header>

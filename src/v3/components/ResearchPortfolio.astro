@@ -10,24 +10,28 @@
 // the same pattern PortfolioComputer.astro (v2) already uses.
 //
 // Scope, deliberately trimmed from the source theme (see docs/DESIGN.md):
-// single scrolling page only (no per-section routes, no multi/single
-// toggle), one fixed accent color (no palette picker), no rainbow mode, no
-// client-side language switching (this project already resolves language
-// at build time via separate /v3 and /en/v3 routes). What's kept: the
-// sidebar table of contents with scroll-spy highlighting, the light/dark
-// theme toggle, and the citation-copy button.
+// - Only the research-related sections (Research Interests / Publications /
+//   Presentations). v1's own sticky header already has tabs for everything
+//   else (制作物/趣味/スキル/学歴/資格・免許/作品集); v3 isn't a second
+//   copy of the whole resume, it's a research-focused view.
+// - The header/section-navigation pattern is v1's own (a sticky bar with a
+//   second row of scroll-spy section tabs, src/layouts/BaseLayout.astro's
+//   `toc-nav` + `updateToc()`), not portfolio-taraba's left sidebar — v3
+//   follows this site's existing convention rather than introducing a new
+//   navigation pattern of its own.
+// - Single scrolling page only (no per-section routes, no multi/single
+//   toggle), one fixed accent color (no palette picker), no rainbow mode, no
+//   client-side language switching (this project already resolves language
+//   at build time via separate /v3 and /en/v3 routes).
+// - What's kept: scroll-spy tab highlighting, the light/dark theme toggle,
+//   and the citation-copy button.
 import BaseHead from '@/components/BaseHead.astro'
 import '../styles/research.css'
 
 import Header from './organisms/Header.astro'
-import Sidebar from './organisms/Sidebar.astro'
 import Hero from './organisms/Hero.astro'
 import Footer from './organisms/Footer.astro'
-import LinkList from './molecules/LinkList.astro'
-import SkillGroup from './molecules/SkillGroup.astro'
 import PublicationList from './organisms/PublicationList.astro'
-import Timeline from './organisms/Timeline.astro'
-import ProjectList from './organisms/ProjectList.astro'
 import { getResearchPortfolio } from '../data/adapter'
 import { getUi } from '../data/ui'
 import type { Language } from '@/v2/data/portfolio'
@@ -50,8 +54,6 @@ const description =
 	lang === 'en'
 		? `${portfolio.profile.name}'s research portfolio.`
 		: `${portfolio.profile.name} の研究者ポートフォリオ。`
-
-const skillCategories = [...new Set(portfolio.skills.map((skill) => skill.category))]
 ---
 
 <html lang={lang}>
@@ -61,7 +63,7 @@ const skillCategories = [...new Set(portfolio.skills.map((skill) => skill.catego
 	<body class='rp-portfolio' id='top'>
 		<a class='rp-skip-link' href='#rp-main'>{ui.skip}</a>
 		<Header
-			brand={ui.overview}
+			brand={ui.brand}
 			v1Href={v1Href}
 			v1Label={ui.backToV1}
 			v2Href={v2Href}
@@ -69,74 +71,48 @@ const skillCategories = [...new Set(portfolio.skills.map((skill) => skill.catego
 			otherLangHref={otherLangHref}
 			otherLangLabel={otherLangLabel}
 			themeLabel={ui.theme}
+			sections={portfolio.sections}
+			contentsLabel={ui.contents}
 		/>
-		<div class='rp-layout-shell'>
-			<Sidebar
-				profile={portfolio.profile}
-				sections={portfolio.sections}
-				contentsLabel={ui.contents}
-			/>
-			<div class='rp-content-column'>
-				<main id='rp-main' class='rp-page-shell' tabindex='-1'>
-					<section id='overview' class='rp-single-section rp-single-overview'>
-						<Hero profile={portfolio.profile} links={portfolio.links} />
+		<main id='rp-main' class='rp-page-shell' tabindex='-1'>
+			<section id='overview' class='rp-single-section rp-single-overview'>
+				<Hero profile={portfolio.profile} links={portfolio.links} />
+			</section>
+			{
+				portfolio.sections.map((section, index) => (
+					<section
+						id={section.id}
+						class='rp-single-section'
+						aria-labelledby={`${section.id}-title`}
+					>
+						<header class='rp-single-section-heading'>
+							<p class='rp-eyebrow rp-accent'>
+								{String(index + 1).padStart(2, '0')} /{' '}
+								{String(portfolio.sections.length).padStart(2, '0')}
+							</p>
+							<h2 id={`${section.id}-title`}>{section.title}</h2>
+							<p>{section.subtitle}</p>
+						</header>
+						<div class='rp-section-content'>
+							{section.id === 'interests' && (
+								<ul class='rp-interests'>
+									{portfolio.interests.map((interest) => (
+										<li>{interest}</li>
+									))}
+								</ul>
+							)}
+							{section.id === 'publications' && (
+								<PublicationList outputs={portfolio.publications} lang={lang} />
+							)}
+							{section.id === 'presentations' && (
+								<PublicationList outputs={portfolio.presentations} lang={lang} />
+							)}
+						</div>
 					</section>
-					{
-						portfolio.sections.map((section, index) => (
-							<section
-								id={section.id}
-								class='rp-single-section'
-								aria-labelledby={`${section.id}-title`}
-							>
-								<header class='rp-single-section-heading'>
-									<p class='rp-eyebrow rp-accent'>
-										{String(index + 2).padStart(2, '0')} /{' '}
-										{String(portfolio.sections.length + 1).padStart(2, '0')}
-									</p>
-									<h2 id={`${section.id}-title`}>{section.title}</h2>
-									<p>{section.subtitle}</p>
-								</header>
-								<div class='rp-section-content'>
-									{section.id === 'about' &&
-										portfolio.profile.about.map((paragraph) => <p>{paragraph}</p>)}
-									{section.id === 'interests' && (
-										<ul class='rp-interests'>
-											{portfolio.interests.map((interest) => (
-												<li>{interest}</li>
-											))}
-										</ul>
-									)}
-									{section.id === 'projects' && (
-										<ProjectList projects={portfolio.projects} lang={lang} />
-									)}
-									{section.id === 'publications' && (
-										<PublicationList outputs={portfolio.publications} lang={lang} />
-									)}
-									{section.id === 'presentations' && (
-										<PublicationList outputs={portfolio.presentations} lang={lang} />
-									)}
-									{section.id === 'skills' &&
-										skillCategories.map((category) => (
-											<SkillGroup
-												category={category}
-												skills={portfolio.skills.filter((skill) => skill.category === category)}
-											/>
-										))}
-									{section.id === 'experience' && <Timeline entries={portfolio.experience} />}
-									{section.id === 'contact' && (
-										<>
-											<p>{ui.contactIntro}</p>
-											<LinkList links={portfolio.links} />
-										</>
-									)}
-								</div>
-							</section>
-						))
-					}
-				</main>
-				<Footer label={ui.footer} />
-			</div>
-		</div>
+				))
+			}
+		</main>
+		<Footer label={ui.footer} />
 
 		<script>
 			const THEME_KEY = 'v3-theme'
@@ -153,7 +129,7 @@ const skillCategories = [...new Set(portfolio.skills.map((skill) => skill.catego
 			applyTheme(initialTheme)
 
 			document.querySelector('[data-rp-set-theme]')?.addEventListener('click', () => {
-				const next = root.dataset.rpTheme === 'dark' ? 'light' : 'dark'
+				const next = root?.dataset.rpTheme === 'dark' ? 'light' : 'dark'
 				applyTheme(next)
 				try {
 					localStorage.setItem(THEME_KEY, next)
@@ -178,6 +154,9 @@ const skillCategories = [...new Set(portfolio.skills.map((skill) => skill.catego
 				setTimeout(reset, 1800)
 			})
 
+			// Scroll-spy for the header's section tabs — same idea as v1's
+			// updateToc() in src/layouts/BaseLayout.astro, kept as an
+			// IntersectionObserver here since it was already in place.
 			const sections = [...document.querySelectorAll<HTMLElement>('.rp-single-section')]
 			const tocLinks = new Map(
 				[...document.querySelectorAll<HTMLAnchorElement>('[data-rp-toc-link]')].map((link) => [
@@ -185,13 +164,8 @@ const skillCategories = [...new Set(portfolio.skills.map((skill) => skill.catego
 					link
 				])
 			)
-			const progress = document.querySelector<HTMLElement>('[data-rp-progress]')
 			const updateActive = (id: string) => {
-				tocLinks.forEach((link, linkId) => link.toggleAttribute('aria-current', linkId === id))
-				const index = sections.findIndex((section) => section.id === id)
-				if (index >= 0 && progress) {
-					progress.style.setProperty('--rp-progress', `${((index + 1) / sections.length) * 100}%`)
-				}
+				tocLinks.forEach((link, linkId) => link.classList.toggle('rp-toc-active', linkId === id))
 			}
 			if ('IntersectionObserver' in window && sections.length > 0) {
 				const observer = new IntersectionObserver(

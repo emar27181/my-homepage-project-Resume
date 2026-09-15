@@ -6,9 +6,11 @@
  * owns its own token block" convention v2 uses for `.pf-computer` — v1's
  * Tailwind/shadcn tokens and v2's tokens are both left untouched.
  *
- * See docs/DESIGN.md for the scope this port deliberately dropped (rainbow
- * mode, the palette picker, multi-page routing, client-side language
- * switching).
+ * The header/section-nav pattern (`.rp-header`/`.rp-toc-*`) instead mirrors
+ * v1's own sticky bar (src/layouts/BaseLayout.astro's `.sticky` wrapper +
+ * `toc-nav`, styled in src/styles/app.css's `.toc-link`/`.toc-active`) —
+ * see docs/DESIGN.md for why v3 follows v1's pattern here rather than
+ * portfolio-taraba's left sidebar.
  */
 
 .rp-portfolio {
@@ -20,8 +22,6 @@
 	--rp-accent: #403797;
 	--rp-accent-dark: #2e286f;
 	--rp-accent-soft: #eeecff;
-	--rp-brand: #403797;
-	--rp-on-accent: #ffffff;
 
 	--rp-space-1: 0.25rem;
 	--rp-space-2: 0.5rem;
@@ -32,10 +32,8 @@
 	--rp-space-16: 4rem;
 
 	--rp-width-content: 44rem;
-	--rp-width-sidebar: 16rem;
-	--rp-control-height: 2.75rem;
 	--rp-control-compact: 2.25rem;
-	--rp-header-height: 4rem;
+	--rp-header-height: 3.5rem;
 
 	--rp-type-xs: 0.75rem;
 	--rp-type-sm: 0.875rem;
@@ -130,7 +128,8 @@
 	top: 1rem;
 }
 
-/* Header */
+/* Header: sticky bar (brand/mode row) + a second row of section tabs,
+   matching v1's sticky wrapper + toc-nav (src/layouts/BaseLayout.astro). */
 .rp-header {
 	position: sticky;
 	top: 0;
@@ -140,7 +139,7 @@
 	border-bottom: 1px solid var(--rp-rule);
 }
 .rp-header-inner {
-	width: min(1120px, calc(100% - 3rem));
+	width: min(var(--rp-width-content), calc(100% - 3rem));
 	margin-inline: auto;
 	min-height: var(--rp-header-height);
 	display: flex;
@@ -205,99 +204,54 @@
 .rp-portfolio[data-rp-theme='dark'] .rp-theme-icon--dark {
 	display: block;
 }
-.rp-page-progress {
-	height: 3px;
-	background: var(--rp-rule);
+
+.rp-toc-row {
+	border-top: 1px solid color-mix(in srgb, var(--rp-rule) 60%, transparent);
 }
-.rp-page-progress span {
-	display: block;
-	width: var(--rp-progress, 0%);
-	height: 100%;
+.rp-toc-nav {
+	width: min(var(--rp-width-content), calc(100% - 3rem));
+	margin-inline: auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--rp-space-2) 0.75rem;
+	padding-block: 0.5rem;
+}
+.rp-toc-link {
+	padding: 2px 8px;
+	border-radius: 4px;
+	color: var(--rp-muted);
+	font-size: var(--rp-type-sm);
+	text-decoration: none;
+	position: relative;
+	transition:
+		color 0.2s,
+		background 0.2s;
+}
+.rp-toc-link:hover {
+	color: var(--rp-ink);
+}
+.rp-toc-link.rp-toc-active {
+	color: var(--rp-ink);
+	font-weight: 500;
+}
+.rp-toc-link.rp-toc-active::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 20%;
+	right: 20%;
+	height: 2px;
+	border-radius: 1px;
 	background: var(--rp-accent);
-	transition: width 240ms ease;
 }
 
 /* Layout */
-.rp-layout-shell {
-	width: 100%;
-}
-.rp-content-column {
-	min-width: 0;
-}
 .rp-page-shell {
 	width: min(var(--rp-width-content), calc(100% - 3rem));
 	margin-inline: auto;
 	padding-block: var(--rp-space-12) var(--rp-space-16);
-}
-.rp-sidebar {
-	background: var(--rp-brand);
-	color: white;
-	padding: var(--rp-space-4) var(--rp-space-6);
-}
-.rp-sidebar-profile {
-	display: flex;
-	align-items: center;
-	gap: 0.8rem;
-	padding-bottom: 1.2rem;
-	margin-bottom: 1.2rem;
-	border-bottom: 1px solid color-mix(in srgb, white 24%, transparent);
-}
-.rp-sidebar-profile strong,
-.rp-sidebar-profile span {
-	display: block;
-}
-.rp-sidebar-profile span {
-	color: color-mix(in srgb, white 85%, transparent);
-	font-size: var(--rp-type-xs);
-}
-.rp-avatar {
-	display: inline-grid;
-	place-items: center;
-	width: 44px;
-	height: 44px;
-	flex: 0 0 auto;
-	border-radius: 50%;
-	background: color-mix(in srgb, white 16%, transparent);
-	color: white;
-	font: 600 var(--rp-type-sm) inherit;
-}
-.rp-sidebar-label {
-	margin: 0 0 0.5rem;
-	color: color-mix(in srgb, white 85%, transparent);
-	font: 500 var(--rp-type-meta) inherit;
-	letter-spacing: 0.06em;
-}
-.rp-sidebar-toc {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.4rem;
-}
-.rp-sidebar-toc a {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	min-height: 44px;
-	padding: 0.4rem 0.7rem;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: color-mix(in srgb, white 92%, transparent);
-	text-decoration: none;
-	font-size: var(--rp-type-sm);
-}
-.rp-sidebar-toc a:hover {
-	color: white;
-	border-color: color-mix(in srgb, white 35%, transparent);
-}
-.rp-sidebar-toc a[aria-current] {
-	background: white;
-	color: var(--rp-accent-dark);
-}
-.rp-sidebar-toc b {
-	font-weight: 500;
-	opacity: 0.75;
 }
 
 /* Hero */
@@ -392,12 +346,6 @@
 	font-size: var(--rp-type-sm);
 	color: var(--rp-muted);
 }
-.rp-contribution {
-	border-left: 2px solid var(--rp-accent);
-	padding: 0.6rem 1rem;
-	background: var(--rp-accent-soft);
-	margin-block: 1rem;
-}
 
 .rp-link-list {
 	display: flex;
@@ -435,55 +383,6 @@
 	stroke-width: 1.5;
 }
 
-.rp-skill-group + .rp-skill-group {
-	margin-top: 1.5rem;
-	padding-top: 1.5rem;
-	border-top: 1px solid var(--rp-rule);
-}
-.rp-skill-group h3 {
-	font-size: var(--rp-type-meta);
-	color: var(--rp-accent);
-	margin-bottom: 0.6rem;
-}
-.rp-skill-tags {
-	list-style: none;
-	padding: 0;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-}
-.rp-skill-tags li {
-	border: 1px solid var(--rp-rule);
-	border-radius: 999px;
-	padding: 0.3rem 0.8rem;
-	font-size: var(--rp-type-sm);
-}
-
-.rp-timeline {
-	list-style: none;
-	padding-left: 1.2rem;
-	border-left: 1px solid var(--rp-rule);
-}
-.rp-timeline li {
-	position: relative;
-	padding-bottom: 1.4rem;
-}
-.rp-timeline li::before {
-	content: '';
-	position: absolute;
-	width: 7px;
-	height: 7px;
-	background: var(--rp-accent);
-	border-radius: 50%;
-	left: -1.45rem;
-	top: 0.55rem;
-}
-.rp-timeline h3 {
-	margin-top: 0.4rem;
-	font-size: var(--rp-type-body);
-	font-weight: 600;
-}
-
 .rp-footer {
 	display: flex;
 	align-items: center;
@@ -509,33 +408,6 @@
 		grid-template-columns: 1fr 1.2fr;
 		gap: 4rem;
 		padding-block: 3.5rem 4.5rem;
-	}
-	.rp-layout-shell {
-		display: grid;
-		grid-template-columns: var(--rp-width-sidebar) minmax(0, 1fr);
-	}
-	.rp-sidebar {
-		position: fixed;
-		top: var(--rp-header-height);
-		left: 0;
-		width: var(--rp-width-sidebar);
-		height: calc(100vh - var(--rp-header-height));
-		overflow-y: auto;
-		padding: var(--rp-space-8) var(--rp-space-6);
-	}
-	.rp-sidebar-toc {
-		display: block;
-	}
-	.rp-sidebar-toc li + li {
-		margin-top: 0.2rem;
-	}
-	.rp-content-column {
-		grid-column: 2;
-	}
-	.rp-page-shell,
-	.rp-footer {
-		width: min(var(--rp-width-content), calc(100% - 6rem));
-		margin-inline: var(--rp-space-12) auto;
 	}
 }
 

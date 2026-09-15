@@ -59,9 +59,9 @@ v1はTailwindの`dark:`クラス切り替え(`ThemeProvider`がlocalStorageと`<
 ```
 src/v3/
 ├── components/
-│   ├── atoms/       # ExternalLink・Avatar(写真が無いためイニシャル表示)・CitationCopyButton
-│   ├── molecules/   # LinkList・SkillGroup・PublicationItem
-│   ├── organisms/   # Header・Sidebar・Hero・Footer・PublicationList・Timeline・ProjectList
+│   ├── atoms/       # ExternalLink・CitationCopyButton
+│   ├── molecules/   # LinkList・PublicationItem
+│   ├── organisms/   # Header(ブランド行+セクションタブ行)・Hero・Footer・PublicationList
 │   └── ResearchPortfolio.astro # v3ページの実体。langをpropで受け取る唯一のマークアップ(v2のPortfolioComputer.astroと同じ役割)。
 ├── data/
 │   ├── types.ts     # 移植先コンポーネントが要求する型(ResearchProfile/ResearchOutput等)。
@@ -73,25 +73,32 @@ src/v3/
     └── research.css  # `.rp-*` 名前空間の独自スタイル(紫アクセント、ライト基調)。v1・v2のCSSと衝突しない。
 ```
 
+**v3は研究関連セクションだけを表示する**: v1のヘッダーには既にすべてのカテゴリ(制作物/趣味/研究テーマ/学会発表/スキル/学歴/資格・免許/作品集)のタブがある。v3を移植元テーマの全セクション(Featured Projects・Skills・Education/History・Awards・Contactなど)でそのまま再現すると、v1と同じ内容を別デザインで重複表示するだけになってしまう。そこでv3は研究に関するセクション ― Research Interests・Publications・Presentations ― だけを表示する設計にした。`SectionId`型を`'interests' | 'publications' | 'presentations'`の3つに絞り、`ProjectList.astro`/`SkillGroup.astro`/`Timeline.astro`など元テーマのAwards以外の非研究セクション用コンポーネントも(Awardsと同じ理由で)作らなかった。プロフィール本文・連絡先リンクはセクションではなくHero(常に表示される導入部)にまとめている ― 元の実装ではHeroとAbout/Contactセクションの両方に同じ内容(`profile.about`・`profile.links`)を出しており「同じ内容を2箇所に書く」規約違反になっていたため、Hero側だけに一本化した。
+
 **移植元からの意図的な縮小**(docs/DESIGN.mdに詳細):
 
 - 単一のスクロールページのみ。セクションごとの個別ページ(`/about`等)やmulti/single表示切り替えは実装していない。
 - アクセントカラーは紫1色固定。パレット選択・虹色モードは移植していない。
 - 表示言語はこのサイトの既存の方式(`/v3` = ja、`/en/v3` = en のURLベース切り替え)に統一し、移植元が持っていたクライアントサイドでのDOM文字列置換による言語切り替えは採用していない。
-- 保持した機能: サイドバー目次のスクロール連動ハイライト(IntersectionObserver)、ライト/ダーク切り替え、引用コピーボタン。
+- **ナビゲーションは移植元の左サイドバーではなくv1自身のパターンを踏襲**(後述)。
+- 保持した機能: セクションタブのスクロール連動ハイライト、ライト/ダーク切り替え、引用コピーボタン。
 
-**Awardsセクションが無い理由**: 移植元にはAwards/Grantsセクションがあるが、`v2/data/portfolio.ts`には受賞・助成金のデータそのものが無い(空配列ではなく、データ構造自体が存在しない)。あとから追加できる空のプレースホルダーを持つより、使われないAwardListコンポーネントを残さない方を選び、`SectionId`型からも外した。
+## v3のヘッダー/ナビゲーションはv1のパターンを踏襲
+
+移植元(portfolio-taraba)は幅260pxの固定左サイドバーにプロフィールと目次を置く設計だが、v3では採用していない。代わりに、このサイトのv1が既に持っているパターン(`src/layouts/BaseLayout.astro`の`sticky top-0`なラッパーに`Header`と`toc-nav`を重ね、`src/styles/app.css`の`.toc-link`/`.toc-active`でスクロール位置に応じてハイライトする、`src/pages/index.astro`の`slot="toc"`)をv3にもそのまま適用した。
+
+- `src/v3/components/organisms/Header.astro`が1つのコンポーネントで両方の行を持つ: 1行目はブランド名+v1/v2/言語切替/テーマ切替、2行目(`.rp-toc-row`)が各研究セクションへのタブ(`.rp-toc-link`)。
+- ハイライトの仕組みはv1の`updateToc()`(scrollイベント + `offsetTop`比較)ではなく、既存の`IntersectionObserver`実装(`ResearchPortfolio.astro`のscript)をそのまま流用している ― 挙動(現在の見えているセクションのタブに`active`相当のクラスを付ける)はv1と同じだが、実装手段は元々v3にあったものを活かした。CSSのクラス名・見た目(`.rp-toc-link.rp-toc-active`に下線)はv1の`.toc-link.toc-active::after`と揃えている。
+- 結果として`Sidebar.astro`・`Avatar.astro`(顔写真が無いためのイニシャル表示)は使われなくなったため削除した。
 
 ## v3 の多言語化・アダプタ設計
 
 v2と同じくURLベースの方式(`/v3` = ja、`/en/v3` = en)。`adapter.ts`の`getResearchPortfolio(lang)`が`getPortfolio(lang)`(v2)の出力を1回だけ組み替えて返し、その先のコンポーネントはすでに解決済みの文字列だけを受け取る(移植元が持っていた`{ja, en}`の`LocalizedText`型や`t()`ヘルパーは不要になった)。
 
-対応関係の主なもの:
+対応関係:
 
 - `research`配列(v2)のうち日付が無いもの → Research Interestsの1件(研究テーマの説明そのものが関心事だと解釈)。日付があるもの(学会発表2件)→ Publications・Presentationsの両方(移植元の「学会・研究会の成果はPresentationsにも自動掲載」という仕様をそのまま踏襲)。
-- `history`配列(v2) → Education / Historyのタイムライン。見出しに「入学/卒業/修了」を含むかどうかで`学歴`/`資格・免許`の分類を機械的に振り分けている(データを捏造せず、既存の見出し文字列から分類するだけ)。
-- `projects`配列(v2) → Featured Projectsのカード。
-- `skills`配列(v2) → カテゴリ別のタグ表示。移植元は技能ごとに用途・経験年数の説明文を持つが、v2側にその粒度のデータが無いため名前とカテゴリのみ表示し、説明文を捏造していない。
+- `profile.bio`/`profile.links`(v2) → Heroのみで表示(前述のとおりセクションとしては重複させない)。
 
 ## v1・v2・v3間の相互リンク
 
