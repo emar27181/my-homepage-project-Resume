@@ -304,7 +304,10 @@ export interface SkillGroup {
 // Skill/tech names are already language-neutral (proper nouns), so this one
 // is shared across languages rather than duplicated per language.
 export const skills: SkillGroup[] = [
-	{ label: 'Frontend', items: ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'p5.js', 'Astro'] },
+	{
+		label: 'Frontend',
+		items: ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'Next.js', 'p5.js', 'Astro']
+	},
 	{ label: 'Backend', items: ['Python', 'C', 'Java', 'Flask'] },
 	{ label: 'Tool', items: ['Git', 'VSCode'] }
 ]
@@ -321,16 +324,36 @@ const hobbiesByLang: Record<Language, HobbyEntry[]> = {
 			heading: 'イラスト',
 			summary:
 				'幼少期から絵を描くことが好きで、動物やキャラクターの模写、サークルや研究室のロゴデザインなど幅広い創作活動を行ってきました。',
-			links: [{ label: 'Instagram', href: 'https://www.instagram.com/amen27181/' }]
+			links: [{ label: 'Instagram', href: 'https://www.instagram.com/emar27181/' }]
 		},
 		{
 			heading: 'スポーツ',
 			summary:
-				'スノーボード、テニス、卓球が趣味。中学では卓球部副部長、高校ではテニス部副部長、大学ではテニスサークルの練習長を務めました。'
+				'ゴルフ・卓球・テニス・スノーボードと幅広くスポーツに取り組んできました。跳び箱やボルダリングなど、体を動かすことも好きです。'
+		},
+		{
+			heading: 'アニメ・漫画',
+			summary:
+				'バトルものが好きで、『HUNTER×HUNTER』『呪術廻戦』『葬送のフリーレン』などをよく見ています。'
+		},
+		{
+			heading: 'ラーメン',
+			summary: 'ラーメンを食べ歩くのが好きです。一番好きなお店は藤沢市の「こぐま」。'
+		},
+		{
+			heading: '猫',
+			summary:
+				'モナ・リサ・ピットの3匹の保護猫を飼っています。猫をモチーフにしたイラストもよく描きます。'
 		},
 		{
 			heading: 'ゲーム',
-			summary: '主にFPSゲームが好きで、賞金付きのAPEXカスタム大会を主催したこともあります。'
+			summary: '主にFPSゲームが好きで、賞金付きのAPEXカスタム大会を主催したこともあります。',
+			links: [{ label: 'Gaming Portfolio', href: 'https://nodoame27181.netlify.app/' }]
+		},
+		{
+			heading: '音楽',
+			summary:
+				'アニメのOP・EDきっかけで好きになった曲が多く、King Gnuや米津玄師などのJ-POPをよく聴いています。'
 		}
 	],
 	en: [
@@ -338,16 +361,36 @@ const hobbiesByLang: Record<Language, HobbyEntry[]> = {
 			heading: 'Illustration',
 			summary:
 				"I've loved drawing since childhood — copying animals and characters, and designing logos for clubs and my lab, among other things.",
-			links: [{ label: 'Instagram', href: 'https://www.instagram.com/amen27181/' }]
+			links: [{ label: 'Instagram', href: 'https://www.instagram.com/emar27181/' }]
 		},
 		{
 			heading: 'Sports',
 			summary:
-				'Snowboarding, tennis, and table tennis. Vice-captain of the table tennis club in junior high, vice-captain of the tennis club in high school, and practice lead of the tennis circle in university.'
+				"Golf, table tennis, tennis, and snowboarding — I've taken on a wide range of sports, and enjoy staying active with things like vault and bouldering too."
+		},
+		{
+			heading: 'Anime & Manga',
+			summary:
+				"I enjoy battle-shonen series — Hunter × Hunter, Jujutsu Kaisen, and Frieren: Beyond Journey's End among my favorites."
+		},
+		{
+			heading: 'Ramen',
+			summary: 'I like ramen-hopping — my favorite spot is Koguma in Fujisawa.'
+		},
+		{
+			heading: 'Cats',
+			summary:
+				'I live with three rescue cats — Mona, Lisa, and Pitt — and often draw cat-themed illustrations too.'
 		},
 		{
 			heading: 'Gaming',
-			summary: 'Mostly FPS games — I once hosted a cash-prize APEX custom tournament.'
+			summary: 'Mostly FPS games — I once hosted a cash-prize APEX custom tournament.',
+			links: [{ label: 'Gaming Portfolio', href: 'https://nodoame27181.netlify.app/' }]
+		},
+		{
+			heading: 'Music',
+			summary:
+				'Many of my favorite songs started from anime openings and endings — I often listen to J-POP artists like King Gnu and Kenshi Yonezu.'
 		}
 	]
 }
