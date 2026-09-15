@@ -290,12 +290,14 @@ button.pf-chip:hover {
 	}
 }
 
+/* Lives inside #pf-output now (a real terminal's cursor sits right after
+   the last output line, not in a separate fixed bar) — no border/padding
+   of its own, it just takes on .pf-window__body's existing padding and
+   line-height rhythm like every other printed line. */
 .pf-window__input-row {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	padding: 10px 16px;
-	border-top: 1px solid var(--pf-border);
 	min-width: 0;
 }
 
