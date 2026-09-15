@@ -1,6 +1,6 @@
-# Design (v2: Portfolio Terminal)
+# Design (v2: Portfolio Terminal / v3: Research Portfolio)
 
-v1のデザイン規約(Tailwindのデフォルトスケール、shadcn由来のCSS変数)は変更していない。ここではv2 (`/v2`) だけで使う独自トークンを記録する。実体は `src/v2/styles/terminal.css` の `.pf-computer` 内のCSS変数1箇所のみ。
+v1のデザイン規約(Tailwindのデフォルトスケール、shadcn由来のCSS変数)は変更していない。ここではv2 (`/v2`) とv3 (`/v3`) がそれぞれ独自に持つトークンを記録する。v2の実体は `src/v2/styles/terminal.css` の `.pf-computer` 内のCSS変数1箇所、v3の実体は `src/v3/styles/research.css` の `.rp-portfolio` 内のCSS変数1箇所で、互いに参照し合わない。
 
 ## カラー
 
@@ -93,3 +93,57 @@ v1のヘッダーには元々、ダークモード切り替えボタンの独自
 ## 出典
 
 - 44px/24pxの操作部品の2段階、16px固定の入力欄という一般則はCLAUDE運用ルールの持ち歩くフロントエンド規約(Apple HIG 44pt / WCAG 2.2 AA 2.5.8 / iOS Safariのズーム挙動)に準拠しており、v2でも同じ下限だけは踏襲している(ただしv2はキーボード入力中心のUIのため、タッチ領域44pxを機械的に全部品へ適用してはいない)。
+
+---
+
+# Design (v3: Research Portfolio)
+
+v3 (`/v3`) は[emar27181/portfolio-taraba](https://github.com/emar27181/portfolio-taraba)という研究者ポートフォリオ用Astroテーマのデザインを、このサイトの内容で動くように移植したもの。構成はdocs/ARCHITECTURE.mdを参照。ここでは移植時に決めたデザイン判断を記録する。
+
+## 移植元から意図的に外した機能
+
+移植元は次の機能を持つが、いずれもv3では実装していない。理由は「不要」ではなく「このポート作業のスコープを、実データで動く1枚のデザインに絞った」ため — 将来必要になれば移植元を参照して追加できる。
+
+- **セクションごとの個別ページ・multi/single表示切り替え**: 移植元は`/about`・`/publications`のような個別ページ表示と、全セクションを1ページに並べる表示を設定で切り替えられる。v3では後者(1ページ)のみを実装した。ページ数が少なく(3セクション、後述)、切り替え機能を持つほどの規模ではないため。
+- **パレット選択・虹色モード**: 移植元は紫・青・緑・虹の4配色を設定で切り替えられる。v3では紫1色に固定した。配色を選べること自体がこのポートの目的ではないため、まず1色で動くことを優先した。
+- **クライアントサイドの言語切り替え**: 移植元はページ内のテキストノードを丸ごと日→英に置換するJSを持つ(`getTranslationDictionary`)。このサイトはv1・v2ともに「表示言語ごとに別URL(`/v2`=ja, `/en/v2`=en)、サーバー側で解決済みの文字列を渡す」という一貫した方式を採っているため、v3もそれに合わせた(`/v3`=ja, `/en/v3`=en)。DOM文字列置換より単純で、v1・v2と実装方式が食い違わない。
+- **左サイドバー**: 移植元の主要なレイアウト要素だが、v3では採用していない。代わりにv1自身が既に持っているパターン(ヘッダー+スクロール連動タブ行)を踏襲した。理由・詳細は次節。
+- **Featured Projects・Skills・Education/History・Contact・Awardsのセクション**: v3はResearch Interests・Publications・Presentationsの3セクションだけを表示する。理由は次々節。
+
+保持した機能: セクションタブのスクロール連動ハイライト(IntersectionObserver、`ResearchPortfolio.astro`のscript)、ライト/ダーク切り替え。いずれもこのポートの主眼である「研究者ポートフォリオらしい見た目と操作感」に直結するため残した。引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)は一度移植したが、不要という判断で削除した。
+
+## ナビゲーションはv1のパターンを踏襲(サイドバーではない)
+
+移植元のSidebar(幅260pxの固定左カラム、プロフィール写真+目次)は、v3では実装していない。代わりに、このサイトのv1(`/`)が既に持っている「スクロール位置に応じてハイライトするタブ行」パターン(`src/layouts/BaseLayout.astro`の`sticky`ラッパー + `toc-nav`、`src/styles/app.css`の`.toc-link`/`.toc-active`)をv3にも適用した。
+
+- v3の`Header.astro`が2段構成になっている: 1段目はブランド+v1/v2/言語/テーマの切り替え、2段目(`.rp-toc-row` / `.rp-toc-nav`)が各セクションへのタブ。どちらもヘッダーごと`position: sticky`で画面上部に固定される。
+- タブの現在地ハイライトは`.rp-toc-link.rp-toc-active`に下線を出す方式で、v1の`.toc-link.toc-active::after`と見た目を揃えている。スクロール位置の検出はv1の`scroll`イベント+`offsetTop`比較ではなく、既存の`IntersectionObserver`実装をそのまま使っている(挙動は同じ、実装手段はv3側の既存コードを活かした)。
+- この変更で`Sidebar.astro`・`Avatar.astro`(顔写真が無いためのイニシャル表示。移植元のSidebarでのみ使っていた)は不要になったため削除した。プロフィール写真をどう扱うかという論点自体が無くなった。
+
+## 研究セクションだけを表示する理由
+
+v1のヘッダーには既にすべてのカテゴリ(制作物・趣味・研究テーマ・学会発表・スキル・学歴・資格免許・作品集)のタブがある。v3を移植元の全セクション構成のまま実装すると、v1と全く同じ内容を別の見た目で重複させるだけになり、「同じ内容を2箇所に書かない」という規約に反する。そこでv3は研究に直接関係するセクション(Research Interests・Publications・Presentations)だけを表示し、それ以外(Featured Projects・Skills・Education/History・Contact)は表示しない — v1側で既に見られるため。
+
+これに伴い、プロフィール本文(`profile.about`)と連絡先リンク(`profile.links`)は独立したAbout/Contactセクションとしては置かず、常に表示されるHero(プロフィール導入部)だけで表示する。初期実装ではHeroとAbout/Contactセクションの両方に同じ内容を出しており、それ自体が「同じ内容を2箇所に書く」規約違反になっていたため、一本化した。
+
+## カラー
+
+`.rp-portfolio`(`src/v3/styles/research.css`)のCSS変数1箇所で定義。移植元のデフォルト配色(紫)をそのまま採用している。
+
+| 用途           | 変数           | ライト値  | ダーク値  |
+| -------------- | -------------- | --------- | --------- |
+| 背景           | `--rp-paper`   | `#fafaf8` | `#0d0e13` |
+| パネル         | `--rp-surface` | `#ffffff` | `#15161d` |
+| 本文           | `--rp-ink`     | `#22212a` | `#f3f1fa` |
+| 補助テキスト   | `--rp-muted`   | `#616860` | `#aaa8b6` |
+| 罫線           | `--rp-rule`    | `#d9ddd6` | `#30313a` |
+| アクセント(紫) | `--rp-accent`  | `#403797` | `#9b94ff` |
+
+ライト/ダークは`.rp-portfolio[data-rp-theme="dark"]`で変数を上書きする方式(v1の`dark:`クラス、v2の常時ダーク固定、それぞれと独立した第3の仕組み)。`data-rp-theme`はヘッダーのトグルボタンがクリックで切り替え、`localStorage`の`v3-theme`キーに保存する(v1の`theme`キー、v2は保存無し、とキーを分けて衝突を避けている)。
+
+## タイポグラフィ・寸法
+
+- フォントはシステムフォント(`ui-sans-serif, system-ui, ...`)。移植元は`Inter Variable`/`Noto Sans JP Variable`をnpm依存として読み込むが、このサイトの他モードは特定のWebフォントに依存していないため、v3だけ新しい依存を増やさずシステムフォントに寄せた。
+- 文字サイズ・余白・操作部品の寸法は移植元の値(`design.ts`/`typography.ts`相当)をCSS変数に直接書き写している(`--rp-space-*`/`--rp-type-*`/`--rp-control-*`)。移植元のようにTypeScript側の正本から生成する仕組みは、v3単体では正本が1箇所のCSSファイルで足りる規模のため導入していない。
+
+顔写真アセットはこのプロジェクトのどこにも存在しない(`src/assets`・v1のindex.astroいずれにも無い)。移植元のSidebarは`profile.avatar`の顔写真を表示する設計だったが、Sidebar自体を採用していない(前述)ため、顔写真をどう扱うかという論点自体が無くなっている。

@@ -1,0 +1,18 @@
+---
+import ExternalLink from '../atoms/ExternalLink.astro'
+import type { ResearchOutput } from '../../data/types'
+interface Props {
+	output: ResearchOutput
+}
+const { output } = Astro.props
+---
+
+<article class='rp-record' id={output.id}>
+	<span class='rp-mono rp-muted'>{output.venue}</span>
+	<h4>{output.title}</h4>
+	<p>{output.authors}</p>
+	{output.date && <p class='rp-small-label'>{output.date}</p>}
+	<div class='rp-link-list'>
+		{output.links.map((link) => <ExternalLink href={link.url}>{link.label}</ExternalLink>)}
+	</div>
+</article>

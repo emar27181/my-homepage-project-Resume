@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-09-15 (14)
+
+- feat: エンターテインメントコンピューティング2026特集号(情報処理学会論文誌、申請中)をresearchデータに追加。v1(`src/pages/index.astro`)には既にプレースホルダとして掲載されていた内容(タイトル・日付「2026年2月（申請中）」・学会リンク・動画)をそのままv2/data/portfolio.tsに転記した(en版も新規に対応する形で追加)。
+- fix: `ResearchEntry`に`kind?: 'presentation' | 'journal'`を追加し、v3(研究者ポートフォリオ)のPublications/Presentations振り分けを修正。論文誌投稿(発表を伴わない)がPresentationsセクションに紛れ込んでいた挙動を直し、`kind: 'journal'`のものはPublicationsのみに表示されるようにした。
+- improve: v3から引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)を削除。不要と判断したため、関連コンポーネント・スクリプト・CSS・UI文言をまとめて削除した。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright)でPublications 4件(学会発表3件+論文誌1件)・Presentations 3件(学会発表のみ)・引用コピーボタンが表示されないことを確認済み。
+
+## 2026-09-15 (13)
+
+- improve: v3(研究者ポートフォリオ)を研究関連セクションだけに絞り、ナビゲーションをv1と同じパターンに揃えた。v1のヘッダーには既に全カテゴリ(制作物/趣味/研究テーマ/学会発表/スキル/学歴/資格・免許/作品集)のタブがあるため、v3で移植元の全セクション構成をそのまま再現すると内容が重複してしまう。`SectionId`を`interests`/`publications`/`presentations`の3つに絞り、Featured Projects・Skills・Education/History・Contactの各セクションとそれ専用のコンポーネント(`ProjectList`/`SkillGroup`/`Timeline`)を削除した。プロフィール本文・連絡先リンクはHero(常時表示の導入部)だけに一本化し、独立したAbout/Contactセクションとの重複表示を解消した。ナビゲーションは移植元の左サイドバーをやめ、v1自身が既に持つパターン(`src/layouts/BaseLayout.astro`の`sticky`ヘッダー+`toc-nav`、`.toc-link`/`.toc-active`のスクロール連動ハイライト)を`Header.astro`の2段構成(ブランド行+セクションタブ行)として移植した。これに伴い`Sidebar.astro`・`Avatar.astro`(顔写真の代わりのイニシャル表示)は不要になったため削除。`npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright)でセクション数・タブのスクロール連動ハイライト・スティッキーヘッダーの固定・デスクトップ/モバイル双方の表示を確認済み。
+
+## 2026-09-15 (12)
+
+- feat: 研究者ポートフォリオ風のデザインに切り替えられる`/v3`を追加。[emar27181/portfolio-taraba](https://github.com/emar27181/portfolio-taraba)というAstro製の研究者ポートフォリオテーマ(Atomic Design構成)を、このサイト自身のコンテンツで動くように移植した。新しいコンテンツファイルは作らず、`src/v3/data/adapter.ts`が既存の`src/v2/data/portfolio.ts`(v2と共有する唯一のソース)を研究者ポートフォリオ向けの形に組み替える。研究発表2件(インタラクション2024・EC2024)はPublications/Presentations両方に、日付の無い研究概要はResearch Interestsに、学歴/資格の履歴はタイムラインに、制作物はFeatured Projectsにそれぞれ対応させた。移植元にあるAwards/パレット選択/虹色モード/セクション別個別ページ/クライアントサイド言語切り替えは、実データが無い・このサイトの既存方式と食い違う等の理由で意図的に持ち込んでいない(理由はdocs/DESIGN.md参照)。サイドバー目次のスクロール連動ハイライト・ライト/ダーク切り替え・引用情報コピーは移植した。顔写真アセットがどこにも存在しないため、捏造せずイニシャル表示のAvatarで代替。v1ヘッダーに`graduation-cap`アイコンのリンクを、v2ヘッダーに`v3`チップを追加し、3モード間を相互リンクできるようにした。`tsconfig.json`に`@/v3/*`のパスエイリアスを追加。`npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、デスクトップ/モバイル390px、ja/en、ライト/ダーク)で確認済み。
+
 ## 2026-09-15 (11)
 
 - feat: モバイル用オンスクリーンキーに`/`・`.`・`-`・`~`を追加。絶対パス・`cd ..`・プロジェクトのslug・ホームディレクトリの表記に頻出するがスマホの記号レイアウト切り替えが要る記号を、既存の`.pf-mobile-keys`行(Tab・矢印・Enter・Clear)にまとめた。`app.ts`側は名前付きアクションに一致しない`data-key`をカーソル位置への文字挿入として扱う`insertAtCursor()`+`default`分岐を追加しただけで、記号ごとの個別処理や別リストは持たない(ボタンの`data-key`自体が挿入対象の文字)。実ブラウザ(390px幅)でカーソル位置(先頭・中間・末尾)への挿入が正しく行われること、行が折り返しても`Enter`が引き続き右端に来ることを確認済み。

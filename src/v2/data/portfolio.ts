@@ -221,6 +221,8 @@ export interface ResearchEntry {
 	summary: string
 	links?: { label: string; href: string }[]
 	videoUrl?: string
+	/** 'journal' entries are publications but not presentations (no talk was given). Defaults to 'presentation'. */
+	kind?: 'presentation' | 'journal'
 }
 
 const researchByLang: Record<Language, ResearchEntry[]> = {
@@ -257,6 +259,29 @@ const researchByLang: Record<Language, ResearchEntry[]> = {
 				}
 			],
 			videoUrl: 'https://www.youtube.com/embed/1PHFpr4gAR4'
+		},
+		{
+			heading: 'エンターテインメントコンピューティング2025 口頭発表・デモ発表',
+			date: '2025年9月',
+			summary:
+				'「色相・トーンの二段階配色推薦によるイラスト制作支援ツールの検証」というタイトルで口頭発表・デモ発表を行いました。',
+			links: [
+				{ label: '学会リンク', href: 'https://ec2025.entcomp.org/' },
+				{ label: '表彰リンク', href: 'https://ec2025.entcomp.org/award/' },
+				{
+					label: '説明リンク',
+					href: 'https://int.cs.meiji.ac.jp/2025/10/%e8%89%b2%e7%9b%b8%e3%83%bb%e3%83%88%e3%83%bc%e3%83%b3%e3%81%ae%e4%ba%8c%e6%ae%b5%e9%9a%8e%e9%85%8d%e8%89%b2%e6%8e%a8%e8%96%a6%e3%81%ab%e3%82%88%e3%82%8b%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e5%88%b6/'
+				}
+			],
+			videoUrl: 'https://www.youtube.com/embed/Sr1CyI3407c'
+		},
+		{
+			heading: '情報処理学会論文誌 エンターテインメントコンピューティング特集号 (申請中)',
+			date: '2026年2月（申請中）',
+			summary: 'エンターテインメントコンピューティング特集号への論文を申請中です。',
+			links: [{ label: '学会リンク', href: 'https://www.ipsj.or.jp/journal/cfp/26-T.html' }],
+			videoUrl: 'https://www.youtube.com/embed/h5IxvhB8jNE',
+			kind: 'journal'
 		}
 	],
 	en: [
@@ -292,6 +317,30 @@ const researchByLang: Record<Language, ResearchEntry[]> = {
 				}
 			],
 			videoUrl: 'https://www.youtube.com/embed/1PHFpr4gAR4'
+		},
+		{
+			heading: 'Entertainment Computing 2025 Oral & Demo Presentation',
+			date: 'September 2025',
+			summary:
+				'Gave an oral and demo presentation titled "Verification of an illustration creation support tool using two-stage hue and tone color scheme recommendation."',
+			links: [
+				{ label: 'Conference Link', href: 'https://ec2025.entcomp.org/' },
+				{ label: 'Award Link', href: 'https://ec2025.entcomp.org/award/' },
+				{
+					label: 'Description Link',
+					href: 'https://int.cs.meiji.ac.jp/2025/10/%e8%89%b2%e7%9b%b8%e3%83%bb%e3%83%88%e3%83%bc%e3%83%b3%e3%81%ae%e4%ba%8c%e6%ae%b5%e9%9a%8e%e9%85%8d%e8%89%b2%e6%8e%a8%e8%96%a6%e3%81%ab%e3%82%88%e3%82%8b%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e5%88%b6/'
+				}
+			],
+			videoUrl: 'https://www.youtube.com/embed/Sr1CyI3407c'
+		},
+		{
+			heading: 'IPSJ Journal: Entertainment Computing Special Issue (Under Review)',
+			date: 'February 2026 (Under Review)',
+			summary:
+				'Currently under review for submission to the IPSJ Journal Entertainment Computing special issue.',
+			links: [{ label: 'Conference Link', href: 'https://www.ipsj.or.jp/journal/cfp/26-T.html' }],
+			videoUrl: 'https://www.youtube.com/embed/h5IxvhB8jNE',
+			kind: 'journal'
 		}
 	]
 }

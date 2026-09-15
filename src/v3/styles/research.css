@@ -1,0 +1,396 @@
+/**
+ * v3 "research portfolio" — scoped design tokens and layout, adapted from
+ * https://github.com/emar27181/portfolio-taraba's Tailwind v4 `global.css`
+ * into plain CSS (this project runs Tailwind v3, which has no `@theme`
+ * directive). Everything lives under `.rp-portfolio`, the same "each mode
+ * owns its own token block" convention v2 uses for `.pf-computer` — v1's
+ * Tailwind/shadcn tokens and v2's tokens are both left untouched.
+ *
+ * The header/section-nav pattern (`.rp-header`/`.rp-toc-*`) instead mirrors
+ * v1's own sticky bar (src/layouts/BaseLayout.astro's `.sticky` wrapper +
+ * `toc-nav`, styled in src/styles/app.css's `.toc-link`/`.toc-active`) —
+ * see docs/DESIGN.md for why v3 follows v1's pattern here rather than
+ * portfolio-taraba's left sidebar.
+ */
+
+.rp-portfolio {
+	--rp-paper: #fafaf8;
+	--rp-surface: #ffffff;
+	--rp-ink: #22212a;
+	--rp-muted: #616860;
+	--rp-rule: #d9ddd6;
+	--rp-accent: #403797;
+	--rp-accent-dark: #2e286f;
+	--rp-accent-soft: #eeecff;
+
+	--rp-space-1: 0.25rem;
+	--rp-space-2: 0.5rem;
+	--rp-space-4: 1rem;
+	--rp-space-6: 1.5rem;
+	--rp-space-8: 2rem;
+	--rp-space-12: 3rem;
+	--rp-space-16: 4rem;
+
+	--rp-width-content: 44rem;
+	--rp-control-compact: 2.25rem;
+	--rp-header-height: 3.5rem;
+
+	--rp-type-xs: 0.75rem;
+	--rp-type-sm: 0.875rem;
+	--rp-type-meta: 0.8125rem;
+	--rp-type-body: 1rem;
+	--rp-type-heading: 1.25rem;
+	--rp-type-section: 1.5rem;
+	--rp-type-hero-name: clamp(2.1rem, 5vw, 2.6rem);
+	--rp-type-hero-statement: clamp(1.25rem, 3vw, 1.4rem);
+
+	font-family:
+		ui-sans-serif,
+		system-ui,
+		-apple-system,
+		'Hiragino Kaku Gothic ProN',
+		'Yu Gothic',
+		sans-serif;
+	background: var(--rp-paper);
+	color: var(--rp-ink);
+	margin: 0;
+	line-height: 1.75;
+	font-size: var(--rp-type-body);
+}
+
+.rp-portfolio[data-rp-theme='dark'] {
+	--rp-paper: #0d0e13;
+	--rp-surface: #15161d;
+	--rp-ink: #f3f1fa;
+	--rp-muted: #aaa8b6;
+	--rp-rule: #30313a;
+	--rp-accent: #9b94ff;
+	--rp-accent-dark: #2e286f;
+	--rp-accent-soft: #24213c;
+	color-scheme: dark;
+}
+
+.rp-portfolio {
+	color-scheme: light;
+}
+
+.rp-portfolio * {
+	box-sizing: border-box;
+}
+
+.rp-portfolio h1,
+.rp-portfolio h2,
+.rp-portfolio h3,
+.rp-portfolio h4 {
+	line-height: 1.4;
+	font-weight: 600;
+	margin: 0;
+}
+.rp-portfolio h1 {
+	font-size: var(--rp-type-hero-name);
+	letter-spacing: -0.02em;
+}
+.rp-portfolio h2 {
+	font-size: var(--rp-type-section);
+}
+.rp-portfolio h3,
+.rp-portfolio h4 {
+	font-size: var(--rp-type-heading);
+}
+.rp-portfolio p {
+	margin: 0;
+}
+.rp-portfolio p + p {
+	margin-top: 0.8rem;
+}
+.rp-portfolio a {
+	color: inherit;
+	text-underline-offset: 0.3em;
+}
+.rp-portfolio a:hover {
+	color: var(--rp-accent);
+}
+.rp-portfolio ul,
+.rp-portfolio ol {
+	margin: 0;
+}
+
+.rp-skip-link {
+	position: fixed;
+	top: -100px;
+	left: 1rem;
+	background: var(--rp-paper);
+	color: var(--rp-ink);
+	padding: 0.7rem 1rem;
+	z-index: 50;
+}
+.rp-skip-link:focus {
+	top: 1rem;
+}
+
+/* Header: sticky bar (brand/mode row) + a second row of section tabs,
+   matching v1's sticky wrapper + toc-nav (src/layouts/BaseLayout.astro). */
+.rp-header {
+	position: sticky;
+	top: 0;
+	z-index: 30;
+	background: color-mix(in srgb, var(--rp-paper) 94%, transparent);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--rp-rule);
+}
+.rp-header-inner {
+	width: min(var(--rp-width-content), calc(100% - 3rem));
+	margin-inline: auto;
+	min-height: var(--rp-header-height);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: var(--rp-space-4);
+}
+.rp-brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	min-height: 44px;
+	font: 600 var(--rp-type-sm) inherit;
+	letter-spacing: 0.06em;
+	text-decoration: none;
+}
+.rp-brand-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--rp-accent);
+}
+.rp-header-nav {
+	display: flex;
+	align-items: center;
+	gap: var(--rp-space-4);
+}
+.rp-header-nav a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	font: 500 var(--rp-type-meta) inherit;
+	color: var(--rp-muted);
+	text-decoration: none;
+}
+.rp-header-nav a:hover {
+	color: var(--rp-accent);
+}
+.rp-theme-toggle {
+	display: inline-grid;
+	place-items: center;
+	width: var(--rp-control-compact);
+	height: var(--rp-control-compact);
+	padding: 0;
+	border: 1px solid var(--rp-rule);
+	border-radius: 999px;
+	background: var(--rp-surface);
+	color: var(--rp-muted);
+	cursor: pointer;
+}
+.rp-theme-toggle:hover {
+	color: var(--rp-accent);
+	border-color: var(--rp-accent);
+}
+.rp-theme-icon--dark {
+	display: none;
+}
+.rp-portfolio[data-rp-theme='dark'] .rp-theme-icon--light {
+	display: none;
+}
+.rp-portfolio[data-rp-theme='dark'] .rp-theme-icon--dark {
+	display: block;
+}
+
+.rp-toc-row {
+	border-top: 1px solid color-mix(in srgb, var(--rp-rule) 60%, transparent);
+}
+.rp-toc-nav {
+	width: min(var(--rp-width-content), calc(100% - 3rem));
+	margin-inline: auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--rp-space-2) 0.75rem;
+	padding-block: 0.5rem;
+}
+.rp-toc-link {
+	padding: 2px 8px;
+	border-radius: 4px;
+	color: var(--rp-muted);
+	font-size: var(--rp-type-sm);
+	text-decoration: none;
+	position: relative;
+	transition:
+		color 0.2s,
+		background 0.2s;
+}
+.rp-toc-link:hover {
+	color: var(--rp-ink);
+}
+.rp-toc-link.rp-toc-active {
+	color: var(--rp-ink);
+	font-weight: 500;
+}
+.rp-toc-link.rp-toc-active::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 20%;
+	right: 20%;
+	height: 2px;
+	border-radius: 1px;
+	background: var(--rp-accent);
+}
+
+/* Layout */
+.rp-page-shell {
+	width: min(var(--rp-width-content), calc(100% - 3rem));
+	margin-inline: auto;
+	padding-block: var(--rp-space-12) var(--rp-space-16);
+}
+
+/* Hero */
+.rp-hero {
+	display: grid;
+	gap: 2rem;
+	padding-block: 2.5rem 3rem;
+}
+.rp-hero h1 {
+	margin-top: 0.6rem;
+}
+.rp-eyebrow {
+	font: 500 var(--rp-type-sm) inherit;
+	letter-spacing: 0.1em;
+}
+.rp-accent {
+	color: var(--rp-accent);
+}
+.rp-name-sub {
+	color: var(--rp-muted);
+	font-size: var(--rp-type-sm);
+	margin-top: 0.3rem;
+}
+.rp-affiliation {
+	margin-top: 1.2rem;
+}
+.rp-hero-statement {
+	font-size: var(--rp-type-hero-statement);
+	font-weight: 500;
+	line-height: 1.5;
+	margin-bottom: 1rem;
+}
+.rp-mono {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: var(--rp-type-meta);
+}
+.rp-muted {
+	color: var(--rp-muted);
+}
+
+/* Sections */
+.rp-single-section {
+	padding-block: var(--rp-space-16);
+	border-top: 1px solid var(--rp-rule);
+}
+.rp-single-overview {
+	padding-block: 0;
+	border-top: 0;
+}
+.rp-single-section-heading {
+	margin-bottom: var(--rp-space-8);
+}
+.rp-single-section-heading h2 {
+	margin-top: 0.5rem;
+}
+.rp-single-section-heading > p:last-child {
+	margin-top: 0.3rem;
+	color: var(--rp-muted);
+}
+.rp-section-content {
+	max-width: var(--rp-width-content);
+}
+
+.rp-interests {
+	list-style: none;
+	padding: 0;
+	display: grid;
+	gap: 0.8rem;
+}
+.rp-interests li::before {
+	content: '+ ';
+	color: var(--rp-accent);
+}
+
+.rp-record + .rp-record,
+.rp-plain-list > li + li {
+	border-top: 1px solid var(--rp-rule);
+	margin-top: var(--rp-space-8);
+	padding-top: var(--rp-space-8);
+}
+.rp-plain-list {
+	list-style: none;
+	padding: 0;
+}
+.rp-record p {
+	font-size: var(--rp-type-sm);
+}
+.rp-record p + p {
+	margin-top: var(--rp-space-1);
+}
+.rp-small-label {
+	font-size: var(--rp-type-sm);
+	color: var(--rp-muted);
+}
+
+.rp-link-list {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--rp-space-2) var(--rp-space-4);
+	list-style: none;
+	padding: 0;
+	margin-top: var(--rp-space-2);
+}
+.rp-link {
+	text-decoration: underline;
+}
+
+.rp-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	width: min(var(--rp-width-content), calc(100% - 3rem));
+	margin-inline: auto;
+	border-top: 1px solid var(--rp-rule);
+	padding-block: 1.5rem;
+	color: var(--rp-muted);
+	font-size: var(--rp-type-sm);
+}
+.rp-footer a {
+	min-width: 44px;
+	min-height: 44px;
+	display: grid;
+	place-items: center;
+	text-decoration: none;
+}
+
+@media (min-width: 900px) {
+	.rp-hero {
+		grid-template-columns: 1fr 1.2fr;
+		gap: 4rem;
+		padding-block: 3.5rem 4.5rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rp-portfolio * {
+		transition: none !important;
+		animation: none !important;
+	}
+}

@@ -1,0 +1,11 @@
+---
+interface Props {
+	label: string
+}
+const { label } = Astro.props
+---
+
+<footer class='rp-footer'>
+	<p>{label}</p>
+	<a href='#top'>↑ <span class='sr-only'>Top</span></a>
+</footer>

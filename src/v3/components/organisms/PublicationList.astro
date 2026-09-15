@@ -1,0 +1,18 @@
+---
+import PublicationItem from '../molecules/PublicationItem.astro'
+import type { ResearchOutput } from '../../data/types'
+interface Props {
+	outputs: ResearchOutput[]
+}
+const { outputs } = Astro.props
+---
+
+<ul class='rp-plain-list'>
+	{
+		outputs.map((output) => (
+			<li>
+				<PublicationItem output={output} />
+			</li>
+		))
+	}
+</ul>

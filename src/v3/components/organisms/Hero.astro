@@ -1,0 +1,24 @@
+---
+import LinkList from '../molecules/LinkList.astro'
+import type { ResearchLink, ResearchProfile } from '../../data/types'
+interface Props {
+	profile: ResearchProfile
+	links: ResearchLink[]
+}
+const { profile, links } = Astro.props
+---
+
+<section class='rp-hero' aria-labelledby='rp-profile-name'>
+	<div>
+		<p class='rp-eyebrow rp-accent'>{profile.title}</p>
+		<h1 id='rp-profile-name'>{profile.name}</h1>
+		<p class='rp-name-sub'>{profile.nameSub}</p>
+		<p class='rp-affiliation'>{profile.affiliation}</p>
+		<p class='rp-mono rp-muted'>{profile.location}</p>
+	</div>
+	<div class='rp-hero-intro'>
+		<p class='rp-hero-statement'>{profile.statement}</p>
+		{profile.about.map((paragraph) => <p>{paragraph}</p>)}
+		{links.length > 0 && <LinkList links={links} />}
+	</div>
+</section>
