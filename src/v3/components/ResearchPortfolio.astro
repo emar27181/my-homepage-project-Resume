@@ -1,0 +1,210 @@
+---
+// v3 — "Research Portfolio". A design ported from
+// https://github.com/emar27181/portfolio-taraba (a researcher-portfolio
+// Astro theme) and re-skinned around this site's own content. Like v2, it
+// has its own scoped visual language (see styles/research.css) and does not
+// touch v1's Tailwind/shadcn tokens or v2's `.pf-computer` tokens.
+//
+// Shared by src/pages/v3/index.astro (lang="ja") and
+// src/pages/en/v3/index.astro (lang="en") — only `lang` differs, matching
+// the same pattern PortfolioComputer.astro (v2) already uses.
+//
+// Scope, deliberately trimmed from the source theme (see docs/DESIGN.md):
+// single scrolling page only (no per-section routes, no multi/single
+// toggle), one fixed accent color (no palette picker), no rainbow mode, no
+// client-side language switching (this project already resolves language
+// at build time via separate /v3 and /en/v3 routes). What's kept: the
+// sidebar table of contents with scroll-spy highlighting, the light/dark
+// theme toggle, and the citation-copy button.
+import BaseHead from '@/components/BaseHead.astro'
+import '../styles/research.css'
+
+import Header from './organisms/Header.astro'
+import Sidebar from './organisms/Sidebar.astro'
+import Hero from './organisms/Hero.astro'
+import Footer from './organisms/Footer.astro'
+import LinkList from './molecules/LinkList.astro'
+import SkillGroup from './molecules/SkillGroup.astro'
+import PublicationList from './organisms/PublicationList.astro'
+import Timeline from './organisms/Timeline.astro'
+import ProjectList from './organisms/ProjectList.astro'
+import { getResearchPortfolio } from '../data/adapter'
+import { getUi } from '../data/ui'
+import type { Language } from '@/v2/data/portfolio'
+
+interface Props {
+	lang?: Language
+}
+
+const { lang = 'ja' } = Astro.props as Props
+const portfolio = getResearchPortfolio(lang)
+const ui = getUi(lang)
+
+const otherLang: Language = lang === 'en' ? 'ja' : 'en'
+const v1Href = lang === 'en' ? '/en' : '/'
+const v2Href = lang === 'en' ? '/en/v2' : '/v2'
+const otherLangHref = otherLang === 'en' ? '/en/v3' : '/v3'
+const otherLangLabel = otherLang === 'en' ? 'EN' : 'JA'
+
+const description =
+	lang === 'en'
+		? `${portfolio.profile.name}'s research portfolio.`
+		: `${portfolio.profile.name} の研究者ポートフォリオ。`
+
+const skillCategories = [...new Set(portfolio.skills.map((skill) => skill.category))]
+---
+
+<html lang={lang}>
+	<head>
+		<BaseHead title='Research Portfolio' description={description} />
+	</head>
+	<body class='rp-portfolio' id='top'>
+		<a class='rp-skip-link' href='#rp-main'>{ui.skip}</a>
+		<Header
+			brand={ui.overview}
+			v1Href={v1Href}
+			v1Label={ui.backToV1}
+			v2Href={v2Href}
+			v2Label={ui.backToV2}
+			otherLangHref={otherLangHref}
+			otherLangLabel={otherLangLabel}
+			themeLabel={ui.theme}
+		/>
+		<div class='rp-layout-shell'>
+			<Sidebar
+				profile={portfolio.profile}
+				sections={portfolio.sections}
+				contentsLabel={ui.contents}
+			/>
+			<div class='rp-content-column'>
+				<main id='rp-main' class='rp-page-shell' tabindex='-1'>
+					<section id='overview' class='rp-single-section rp-single-overview'>
+						<Hero profile={portfolio.profile} links={portfolio.links} />
+					</section>
+					{
+						portfolio.sections.map((section, index) => (
+							<section
+								id={section.id}
+								class='rp-single-section'
+								aria-labelledby={`${section.id}-title`}
+							>
+								<header class='rp-single-section-heading'>
+									<p class='rp-eyebrow rp-accent'>
+										{String(index + 2).padStart(2, '0')} /{' '}
+										{String(portfolio.sections.length + 1).padStart(2, '0')}
+									</p>
+									<h2 id={`${section.id}-title`}>{section.title}</h2>
+									<p>{section.subtitle}</p>
+								</header>
+								<div class='rp-section-content'>
+									{section.id === 'about' &&
+										portfolio.profile.about.map((paragraph) => <p>{paragraph}</p>)}
+									{section.id === 'interests' && (
+										<ul class='rp-interests'>
+											{portfolio.interests.map((interest) => (
+												<li>{interest}</li>
+											))}
+										</ul>
+									)}
+									{section.id === 'projects' && (
+										<ProjectList projects={portfolio.projects} lang={lang} />
+									)}
+									{section.id === 'publications' && (
+										<PublicationList outputs={portfolio.publications} lang={lang} />
+									)}
+									{section.id === 'presentations' && (
+										<PublicationList outputs={portfolio.presentations} lang={lang} />
+									)}
+									{section.id === 'skills' &&
+										skillCategories.map((category) => (
+											<SkillGroup
+												category={category}
+												skills={portfolio.skills.filter((skill) => skill.category === category)}
+											/>
+										))}
+									{section.id === 'experience' && <Timeline entries={portfolio.experience} />}
+									{section.id === 'contact' && (
+										<>
+											<p>{ui.contactIntro}</p>
+											<LinkList links={portfolio.links} />
+										</>
+									)}
+								</div>
+							</section>
+						))
+					}
+				</main>
+				<Footer label={ui.footer} />
+			</div>
+		</div>
+
+		<script>
+			const THEME_KEY = 'v3-theme'
+			const root = document.querySelector<HTMLElement>('.rp-portfolio')
+			const applyTheme = (theme: string) => {
+				if (!root) return
+				if (theme === 'dark') root.dataset.rpTheme = 'dark'
+				else delete root.dataset.rpTheme
+			}
+			let initialTheme = 'light'
+			try {
+				initialTheme = localStorage.getItem(THEME_KEY) || 'light'
+			} catch {}
+			applyTheme(initialTheme)
+
+			document.querySelector('[data-rp-set-theme]')?.addEventListener('click', () => {
+				const next = root.dataset.rpTheme === 'dark' ? 'light' : 'dark'
+				applyTheme(next)
+				try {
+					localStorage.setItem(THEME_KEY, next)
+				} catch {}
+			})
+
+			document.addEventListener('click', async (event) => {
+				const button = (event.target as HTMLElement)?.closest<HTMLButtonElement>(
+					'[data-copy-citation]'
+				)
+				if (!button) return
+				const label = button.querySelector('[data-copy-label]')
+				const reset = () => {
+					if (label) label.textContent = button.dataset.label ?? ''
+				}
+				try {
+					await navigator.clipboard.writeText(button.dataset.citation ?? '')
+					if (label) label.textContent = button.dataset.success ?? ''
+				} catch {
+					if (label) label.textContent = button.dataset.error ?? ''
+				}
+				setTimeout(reset, 1800)
+			})
+
+			const sections = [...document.querySelectorAll<HTMLElement>('.rp-single-section')]
+			const tocLinks = new Map(
+				[...document.querySelectorAll<HTMLAnchorElement>('[data-rp-toc-link]')].map((link) => [
+					link.dataset.rpTocLink,
+					link
+				])
+			)
+			const progress = document.querySelector<HTMLElement>('[data-rp-progress]')
+			const updateActive = (id: string) => {
+				tocLinks.forEach((link, linkId) => link.toggleAttribute('aria-current', linkId === id))
+				const index = sections.findIndex((section) => section.id === id)
+				if (index >= 0 && progress) {
+					progress.style.setProperty('--rp-progress', `${((index + 1) / sections.length) * 100}%`)
+				}
+			}
+			if ('IntersectionObserver' in window && sections.length > 0) {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						const visible = entries
+							.filter((entry) => entry.isIntersecting)
+							.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+						if (visible) updateActive(visible.target.id)
+					},
+					{ rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.1, 0.5] }
+				)
+				sections.forEach((section) => observer.observe(section))
+			}
+		</script>
+	</body>
+</html>

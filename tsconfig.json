@@ -12,7 +12,8 @@
 			"@/utils": ["src/utils/index.ts"],
 			"@/types": ["src/types.ts"],
 			"@/site-config": ["src/site.config.ts"],
-			"@/v2/*": ["src/v2/*"]
+			"@/v2/*": ["src/v2/*"],
+			"@/v3/*": ["src/v3/*"]
 		}
 	},
 	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]

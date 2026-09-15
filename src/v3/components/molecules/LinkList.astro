@@ -1,0 +1,20 @@
+---
+import ExternalLink from '../atoms/ExternalLink.astro'
+import type { ResearchLink } from '../../data/types'
+interface Props {
+	links: ResearchLink[]
+}
+const { links } = Astro.props
+---
+
+<ul class='rp-link-list'>
+	{
+		links.map((link) => (
+			<li>
+				<ExternalLink href={link.url} download={link.download}>
+					{link.label}
+				</ExternalLink>
+			</li>
+		))
+	}
+</ul>

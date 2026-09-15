@@ -1,0 +1,24 @@
+---
+interface Props {
+	href: string
+	download?: boolean
+}
+const { href, download = false } = Astro.props
+const isSafe = /^(https?:\/\/|mailto:)/i.test(href)
+const external = /^https?:\/\//i.test(href)
+---
+
+{
+	isSafe && (
+		<a
+			class='rp-link'
+			href={href}
+			download={download || undefined}
+			target={external && !download ? '_blank' : undefined}
+			rel={external ? 'noopener noreferrer' : undefined}
+		>
+			<slot />
+			<span aria-hidden='true'>{download ? ' ↓' : external ? ' ↗' : ' →'}</span>
+		</a>
+	)
+}

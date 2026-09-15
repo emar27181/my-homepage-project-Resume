@@ -1,0 +1,61 @@
+---
+interface Props {
+	brand: string
+	v1Href: string
+	v1Label: string
+	v2Href: string
+	v2Label: string
+	otherLangHref: string
+	otherLangLabel: string
+	themeLabel: string
+}
+const { brand, v1Href, v1Label, v2Href, v2Label, otherLangHref, otherLangLabel, themeLabel } =
+	Astro.props
+---
+
+<header class='rp-header'>
+	<div class='rp-header-inner'>
+		<a class='rp-brand' href='#top'>
+			<span class='rp-brand-dot' aria-hidden='true'></span>
+			{brand}
+		</a>
+		<nav class='rp-header-nav' aria-label={v1Label}>
+			<a href={v1Href} title={v1Label}>v1</a>
+			<a href={v2Href} title={v2Label}>v2</a>
+			<a href={otherLangHref}>{otherLangLabel}</a>
+			<button type='button' class='rp-theme-toggle' data-rp-set-theme aria-label={themeLabel}>
+				<svg
+					class='rp-theme-icon rp-theme-icon--light'
+					viewBox='0 0 24 24'
+					width='16'
+					height='16'
+					fill='none'
+					stroke='currentColor'
+					stroke-width='2'
+					stroke-linecap='round'
+					aria-hidden='true'
+				>
+					<circle cx='12' cy='12' r='4'></circle>
+					<path
+						d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'
+					></path>
+				</svg>
+				<svg
+					class='rp-theme-icon rp-theme-icon--dark'
+					viewBox='0 0 24 24'
+					width='16'
+					height='16'
+					fill='none'
+					stroke='currentColor'
+					stroke-width='2'
+					stroke-linecap='round'
+					stroke-linejoin='round'
+					aria-hidden='true'
+				>
+					<path d='M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z'></path>
+				</svg>
+			</button>
+		</nav>
+	</div>
+	<div class='rp-page-progress' data-rp-progress><span></span></div>
+</header>

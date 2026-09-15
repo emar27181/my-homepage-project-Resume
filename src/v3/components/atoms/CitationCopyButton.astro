@@ -1,0 +1,25 @@
+---
+interface Props {
+	citation: string
+	label: string
+	copiedLabel: string
+	failedLabel: string
+}
+const { citation, label, copiedLabel, failedLabel } = Astro.props
+---
+
+<button
+	class='rp-citation-copy'
+	type='button'
+	data-copy-citation
+	data-citation={citation}
+	data-label={label}
+	data-success={copiedLabel}
+	data-error={failedLabel}
+>
+	<svg viewBox='0 0 20 20' width='14' height='14' aria-hidden='true'>
+		<rect x='6' y='6' width='10' height='10' rx='1'></rect>
+		<path d='M4 13H3V3h10v1'></path>
+	</svg>
+	<span data-copy-label aria-live='polite'>{label}</span>
+</button>

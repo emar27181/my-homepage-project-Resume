@@ -1,0 +1,15 @@
+---
+import type { ResearchSkill } from '../../data/types'
+interface Props {
+	category: string
+	skills: ResearchSkill[]
+}
+const { category, skills } = Astro.props
+---
+
+<div class='rp-skill-group'>
+	<h3>{category}</h3>
+	<ul class='rp-skill-tags'>
+		{skills.map((skill) => <li>{skill.name}</li>)}
+	</ul>
+</div>

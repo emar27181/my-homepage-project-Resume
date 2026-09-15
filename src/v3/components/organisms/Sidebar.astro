@@ -1,0 +1,35 @@
+---
+import Avatar from '../atoms/Avatar.astro'
+import type { ResearchProfile, SectionDef } from '../../data/types'
+interface Props {
+	profile: ResearchProfile
+	sections: SectionDef[]
+	contentsLabel: string
+}
+const { profile, sections, contentsLabel } = Astro.props
+---
+
+<aside class='rp-sidebar' aria-label={contentsLabel}>
+	<div class='rp-sidebar-profile'>
+		<Avatar initials={profile.initials} />
+		<div>
+			<strong>{profile.name}</strong>
+			<span>{profile.title}</span>
+		</div>
+	</div>
+	<p class='rp-sidebar-label'>{contentsLabel}</p>
+	<nav aria-label={contentsLabel}>
+		<ol class='rp-sidebar-toc' data-rp-toc>
+			{
+				sections.map((section, index) => (
+					<li>
+						<a href={`#${section.id}`} data-rp-toc-link={section.id}>
+							<b>{String(index + 1).padStart(2, '0')}</b>
+							<span>{section.title}</span>
+						</a>
+					</li>
+				))
+			}
+		</ol>
+	</nav>
+</aside>

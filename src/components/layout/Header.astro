@@ -11,6 +11,10 @@ const v2Title =
 	currentLanguage === 'en' ? 'Try the terminal-style portfolio' : 'ターミナル版ポートフォリオを試す'
 const v2SrLabel =
 	currentLanguage === 'en' ? 'Terminal-style portfolio' : 'ターミナル版ポートフォリオ'
+const v3Link = getLocalizedPath('/v3', currentLanguage)
+const v3Title =
+	currentLanguage === 'en' ? 'Try the research portfolio' : '研究者ポートフォリオ版を試す'
+const v3SrLabel = currentLanguage === 'en' ? 'Research portfolio' : '研究者ポートフォリオ'
 ---
 
 <header class='flex w-full flex-wrap py-3 text-sm sm:flex-nowrap sm:justify-start'>
@@ -69,6 +73,11 @@ const v2SrLabel =
 			<IconButton as='a' href={v2Link} title={v2Title}>
 				<span class='sr-only'>{v2SrLabel}</span>
 				<Icon name='square-terminal' class='h-[1.2rem] w-[1.2rem]' />
+			</IconButton>
+
+			<IconButton as='a' href={v3Link} title={v3Title}>
+				<span class='sr-only'>{v3SrLabel}</span>
+				<Icon name='graduation-cap' class='h-[1.2rem] w-[1.2rem]' />
 			</IconButton>
 
 			<IconButton id='toggleDarkMode'>

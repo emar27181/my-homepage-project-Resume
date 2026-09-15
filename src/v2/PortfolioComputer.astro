@@ -23,6 +23,9 @@ const { hobbies, profile, projects, research, skills } = getPortfolio(lang)
 
 const otherLang: Language = lang === 'en' ? 'ja' : 'en'
 const v1Href = lang === 'en' ? '/en' : '/'
+const v3Href = lang === 'en' ? '/en/v3' : '/v3'
+const v3Title = lang === 'en' ? 'Try the research portfolio' : '研究者ポートフォリオ版を試す'
+const v3SrOnly = lang === 'en' ? 'Research portfolio' : '研究者ポートフォリオ'
 const otherLangHref = otherLang === 'en' ? '/en/v2' : '/v2'
 const otherLangLabel = otherLang === 'en' ? 'EN' : 'JA'
 const otherLangTitle = otherLang === 'en' ? 'Switch to English' : '日本語に切り替え'
@@ -45,6 +48,9 @@ const description =
 			<div class='pf-header__actions'>
 				<Chip as='a' href={v1Href} size='sm' title={backTitle}>
 					<span class='sr-only'>{backSrOnly}</span>v1
+				</Chip>
+				<Chip as='a' href={v3Href} size='sm' title={v3Title}>
+					<span class='sr-only'>{v3SrOnly}</span>v3
 				</Chip>
 				<Chip as='a' href={otherLangHref} size='sm' title={otherLangTitle}>{otherLangLabel}</Chip>
 				{
