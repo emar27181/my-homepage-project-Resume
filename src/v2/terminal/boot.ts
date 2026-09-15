@@ -126,6 +126,9 @@ export function getHintText(lang: Language): string {
 }
 export const START_COMMAND = './start.sh'
 
-export function asciiArtFor(width: number): string[] {
-	return width < 560 ? renderAsciiWord('EMAR') : renderAsciiWord('EMAR27181')
+// Always the full handle — .pf-ascii scrolls horizontally instead of
+// wrapping on narrow viewports (same pattern as the identity box above),
+// so there's no need to truncate it to "EMAR" on mobile.
+export function asciiArtFor(): string[] {
+	return renderAsciiWord('EMAR27181')
 }

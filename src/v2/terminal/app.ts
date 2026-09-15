@@ -65,7 +65,7 @@ async function playBoot() {
 		printRaw(line.text, line.className)
 		if (!skipRequested && line.delayMs) await sleep(line.delayMs)
 	}
-	const art = asciiArtFor(windowEl.clientWidth)
+	const art = asciiArtFor()
 	printRaw('')
 	art.forEach((row) => printRaw(row, 'pf-ascii'))
 	printRaw('')
