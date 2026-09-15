@@ -274,19 +274,15 @@ mobileKeys?.querySelectorAll<HTMLButtonElement>('[data-key]').forEach((button) =
 })
 
 // --- on-screen quick commands (mobile: tap instead of typing) ---
-// A trailing space in data-cmd means the command takes an argument
-// (cd/cat/open) — insert it and leave the cursor there instead of running
-// it immediately, so the visitor can type the rest or Tab-complete it.
+// These only fill the input — like Tab-completion, they never run the
+// command themselves. Enter is the one way to submit, same as typing it
+// by hand, so a tap doesn't fire off `ls`/`open <slug>` on the visitor
+// before they've seen what's about to run.
 mobileCommands?.querySelectorAll<HTMLButtonElement>('[data-cmd]').forEach((button) => {
 	button.addEventListener('pointerdown', (e) => e.preventDefault())
 	button.addEventListener('click', () => {
-		const cmd = button.dataset.cmd ?? ''
-		if (cmd.endsWith(' ')) {
-			input.value = cmd
-			input.focus()
-		} else {
-			void handleSubmit(cmd)
-		}
+		input.value = button.dataset.cmd ?? ''
+		input.focus()
 	})
 })
 
