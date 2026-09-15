@@ -16,6 +16,7 @@ const promptEl = document.getElementById('pf-prompt') as HTMLSpanElement
 const windowEl = document.getElementById('pf-window') as HTMLDivElement
 const preview = document.getElementById('pf-preview') as HTMLDivElement
 const mobileKeys = document.getElementById('pf-mobile-keys')
+const mobileCommands = document.getElementById('pf-mobile-commands')
 
 let booted = false
 let busy = false
@@ -258,6 +259,23 @@ mobileKeys?.querySelectorAll<HTMLButtonElement>('[data-key]').forEach((button) =
 		if (button.dataset.key === 'tab') triggerTabComplete()
 		else if (button.dataset.key === 'enter') void handleSubmit(input.value)
 		input.focus()
+	})
+})
+
+// --- on-screen quick commands (mobile: tap instead of typing) ---
+// A trailing space in data-cmd means the command takes an argument
+// (cd/cat/open) — insert it and leave the cursor there instead of running
+// it immediately, so the visitor can type the rest or Tab-complete it.
+mobileCommands?.querySelectorAll<HTMLButtonElement>('[data-cmd]').forEach((button) => {
+	button.addEventListener('pointerdown', (e) => e.preventDefault())
+	button.addEventListener('click', () => {
+		const cmd = button.dataset.cmd ?? ''
+		if (cmd.endsWith(' ')) {
+			input.value = cmd
+			input.focus()
+		} else {
+			void handleSubmit(cmd)
+		}
 	})
 })
 
