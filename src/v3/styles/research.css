@@ -191,6 +191,15 @@
 	justify-content: center;
 	width: 44px;
 }
+/* Home/Terminal/Research grouped tighter than the rest of .rp-header-nav
+   (same idea as v1's gap-x-1 icon cluster and v2's .pf-header__icons):
+   one set of peer page-switch links, packed together rather than spaced
+   out like EN and the theme toggle. */
+.rp-header-icons {
+	display: flex;
+	align-items: center;
+	gap: var(--rp-space-1);
+}
 .rp-theme-toggle {
 	display: inline-grid;
 	place-items: center;

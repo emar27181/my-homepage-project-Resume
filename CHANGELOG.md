@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-16 (24)
+
+- improve: v3ヘッダーのnav並び・間隔をv1に揃えた。v1は「EN/JAチップ→(gap-x-1で詰めた)Home/Terminal/Researchアイコン」の順だが、v3は元々「Home/Terminal/Research→EN/JA」の順で、`.rp-header-nav`全体が同じ16pxギャップだったため1つのグループに見えていなかった。EN/JAリンクをアイコン列より前に出し、3アイコンを`.rp-header-icons`という新しいラッパー(`gap: var(--rp-space-1)` = 4px)でくくって、v1と同じ「EN→詰まったアイコン列」の見た目に揃えた。テーマ切り替えボタン(v1には無い要素)はアイコン列の後ろに残している。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px)で並び順(EN→Home→Terminal→Research→テーマ切替)・間隔(アイコン間4px/グループ間16px)・コンソールエラー無しを確認済み。
+
 ## 2026-09-16 (23)
 
 - improve: v3ヘッダーに自分自身(Research)へのアイコンリンクを追加し、v1/v2と同じHome→Terminal→Researchの並びに揃えた。それまではv1(house)・v2(square-terminal)の2アイコンしか無く、v1・v2が自分自身を含む3モード分のアイコンを持つのに対してv3だけ2つで揃っていなかった。`Header.astro`(v3)の`.rp-icon-link`をそのまま使い、新規の`v3Href`(そのページ自身のURL)/`v3Label`(新設の`ui.thisIsV3`文言)propsを追加しただけで、新しいCSS/コンポーネントは増やしていない。

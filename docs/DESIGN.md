@@ -172,6 +172,8 @@ Terminal(自分自身、square-terminalアイコン)も同じ並びに含め、`
 
 v3のヘッダーにも同じ考え方で、自分自身(Research、graduation-capアイコン)へのリンクを追加した。それまでは移植元から持ち込んだv1(house)・v2(square-terminal)の2アイコンしか無く、v1・v2が自分自身を含む3モード分のアイコンを持つのに対してv3だけ2つで揃っていなかった。`Header.astro`(v3)の`.rp-icon-link`をそのまま使い、表示順もv1・v2と同じHome→Terminal→Researchにした(`v3Href`はそのページ自身のURL、`v3Label`は新設の`ui.thisIsV3`文言)。
 
+ヘッダーnav内の並び・間隔もv1に揃えた。v1の実際の構造は「EN/JAチップ → (詰めて並べた)Home/Terminal/Researchアイコン」で、EN側が先(左)、アイコン側は`gap-x-1`(4px)という狭い間隔でひとまとまりに見えるようにしている。v3は元々EN/JAリンクがアイコン列の最後に置かれ、`.rp-header-nav`全体が同じ`gap: var(--rp-space-4)`(16px)でどの要素間も均等に空いていたため、ひとまとまりのグループには見えていなかった。EN/JAリンクをHome/Terminal/Researchより前に出し、3アイコンだけを`.rp-header-icons`という新しいラッパー(`gap: var(--rp-space-1)` = 4px)でくくることで、v1と同じ「EN → 詰まったアイコン列」という見た目に揃えた。テーマ切り替えボタンはv1に無い要素なので、アイコン列の後ろ(`.rp-header-nav`の通常の間隔)に残している。
+
 ## スクロール時に見出しがヘッダーに隠れる不具合(移植元にあった仕組みの移植漏れ)
 
 ヘッダー2段目のタブや`#section`アンカーへジャンプすると、対象セクションの見出しがsticky headerの下に隠れる不具合があった。移植元テーマはヘッダーの実測高さを`ResizeObserver`で追跡し、`--page-scroll-offset`というCSS変数を通じて`scroll-padding-top`に反映する仕組みを持っていたが、v3を組み立てた際にこの仕組みを移植し忘れていた。同じ考え方で`ResearchPortfolio.astro`のscriptに`--rp-scroll-offset`を追加し(`.rp-header`の高さ+16pxをResizeObserverで追跡)、`.rp-single-section`の`scroll-margin-top`に使うようにした。ヘッダーは`flex-wrap`で狭い画面では2行になることがあるため、固定値ではなく実測値を使っている。
