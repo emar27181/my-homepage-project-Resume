@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-16 (25)
+
+- improve: v3ヘッダーのHome/Terminal/Researchアイコンリンクを`src/v3/components/atoms/IconLink.astro`という1つのアトムに共通化した。`Header.astro`に`<a class='rp-icon-link'>...<svg viewBox='0 0 24 24' ...>`というラッパー構造(pathデータ以外は完全に同一)を3回コピー&ペーストしていたのを、`href`/`label`だけを受け取り具体的なアイコン形状は`<slot />`で受け取る(既存の`ExternalLink.astro`アトムと同じ設計)アトム1つにまとめた。表示結果・DOM構造は変更していない(Playwrightで見た目・リンク先・コンソールエラー無しを変更前後で比較確認済み)。
+- `npm run test`(54件、無変更)・`npm run build`で確認済み。
+
 ## 2026-09-16 (24)
 
 - improve: v3ヘッダーのnav並び・間隔をv1に揃えた。v1は「EN/JAチップ→(gap-x-1で詰めた)Home/Terminal/Researchアイコン」の順だが、v3は元々「Home/Terminal/Research→EN/JA」の順で、`.rp-header-nav`全体が同じ16pxギャップだったため1つのグループに見えていなかった。EN/JAリンクをアイコン列より前に出し、3アイコンを`.rp-header-icons`という新しいラッパー(`gap: var(--rp-space-1)` = 4px)でくくって、v1と同じ「EN→詰まったアイコン列」の見た目に揃えた。テーマ切り替えボタン(v1には無い要素)はアイコン列の後ろに残している。

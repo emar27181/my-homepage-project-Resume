@@ -59,7 +59,7 @@ v1はTailwindの`dark:`クラス切り替え(`ThemeProvider`がlocalStorageと`<
 ```
 src/v3/
 ├── components/
-│   ├── atoms/       # ExternalLink
+│   ├── atoms/       # ExternalLink・IconLink
 │   ├── molecules/   # LinkList・PublicationItem
 │   ├── organisms/   # Header(ブランド行+セクションタブ行)・Hero・Footer・PublicationList
 │   └── ResearchPortfolio.astro # v3ページの実体。langをpropで受け取る唯一のマークアップ(v2のPortfolioComputer.astroと同じ役割)。
@@ -100,7 +100,9 @@ v2と同じくURLベースの方式(`/v3` = ja、`/en/v3` = en)。`adapter.ts`�
 
 ## v1・v2・v3間の相互リンク
 
-`src/components/layout/Header.astro`(v1)・v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`は、いずれも自分自身を含む3モード全て(Home/Terminal/Research)へのアイコンリンクをヘッダーに持つ(v1は`IconButton`、v2は`Chip`、v3は`.rp-header-nav`のリンク)。表示順はどのモードでも同じ左からHome→Terminal→Research。`getLocalizedPath('/'|'/v2'|'/v3', currentLanguage)`相当の仕組みで表示言語に追従する。3モードともテキストではなくアイコン(house/square-terminal/graduation-cap)でリンクし、`aria-label`相当(`sr-only`テキストまたは`aria-label`)でアクセシブルな名前を持つ。v3はv1が使う`astro-icon`のローカルアイコン一式(`src/icons/`)に依存せず独自にインラインSVGで用意しているが、v2はv1と同じ`astro-icon`のアイコンをそのまま再利用している(新しい依存は増やしていない)。
+`src/components/layout/Header.astro`(v1)・v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`は、いずれも自分自身を含む3モード全て(Home/Terminal/Research)へのアイコンリンクをヘッダーに持つ(v1は`IconButton`、v2は`Chip`、v3は`IconLink`)。表示順はどのモードでも同じ左からHome→Terminal→Research。`getLocalizedPath('/'|'/v2'|'/v3', currentLanguage)`相当の仕組みで表示言語に追従する。3モードともテキストではなくアイコン(house/square-terminal/graduation-cap)でリンクし、`aria-label`相当(`sr-only`テキストまたは`aria-label`)でアクセシブルな名前を持つ。v3はv1が使う`astro-icon`のローカルアイコン一式(`src/icons/`)に依存せず独自にインラインSVGで用意しているが、v2はv1と同じ`astro-icon`のアイコンをそのまま再利用している(新しい依存は増やしていない)。
+
+v3の3つの`IconLink`(Home/Terminal/Research)は、`src/v3/components/atoms/IconLink.astro`という1つのアトムから生成する。元は`Header.astro`に`<a class='rp-icon-link'>...<svg viewBox='0 0 24 24' ...>`という同じラッパー構造(リンク要素+svgの共通属性)を3回コピー&ペーストしていた ― pathデータ(実際のアイコン形状)以外は3箇所とも完全に同一だったため、「同じ規則を2箇所目に書く前に共通化する」規約に反していた。`IconLink`は`href`/`label`だけを受け取り、アイコン形状はどれかを知らない(`<slot />`で`<path>`/`<rect>`をそのまま受け取る) ― 具体的な絵柄を知らずラッパーだけを知っているという点で、`ExternalLink.astro`(既存のv3アトム)と同じ設計。
 
 v1のヘッダーアイコン(Home・Terminal(v2)・Research(v3)、`src/icons/`のhouse・square-terminal・graduation-cap)は、右上にまとめて`gap-x-1`の狭い間隔で並べている(ヘッダー全体の他の要素同士の間隔`gap-x-3`/`gap-x-4`より詰めている ― 同じ役割(ページ間ナビゲーション)を持つ1つのグループとして扱うため)。表示順は左から Home(自身、`/`) → Terminal(v2) → Research(v3)。全てIconButton(`h-8 w-8`の同じ寸法)に揃え、行内で寸法がバラつかないようにしている。
 
