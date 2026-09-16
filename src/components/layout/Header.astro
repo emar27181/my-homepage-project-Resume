@@ -30,11 +30,13 @@ const v3SrLabel = currentLanguage === 'en' ? 'Research portfolio' : '研究者�
 			<LanguageSwitcher />
 
 			{
-				/* Header icon cluster — right-to-left: hamburger (mobile toc
-				 toggle), night mode, research (v3), terminal (v2), home (v1).
-				 Kept together with a tight, consistent gap (rather than the
-				 rest of the header's wider gap) since these are one group of
-				 peer navigation controls, all the same IconButton size. */
+				/* Header icon cluster — home (v1) / terminal (v2) / research
+				 (v3). Hamburger (mobile toc toggle) and the night-mode toggle
+				 were dropped from display; #toc-nav (src/layouts/
+				 BaseLayout.astro) already defaults to visible, so it just
+				 stays permanently expanded now. Theme still follows
+				 ThemeProvider's default/OS-preference logic, just without a
+				 manual switch. */
 			}
 			<div class='flex flex-row items-center gap-x-1'>
 				<IconButton as='a' href={homeLink} title={homeTitle}>
@@ -51,44 +53,7 @@ const v3SrLabel = currentLanguage === 'en' ? 'Research portfolio' : '研究者�
 					<span class='sr-only'>{v3SrLabel}</span>
 					<Icon name='graduation-cap' class='h-[1.2rem] w-[1.2rem]' />
 				</IconButton>
-
-				<IconButton id='toggleDarkMode'>
-					<span class='sr-only'>Dark Theme</span>
-					<Icon
-						name='sun'
-						class='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:hidden dark:-rotate-90 dark:scale-0'
-					/>
-					<Icon
-						name='moon'
-						class='hidden h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:block dark:rotate-0 dark:scale-100'
-					/>
-				</IconButton>
-
-				<IconButton id='toggleToc' class='sm:hidden' aria-label='Toggle navigation'>
-					<Icon name='menu' class='h-[1.2rem] w-[1.2rem]' />
-				</IconButton>
 			</div>
 		</div>
 	</nav>
 </header>
-
-<script>
-	function getCurrentTheme() {
-		return localStorage.getItem('theme')
-	}
-	const toggleDarkModeButton = document.getElementById('toggleDarkMode')
-
-	toggleDarkModeButton?.addEventListener('click', () => {
-		const toggleDarkModeEvent = new CustomEvent('theme-change', {
-			detail: { theme: getCurrentTheme() === 'light' ? 'dark' : 'light' }
-		})
-		document.dispatchEvent(toggleDarkModeEvent)
-	})
-
-	const toggleTocButton = document.getElementById('toggleToc')
-	const tocNav = document.getElementById('toc-nav')
-
-	toggleTocButton?.addEventListener('click', () => {
-		tocNav?.classList.toggle('hidden')
-	})
-</script>
