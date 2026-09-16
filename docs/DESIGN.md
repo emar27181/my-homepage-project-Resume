@@ -110,7 +110,7 @@ v3 (`/v3`) は[emar27181/portfolio-taraba](https://github.com/emar27181/portfoli
 - **左サイドバー**: 移植元の主要なレイアウト要素だが、v3では採用していない。代わりにv1自身が既に持っているパターン(ヘッダー+スクロール連動タブ行)を踏襲した。理由・詳細は次節。
 - **Featured Projects・Skills・Education/History・Contact・Awardsのセクション**: v3はResearch Interests・Publications・Presentationsの3セクションだけを表示する。理由は次々節。
 
-保持した機能: セクションタブのスクロール連動ハイライト(IntersectionObserver、`ResearchPortfolio.astro`のscript)、ライト/ダーク切り替え。いずれもこのポートの主眼である「研究者ポートフォリオらしい見た目と操作感」に直結するため残した。引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)は一度移植したが、不要という判断で削除した。
+保持した機能: セクションタブのスクロール連動ハイライト(`ResearchPortfolio.astro`のscript、実装はv1と同じ`offsetTop`比較。後述)、ライト/ダーク切り替え。いずれもこのポートの主眼である「研究者ポートフォリオらしい見た目と操作感」に直結するため残した。引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)は一度移植したが、不要という判断で削除した。
 
 ### モバイルではセクションタブを番号のみにする
 
@@ -123,8 +123,14 @@ v3 (`/v3`) は[emar27181/portfolio-taraba](https://github.com/emar27181/portfoli
 移植元のSidebar(幅260pxの固定左カラム、プロフィール写真+目次)は、v3では実装していない。代わりに、このサイトのv1(`/`)が既に持っている「スクロール位置に応じてハイライトするタブ行」パターン(`src/layouts/BaseLayout.astro`の`sticky`ラッパー + `toc-nav`、`src/styles/app.css`の`.toc-link`/`.toc-active`)をv3にも適用した。
 
 - v3の`Header.astro`が2段構成になっている: 1段目はブランド+v1/v2/言語/テーマの切り替え、2段目(`.rp-toc-row` / `.rp-toc-nav`)が各セクションへのタブ。どちらもヘッダーごと`position: sticky`で画面上部に固定される。
-- タブの現在地ハイライトは`.rp-toc-link.rp-toc-active`に下線を出す方式で、v1の`.toc-link.toc-active::after`と見た目を揃えている。スクロール位置の検出はv1の`scroll`イベント+`offsetTop`比較ではなく、既存の`IntersectionObserver`実装をそのまま使っている(挙動は同じ、実装手段はv3側の既存コードを活かした)。
+- タブの現在地ハイライトは`.rp-toc-link.rp-toc-active`に下線を出す方式で、v1の`.toc-link.toc-active::after`と見た目を揃えている。スクロール位置の検出も、v1の`updateToc()`(`scroll`イベント+`offsetTop`比較、`src/layouts/BaseLayout.astro`)をそのまま移植したもの(後述の不具合修正で`IntersectionObserver`から置き換えた)。
 - この変更で`Sidebar.astro`・`Avatar.astro`(顔写真が無いためのイニシャル表示。移植元のSidebarでのみ使っていた)は不要になったため削除した。プロフィール写真をどう扱うかという論点自体が無くなった。
+
+### タブ「02」が実質スキップされて見える不具合(移植元由来の実装に起因)
+
+初期実装ではスクロール位置の検出に`IntersectionObserver`+`intersectionRatio`(可視割合が一番高いセクションをアクティブにする)を使っていた。これは移植元のコードをそのまま使ったものだったが、`intersectionRatio`は各セクション「自身の高さ」に対する可視割合なので、丈の短いセクション(Research Interests、約375px)は画面の中のどこにあっても100%近い比率を出しやすく、丈の長いセクション(Publications、1000px超)は同じビューポートに対する比率が上がりにくい。結果、スクロールしてもResearch Interestsのハイライトが不自然に長く居座り、Publications(02)がハイライトされる区間が極端に短く(または実質見えず)、Presentations(03)へ飛んだように見える、という不具合が実測で確認できた(Playwrightで1280×800/390×844の両方、スクロール位置ごとのアクティブタブをサンプリングして再現)。
+
+修正はv1の`updateToc()`と同じ「各セクションの`offsetTop`とスクロール位置を比較し、最後に通過したセクションをアクティブにする」方式へ置き換えたこと。この方式はセクションの高さに左右されないため、01→02→03と単調に、かつ全区間で必ずハイライトが移る(同じPlaywright計測で確認済み)。ヘッダーの実測高さ(`--rp-scroll-offset`と同じ計算)をスクロール位置のオフセットに使っている点も含め、v1の実装をそのまま踏襲する形になった。
 
 ## 研究セクションだけを表示する理由
 

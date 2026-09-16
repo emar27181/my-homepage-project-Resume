@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-16 (17)
+
+- fix: v3のセクションタブで「02 Publications」が実質スキップされたように見える不具合を修正。スクロール位置の検出に使っていた`IntersectionObserver`+`intersectionRatio`(可視割合が一番高いセクションをアクティブにする方式)は、各セクション自身の高さに対する比率で判定するため、丈の短い「Research Interests」(約375px)が丈の長い「Publications」(1000px超)を可視区間で圧倒し、01→(実質スキップ)→03と遷移して見えていた。v1の`updateToc()`(`src/layouts/BaseLayout.astro`)が実際に使っている`offsetTop`比較(スクロール位置がどのセクションの開始位置を最後に通過したか)へ実装を置き換え、セクションの高さに左右されない判定にした。Playwrightでスクロール位置ごとのアクティブタブをサンプリングし、1280×800/390×844の両方で01→02→03と単調に遷移することを確認済み。docs/DESIGN.md・docs/ARCHITECTURE.mdの「既存のIntersectionObserver実装をそのまま流用」という記述も実態に合わせて更新した。
+
 ## 2026-09-15 (16)
 
 - improve: v3ヘッダーのv1/v2リンクをテキストからアイコンに変更。v1のヘッダー(`Header.astro`)がIconButton+アイコンでv2/v3を切り替えている慣習に合わせ、house(v1)・square-terminal(v2、v1側が実際に使っているのと同じ絵柄)のインラインSVGアイコンに差し替えた。`aria-label`/`title`でアクセシブルな名前は維持。

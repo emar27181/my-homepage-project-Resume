@@ -86,7 +86,7 @@ src/v3/
 移植元(portfolio-taraba)は幅260pxの固定左サイドバーにプロフィールと目次を置く設計だが、v3では採用していない。代わりに、このサイトのv1が既に持っているパターン(`src/layouts/BaseLayout.astro`の`sticky top-0`なラッパーに`Header`と`toc-nav`を重ね、`src/styles/app.css`の`.toc-link`/`.toc-active`でスクロール位置に応じてハイライトする、`src/pages/index.astro`の`slot="toc"`)をv3にもそのまま適用した。
 
 - `src/v3/components/organisms/Header.astro`が1つのコンポーネントで両方の行を持つ: 1行目はブランド名+v1/v2/言語切替/テーマ切替、2行目(`.rp-toc-row`)が各研究セクションへのタブ(`.rp-toc-link`)。
-- ハイライトの仕組みはv1の`updateToc()`(scrollイベント + `offsetTop`比較)ではなく、既存の`IntersectionObserver`実装(`ResearchPortfolio.astro`のscript)をそのまま流用している ― 挙動(現在の見えているセクションのタブに`active`相当のクラスを付ける)はv1と同じだが、実装手段は元々v3にあったものを活かした。CSSのクラス名・見た目(`.rp-toc-link.rp-toc-active`に下線)はv1の`.toc-link.toc-active::after`と揃えている。
+- ハイライトの仕組みはv1の`updateToc()`(scrollイベント + `offsetTop`比較)をそのまま`ResearchPortfolio.astro`のscriptに移植したもの。初期実装は移植元由来の`IntersectionObserver`+`intersectionRatio`を流用していたが、`intersectionRatio`は各セクション自身の高さに対する可視割合のため、丈の短い「Research Interests」が丈の長い「Publications」を可視区間で圧倒し、02のハイライトが実質スキップされたように見える不具合があった(詳細はdocs/DESIGN.md)。`offsetTop`比較はセクションの高さに左右されないため、この不具合を修正できた。CSSのクラス名・見た目(`.rp-toc-link.rp-toc-active`に下線)はv1の`.toc-link.toc-active::after`と揃えている。
 - 結果として`Sidebar.astro`・`Avatar.astro`(顔写真が無いためのイニシャル表示)は使われなくなったため削除した。
 
 ## v3 の多言語化・アダプタ設計

@@ -156,30 +156,30 @@ const description =
 				new ResizeObserver(updateScrollOffset).observe(header)
 			}
 
-			// Scroll-spy for the header's section tabs — same idea as v1's
-			// updateToc() in src/layouts/BaseLayout.astro, kept as an
-			// IntersectionObserver here since it was already in place.
-			const sections = [...document.querySelectorAll<HTMLElement>('.rp-single-section')]
-			const tocLinks = new Map(
-				[...document.querySelectorAll<HTMLAnchorElement>('[data-rp-toc-link]')].map((link) => [
-					link.dataset.rpTocLink,
-					link
-				])
-			)
-			const updateActive = (id: string) => {
-				tocLinks.forEach((link, linkId) => link.classList.toggle('rp-toc-active', linkId === id))
+			// Scroll-spy for the header's section tabs — ported verbatim from
+			// v1's updateToc() in src/layouts/BaseLayout.astro (offsetTop
+			// comparison against scrollY), not an IntersectionObserver. An
+			// IntersectionObserver ranks sections by intersectionRatio against
+			// each target's OWN height, so a short section (e.g. Research
+			// Interests) can out-rank a much taller one (Publications) across
+			// a wide scroll range — that was starving "02 Publications" of
+			// its active state. offsetTop comparison has no such bias.
+			const tocLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-rp-toc-link]')]
+			const linkedSections = tocLinks
+				.map((link) => document.getElementById(link.dataset.rpTocLink ?? ''))
+				.filter((section): section is HTMLElement => Boolean(section))
+			const updateActive = () => {
+				const offset = header ? header.getBoundingClientRect().height + 16 : 120
+				const scrollY = window.scrollY + offset
+				let activeIndex = 0
+				for (let i = 0; i < linkedSections.length; i++) {
+					if (linkedSections[i].offsetTop <= scrollY) activeIndex = i
+				}
+				tocLinks.forEach((link, i) => link.classList.toggle('rp-toc-active', i === activeIndex))
 			}
-			if ('IntersectionObserver' in window && sections.length > 0) {
-				const observer = new IntersectionObserver(
-					(entries) => {
-						const visible = entries
-							.filter((entry) => entry.isIntersecting)
-							.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-						if (visible) updateActive(visible.target.id)
-					},
-					{ rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.1, 0.5] }
-				)
-				sections.forEach((section) => observer.observe(section))
+			if (tocLinks.length > 0) {
+				window.addEventListener('scroll', updateActive, { passive: true })
+				updateActive()
 			}
 		</script>
 	</body>
