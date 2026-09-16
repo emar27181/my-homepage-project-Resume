@@ -9,6 +9,7 @@
 // the same file.
 import BaseHead from '@/components/BaseHead.astro'
 import '@/v2/styles/terminal.css'
+import { Icon } from 'astro-icon/components'
 
 import Chip from '@/v2/components/atoms/Chip.astro'
 import SegmentedControl from '@/v2/components/molecules/SegmentedControl.astro'
@@ -46,11 +47,20 @@ const description =
 		<header class='pf-header'>
 			<span class='pf-header__prompt'>{profile.handle}@portfolio: ~</span>
 			<div class='pf-header__actions'>
-				<Chip as='a' href={v1Href} size='sm' title={backTitle}>
-					<span class='sr-only'>{backSrOnly}</span>v1
+				{
+					/* Same icon-based page-switch format as v1's header
+					 (Home/Terminal/Research): here it's Home(v1)/Research(v3)
+					 since we're already on the terminal. Same Chip atom as
+					 the rest of v2 (no one-off icon-button style), just an
+					 icon instead of a text label inside it. */
+				}
+				<Chip as='a' href={v1Href} size='sm' title={backTitle} class='pf-chip--icon'>
+					<span class='sr-only'>{backSrOnly}</span>
+					<Icon name='house' width='16' height='16' />
 				</Chip>
-				<Chip as='a' href={v3Href} size='sm' title={v3Title}>
-					<span class='sr-only'>{v3SrOnly}</span>v3
+				<Chip as='a' href={v3Href} size='sm' title={v3Title} class='pf-chip--icon'>
+					<span class='sr-only'>{v3SrOnly}</span>
+					<Icon name='graduation-cap' width='16' height='16' />
 				</Chip>
 				<Chip as='a' href={otherLangHref} size='sm' title={otherLangTitle}>{otherLangLabel}</Chip>
 				{

@@ -84,6 +84,14 @@
 	font-size: 14px;
 }
 
+/* Icon-only chip (page-switch links, matching v1's header icon format):
+   same pill, but square instead of pill-shaped-for-text so a lone icon
+   sits centered rather than swimming in text padding. */
+.pf-chip--icon.pf-chip--sm {
+	width: var(--pf-touch-sm);
+	padding: 0;
+}
+
 a.pf-chip,
 button.pf-chip {
 	cursor: pointer;
@@ -104,6 +112,12 @@ button.pf-chip:hover {
 		height: var(--pf-touch-md);
 		padding: 0 16px;
 		font-size: 13px;
+	}
+
+	a.pf-chip--icon.pf-chip--sm,
+	button.pf-chip--icon.pf-chip--sm {
+		width: var(--pf-touch-md);
+		padding: 0;
 	}
 }
 
