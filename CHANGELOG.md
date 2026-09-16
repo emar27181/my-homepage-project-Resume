@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-16 (18)
+
+- improve: v1の言語切り替えボタンの表示を「English」/「日本語」の全角文言から、v2/v3のヘッダーチップと同じ「EN」/「JA」の短い表記に揃えた。挙動(1つのボタンで表示言語をトグルする)は変更していない。アクセシビリティのため`title`属性(`Switch to English`/`日本語に切り替え`)を新たに追加した。
+
 ## 2026-09-16 (17)
 
 - fix: v3のセクションタブで「02 Publications」が実質スキップされたように見える不具合を修正。スクロール位置の検出に使っていた`IntersectionObserver`+`intersectionRatio`(可視割合が一番高いセクションをアクティブにする方式)は、各セクション自身の高さに対する比率で判定するため、丈の短い「Research Interests」(約375px)が丈の長い「Publications」(1000px超)を可視区間で圧倒し、01→(実質スキップ)→03と遷移して見えていた。v1の`updateToc()`(`src/layouts/BaseLayout.astro`)が実際に使っている`offsetTop`比較(スクロール位置がどのセクションの開始位置を最後に通過したか)へ実装を置き換え、セクションの高さに左右されない判定にした。Playwrightでスクロール位置ごとのアクティブタブをサンプリングし、1280×800/390×844の両方で01→02→03と単調に遷移することを確認済み。docs/DESIGN.md・docs/ARCHITECTURE.mdの「既存のIntersectionObserver実装をそのまま流用」という記述も実態に合わせて更新した。
