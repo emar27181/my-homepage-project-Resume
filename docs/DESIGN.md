@@ -170,6 +170,8 @@ Terminal(自分自身、square-terminalアイコン)も同じ並びに含め、`
 
 アイコン化で幅が縮んだ効果もあって、モバイル(390px)でヘッダーが2行に折り返っていたのを1行に戻せた。操作可能な`Chip`は560px未満で`sm`(24px)→`md`(44px)へ育つ仕様(WCAGのタッチ領域確保、前述)のため、以前の`terminal`という英単語のテキストピルより幅が伸びる方向に働いていた。装飾的なプロンプト文字列(`emar27181@portfolio: ~`)のフォントサイズを860px未満で1段階だけ縮め、ヘッダーの余白も詰めて帳尻を合わせている。
 
+v3のヘッダーにも同じ考え方で、自分自身(Research、graduation-capアイコン)へのリンクを追加した。それまでは移植元から持ち込んだv1(house)・v2(square-terminal)の2アイコンしか無く、v1・v2が自分自身を含む3モード分のアイコンを持つのに対してv3だけ2つで揃っていなかった。`Header.astro`(v3)の`.rp-icon-link`をそのまま使い、表示順もv1・v2と同じHome→Terminal→Researchにした(`v3Href`はそのページ自身のURL、`v3Label`は新設の`ui.thisIsV3`文言)。
+
 ## スクロール時に見出しがヘッダーに隠れる不具合(移植元にあった仕組みの移植漏れ)
 
 ヘッダー2段目のタブや`#section`アンカーへジャンプすると、対象セクションの見出しがsticky headerの下に隠れる不具合があった。移植元テーマはヘッダーの実測高さを`ResizeObserver`で追跡し、`--page-scroll-offset`というCSS変数を通じて`scroll-padding-top`に反映する仕組みを持っていたが、v3を組み立てた際にこの仕組みを移植し忘れていた。同じ考え方で`ResearchPortfolio.astro`のscriptに`--rp-scroll-offset`を追加し(`.rp-header`の高さ+16pxをResizeObserverで追跡)、`.rp-single-section`の`scroll-margin-top`に使うようにした。ヘッダーは`flex-wrap`で狭い画面では2行になることがあるため、固定値ではなく実測値を使っている。

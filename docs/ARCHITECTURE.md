@@ -100,7 +100,7 @@ v2と同じくURLベースの方式(`/v3` = ja、`/en/v3` = en)。`adapter.ts`�
 
 ## v1・v2・v3間の相互リンク
 
-`src/components/layout/Header.astro`(v1)には`v1(自身)`・`v2`・`v3`へのIconButtonリンクがあり、`getLocalizedPath('/'|'/v2'|'/v3', currentLanguage)`で表示言語に追従する。v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`はそれぞれのヘッダーに残り2モードへのリンクを持つ(v2は`Chip`、v3は`.rp-header-nav`のリンク)。3モードともテキストではなくアイコン(house/square-terminal/graduation-cap)でリンクし、`aria-label`相当(`sr-only`テキストまたは`aria-label`)でアクセシブルな名前を持つ。v3はv1が使う`astro-icon`のローカルアイコン一式(`src/icons/`)に依存せず独自にインラインSVGで用意しているが、v2はv1と同じ`astro-icon`のアイコンをそのまま再利用している(新しい依存は増やしていない)。
+`src/components/layout/Header.astro`(v1)・v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`は、いずれも自分自身を含む3モード全て(Home/Terminal/Research)へのアイコンリンクをヘッダーに持つ(v1は`IconButton`、v2は`Chip`、v3は`.rp-header-nav`のリンク)。表示順はどのモードでも同じ左からHome→Terminal→Research。`getLocalizedPath('/'|'/v2'|'/v3', currentLanguage)`相当の仕組みで表示言語に追従する。3モードともテキストではなくアイコン(house/square-terminal/graduation-cap)でリンクし、`aria-label`相当(`sr-only`テキストまたは`aria-label`)でアクセシブルな名前を持つ。v3はv1が使う`astro-icon`のローカルアイコン一式(`src/icons/`)に依存せず独自にインラインSVGで用意しているが、v2はv1と同じ`astro-icon`のアイコンをそのまま再利用している(新しい依存は増やしていない)。
 
 v1のヘッダーアイコン(Home・Terminal(v2)・Research(v3)、`src/icons/`のhouse・square-terminal・graduation-cap)は、右上にまとめて`gap-x-1`の狭い間隔で並べている(ヘッダー全体の他の要素同士の間隔`gap-x-3`/`gap-x-4`より詰めている ― 同じ役割(ページ間ナビゲーション)を持つ1つのグループとして扱うため)。表示順は左から Home(自身、`/`) → Terminal(v2) → Research(v3)。全てIconButton(`h-8 w-8`の同じ寸法)に揃え、行内で寸法がバラつかないようにしている。
 

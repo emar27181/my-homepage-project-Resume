@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-16 (23)
+
+- improve: v3ヘッダーに自分自身(Research)へのアイコンリンクを追加し、v1/v2と同じHome→Terminal→Researchの並びに揃えた。それまではv1(house)・v2(square-terminal)の2アイコンしか無く、v1・v2が自分自身を含む3モード分のアイコンを持つのに対してv3だけ2つで揃っていなかった。`Header.astro`(v3)の`.rp-icon-link`をそのまま使い、新規の`v3Href`(そのページ自身のURL)/`v3Label`(新設の`ui.thisIsV3`文言)propsを追加しただけで、新しいCSS/コンポーネントは増やしていない。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px、ja/en)でアイコン順序・リンク先・コンソールエラー無しを確認済み。
+
 ## 2026-09-16 (22)
 
 - improve: v2ヘッダーの`terminal`という英単語のテキストピルをsquare-terminalアイコンに差し替え、Home/Terminal/Researchの並び順もv1と同じ(左からHome→Terminal→Research)に揃えた。この3アイコンは`.pf-header__icons`という4pxギャップのラッパーでまとめ、v1の`gap-x-1`と同じく1グループとして詰めて配置している。Terminal(自分自身へのリンク)は`Chip`の`active`propで塗りつぶし、現在地を示す。これに伴い、選択肢が常に1つしかない(collageモード非表示中の)`SegmentedControl`呼び出しは削除し、他の2アイコンと同じ`Chip`直書きに統一した(`SegmentedControl.astro`自体は変更していないので、collageモード再有効化時にまた使える)。

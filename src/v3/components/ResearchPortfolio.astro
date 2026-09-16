@@ -47,6 +47,7 @@ const ui = getUi(lang)
 const otherLang: Language = lang === 'en' ? 'ja' : 'en'
 const v1Href = lang === 'en' ? '/en' : '/'
 const v2Href = lang === 'en' ? '/en/v2' : '/v2'
+const v3Href = lang === 'en' ? '/en/v3' : '/v3'
 const otherLangHref = otherLang === 'en' ? '/en/v3' : '/v3'
 const otherLangLabel = otherLang === 'en' ? 'EN' : 'JA'
 
@@ -68,6 +69,8 @@ const description =
 			v1Label={ui.backToV1}
 			v2Href={v2Href}
 			v2Label={ui.backToV2}
+			v3Href={v3Href}
+			v3Label={ui.thisIsV3}
 			otherLangHref={otherLangHref}
 			otherLangLabel={otherLangLabel}
 			themeLabel={ui.theme}
