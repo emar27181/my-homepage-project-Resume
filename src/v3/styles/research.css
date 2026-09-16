@@ -114,6 +114,14 @@
 .rp-portfolio ol {
 	margin: 0;
 }
+.rp-portfolio :focus-visible {
+	outline: 3px solid var(--rp-accent);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+.rp-portfolio ::selection {
+	background: var(--rp-accent-soft);
+}
 
 .rp-skip-link {
 	position: fixed;
@@ -167,6 +175,11 @@
 	display: flex;
 	align-items: center;
 	gap: var(--rp-space-4);
+	/* Stays pinned to the right even once .rp-header-inner wraps it onto
+	   its own line on narrow screens (same fix as v2's .pf-header__actions)
+	   — without this it falls back to flex-start (left) because a lone
+	   item on a wrapped line has nothing to space against. */
+	margin-left: auto;
 }
 .rp-header-nav a {
 	display: inline-flex;
@@ -178,6 +191,19 @@
 }
 .rp-header-nav a:hover {
 	color: var(--rp-accent);
+}
+.rp-icon-link {
+	justify-content: center;
+	width: 44px;
+}
+/* Home/Terminal/Research grouped tighter than the rest of .rp-header-nav
+   (same idea as v1's gap-x-1 icon cluster and v2's .pf-header__icons):
+   one set of peer page-switch links, packed together rather than spaced
+   out like EN and the theme toggle. */
+.rp-header-icons {
+	display: flex;
+	align-items: center;
+	gap: var(--rp-space-1);
 }
 .rp-theme-toggle {
 	display: inline-grid;
@@ -219,6 +245,9 @@
 	padding-block: 0.5rem;
 }
 .rp-toc-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
 	padding: 2px 8px;
 	border-radius: 4px;
 	color: var(--rp-muted);
@@ -228,6 +257,11 @@
 	transition:
 		color 0.2s,
 		background 0.2s;
+}
+.rp-toc-num {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: var(--rp-type-xs);
+	opacity: 0.7;
 }
 .rp-toc-link:hover {
 	color: var(--rp-ink);
@@ -245,6 +279,34 @@
 	height: 2px;
 	border-radius: 1px;
 	background: var(--rp-accent);
+}
+
+/* Below 700px (matches the source theme's own breakpoint), the tab row
+   shows just the section number — like the reference deploy
+   (aihara-yasuto-portfolio.netlify.app) does on mobile — instead of full
+   labels that would wrap awkwardly in a narrow sticky bar. The label text
+   stays in the DOM for screen readers (see Header.astro's aria-label). */
+@media (max-width: 700px) {
+	.rp-toc-text {
+		display: none;
+	}
+	.rp-toc-link {
+		min-width: 32px;
+		min-height: 32px;
+		justify-content: center;
+		border-radius: 999px;
+	}
+	.rp-toc-num {
+		font-size: var(--rp-type-sm);
+		opacity: 1;
+	}
+	.rp-toc-link.rp-toc-active {
+		background: var(--rp-accent);
+		color: white;
+	}
+	.rp-toc-link.rp-toc-active::after {
+		content: none;
+	}
 }
 
 /* Layout */
@@ -296,6 +358,12 @@
 .rp-single-section {
 	padding-block: var(--rp-space-16);
 	border-top: 1px solid var(--rp-rule);
+	/* Keeps a jump-to-#section link (the header tabs, or any other anchor)
+	   from landing the heading underneath the sticky header. --rp-scroll-
+	   offset is measured from the header's real (possibly wrapped) height
+	   by ResearchPortfolio.astro's script — same idea as the source
+	   theme's --page-scroll-offset, ported over since it was missing here. */
+	scroll-margin-top: var(--rp-scroll-offset, 6.5rem);
 }
 .rp-single-overview {
 	padding-block: 0;

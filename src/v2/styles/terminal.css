@@ -54,6 +54,15 @@
 	margin-left: auto;
 }
 
+/* Home/Terminal/Research page-switch icons, grouped tighter than the rest
+   of .pf-header__actions (same idea as v1's header icon cluster) since
+   they're one set of peer navigation controls. */
+.pf-header__icons {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
 /* One pill atom for the whole page (docs/DESIGN.md): nav links, the mode
    toggle, profile links, and tech tags all share this base + one size
    modifier. Only `a`/`button` get pointer/hover — a plain `span` (tag use)
@@ -84,6 +93,14 @@
 	font-size: 14px;
 }
 
+/* Icon-only chip (page-switch links, matching v1's header icon format):
+   same pill, but square instead of pill-shaped-for-text so a lone icon
+   sits centered rather than swimming in text padding. */
+.pf-chip--icon.pf-chip--sm {
+	width: var(--pf-touch-sm);
+	padding: 0;
+}
+
 a.pf-chip,
 button.pf-chip {
 	cursor: pointer;
@@ -104,6 +121,12 @@ button.pf-chip:hover {
 		height: var(--pf-touch-md);
 		padding: 0 16px;
 		font-size: 13px;
+	}
+
+	a.pf-chip--icon.pf-chip--sm,
+	button.pf-chip--icon.pf-chip--sm {
+		width: var(--pf-touch-md);
+		padding: 0;
 	}
 }
 
@@ -242,7 +265,17 @@ button.pf-chip:hover {
 	}
 
 	.pf-header {
-		padding: 8px 12px;
+		padding: 8px 10px;
+		gap: 8px;
+	}
+
+	/* Shrinking this (decorative prompt text, not a functional control) is
+	   what actually buys back enough width to keep .pf-header on one line
+	   at common phone widths (~360-414px) now that the actions column grew
+	   under the 560px touch-target rule below — the two mobile breakpoints
+	   interact, so this has to be tuned against that one, not in isolation. */
+	.pf-header__prompt {
+		font-size: 12px;
 	}
 }
 

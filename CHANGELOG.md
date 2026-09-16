@@ -1,5 +1,66 @@
 # Changelog
 
+## 2026-09-16 (26)
+
+- fix: v3ヘッダーがモバイル幅で2行に折り返ると、`.rp-header-nav`(EN/アイコン/テーマ切替)が右端ではなく左端に寄ってしまう不具合を修正。`.rp-header-inner`の`justify-content: space-between`は、2行に折り返ってnavが自分の行に単独になった時点で対になる相手(ブランド)が同じ行に無くなり効かなくなる、というflexboxの仕様が原因。v2の`.pf-header__actions`で以前まったく同じ不具合を直した`margin-left: auto`を、v3の`.rp-header-nav`にも追加した。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、390px/320px/1280px)で`.rp-header-nav`の右端と`.rp-header-inner`の右端が一致すること(修正前は390px幅で112pxのズレ)を確認済み。
+
+## 2026-09-16 (25)
+
+- improve: v3ヘッダーのHome/Terminal/Researchアイコンリンクを`src/v3/components/atoms/IconLink.astro`という1つのアトムに共通化した。`Header.astro`に`<a class='rp-icon-link'>...<svg viewBox='0 0 24 24' ...>`というラッパー構造(pathデータ以外は完全に同一)を3回コピー&ペーストしていたのを、`href`/`label`だけを受け取り具体的なアイコン形状は`<slot />`で受け取る(既存の`ExternalLink.astro`アトムと同じ設計)アトム1つにまとめた。表示結果・DOM構造は変更していない(Playwrightで見た目・リンク先・コンソールエラー無しを変更前後で比較確認済み)。
+- `npm run test`(54件、無変更)・`npm run build`で確認済み。
+
+## 2026-09-16 (24)
+
+- improve: v3ヘッダーのnav並び・間隔をv1に揃えた。v1は「EN/JAチップ→(gap-x-1で詰めた)Home/Terminal/Researchアイコン」の順だが、v3は元々「Home/Terminal/Research→EN/JA」の順で、`.rp-header-nav`全体が同じ16pxギャップだったため1つのグループに見えていなかった。EN/JAリンクをアイコン列より前に出し、3アイコンを`.rp-header-icons`という新しいラッパー(`gap: var(--rp-space-1)` = 4px)でくくって、v1と同じ「EN→詰まったアイコン列」の見た目に揃えた。テーマ切り替えボタン(v1には無い要素)はアイコン列の後ろに残している。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px)で並び順(EN→Home→Terminal→Research→テーマ切替)・間隔(アイコン間4px/グループ間16px)・コンソールエラー無しを確認済み。
+
+## 2026-09-16 (23)
+
+- improve: v3ヘッダーに自分自身(Research)へのアイコンリンクを追加し、v1/v2と同じHome→Terminal→Researchの並びに揃えた。それまではv1(house)・v2(square-terminal)の2アイコンしか無く、v1・v2が自分自身を含む3モード分のアイコンを持つのに対してv3だけ2つで揃っていなかった。`Header.astro`(v3)の`.rp-icon-link`をそのまま使い、新規の`v3Href`(そのページ自身のURL)/`v3Label`(新設の`ui.thisIsV3`文言)propsを追加しただけで、新しいCSS/コンポーネントは増やしていない。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px、ja/en)でアイコン順序・リンク先・コンソールエラー無しを確認済み。
+
+## 2026-09-16 (22)
+
+- improve: v2ヘッダーの`terminal`という英単語のテキストピルをsquare-terminalアイコンに差し替え、Home/Terminal/Researchの並び順もv1と同じ(左からHome→Terminal→Research)に揃えた。この3アイコンは`.pf-header__icons`という4pxギャップのラッパーでまとめ、v1の`gap-x-1`と同じく1グループとして詰めて配置している。Terminal(自分自身へのリンク)は`Chip`の`active`propで塗りつぶし、現在地を示す。これに伴い、選択肢が常に1つしかない(collageモード非表示中の)`SegmentedControl`呼び出しは削除し、他の2アイコンと同じ`Chip`直書きに統一した(`SegmentedControl.astro`自体は変更していないので、collageモード再有効化時にまた使える)。
+- fix: 上記のアイコン化とv1と同じ44pxタッチターゲット拡大(560px未満)が組み合わさり、モバイル(390px)でヘッダーが2行に折り返っていた。プロンプト文字列(`emar27181@portfolio: ~`)のフォントサイズを860px未満で12pxに縮小し、ヘッダーの余白・ギャップを詰めることで1行に収まるようにした(実測: 390px幅でヘッダー高さ92.5px→61px)。320pxのような極端に狭い幅では引き続き2行になる。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px/320px、ja/en)でアイコン順序・リンク先・active状態・1行レイアウト・コンソールエラー無しを確認済み。
+
+## 2026-09-16 (21)
+
+- improve: v2(ターミナル表示)のヘッダーも、v1・v3と同じアイコンによるページ切り替え形式に揃えた。`v1`/`v3`への素のテキストChipを、v1と同じ`astro-icon`のhouse/graduation-capアイコンに差し替えた(v2はv1のローカルアイコン一式をそのまま再利用でき、新しい依存は増えていない)。アイコン1つだけだと`Chip`のテキスト用パディングで横長の楕円になるため、`.pf-chip--icon`という補助クラスを追加して幅を高さに揃え、正方形(丸)にした(`src/v2/styles/terminal.css`、`sm`=24px/`560px`未満で`md`=44pxへ育つ既存のブレークポイントにそのまま追従)。既存の`Chip`アトムを使い回しているだけで、新しいボタン部品は作っていない。v2はターミナル表示そのものなので、自分自身を指す3つ目のアイコンは置いていない。EN/JAの言語チップ・`terminal`モード表示はページ間ナビゲーションではないためテキストのまま。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px、ja/en)でアイコンの見た目・リンク先(`/`・`/v3`、`getLocalizedPath`で言語追従)・コンソールエラー無しを確認済み。
+
+## 2026-09-16 (20)
+
+- improve: v1ヘッダーのハンバーガーメニュー・ナイトモード切替の表示をオフにした。アイコン群はHome(自身)・Terminal(v2)・Research(v3)の3つに整理。`#toc-nav`はもともと`class='block'`で常時表示がデフォルトのため、開閉トグルが無くなった今は常に展開された状態になる(表示内容自体に変化は無い)。テーマは`ThemeProvider.astro`の初期値(既定はダーク)とOS設定追従がそのまま効くため、手動切り替えができなくなるだけで機能自体は残る。前回追加した`src/icons/menu.svg`・`sun.svg`・`moon.svg`はこれに伴い不要になったため削除した(`house.svg`は引き続き使用)。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px)でアイコン数(3つ)・ハンバーガー/ダークモード切替ボタンの不在・toc-navの常時表示を確認済み。
+
+## 2026-09-16 (19)
+
+- improve: v1ヘッダーの右上アイコン群を、右から順に「ハンバーガーメニュー・ナイトモード切替・研究(v3)・ターミナル(v2)・ホーム(自身)」の並びに揃え、`gap-x-1`で1つのグループとして詰めて配置した(ヘッダー内の他要素同士の間隔より狭くし、ページ間ナビゲーション+テーマ切替+モバイルメニューという同じ役割のグループであることを視覚的に示した)。ホームアイコン(`src/icons/house.svg`、v3で既に使っているものと同じpath)を新規追加し、v1の各ページ(index以外のblog/tags/tools等でも同じHeaderを使う)から`/`へすぐ戻れるようにした。ハンバーガー・ダークモード切替が手書きのインラインSVG(lucideの実際のpathとは微妙にずれた座標)だったのを、`src/icons/menu.svg`・`sun.svg`・`moon.svg`として実際のlucideアイコンのpathに差し替え、`astro-icon`経由の他アイコンと同じ仕組みに統一した。ハンバーガーもIconButton化し、行内の全アイコンが同じ寸法(`h-8 w-8`)に揃うようにした。各アイコンのリンク先(`/`・`/v2`・`/v3`、いずれも`getLocalizedPath`で表示言語に追従)を再確認済み。v2(ターミナル表示中)はこの構成への統一対象から外している。
+- fix: 上記編集中に`src/pages/index.astro`の「最終更新」表記が更新漏れ(2026年9月9日のまま)だったため、当日日付(2026年9月16日)に修正(`/en`版も同様)。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px、ライト/ダーク)でアイコンの並び順・リンク先・ダークモード切替・ハンバーガーでのtoc-nav開閉を確認済み。
+
+## 2026-09-16 (18)
+
+- improve: v1の言語切り替えボタンの表示を「English」/「日本語」の全角文言から、v2/v3のヘッダーチップと同じ「EN」/「JA」の短い表記に揃えた。挙動(1つのボタンで表示言語をトグルする)は変更していない。アクセシビリティのため`title`属性(`Switch to English`/`日本語に切り替え`)を新たに追加した。
+
+## 2026-09-16 (17)
+
+- fix: v3のセクションタブで「02 Publications」が実質スキップされたように見える不具合を修正。スクロール位置の検出に使っていた`IntersectionObserver`+`intersectionRatio`(可視割合が一番高いセクションをアクティブにする方式)は、各セクション自身の高さに対する比率で判定するため、丈の短い「Research Interests」(約375px)が丈の長い「Publications」(1000px超)を可視区間で圧倒し、01→(実質スキップ)→03と遷移して見えていた。v1の`updateToc()`(`src/layouts/BaseLayout.astro`)が実際に使っている`offsetTop`比較(スクロール位置がどのセクションの開始位置を最後に通過したか)へ実装を置き換え、セクションの高さに左右されない判定にした。Playwrightでスクロール位置ごとのアクティブタブをサンプリングし、1280×800/390×844の両方で01→02→03と単調に遷移することを確認済み。docs/DESIGN.md・docs/ARCHITECTURE.mdの「既存のIntersectionObserver実装をそのまま流用」という記述も実態に合わせて更新した。
+
+## 2026-09-15 (16)
+
+- improve: v3ヘッダーのv1/v2リンクをテキストからアイコンに変更。v1のヘッダー(`Header.astro`)がIconButton+アイコンでv2/v3を切り替えている慣習に合わせ、house(v1)・square-terminal(v2、v1側が実際に使っているのと同じ絵柄)のインラインSVGアイコンに差し替えた。`aria-label`/`title`でアクセシブルな名前は維持。
+- fix: ヘッダー2段目のタブや`#section`アンカーへジャンプすると、対象セクションの見出しがsticky headerの下に隠れる不具合を修正。移植元テーマが持つ「ヘッダー実測高さをResizeObserverで追跡し`scroll-padding-top`へ反映する」仕組み(`--page-scroll-offset`)の移植が漏れていたため、同じ考え方で`--rp-scroll-offset`を追加し、`.rp-single-section`の`scroll-margin-top`に使うようにした。
+- style: `:focus-visible`のアウトラインと`::selection`の配色をv3に追加(移植元にあったが未移植だった)。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright)でアイコン表示・タブジャンプ後に見出しが隠れないこと・ライト/ダーク両方でのアイコン視認性を確認済み。
+
+## 2026-09-15 (15)
+
+- improve: v3のヘッダー2段目のセクションタブに番号(`01`/`02`/`03`)バッジを追加し、幅700px未満(移植元テーマ[aihara-yasuto-portfolio.netlify.app](https://aihara-yasuto-portfolio.netlify.app/)の実際のブレークポイントに合わせた)では見出し文字列を隠して番号だけを丸いバッジで表示するようにした。移植元のCSSが持つ`.header-tabs strong { display: none }`と同じ挙動をv1由来のタブ実装に取り入れた形。ラベル文字列はDOMからは消さず、リンクの`aria-label`で常に読み上げられるようにしている。アクティブなタブはデスクトップでは下線、モバイルではアクセントカラーの塗りつぶしバッジで示す。`npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、390px/1280px)で番号のみ表示への切り替わりを確認済み。
+
 ## 2026-09-15 (14)
 
 - feat: エンターテインメントコンピューティング2026特集号(情報処理学会論文誌、申請中)をresearchデータに追加。v1(`src/pages/index.astro`)には既にプレースホルダとして掲載されていた内容(タイトル・日付「2026年2月（申請中）」・学会リンク・動画)をそのままv2/data/portfolio.tsに転記した(en版も新規に対応する形で追加)。

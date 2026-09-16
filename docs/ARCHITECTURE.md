@@ -59,7 +59,7 @@ v1はTailwindの`dark:`クラス切り替え(`ThemeProvider`がlocalStorageと`<
 ```
 src/v3/
 ├── components/
-│   ├── atoms/       # ExternalLink
+│   ├── atoms/       # ExternalLink・IconLink
 │   ├── molecules/   # LinkList・PublicationItem
 │   ├── organisms/   # Header(ブランド行+セクションタブ行)・Hero・Footer・PublicationList
 │   └── ResearchPortfolio.astro # v3ページの実体。langをpropで受け取る唯一のマークアップ(v2のPortfolioComputer.astroと同じ役割)。
@@ -86,7 +86,7 @@ src/v3/
 移植元(portfolio-taraba)は幅260pxの固定左サイドバーにプロフィールと目次を置く設計だが、v3では採用していない。代わりに、このサイトのv1が既に持っているパターン(`src/layouts/BaseLayout.astro`の`sticky top-0`なラッパーに`Header`と`toc-nav`を重ね、`src/styles/app.css`の`.toc-link`/`.toc-active`でスクロール位置に応じてハイライトする、`src/pages/index.astro`の`slot="toc"`)をv3にもそのまま適用した。
 
 - `src/v3/components/organisms/Header.astro`が1つのコンポーネントで両方の行を持つ: 1行目はブランド名+v1/v2/言語切替/テーマ切替、2行目(`.rp-toc-row`)が各研究セクションへのタブ(`.rp-toc-link`)。
-- ハイライトの仕組みはv1の`updateToc()`(scrollイベント + `offsetTop`比較)ではなく、既存の`IntersectionObserver`実装(`ResearchPortfolio.astro`のscript)をそのまま流用している ― 挙動(現在の見えているセクションのタブに`active`相当のクラスを付ける)はv1と同じだが、実装手段は元々v3にあったものを活かした。CSSのクラス名・見た目(`.rp-toc-link.rp-toc-active`に下線)はv1の`.toc-link.toc-active::after`と揃えている。
+- ハイライトの仕組みはv1の`updateToc()`(scrollイベント + `offsetTop`比較)をそのまま`ResearchPortfolio.astro`のscriptに移植したもの。初期実装は移植元由来の`IntersectionObserver`+`intersectionRatio`を流用していたが、`intersectionRatio`は各セクション自身の高さに対する可視割合のため、丈の短い「Research Interests」が丈の長い「Publications」を可視区間で圧倒し、02のハイライトが実質スキップされたように見える不具合があった(詳細はdocs/DESIGN.md)。`offsetTop`比較はセクションの高さに左右されないため、この不具合を修正できた。CSSのクラス名・見た目(`.rp-toc-link.rp-toc-active`に下線)はv1の`.toc-link.toc-active::after`と揃えている。
 - 結果として`Sidebar.astro`・`Avatar.astro`(顔写真が無いためのイニシャル表示)は使われなくなったため削除した。
 
 ## v3 の多言語化・アダプタ設計
@@ -100,4 +100,16 @@ v2と同じくURLベースの方式(`/v3` = ja、`/en/v3` = en)。`adapter.ts`�
 
 ## v1・v2・v3間の相互リンク
 
-`src/components/layout/Header.astro`(v1)には`v2`・`v3`へのIconButtonリンクがあり、`getLocalizedPath('/v2'|'/v3', currentLanguage)`で表示言語に追従する。v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`はそれぞれのヘッダーに残り2モードへのリンクを持つ(v2はChip、v3は`.rp-header-nav`のリンク)。
+`src/components/layout/Header.astro`(v1)・v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`は、いずれも自分自身を含む3モード全て(Home/Terminal/Research)へのアイコンリンクをヘッダーに持つ(v1は`IconButton`、v2は`Chip`、v3は`IconLink`)。表示順はどのモードでも同じ左からHome→Terminal→Research。`getLocalizedPath('/'|'/v2'|'/v3', currentLanguage)`相当の仕組みで表示言語に追従する。3モードともテキストではなくアイコン(house/square-terminal/graduation-cap)でリンクし、`aria-label`相当(`sr-only`テキストまたは`aria-label`)でアクセシブルな名前を持つ。v3はv1が使う`astro-icon`のローカルアイコン一式(`src/icons/`)に依存せず独自にインラインSVGで用意しているが、v2はv1と同じ`astro-icon`のアイコンをそのまま再利用している(新しい依存は増やしていない)。
+
+v3の3つの`IconLink`(Home/Terminal/Research)は、`src/v3/components/atoms/IconLink.astro`という1つのアトムから生成する。元は`Header.astro`に`<a class='rp-icon-link'>...<svg viewBox='0 0 24 24' ...>`という同じラッパー構造(リンク要素+svgの共通属性)を3回コピー&ペーストしていた ― pathデータ(実際のアイコン形状)以外は3箇所とも完全に同一だったため、「同じ規則を2箇所目に書く前に共通化する」規約に反していた。`IconLink`は`href`/`label`だけを受け取り、アイコン形状はどれかを知らない(`<slot />`で`<path>`/`<rect>`をそのまま受け取る) ― 具体的な絵柄を知らずラッパーだけを知っているという点で、`ExternalLink.astro`(既存のv3アトム)と同じ設計。
+
+v1のヘッダーアイコン(Home・Terminal(v2)・Research(v3)、`src/icons/`のhouse・square-terminal・graduation-cap)は、右上にまとめて`gap-x-1`の狭い間隔で並べている(ヘッダー全体の他の要素同士の間隔`gap-x-3`/`gap-x-4`より詰めている ― 同じ役割(ページ間ナビゲーション)を持つ1つのグループとして扱うため)。表示順は左から Home(自身、`/`) → Terminal(v2) → Research(v3)。全てIconButton(`h-8 w-8`の同じ寸法)に揃え、行内で寸法がバラつかないようにしている。
+
+以前はこのグループにダークモード切替(`#toggleDarkMode`)とハンバーガー(`#toggleToc`、モバイルの`#toc-nav`開閉用)も含めていたが、表示をオフにする指示を受けて削除した。`#toc-nav`(`src/layouts/BaseLayout.astro`)は元々`class='block'`で常時表示がデフォルトのため、開閉トグルが無くなった今は常に展開された状態になる。テーマは`ThemeProvider.astro`の初期値(既定はダーク)とOS設定追従(`prefers-color-scheme`の変更監視)がそのまま効いているため、手動切り替えができなくなっただけで機能自体は残っている。手書きのハンバーガー/ダークモード切替アイコンを実際のlucideアイコンのpathに差し替える作業も一度行ったが(`src/icons/menu.svg`・`sun.svg`・`moon.svg`)、アイコン自体を削除したためこれらのファイルも不要になり削除した。
+
+v2の`PortfolioComputer.astro`も同じアイコン切り替えの形式に揃えた。ヘッダーの`v1`/`v3`リンクは元々テキストの`Chip`(`v1`/`v3`という文字)だったが、v1の`Header.astro`と同じ`astro-icon`のhouse/graduation-capアイコンに差し替えた。新しいアトムは作らず、既存の`Chip`(`docs/DESIGN.md`が定める`sm`=24px/`md`=44pxの2段階のみを持つv2唯一のピル型アトム)にアイコンを入れているだけ。ただしテキスト用の左右パディング(`0 12px`)ではアイコン1つだと横長の楕円になってしまうため、`.pf-chip--icon`という補助クラスを追加し、幅を高さと揃えて正方形(丸)にした(`sm`=24px、`560px`未満でChipが`md`=44pxへ育つのと同じブレークポイントで`.pf-chip--icon`側の幅も44pxへ追従する)。表示順はv1と同じHome(v1)→Terminal(v2)→Research(v3)で、v1の`gap-x-1`と同じ意図で`.pf-header__icons`という4pxギャップのラッパーにまとめている。
+
+Terminal(自分自身、`/v2`or`/en/v2`へのリンク)も同じ並びに含め、`Chip`の`active`propで塗りつぶし(`is-active`、`--pf-green`背景)にして「現在地」を示している。これは元々`SegmentedControl`(`terminal`という1択だけのモード切り替え)が担っていた役割の置き換え ― collageモードが非表示の今は選択肢が常に1つしか無く、複数択から選ぶという`SegmentedControl`本来の仕事が無くなっていたため、Home/Researchと同じ`Chip`直書きに統一した(`SegmentedControl.astro`自体は変更していないので、collageモードを再度有効にする際はそのまま使い直せる)。EN/JAの言語切り替えチップは元のままテキストで残している(ページ間ナビゲーションではないため)。
+
+モバイルでヘッダーが2行に折り返っていた問題(操作可能な`Chip`が560px未満で`sm`→`md`(24→44px)へ育つ分、アクション列の幅が伸びる)は、`.pf-header`の余白・ギャップを詰め、装飾的なプロンプト文字列(`emar27181@portfolio: ~`)のフォントサイズを860px未満で12pxに縮小することで解消した(実測: 390px幅でヘッダー高さが92.5px→61pxに減り1行に収まることをPlaywrightで確認。320pxのような極端に狭い幅では2行のまま)。

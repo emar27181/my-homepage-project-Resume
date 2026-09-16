@@ -1,0 +1,30 @@
+---
+// The header's icon-only nav links (Home/Terminal/Research in
+// Header.astro). Knows only the wrapper markup — the `<a>` + its `<svg>`'s
+// shared attributes (viewBox/size/stroke) — not which icon it is; the
+// shape itself comes in via slot as plain <path>/<rect> children. Was
+// three copy-pasted `<a class='rp-icon-link'>...<svg ...>` blocks in
+// Header.astro differing only in the path data; this atom is the one
+// place that markup is written now.
+interface Props {
+	href: string
+	label: string
+}
+const { href, label } = Astro.props
+---
+
+<a class='rp-icon-link' href={href} title={label} aria-label={label}>
+	<svg
+		viewBox='0 0 24 24'
+		width='18'
+		height='18'
+		fill='none'
+		stroke='currentColor'
+		stroke-width='2'
+		stroke-linecap='round'
+		stroke-linejoin='round'
+		aria-hidden='true'
+	>
+		<slot />
+	</svg>
+</a>

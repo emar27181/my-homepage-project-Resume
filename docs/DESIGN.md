@@ -110,15 +110,27 @@ v3 (`/v3`) は[emar27181/portfolio-taraba](https://github.com/emar27181/portfoli
 - **左サイドバー**: 移植元の主要なレイアウト要素だが、v3では採用していない。代わりにv1自身が既に持っているパターン(ヘッダー+スクロール連動タブ行)を踏襲した。理由・詳細は次節。
 - **Featured Projects・Skills・Education/History・Contact・Awardsのセクション**: v3はResearch Interests・Publications・Presentationsの3セクションだけを表示する。理由は次々節。
 
-保持した機能: セクションタブのスクロール連動ハイライト(IntersectionObserver、`ResearchPortfolio.astro`のscript)、ライト/ダーク切り替え。いずれもこのポートの主眼である「研究者ポートフォリオらしい見た目と操作感」に直結するため残した。引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)は一度移植したが、不要という判断で削除した。
+保持した機能: セクションタブのスクロール連動ハイライト(`ResearchPortfolio.astro`のscript、実装はv1と同じ`offsetTop`比較。後述)、ライト/ダーク切り替え。いずれもこのポートの主眼である「研究者ポートフォリオらしい見た目と操作感」に直結するため残した。引用情報コピーボタン(`CitationCopyButton.astro`/`lib/citation.ts`)は一度移植したが、不要という判断で削除した。
+
+### モバイルではセクションタブを番号のみにする
+
+移植元テーマの実際のデプロイ([aihara-yasuto-portfolio.netlify.app](https://aihara-yasuto-portfolio.netlify.app/))を確認すると、ヘッダーのセクションタブは幅700px未満で見出し文字列を隠し、`01`/`02`のような番号だけを丸いバッジとして表示していた(移植元のCSSにも同じ`@media (max-width: 700px) { .header-tabs strong { display: none; } }`という規則がある)。v1由来のタブ実装(`.rp-toc-link`)ではこの縮小表示を持っていなかったため、狭い画面でラベル文字列が折り返して読みにくくなっていた。
+
+同じ700pxのブレークポイントで`.rp-toc-text`を`display: none`にし、`.rp-toc-num`(`01`/`02`/`03`)だけを残す形で移植元の挙動に合わせた。ラベル文字列はDOMからは消さず、リンク自体の`aria-label`にセクション名を渡しているため、スクリーンリーダーでの読み上げは幅に関係なく変わらない(`.rp-toc-num`/`.rp-toc-text`は両方`aria-hidden`)。アクティブなタブの示し方も、幅が十分あるデスクトップでは下線、番号だけになるモバイルでは(下線だと視認性が落ちるため)アクセントカラーの塗りつぶしバッジに変えている。
 
 ## ナビゲーションはv1のパターンを踏襲(サイドバーではない)
 
 移植元のSidebar(幅260pxの固定左カラム、プロフィール写真+目次)は、v3では実装していない。代わりに、このサイトのv1(`/`)が既に持っている「スクロール位置に応じてハイライトするタブ行」パターン(`src/layouts/BaseLayout.astro`の`sticky`ラッパー + `toc-nav`、`src/styles/app.css`の`.toc-link`/`.toc-active`)をv3にも適用した。
 
 - v3の`Header.astro`が2段構成になっている: 1段目はブランド+v1/v2/言語/テーマの切り替え、2段目(`.rp-toc-row` / `.rp-toc-nav`)が各セクションへのタブ。どちらもヘッダーごと`position: sticky`で画面上部に固定される。
-- タブの現在地ハイライトは`.rp-toc-link.rp-toc-active`に下線を出す方式で、v1の`.toc-link.toc-active::after`と見た目を揃えている。スクロール位置の検出はv1の`scroll`イベント+`offsetTop`比較ではなく、既存の`IntersectionObserver`実装をそのまま使っている(挙動は同じ、実装手段はv3側の既存コードを活かした)。
+- タブの現在地ハイライトは`.rp-toc-link.rp-toc-active`に下線を出す方式で、v1の`.toc-link.toc-active::after`と見た目を揃えている。スクロール位置の検出も、v1の`updateToc()`(`scroll`イベント+`offsetTop`比較、`src/layouts/BaseLayout.astro`)をそのまま移植したもの(後述の不具合修正で`IntersectionObserver`から置き換えた)。
 - この変更で`Sidebar.astro`・`Avatar.astro`(顔写真が無いためのイニシャル表示。移植元のSidebarでのみ使っていた)は不要になったため削除した。プロフィール写真をどう扱うかという論点自体が無くなった。
+
+### タブ「02」が実質スキップされて見える不具合(移植元由来の実装に起因)
+
+初期実装ではスクロール位置の検出に`IntersectionObserver`+`intersectionRatio`(可視割合が一番高いセクションをアクティブにする)を使っていた。これは移植元のコードをそのまま使ったものだったが、`intersectionRatio`は各セクション「自身の高さ」に対する可視割合なので、丈の短いセクション(Research Interests、約375px)は画面の中のどこにあっても100%近い比率を出しやすく、丈の長いセクション(Publications、1000px超)は同じビューポートに対する比率が上がりにくい。結果、スクロールしてもResearch Interestsのハイライトが不自然に長く居座り、Publications(02)がハイライトされる区間が極端に短く(または実質見えず)、Presentations(03)へ飛んだように見える、という不具合が実測で確認できた(Playwrightで1280×800/390×844の両方、スクロール位置ごとのアクティブタブをサンプリングして再現)。
+
+修正はv1の`updateToc()`と同じ「各セクションの`offsetTop`とスクロール位置を比較し、最後に通過したセクションをアクティブにする」方式へ置き換えたこと。この方式はセクションの高さに左右されないため、01→02→03と単調に、かつ全区間で必ずハイライトが移る(同じPlaywright計測で確認済み)。ヘッダーの実測高さ(`--rp-scroll-offset`と同じ計算)をスクロール位置のオフセットに使っている点も含め、v1の実装をそのまま踏襲する形になった。
 
 ## 研究セクションだけを表示する理由
 
@@ -147,3 +159,23 @@ v1のヘッダーには既にすべてのカテゴリ(制作物・趣味・研�
 - 文字サイズ・余白・操作部品の寸法は移植元の値(`design.ts`/`typography.ts`相当)をCSS変数に直接書き写している(`--rp-space-*`/`--rp-type-*`/`--rp-control-*`)。移植元のようにTypeScript側の正本から生成する仕組みは、v3単体では正本が1箇所のCSSファイルで足りる規模のため導入していない。
 
 顔写真アセットはこのプロジェクトのどこにも存在しない(`src/assets`・v1のindex.astroいずれにも無い)。移植元のSidebarは`profile.avatar`の顔写真を表示する設計だったが、Sidebar自体を採用していない(前述)ため、顔写真をどう扱うかという論点自体が無くなっている。
+
+## ヘッダーのv1/v2/v3間リンクはアイコン
+
+v1のヘッダー(`src/components/layout/Header.astro`)はv2/v3への切り替えを`IconButton` + Lucide風アイコンで表現しており、テキストラベルを使っていない。v3のヘッダーが最初`v1`/`v2`という素のテキストリンクだったのは、この site 全体の慣習に合っていなかったため、house(v1)・square-terminal(v2、v1側で実際に使っているアイコンと同じ絵柄)のインラインSVGアイコンに差し替えた。`aria-label`/`title`でアクセシブルな名前を保っている。v1は`astro-icon`パッケージ経由で`src/icons/`のローカルSVGを読み込む仕組みだが、v3は他の要素(テーマ切り替えアイコンなど)と同じくコンポーネント内に直接SVGを書く方式を踏襲し、新しい依存は増やしていない。
+
+v2のヘッダー(`PortfolioComputer.astro`)も同じ理由で揃えた。元々`v1`/`v3`という素のテキストの`Chip`だったのを、v1と同じ`astro-icon`のhouse/graduation-capアイコンに差し替えている(v2はv1のローカルアイコン一式にそのまま乗れるため、v3のように独自インラインSVGを持つ必要はなかった)。アイコン1つだけを`Chip`(テキスト用の左右パディングを持つピル)に入れると横長の楕円になってしまうため、`.pf-chip--icon`という補助クラスで幅を高さに揃えて正方形にしている。表示順はv1と同じHome→Terminal→Research。
+
+Terminal(自分自身、square-terminalアイコン)も同じ並びに含め、`active`で塗りつぶして現在地を示している。これは元々`SegmentedControl`(`terminal`という1択だけのモード切り替え)が担っていた場所の置き換え。collageモードが非表示の今は選択肢が常に1つしか無く、「複数の選択肢から選ぶ」という`SegmentedControl`本来の役目が無くなっていたため、他の2アイコンと同じ`Chip`直書きに統一した(`SegmentedControl.astro`自体はそのままなので、collageモードを再度有効にすればまた使い直せる)。EN/JAの言語チップは、ページ間ナビゲーションではないためテキストのまま残した。
+
+アイコン化で幅が縮んだ効果もあって、モバイル(390px)でヘッダーが2行に折り返っていたのを1行に戻せた。操作可能な`Chip`は560px未満で`sm`(24px)→`md`(44px)へ育つ仕様(WCAGのタッチ領域確保、前述)のため、以前の`terminal`という英単語のテキストピルより幅が伸びる方向に働いていた。装飾的なプロンプト文字列(`emar27181@portfolio: ~`)のフォントサイズを860px未満で1段階だけ縮め、ヘッダーの余白も詰めて帳尻を合わせている。
+
+v3のヘッダーにも同じ考え方で、自分自身(Research、graduation-capアイコン)へのリンクを追加した。それまでは移植元から持ち込んだv1(house)・v2(square-terminal)の2アイコンしか無く、v1・v2が自分自身を含む3モード分のアイコンを持つのに対してv3だけ2つで揃っていなかった。`Header.astro`(v3)の`.rp-icon-link`をそのまま使い、表示順もv1・v2と同じHome→Terminal→Researchにした(`v3Href`はそのページ自身のURL、`v3Label`は新設の`ui.thisIsV3`文言)。
+
+ヘッダーnav内の並び・間隔もv1に揃えた。v1の実際の構造は「EN/JAチップ → (詰めて並べた)Home/Terminal/Researchアイコン」で、EN側が先(左)、アイコン側は`gap-x-1`(4px)という狭い間隔でひとまとまりに見えるようにしている。v3は元々EN/JAリンクがアイコン列の最後に置かれ、`.rp-header-nav`全体が同じ`gap: var(--rp-space-4)`(16px)でどの要素間も均等に空いていたため、ひとまとまりのグループには見えていなかった。EN/JAリンクをHome/Terminal/Researchより前に出し、3アイコンだけを`.rp-header-icons`という新しいラッパー(`gap: var(--rp-space-1)` = 4px)でくくることで、v1と同じ「EN → 詰まったアイコン列」という見た目に揃えた。テーマ切り替えボタンはv1に無い要素なので、アイコン列の後ろ(`.rp-header-nav`の通常の間隔)に残している。
+
+モバイル幅で`.rp-header-inner`が2行に折り返ると(`flex-wrap: wrap`、ブランド行とnav行が別の行になる)、`.rp-header-nav`が右端ではなく左端に寄って表示される不具合があった。`.rp-header-inner`は`justify-content: space-between`でブランドとnavの間を空ける仕組みだが、2行に折り返った時点でnavは「自分の行に単独で存在する要素」になり、対になる相手(ブランド)が同じ行に無いため`space-between`が効かず、flexのデフォルトである`flex-start`(左寄せ)に落ちてしまう。v2の`.pf-header__actions`で以前まったく同じ理由の不具合を`margin-left: auto`で直しており、v3の`.rp-header-nav`にも同じ`margin-left: auto`を追加して直した(実測: 390px幅で`.rp-header-nav`の右端と`.rp-header-inner`の右端の差が112px→0pxになったことをPlaywrightで確認)。
+
+## スクロール時に見出しがヘッダーに隠れる不具合(移植元にあった仕組みの移植漏れ)
+
+ヘッダー2段目のタブや`#section`アンカーへジャンプすると、対象セクションの見出しがsticky headerの下に隠れる不具合があった。移植元テーマはヘッダーの実測高さを`ResizeObserver`で追跡し、`--page-scroll-offset`というCSS変数を通じて`scroll-padding-top`に反映する仕組みを持っていたが、v3を組み立てた際にこの仕組みを移植し忘れていた。同じ考え方で`ResearchPortfolio.astro`のscriptに`--rp-scroll-offset`を追加し(`.rp-header`の高さ+16pxをResizeObserverで追跡)、`.rp-single-section`の`scroll-margin-top`に使うようにした。ヘッダーは`flex-wrap`で狭い画面では2行になることがあるため、固定値ではなく実測値を使っている。
