@@ -174,6 +174,8 @@ v3のヘッダーにも同じ考え方で、自分自身(Research、graduation-c
 
 ヘッダーnav内の並び・間隔もv1に揃えた。v1の実際の構造は「EN/JAチップ → (詰めて並べた)Home/Terminal/Researchアイコン」で、EN側が先(左)、アイコン側は`gap-x-1`(4px)という狭い間隔でひとまとまりに見えるようにしている。v3は元々EN/JAリンクがアイコン列の最後に置かれ、`.rp-header-nav`全体が同じ`gap: var(--rp-space-4)`(16px)でどの要素間も均等に空いていたため、ひとまとまりのグループには見えていなかった。EN/JAリンクをHome/Terminal/Researchより前に出し、3アイコンだけを`.rp-header-icons`という新しいラッパー(`gap: var(--rp-space-1)` = 4px)でくくることで、v1と同じ「EN → 詰まったアイコン列」という見た目に揃えた。テーマ切り替えボタンはv1に無い要素なので、アイコン列の後ろ(`.rp-header-nav`の通常の間隔)に残している。
 
+モバイル幅で`.rp-header-inner`が2行に折り返ると(`flex-wrap: wrap`、ブランド行とnav行が別の行になる)、`.rp-header-nav`が右端ではなく左端に寄って表示される不具合があった。`.rp-header-inner`は`justify-content: space-between`でブランドとnavの間を空ける仕組みだが、2行に折り返った時点でnavは「自分の行に単独で存在する要素」になり、対になる相手(ブランド)が同じ行に無いため`space-between`が効かず、flexのデフォルトである`flex-start`(左寄せ)に落ちてしまう。v2の`.pf-header__actions`で以前まったく同じ理由の不具合を`margin-left: auto`で直しており、v3の`.rp-header-nav`にも同じ`margin-left: auto`を追加して直した(実測: 390px幅で`.rp-header-nav`の右端と`.rp-header-inner`の右端の差が112px→0pxになったことをPlaywrightで確認)。
+
 ## スクロール時に見出しがヘッダーに隠れる不具合(移植元にあった仕組みの移植漏れ)
 
 ヘッダー2段目のタブや`#section`アンカーへジャンプすると、対象セクションの見出しがsticky headerの下に隠れる不具合があった。移植元テーマはヘッダーの実測高さを`ResizeObserver`で追跡し、`--page-scroll-offset`というCSS変数を通じて`scroll-padding-top`に反映する仕組みを持っていたが、v3を組み立てた際にこの仕組みを移植し忘れていた。同じ考え方で`ResearchPortfolio.astro`のscriptに`--rp-scroll-offset`を追加し(`.rp-header`の高さ+16pxをResizeObserverで追跡)、`.rp-single-section`の`scroll-margin-top`に使うようにした。ヘッダーは`flex-wrap`で狭い画面では2行になることがあるため、固定値ではなく実測値を使っている。

@@ -175,6 +175,11 @@
 	display: flex;
 	align-items: center;
 	gap: var(--rp-space-4);
+	/* Stays pinned to the right even once .rp-header-inner wraps it onto
+	   its own line on narrow screens (same fix as v2's .pf-header__actions)
+	   — without this it falls back to flex-start (left) because a lone
+	   item on a wrapped line has nothing to space against. */
+	margin-left: auto;
 }
 .rp-header-nav a {
 	display: inline-flex;

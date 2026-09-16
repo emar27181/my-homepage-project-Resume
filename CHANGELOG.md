@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-16 (26)
+
+- fix: v3ヘッダーがモバイル幅で2行に折り返ると、`.rp-header-nav`(EN/アイコン/テーマ切替)が右端ではなく左端に寄ってしまう不具合を修正。`.rp-header-inner`の`justify-content: space-between`は、2行に折り返ってnavが自分の行に単独になった時点で対になる相手(ブランド)が同じ行に無くなり効かなくなる、というflexboxの仕様が原因。v2の`.pf-header__actions`で以前まったく同じ不具合を直した`margin-left: auto`を、v3の`.rp-header-nav`にも追加した。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、390px/320px/1280px)で`.rp-header-nav`の右端と`.rp-header-inner`の右端が一致すること(修正前は390px幅で112pxのズレ)を確認済み。
+
 ## 2026-09-16 (25)
 
 - improve: v3ヘッダーのHome/Terminal/Researchアイコンリンクを`src/v3/components/atoms/IconLink.astro`という1つのアトムに共通化した。`Header.astro`に`<a class='rp-icon-link'>...<svg viewBox='0 0 24 24' ...>`というラッパー構造(pathデータ以外は完全に同一)を3回コピー&ペーストしていたのを、`href`/`label`だけを受け取り具体的なアイコン形状は`<slot />`で受け取る(既存の`ExternalLink.astro`アトムと同じ設計)アトム1つにまとめた。表示結果・DOM構造は変更していない(Playwrightで見た目・リンク先・コンソールエラー無しを変更前後で比較確認済み)。
