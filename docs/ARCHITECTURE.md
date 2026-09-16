@@ -100,4 +100,6 @@ v2と同じくURLベースの方式(`/v3` = ja、`/en/v3` = en)。`adapter.ts`�
 
 ## v1・v2・v3間の相互リンク
 
-`src/components/layout/Header.astro`(v1)には`v2`・`v3`へのIconButtonリンクがあり、`getLocalizedPath('/v2'|'/v3', currentLanguage)`で表示言語に追従する。v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`はそれぞれのヘッダーに残り2モードへのリンクを持つ(v2はChip、v3は`.rp-header-nav`のリンク)。v3のv1/v2リンクはテキストではなくアイコン(house/square-terminal、v3独自にインラインSVGで用意。v1が使う`astro-icon`のローカルアイコン一式(`src/icons/`)には依存していない)で、`aria-label`でアクセシブルな名前を持つ。
+`src/components/layout/Header.astro`(v1)には`v1(自身)`・`v2`・`v3`へのIconButtonリンクがあり、`getLocalizedPath('/'|'/v2'|'/v3', currentLanguage)`で表示言語に追従する。v2の`PortfolioComputer.astro`・v3の`ResearchPortfolio.astro`はそれぞれのヘッダーに残り2モードへのリンクを持つ(v2はChip、v3は`.rp-header-nav`のリンク)。v3のv1/v2リンクはテキストではなくアイコン(house/square-terminal、v3独自にインラインSVGで用意。v1が使う`astro-icon`のローカルアイコン一式(`src/icons/`)には依存していない)で、`aria-label`でアクセシブルな名前を持つ。
+
+v1のヘッダーアイコン(`src/icons/`にhouse・menu・sun・moon・square-terminal・graduation-capの6ファイル)は、右上にまとめて`gap-x-1`の狭い間隔で並べている(ヘッダー全体の他の要素同士の間隔`gap-x-3`/`gap-x-4`より詰めている ― 同じ役割(ページ間ナビゲーション+テーマ切替+モバイルメニュー)を持つ1つのグループとして扱うため)。表示順は左から Home(自身、`/`) → Terminal(v2) → Research(v3) → ダークモード切替 → ハンバーガー(`#toggleToc`、`sm:hidden`でモバイルのみ)。ハンバーガー・ダークモード切替も含めて全てIconButton(`h-8 w-8`の同じ寸法)に揃え、行内で寸法がバラつかないようにしている。以前はハンバーガーとダークモード切替が手書きのインラインSVG(lucideの実データとは微妙に異なる座標)だったが、`src/icons/menu.svg`・`sun.svg`・`moon.svg`として実際のlucideアイコンのpathに差し替えた。v2はターミナル表示中(現状唯一の表示モード)であることを理由に、このアイコン群と同じ構成への統一は対象外としている。
