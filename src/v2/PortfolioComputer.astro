@@ -12,7 +12,6 @@ import '@/v2/styles/terminal.css'
 import { Icon } from 'astro-icon/components'
 
 import Chip from '@/v2/components/atoms/Chip.astro'
-import SegmentedControl from '@/v2/components/molecules/SegmentedControl.astro'
 import { getPortfolio, type Language } from '@/v2/data/portfolio'
 
 interface Props {
@@ -24,6 +23,9 @@ const { hobbies, profile, projects, research, skills } = getPortfolio(lang)
 
 const otherLang: Language = lang === 'en' ? 'ja' : 'en'
 const v1Href = lang === 'en' ? '/en' : '/'
+const v2Href = lang === 'en' ? '/en/v2' : '/v2'
+const v2Title = lang === 'en' ? 'Terminal-style portfolio (this page)' : 'ターミナル版ポートフォリオ(現在地)'
+const v2SrOnly = lang === 'en' ? 'Terminal-style portfolio' : 'ターミナル版ポートフォリオ'
 const v3Href = lang === 'en' ? '/en/v3' : '/v3'
 const v3Title = lang === 'en' ? 'Try the research portfolio' : '研究者ポートフォリオ版を試す'
 const v3SrOnly = lang === 'en' ? 'Research portfolio' : '研究者ポートフォリオ'
@@ -47,31 +49,44 @@ const description =
 		<header class='pf-header'>
 			<span class='pf-header__prompt'>{profile.handle}@portfolio: ~</span>
 			<div class='pf-header__actions'>
-				{
-					/* Same icon-based page-switch format as v1's header
-					 (Home/Terminal/Research): here it's Home(v1)/Research(v3)
-					 since we're already on the terminal. Same Chip atom as
-					 the rest of v2 (no one-off icon-button style), just an
-					 icon instead of a text label inside it. */
-				}
-				<Chip as='a' href={v1Href} size='sm' title={backTitle} class='pf-chip--icon'>
-					<span class='sr-only'>{backSrOnly}</span>
-					<Icon name='house' width='16' height='16' />
-				</Chip>
-				<Chip as='a' href={v3Href} size='sm' title={v3Title} class='pf-chip--icon'>
-					<span class='sr-only'>{v3SrOnly}</span>
-					<Icon name='graduation-cap' width='16' height='16' />
-				</Chip>
 				<Chip as='a' href={otherLangHref} size='sm' title={otherLangTitle}>{otherLangLabel}</Chip>
+
 				{
-					/* collageモードは一時的に非表示(コード・データはそのまま)。
-					 再表示するにはoptionsに { value: 'collage', label: 'collage' } を戻すだけでよい。 */
+					/* Same icon-based page-switch format as v1's header,
+					 same order: Home(v1) / Terminal(v2, this page) /
+					 Research(v3), grouped with a tighter gap than the rest
+					 of the header (matches v1's icon cluster). Same Chip
+					 atom as the rest of v2 (no one-off icon component) —
+					 just an icon instead of a text label inside it.
+					 Terminal is `active` (filled) to mark "you are here",
+					 replacing the old SegmentedControl mode-toggle: with
+					 collage mode hidden there's only ever one value, so a
+					 molecule built for mutually-exclusive selection no
+					 longer had a real job here (SegmentedControl.astro
+					 itself is untouched for when collage mode comes back). */
 				}
-				<SegmentedControl
-					name='display mode'
-					value='terminal'
-					options={[{ value: 'terminal', label: 'terminal' }]}
-				/>
+				<div class='pf-header__icons'>
+					<Chip as='a' href={v1Href} size='sm' title={backTitle} class='pf-chip--icon'>
+						<span class='sr-only'>{backSrOnly}</span>
+						<Icon name='house' width='16' height='16' />
+					</Chip>
+					<Chip
+						as='a'
+						href={v2Href}
+						size='sm'
+						title={v2Title}
+						active
+						aria-current='page'
+						class='pf-chip--icon'
+					>
+						<span class='sr-only'>{v2SrOnly}</span>
+						<Icon name='square-terminal' width='16' height='16' />
+					</Chip>
+					<Chip as='a' href={v3Href} size='sm' title={v3Title} class='pf-chip--icon'>
+						<span class='sr-only'>{v3SrOnly}</span>
+						<Icon name='graduation-cap' width='16' height='16' />
+					</Chip>
+				</div>
 			</div>
 		</header>
 
