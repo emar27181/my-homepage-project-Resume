@@ -49,7 +49,15 @@ const description =
 		<header class='pf-header'>
 			<span class='pf-header__prompt'>{profile.handle}@portfolio: ~</span>
 			<div class='pf-header__actions'>
-				<Chip as='a' href={otherLangHref} size='sm' title={otherLangTitle}>{otherLangLabel}</Chip>
+				<Chip
+					as='a'
+					href={otherLangHref}
+					size='sm'
+					title={otherLangTitle}
+					class='pf-chip--plain'
+				>
+					{otherLangLabel}
+				</Chip>
 
 				{
 					/* Same icon-based page-switch format as v1's header,

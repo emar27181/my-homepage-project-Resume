@@ -195,6 +195,14 @@
 .rp-icon-link {
 	justify-content: center;
 	width: 44px;
+	/* A bordered box, matching v1's IconButton shape (border + 6px
+	   corners, not a bare icon and not a circle) — the icon set/order/
+	   spacing already match v1, so the shape should too. */
+	border: 1px solid var(--rp-rule);
+	border-radius: 6px;
+}
+.rp-icon-link:hover {
+	background: var(--rp-rule);
 }
 /* Home/Terminal/Research grouped tighter than the rest of .rp-header-nav
    (same idea as v1's gap-x-1 icon cluster and v2's .pf-header__icons):

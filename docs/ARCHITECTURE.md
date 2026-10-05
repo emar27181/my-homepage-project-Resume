@@ -108,8 +108,16 @@ v1のヘッダーアイコン(Home・Terminal(v2)・Research(v3)、`src/icons/`�
 
 以前はこのグループにダークモード切替(`#toggleDarkMode`)とハンバーガー(`#toggleToc`、モバイルの`#toc-nav`開閉用)も含めていたが、表示をオフにする指示を受けて削除した。`#toc-nav`(`src/layouts/BaseLayout.astro`)は元々`class='block'`で常時表示がデフォルトのため、開閉トグルが無くなった今は常に展開された状態になる。テーマは`ThemeProvider.astro`の初期値(既定はダーク)とOS設定追従(`prefers-color-scheme`の変更監視)がそのまま効いているため、手動切り替えができなくなっただけで機能自体は残っている。手書きのハンバーガー/ダークモード切替アイコンを実際のlucideアイコンのpathに差し替える作業も一度行ったが(`src/icons/menu.svg`・`sun.svg`・`moon.svg`)、アイコン自体を削除したためこれらのファイルも不要になり削除した。
 
-v2の`PortfolioComputer.astro`も同じアイコン切り替えの形式に揃えた。ヘッダーの`v1`/`v3`リンクは元々テキストの`Chip`(`v1`/`v3`という文字)だったが、v1の`Header.astro`と同じ`astro-icon`のhouse/graduation-capアイコンに差し替えた。新しいアトムは作らず、既存の`Chip`(`docs/DESIGN.md`が定める`sm`=24px/`md`=44pxの2段階のみを持つv2唯一のピル型アトム)にアイコンを入れているだけ。ただしテキスト用の左右パディング(`0 12px`)ではアイコン1つだと横長の楕円になってしまうため、`.pf-chip--icon`という補助クラスを追加し、幅を高さと揃えて正方形(丸)にした(`sm`=24px、`560px`未満でChipが`md`=44pxへ育つのと同じブレークポイントで`.pf-chip--icon`側の幅も44pxへ追従する)。表示順はv1と同じHome(v1)→Terminal(v2)→Research(v3)で、v1の`gap-x-1`と同じ意図で`.pf-header__icons`という4pxギャップのラッパーにまとめている。
+v2の`PortfolioComputer.astro`も同じアイコン切り替えの形式に揃えた。ヘッダーの`v1`/`v3`リンクは元々テキストの`Chip`(`v1`/`v3`という文字)だったが、v1の`Header.astro`と同じ`astro-icon`のhouse/graduation-capアイコンに差し替えた。新しいアトムは作らず、既存の`Chip`(`docs/DESIGN.md`が定める`sm`=24px/`md`=44pxの2段階のみを持つv2唯一のピル型アトム)にアイコンを入れているだけ。ただしテキスト用の左右パディング(`0 12px`)ではアイコン1つだと横長の楕円になってしまうため、`.pf-chip--icon`という補助クラスを追加し、幅を高さと揃えた(`sm`=24px、`560px`未満でChipが`md`=44pxへ育つのと同じブレークポイントで`.pf-chip--icon`側の幅も44pxへ追従する)。表示順はv1と同じHome(v1)→Terminal(v2)→Research(v3)で、v1の`gap-x-1`と同じ意図で`.pf-header__icons`という4pxギャップのラッパーにまとめている。
 
 Terminal(自分自身、`/v2`or`/en/v2`へのリンク)も同じ並びに含め、`Chip`の`active`propで塗りつぶし(`is-active`、`--pf-green`背景)にして「現在地」を示している。これは元々`SegmentedControl`(`terminal`という1択だけのモード切り替え)が担っていた役割の置き換え ― collageモードが非表示の今は選択肢が常に1つしか無く、複数択から選ぶという`SegmentedControl`本来の仕事が無くなっていたため、Home/Researchと同じ`Chip`直書きに統一した(`SegmentedControl.astro`自体は変更していないので、collageモードを再度有効にする際はそのまま使い直せる)。EN/JAの言語切り替えチップは元のままテキストで残している(ページ間ナビゲーションではないため)。
 
 モバイルでヘッダーが2行に折り返っていた問題(操作可能な`Chip`が560px未満で`sm`→`md`(24→44px)へ育つ分、アクション列の幅が伸びる)は、`.pf-header`の余白・ギャップを詰め、装飾的なプロンプト文字列(`emar27181@portfolio: ~`)のフォントサイズを860px未満で12pxに縮小することで解消した(実測: 390px幅でヘッダー高さが92.5px→61pxに減り1行に収まることをPlaywrightで確認。320pxのような極端に狭い幅では2行のまま)。
+
+**間隔・位置・形をv1に揃える**: 並び順(Home→Terminal→Research)とグループ間隔(4px)は上記で揃えたが、ボタン自体の見た目(形)はまだ揃っていなかった ― v1は角丸の四角(`rounded-md`+`border`)、v2は`.pf-chip`のベース(`border-radius: 9999px`)をそのまま継承した円形、v3は枠線も背景も無い裸のアイコンで、3者3様だった。v1の`IconButton`(`rounded-md`=6px、1pxボーダー)を基準に統一した:
+- v2: `.pf-chip--icon`に`border-radius: 6px`を追加(ベースの`.pf-chip`が持つ9999pxのピル形状を上書き)。ボーダー自体は`.pf-chip`が元から持っている。
+- v3: `.rp-icon-link`に`border: 1px solid var(--rp-rule)`・`border-radius: 6px`を追加し、hoverで`background: var(--rp-rule)`が付くようにした(v1の`hover:bg-border`と同じ挙動)。
+
+寸法(v1=32px固定・v2=24px/44pxの2段階・v3=44px固定)はそれぞれ既存の設計をそのまま残している ― v2/v3の44pxはWCAG 2.5.8のタッチ領域確保という理由があるため、v1の32pxに合わせて縮めてはいない。テーマ切り替えボタン(v2には無し、v3の`.rp-theme-toggle`)はこの3アイコンの集合に含まれないため、円形のまま。
+
+**EN/JAリンクは枠無しのまま**: 上記の「形を揃える」はHome/Terminal/Researchの3アイコンだけが対象で、EN/JA言語リンクは意図的に対象外にした。v1の`LanguageSwitcher.astro`(`.language-btn`)は元々`border: 1px solid`+`border-radius: 6px`の枠付きボタンだったが、これも枠を外しプレーンなテキストリンクにした(`border: none`、ホバーは背景色ではなく`opacity`で示す)。v2はEN/JAチップに`.pf-chip--plain`という新しい補助クラスを追加し、ベースの`.pf-chip`が持つボーダー(ピル型Chipが元から持つ飾り)を`border: none`で打ち消している ― 他の用途のChip(技術タグなど)には影響しない。v3のEN/JAリンクは元々クラスの無い素の`<a>`(`.rp-header-nav a`にボーダー定義が無い)で、既に枠無しだったため変更していない。結果として3モードとも「ページ切り替えの3アイコンは枠付き、言語リンクは枠無しのテキスト」という同じ見分け方になった。

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-05 (27)
+
+- improve: v1/v2/v3のHome/Terminal/Researchアイコンの「形」を統一した。並び順・間隔は既に揃っていたが、ボタン自体の見た目は v1=角丸の四角(`rounded-md`+`border`)・v2=完全な円(ベースの`.pf-chip`が持つ`border-radius: 9999px`をそのまま継承)・v3=枠線も背景も無い裸のアイコン、と3者3様だった。v1の`IconButton`(`border-radius: 6px`+1pxボーダー)を基準に、v2の`.pf-chip--icon`に`border-radius: 6px`を追加(ピル形状を上書き)、v3の`.rp-icon-link`に`border: 1px solid var(--rp-rule)`・`border-radius: 6px`・hoverの背景塗り(v1の`hover:bg-border`と同じ)を追加した。寸法(v1=32px・v2=24px/44px・v3=44px)はWCAGのタッチ領域確保という理由がある既存設計のためそのまま。テーマ切り替えボタン(v3の`.rp-theme-toggle`)はこの3アイコンの集合に含まれないため円形のまま残した。
+- improve: EN/JA言語リンクは逆に枠無しのテキストリンクへ統一した。v1の`LanguageSwitcher.astro`(`.language-btn`)が元々持っていた`border`+`border-radius`を外し、v2のEN/JAチップには新設の`.pf-chip--plain`補助クラス(ベースの`.pf-chip`が持つボーダーを打ち消す、他用途のChipには影響しない)を追加した。v3のEN/JAリンクは元々クラスの無い素の`<a>`で既に枠無しだったため変更なし。結果、3モードとも「ページ切り替えの3アイコンは枠付き、言語リンクは枠無し」という同じ見分け方に揃った。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px、v1/v2/v3全ページ)で角丸の四角への統一・EN/JAリンクの枠が無いこと・コンソールエラー無しを確認済み。
+
 ## 2026-09-16 (26)
 
 - fix: v3ヘッダーがモバイル幅で2行に折り返ると、`.rp-header-nav`(EN/アイコン/テーマ切替)が右端ではなく左端に寄ってしまう不具合を修正。`.rp-header-inner`の`justify-content: space-between`は、2行に折り返ってnavが自分の行に単独になった時点で対になる相手(ブランド)が同じ行に無くなり効かなくなる、というflexboxの仕様が原因。v2の`.pf-header__actions`で以前まったく同じ不具合を直した`margin-left: auto`を、v3の`.rp-header-nav`にも追加した。

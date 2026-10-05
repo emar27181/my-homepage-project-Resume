@@ -99,6 +99,20 @@
 .pf-chip--icon.pf-chip--sm {
 	width: var(--pf-touch-sm);
 	padding: 0;
+	/* Overrides the base .pf-chip's pill (border-radius: 9999px): icon
+	   links should look like v1's IconButton (a bordered box, not a
+	   circle) since the icon set/order/spacing is already shared with v1
+	   — the shape should be too. */
+	border-radius: 6px;
+}
+
+/* The EN/JA language link: plain text, no box — matches v1's
+   LanguageSwitcher (no border) and v3's EN link (bare <a>, no class at
+   all). Everything else that uses Chip (tech tags, etc.) keeps the
+   border+pill look; only the header's language link opts out. */
+.pf-chip--plain {
+	border: none;
+	background: transparent;
 }
 
 a.pf-chip,
@@ -110,6 +124,10 @@ a.pf-chip:hover,
 button.pf-chip:hover {
 	border-color: var(--pf-green-dim);
 	color: var(--pf-text);
+}
+a.pf-chip--plain:hover,
+button.pf-chip--plain:hover {
+	border-color: transparent;
 }
 
 /* On a touch-sized viewport, operable chips (nav, mode toggle, links) grow
