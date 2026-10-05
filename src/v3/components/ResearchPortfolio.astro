@@ -47,6 +47,7 @@ const ui = getUi(lang)
 const otherLang: Language = lang === 'en' ? 'ja' : 'en'
 const v1Href = lang === 'en' ? '/en' : '/'
 const v2Href = lang === 'en' ? '/en/v2' : '/v2'
+const v3Href = lang === 'en' ? '/en/v3' : '/v3'
 const otherLangHref = otherLang === 'en' ? '/en/v3' : '/v3'
 const otherLangLabel = otherLang === 'en' ? 'EN' : 'JA'
 
@@ -68,6 +69,8 @@ const description =
 			v1Label={ui.backToV1}
 			v2Href={v2Href}
 			v2Label={ui.backToV2}
+			v3Href={v3Href}
+			v3Label={ui.thisIsV3}
 			otherLangHref={otherLangHref}
 			otherLangLabel={otherLangLabel}
 			themeLabel={ui.theme}
@@ -136,30 +139,50 @@ const description =
 				} catch {}
 			})
 
-			// Scroll-spy for the header's section tabs — same idea as v1's
-			// updateToc() in src/layouts/BaseLayout.astro, kept as an
-			// IntersectionObserver here since it was already in place.
-			const sections = [...document.querySelectorAll<HTMLElement>('.rp-single-section')]
-			const tocLinks = new Map(
-				[...document.querySelectorAll<HTMLAnchorElement>('[data-rp-toc-link]')].map((link) => [
-					link.dataset.rpTocLink,
-					link
-				])
-			)
-			const updateActive = (id: string) => {
-				tocLinks.forEach((link, linkId) => link.classList.toggle('rp-toc-active', linkId === id))
-			}
-			if ('IntersectionObserver' in window && sections.length > 0) {
-				const observer = new IntersectionObserver(
-					(entries) => {
-						const visible = entries
-							.filter((entry) => entry.isIntersecting)
-							.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-						if (visible) updateActive(visible.target.id)
-					},
-					{ rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.1, 0.5] }
+			// Keeps --rp-scroll-offset (research.css's scroll-margin-top on each
+			// section) matched to the sticky header's real height, so jumping to
+			// a #section anchor never lands the heading underneath it. The
+			// header can wrap to two rows at narrow widths, so this is measured
+			// rather than hardcoded — the same idea as the source theme's
+			// --page-scroll-offset (ResizeObserver over the header), ported
+			// over since v3 was missing it.
+			const header = document.querySelector<HTMLElement>('.rp-header')
+			const updateScrollOffset = () => {
+				if (!header) return
+				document.documentElement.style.setProperty(
+					'--rp-scroll-offset',
+					`${header.getBoundingClientRect().height + 16}px`
 				)
-				sections.forEach((section) => observer.observe(section))
+			}
+			updateScrollOffset()
+			if (header && 'ResizeObserver' in window) {
+				new ResizeObserver(updateScrollOffset).observe(header)
+			}
+
+			// Scroll-spy for the header's section tabs — ported verbatim from
+			// v1's updateToc() in src/layouts/BaseLayout.astro (offsetTop
+			// comparison against scrollY), not an IntersectionObserver. An
+			// IntersectionObserver ranks sections by intersectionRatio against
+			// each target's OWN height, so a short section (e.g. Research
+			// Interests) can out-rank a much taller one (Publications) across
+			// a wide scroll range — that was starving "02 Publications" of
+			// its active state. offsetTop comparison has no such bias.
+			const tocLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-rp-toc-link]')]
+			const linkedSections = tocLinks
+				.map((link) => document.getElementById(link.dataset.rpTocLink ?? ''))
+				.filter((section): section is HTMLElement => Boolean(section))
+			const updateActive = () => {
+				const offset = header ? header.getBoundingClientRect().height + 16 : 120
+				const scrollY = window.scrollY + offset
+				let activeIndex = 0
+				for (let i = 0; i < linkedSections.length; i++) {
+					if (linkedSections[i].offsetTop <= scrollY) activeIndex = i
+				}
+				tocLinks.forEach((link, i) => link.classList.toggle('rp-toc-active', i === activeIndex))
+			}
+			if (tocLinks.length > 0) {
+				window.addEventListener('scroll', updateActive, { passive: true })
+				updateActive()
 			}
 		</script>
 	</body>

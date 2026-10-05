@@ -54,6 +54,15 @@
 	margin-left: auto;
 }
 
+/* Home/Terminal/Research page-switch icons, grouped tighter than the rest
+   of .pf-header__actions (same idea as v1's header icon cluster) since
+   they're one set of peer navigation controls. */
+.pf-header__icons {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
 /* One pill atom for the whole page (docs/DESIGN.md): nav links, the mode
    toggle, profile links, and tech tags all share this base + one size
    modifier. Only `a`/`button` get pointer/hover — a plain `span` (tag use)
@@ -84,6 +93,33 @@
 	font-size: 14px;
 }
 
+/* Icon-only chip (page-switch links, matching v1's header icon format):
+   same pill, but square instead of pill-shaped-for-text so a lone icon
+   sits centered rather than swimming in text padding. Fixed at the `md`
+   touch step (44px, not the `sm` 24px this otherwise-`size='sm'` chip
+   would get) regardless of viewport — v1's IconButton and v3's
+   .rp-icon-link are both 44px everywhere, so this stays the same size on
+   every page instead of only growing to 44px under 560px. */
+.pf-chip--icon.pf-chip--sm {
+	width: var(--pf-touch-md);
+	height: var(--pf-touch-md);
+	padding: 0;
+	/* Overrides the base .pf-chip's pill (border-radius: 9999px): icon
+	   links should look like v1's IconButton (a bordered box, not a
+	   circle) since the icon set/order/spacing is already shared with v1
+	   — the shape should be too. */
+	border-radius: 6px;
+}
+
+/* The EN/JA language link: plain text, no box — matches v1's
+   LanguageSwitcher (no border) and v3's EN link (bare <a>, no class at
+   all). Everything else that uses Chip (tech tags, etc.) keeps the
+   border+pill look; only the header's language link opts out. */
+.pf-chip--plain {
+	border: none;
+	background: transparent;
+}
+
 a.pf-chip,
 button.pf-chip {
 	cursor: pointer;
@@ -94,13 +130,21 @@ button.pf-chip:hover {
 	border-color: var(--pf-green-dim);
 	color: var(--pf-text);
 }
+a.pf-chip--plain:hover,
+button.pf-chip--plain:hover {
+	border-color: transparent;
+}
 
-/* On a touch-sized viewport, operable chips (nav, mode toggle, links) grow
-   to the 44px touch step; decorative tags (plain <span>, e.g. tech
-   labels) stay at 24px — they aren't tapped, so they shouldn't eat space. */
+/* On a touch-sized viewport, operable text chips (EN/JA, etc.) grow to
+   the 44px touch step; decorative tags (plain <span>, e.g. tech labels)
+   stay at 24px — they aren't tapped, so they shouldn't eat space. Icon
+   chips (.pf-chip--icon) are excluded: they're already fixed at 44px
+   everywhere (see above) with zero padding, and without :not() here this
+   selector's higher specificity would re-add the 16px padding on top of
+   that fixed width. */
 @media (max-width: 560px) {
-	a.pf-chip.pf-chip--sm,
-	button.pf-chip.pf-chip--sm {
+	a.pf-chip.pf-chip--sm:not(.pf-chip--icon),
+	button.pf-chip.pf-chip--sm:not(.pf-chip--icon) {
 		height: var(--pf-touch-md);
 		padding: 0 16px;
 		font-size: 13px;
@@ -242,7 +286,17 @@ button.pf-chip:hover {
 	}
 
 	.pf-header {
-		padding: 8px 12px;
+		padding: 8px 10px;
+		gap: 8px;
+	}
+
+	/* Shrinking this (decorative prompt text, not a functional control) is
+	   what actually buys back enough width to keep .pf-header on one line
+	   at common phone widths (~360-414px) now that the actions column grew
+	   under the 560px touch-target rule below — the two mobile breakpoints
+	   interact, so this has to be tuned against that one, not in isolation. */
+	.pf-header__prompt {
+		font-size: 12px;
 	}
 }
 

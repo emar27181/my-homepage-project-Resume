@@ -15,16 +15,18 @@ const enPath = getLocalizedPath(basePath, 'en')
       class="language-btn"
       data-lang="en"
       data-path={enPath}
+      title="Switch to English"
     >
-      English
+      EN
     </button>
   ) : (
     <button
       class="language-btn"
       data-lang="ja"
       data-path={jaPath}
+      title="日本語に切り替え"
     >
-      日本語
+      JA
     </button>
   )}
 </div>
@@ -37,9 +39,8 @@ const enPath = getLocalizedPath(basePath, 'en')
   }
 
   .language-btn {
-    padding: 6px 12px;
-    border: 1px solid rgba(var(--color-border));
-    border-radius: 6px;
+    padding: 6px 8px;
+    border: none;
     background: transparent;
     color: rgba(var(--color-text-body));
     font-size: 14px;
@@ -48,8 +49,8 @@ const enPath = getLocalizedPath(basePath, 'en')
   }
 
   .language-btn:hover {
-    background: rgba(var(--color-fill));
-    border-color: rgba(var(--color-border-hover));
+    color: rgba(var(--color-text-body));
+    opacity: 0.75;
   }
 
 </style>

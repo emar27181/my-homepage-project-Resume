@@ -13,7 +13,8 @@ export function getUi(lang: Language) {
 				dark: 'Dark',
 				footer: 'Research portfolio',
 				backToV1: 'Classic resume page',
-				backToV2: 'Terminal-style portfolio'
+				backToV2: 'Terminal-style portfolio',
+				thisIsV3: 'Research portfolio (this page)'
 			}
 		: {
 				contents: '目次',
@@ -24,7 +25,8 @@ export function getUi(lang: Language) {
 				dark: 'ダーク',
 				footer: 'Research portfolio',
 				backToV1: '従来のレジュメページ',
-				backToV2: 'ターミナル版ポートフォリオ'
+				backToV2: 'ターミナル版ポートフォリオ',
+				thisIsV3: '研究者ポートフォリオ(現在地)'
 			}
 }
 
