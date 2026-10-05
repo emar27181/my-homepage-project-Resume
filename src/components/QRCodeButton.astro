@@ -1,0 +1,71 @@
+---
+import IconButton from '@/components/IconButton.astro'
+import { Icon } from 'astro-icon/components'
+import { getLanguageFromPath } from '../utils/i18n'
+
+const currentLanguage = getLanguageFromPath(Astro.url.pathname)
+const title = currentLanguage === 'en' ? 'Show QR code' : 'QRコードを表示'
+const dialogTitle = currentLanguage === 'en' ? 'Portfolio QR code' : 'ポートフォリオ QRコード'
+---
+
+<IconButton
+	id='toggleQrCode'
+	title={title}
+	aria-label={title}
+	aria-haspopup='dialog'
+	aria-controls='qr-code-dialog'
+	aria-expanded='false'
+>
+	<Icon name='qr-code' class='h-[1.2rem] w-[1.2rem]' />
+</IconButton>
+
+<dialog
+	id='qr-code-dialog'
+	aria-labelledby='qr-code-dialog-title'
+	class='m-auto w-[min(90vw,24rem)] rounded-xl border border-border bg-background p-0 text-foreground shadow-2xl backdrop:bg-black/50'
+>
+	<div class='p-4 sm:p-5'>
+		<div class='mb-3 flex items-center justify-between gap-4'>
+			<h2 id='qr-code-dialog-title' class='text-sm font-semibold'>{dialogTitle}</h2>
+			<button
+				id='closeQrCode'
+				type='button'
+				class='flex h-8 w-8 items-center justify-center rounded-md border border-border transition-all hover:bg-border'
+				aria-label='Close'
+			>
+				<Icon name='x' class='h-[1.1rem] w-[1.1rem]' />
+			</button>
+		</div>
+		<img
+			src='/qr/portfolio-qr.svg'
+			alt={dialogTitle}
+			width='900'
+			height='1140'
+			class='mx-auto block h-auto w-full max-w-[22rem]'
+			loading='lazy'
+		/>
+	</div>
+</dialog>
+
+<script>
+	const openButton = document.getElementById('toggleQrCode')
+	const closeButton = document.getElementById('closeQrCode')
+	const dialog = document.getElementById('qr-code-dialog')
+
+	if (dialog instanceof HTMLDialogElement) {
+		openButton?.addEventListener('click', () => {
+			dialog.showModal()
+			openButton.setAttribute('aria-expanded', 'true')
+		})
+
+		closeButton?.addEventListener('click', () => dialog.close())
+
+		dialog.addEventListener('click', (event) => {
+			if (event.target === dialog) dialog.close()
+		})
+
+		dialog.addEventListener('close', () => {
+			openButton?.setAttribute('aria-expanded', 'false')
+		})
+	}
+</script>
