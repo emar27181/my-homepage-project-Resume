@@ -1,7 +1,11 @@
 ---
-// Fixed-size square button for the header's icon-only controls (theme
-// toggle, v2 link). One definition so "the button next to it" always
-// matches exactly, instead of each caller guessing padding/font size.
+// Fixed-size square button for the header's icon-only controls (v2/v3
+// links). One definition so "the button next to it" always matches
+// exactly, instead of each caller guessing padding/font size.
+// 44px = Apple HIG's 44pt touch target / WCAG 2.5.8 AA's touch-area
+// minimum (docs/DESIGN.md's `md` step) — also the size v2's
+// `.pf-chip--icon`/v3's `.rp-icon-link` already use, so this button
+// matches them page-to-page.
 import { cn } from '@/utils'
 
 const { as: Tag = 'button', href, class: className, ...rest } = Astro.props
@@ -9,7 +13,7 @@ const { as: Tag = 'button', href, class: className, ...rest } = Astro.props
 
 <Tag
 	class={cn(
-		'relative flex h-8 w-8 flex-none items-center justify-center rounded-md border border-border text-xs font-medium transition-all hover:bg-border',
+		'relative flex h-11 w-11 flex-none items-center justify-center rounded-md border border-border text-xs font-medium transition-all hover:bg-border',
 		className
 	)}
 	href={Tag === 'a' ? href : undefined}

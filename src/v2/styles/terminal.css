@@ -95,9 +95,14 @@
 
 /* Icon-only chip (page-switch links, matching v1's header icon format):
    same pill, but square instead of pill-shaped-for-text so a lone icon
-   sits centered rather than swimming in text padding. */
+   sits centered rather than swimming in text padding. Fixed at the `md`
+   touch step (44px, not the `sm` 24px this otherwise-`size='sm'` chip
+   would get) regardless of viewport — v1's IconButton and v3's
+   .rp-icon-link are both 44px everywhere, so this stays the same size on
+   every page instead of only growing to 44px under 560px. */
 .pf-chip--icon.pf-chip--sm {
-	width: var(--pf-touch-sm);
+	width: var(--pf-touch-md);
+	height: var(--pf-touch-md);
 	padding: 0;
 	/* Overrides the base .pf-chip's pill (border-radius: 9999px): icon
 	   links should look like v1's IconButton (a bordered box, not a
@@ -130,21 +135,19 @@ button.pf-chip--plain:hover {
 	border-color: transparent;
 }
 
-/* On a touch-sized viewport, operable chips (nav, mode toggle, links) grow
-   to the 44px touch step; decorative tags (plain <span>, e.g. tech
-   labels) stay at 24px — they aren't tapped, so they shouldn't eat space. */
+/* On a touch-sized viewport, operable text chips (EN/JA, etc.) grow to
+   the 44px touch step; decorative tags (plain <span>, e.g. tech labels)
+   stay at 24px — they aren't tapped, so they shouldn't eat space. Icon
+   chips (.pf-chip--icon) are excluded: they're already fixed at 44px
+   everywhere (see above) with zero padding, and without :not() here this
+   selector's higher specificity would re-add the 16px padding on top of
+   that fixed width. */
 @media (max-width: 560px) {
-	a.pf-chip.pf-chip--sm,
-	button.pf-chip.pf-chip--sm {
+	a.pf-chip.pf-chip--sm:not(.pf-chip--icon),
+	button.pf-chip.pf-chip--sm:not(.pf-chip--icon) {
 		height: var(--pf-touch-md);
 		padding: 0 16px;
 		font-size: 13px;
-	}
-
-	a.pf-chip--icon.pf-chip--sm,
-	button.pf-chip--icon.pf-chip--sm {
-		width: var(--pf-touch-md);
-		padding: 0;
 	}
 }
 

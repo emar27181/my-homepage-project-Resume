@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-05 (28)
+
+- improve: v1/v2/v3のHome/Terminal/Researchアイコンの「寸法」も統一した(形は既に統一済み)。ボタンを44×44px、アイコングリフを18×18pxに揃えた。v1の`IconButton`は32px固定だったため`h-11 w-11`(44px)に拡大、v2の`.pf-chip--icon`は24px(デスクトップ)/44px(560px未満)の可変だったため常時44px固定に変更(v3は元々44px/18pxで変更なし)。44pxを基準にしたのはWCAG 2.5.8のタッチ領域確保という裏付けのある値で、元からv2・v3が採用していたため。v1の32pxはこのリポジトリの操作部品の段階(`md`=44px/`sm`=24px)のどちらにも属さない値だったので44pxへ丸めた。アイコンの個数(3つ)は変更していない。
+- fix: v2のCSSで、上記の常時44px化に伴い、560px未満のメディアクエリ内のテキストチップ用ルール(`padding: 0 16px`)がアイコンチップにも適用されてしまう(詳細度の問題でアイコン用の`padding: 0`を上書きしてしまう)潜在バグに気づき、`:not(.pf-chip--icon)`で除外した。
+- `npm run test`(54件、無変更)・`npm run build`・実ブラウザ(Playwright、1280px/390px、v1/v2/v3全ページ)でボタン44×44px・アイコン18×18pxへの統一・コンソールエラー無しを確認済み。
+
 ## 2026-10-05 (27)
 
 - improve: v1/v2/v3のHome/Terminal/Researchアイコンの「形」を統一した。並び順・間隔は既に揃っていたが、ボタン自体の見た目は v1=角丸の四角(`rounded-md`+`border`)・v2=完全な円(ベースの`.pf-chip`が持つ`border-radius: 9999px`をそのまま継承)・v3=枠線も背景も無い裸のアイコン、と3者3様だった。v1の`IconButton`(`border-radius: 6px`+1pxボーダー)を基準に、v2の`.pf-chip--icon`に`border-radius: 6px`を追加(ピル形状を上書き)、v3の`.rp-icon-link`に`border: 1px solid var(--rp-rule)`・`border-radius: 6px`・hoverの背景塗り(v1の`hover:bg-border`と同じ)を追加した。寸法(v1=32px・v2=24px/44px・v3=44px)はWCAGのタッチ領域確保という理由がある既存設計のためそのまま。テーマ切り替えボタン(v3の`.rp-theme-toggle`)はこの3アイコンの集合に含まれないため円形のまま残した。
