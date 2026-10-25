@@ -13,6 +13,8 @@
  * years, tech names, hrefs, the handle) are written once and shared.
  */
 
+import { portfolioIdentity } from '@/site-config'
+
 export type Language = 'ja' | 'en'
 
 export interface Profile {
@@ -29,9 +31,9 @@ export interface Profile {
 
 const profileByLang: Record<Language, Profile> = {
 	ja: {
-		name: 'Ryunosuke Ema',
-		nameJa: '江馬 龍之介',
-		handle: 'emar27181',
+		name: portfolioIdentity.nameEn,
+		nameJa: portfolioIdentity.nameJaSpaced,
+		handle: portfolioIdentity.displayName,
 		role: 'IT Engineer',
 		location: 'Kanagawa, Japan',
 		education: '明治大学大学院 理工学研究科 情報科学専攻 修了 (2026.03)',
@@ -48,9 +50,9 @@ const profileByLang: Record<Language, Profile> = {
 		]
 	},
 	en: {
-		name: 'Ryunosuke Ema',
-		nameJa: '江馬 龍之介',
-		handle: 'emar27181',
+		name: portfolioIdentity.nameEn,
+		nameJa: portfolioIdentity.nameJaSpaced,
+		handle: portfolioIdentity.displayName,
 		role: 'IT Engineer',
 		location: 'Kanagawa, Japan',
 		education:

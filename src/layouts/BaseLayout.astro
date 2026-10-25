@@ -6,7 +6,7 @@ import Footer from '@/components/layout/Footer.astro'
 import Header from '@/components/layout/Header.astro'
 import ThemeProvider from '@/components/ThemeProvider.astro'
 
-import { siteConfig } from '@/site-config'
+import { portfolioIdentity, siteConfig } from '@/site-config'
 
 interface Props {
 	meta: SiteMeta
@@ -15,12 +15,23 @@ interface Props {
 const {
 	meta: { articleDate, description = siteConfig.description, ogImage, title }
 } = Astro.props
+const isEnglishPage = Astro.url.pathname.startsWith('/en')
+const isHomePage = Astro.url.pathname === '/' || /^\/en\/?$/.test(Astro.url.pathname)
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: portfolioIdentity.nameJa,
+	alternateName: [portfolioIdentity.nameJaSpaced, portfolioIdentity.nameEn, portfolioIdentity.displayName],
+	url: 'https://emar27181-portfolio.netlify.app/',
+	sameAs: ['https://github.com/emar27181', 'https://www.instagram.com/emar27181/']
+}
 ---
 
-<html lang={siteConfig.lang} class=''>
+<html lang={isEnglishPage ? 'en' : 'ja'} class=''>
 	<head>
 		<meta name='google-site-verification' content='uyjBT9z6vOnpxn6lM6YnxbI6R4jLSDIAboC8zo1slhM' />
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+		{isHomePage && <script type='application/ld+json' set:html={JSON.stringify(personSchema)} />}
 	</head>
 
 	<body class='flex flex-col bg-background'>

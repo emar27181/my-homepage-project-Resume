@@ -35,6 +35,7 @@ import PublicationList from './organisms/PublicationList.astro'
 import { getResearchPortfolio } from '../data/adapter'
 import { getUi } from '../data/ui'
 import type { Language } from '@/v2/data/portfolio'
+import { portfolioIdentity } from '@/site-config'
 
 interface Props {
 	lang?: Language
@@ -52,8 +53,8 @@ const otherLangLabel = otherLang === 'en' ? 'EN' : 'JA'
 
 const description =
 	lang === 'en'
-		? `${portfolio.profile.name}'s research portfolio.`
-		: `${portfolio.profile.name} の研究者ポートフォリオ。`
+		? `${portfolio.profile.name} (${portfolioIdentity.nameEn} / ${portfolioIdentity.nameJa})'s research portfolio.`
+		: `${portfolio.profile.name}（${portfolioIdentity.nameJa} / ${portfolioIdentity.nameEn}）の研究者ポートフォリオ。`
 ---
 
 <html lang={lang}>

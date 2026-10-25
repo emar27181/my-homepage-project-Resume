@@ -1,9 +1,17 @@
 import type { SiteConfig } from '@/types'
+
+/** 公開表示名と検索・著者情報用の氏名を分離する。 */
+export const portfolioIdentity = {
+	displayName: 'emar27181',
+	nameJa: '江馬龍之介',
+	nameJaSpaced: '江馬 龍之介',
+	nameEn: 'Ryunosuke Ema'
+} as const
 import type { AstroExpressiveCodeOptions } from 'astro-expressive-code'
 
 export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
-	author: 'SRLEOM',
+	author: portfolioIdentity.nameJa,
 	// Meta property used to construct the meta title property, found in src/components/BaseHead.astro L:11
 	title: 'emar27181-portfolio',
 	// Meta property used as the default description meta property

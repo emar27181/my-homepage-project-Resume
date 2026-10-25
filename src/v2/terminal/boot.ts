@@ -11,7 +11,7 @@ export interface BootLine {
 const DIVIDER = '────────────────────────────────────────────'
 
 /**
- * The `whoami`-style identity card: handle, name/role, and every link from
+ * The public identity card: handle, role, and every link from
  * `profile.links` (GitHub, Mail, Lab — data/portfolio.ts is the only place
  * that list is written). These fields are language-neutral (same in both
  * `profileByLang.ja` and `.en`), so the box itself is built once and reused
@@ -23,7 +23,7 @@ function buildIdentityBox(): string[] {
 	const labelWidth = Math.max(...profile.links.map((l) => l.label.length)) + 2
 	const rows = [
 		profile.handle,
-		`${profile.name} — ${profile.role}`,
+		profile.role,
 		'',
 		...profile.links.map((l) => `${l.label.padEnd(labelWidth)}${l.href}`)
 	]
@@ -104,7 +104,7 @@ export function getBootLines(lang: Language): BootLine[] {
 		{ text: '', delayMs: 80 },
 		{ text: DIVIDER, delayMs: 40 },
 		{ text: '', delayMs: 40 },
-		{ text: t.welcome(profile.name), delayMs: 120 },
+		{ text: t.welcome(profile.handle), delayMs: 120 },
 		{ text: '', delayMs: 40 },
 		...box.map((line): BootLine => ({ text: line, delayMs: 20, className: 'pf-line-box' })),
 		{ text: t.boxHint, delayMs: 80, className: 'pf-line-hint' },

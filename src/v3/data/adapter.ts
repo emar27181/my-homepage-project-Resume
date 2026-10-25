@@ -67,8 +67,8 @@ export function getResearchPortfolio(lang: Language): ResearchPortfolioData {
 
 	return {
 		profile: {
-			name: profile.name,
-			nameSub: profile.nameJa,
+			name: profile.handle,
+			nameSub: '',
 			title: profile.role,
 			affiliation: profile.education,
 			statement: profile.researchLine,
