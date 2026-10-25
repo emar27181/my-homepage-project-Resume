@@ -146,7 +146,7 @@ export function runCommand(input: string, ctx: CommandContext): CommandResult {
 
 		case 'whoami':
 			return text([
-				`${profile.name} / ${profile.nameJa}`,
+				profile.handle,
 				'',
 				profile.role,
 				profile.location,

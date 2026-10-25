@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { getNode, getRoot, listAllPaths, promptPath, resolveSegments, root } from './filesystem'
+import { getPortfolio } from '@/v2/data/portfolio'
 
 describe('resolveSegments', () => {
 	it('resolves ~ and / to the root', () => {
@@ -89,4 +90,19 @@ describe('getRoot with lang', () => {
 	it('getRoot() defaults to ja, same as the default `root` export', () => {
 		expect(getRoot()).toBe(root)
 	})
+})
+
+describe('public-facing profile content', () => {
+	for (const lang of ['ja', 'en'] as const) {
+		it(`renders the public handle in ${lang} profile.md and keeps full names hidden`, () => {
+			const profile = getPortfolio(lang).profile
+			const node = getNode(['about', 'profile.md'], getRoot(lang))
+			expect(node?.type).toBe('file')
+			if (node?.type === 'file') {
+				expect(node.content).toContain(profile.handle)
+				expect(node.content).not.toContain(profile.name)
+				expect(node.content).not.toContain(profile.nameJa)
+			}
+		})
+	}
 })
