@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/BaseLayout.astro'
+import { portfolioIdentity } from '../site.config'
 import Section from '../components/Section.astro'
 import Card from '../components/Card.astro'
 import ProjectCard from '../components/ProjectCard.astro'
@@ -27,9 +28,10 @@ const tool = ['git', 'vscode']
 //const MAX_POSTS = 10
 //const allPosts = await getAllPosts()
 //const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+const seoDescription = `${portfolioIdentity.displayName}（${portfolioIdentity.nameJa} / ${portfolioIdentity.nameEn}）のポートフォリオ。制作物、研究、スキル、経歴を紹介しています。`
 ---
 
-<PageLayout meta={{ title: 'emar27181-portfolio' }}>
+<PageLayout meta={{ title: 'emar27181-portfolio', description: seoDescription }}>
 	<nav
 		slot='toc'
 		class='flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-satoshi text-[0.92rem]'
@@ -53,12 +55,7 @@ const tool = ['git', 'vscode']
 			/>
 
 			<div class='flex flex-col items-center gap-y-4'>
-				<h1 class='text-center text-3xl font-bold'>
-					<span class='hidden sm:inline'>Ryunosuke Ema | 江馬 龍之介</span>
-					<span class='sm:hidden'>
-						Ryunosuke Ema<br />江馬 龍之介
-					</span>
-				</h1>
+				<h1 class='text-center text-3xl font-bold'>{portfolioIdentity.displayName}</h1>
 			</div>
 		</section>
 

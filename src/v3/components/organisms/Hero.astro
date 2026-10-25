@@ -12,7 +12,7 @@ const { profile, links } = Astro.props
 	<div>
 		<p class='rp-eyebrow rp-accent'>{profile.title}</p>
 		<h1 id='rp-profile-name'>{profile.name}</h1>
-		<p class='rp-name-sub'>{profile.nameSub}</p>
+		{profile.nameSub && <p class='rp-name-sub'>{profile.nameSub}</p>}
 		<p class='rp-affiliation'>{profile.affiliation}</p>
 		<p class='rp-mono rp-muted'>{profile.location}</p>
 	</div>

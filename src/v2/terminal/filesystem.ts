@@ -29,7 +29,7 @@ const dir = (name: string, children: FSNode[]): FSDir => ({ type: 'dir', name, c
 function formatProfileMd(data: Portfolio): string {
 	const { profile } = data
 	return [
-		`${profile.name} / ${profile.nameJa}`,
+		profile.handle,
 		'',
 		profile.role,
 		profile.location,

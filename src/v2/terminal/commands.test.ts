@@ -16,9 +16,15 @@ describe('runCommand', () => {
 		if (result.type === 'text') expect(result.lines.join('\n')).toContain('Available commands:')
 	})
 
-	it('whoami shows the real profile', () => {
+	it('whoami shows the public name without exposing the full name', () => {
 		const result = runCommand('whoami', ctx())
-		if (result.type === 'text') expect(result.lines.join('\n')).toContain(profile.name)
+		expect(result.type).toBe('text')
+		if (result.type === 'text') {
+			const lines = result.lines.join('\n')
+			expect(lines).toContain(profile.handle)
+			expect(lines).not.toContain(profile.name)
+			expect(lines).not.toContain(profile.nameJa)
+		}
 	})
 
 	it('ls lists the root entries', () => {
@@ -160,7 +166,13 @@ describe('runCommand', () => {
 
 		it('whoami shows the English profile content', () => {
 			const result = runCommand('whoami', ctx({ lang: 'en' }))
-			if (result.type === 'text') expect(result.lines.join('\n')).toContain(enProfile.education)
+			if (result.type === 'text') {
+				const lines = result.lines.join('\n')
+				expect(lines).toContain(enProfile.education)
+				expect(lines).toContain(enProfile.handle)
+				expect(lines).not.toContain(enProfile.name)
+				expect(lines).not.toContain(enProfile.nameJa)
+			}
 		})
 
 		it('projects lists the same slugs as ja (slugs are language-neutral)', () => {
